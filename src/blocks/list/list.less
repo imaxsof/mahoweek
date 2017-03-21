@@ -1,0 +1,62 @@
+// List
+//------------------------------------------------------------------------------
+
+.list {
+	background-color: fade(@list-bg, 95%);
+	box-shadow: 0 0 100px fade(#000, 15%);
+	border-radius: @list-radius;
+}
+
+.list__head {
+	display: flex;
+	font-size: @font-size-small;
+	border-radius: @list-radius @list-radius 0 0;
+	overflow: hidden;
+}
+
+.list__name {
+	flex: 1 0 0;
+	padding: 8px 15px 7px;
+	border-bottom: 2px solid @list-border-color;
+	color: @text-gray;
+	fill: @text-gray;
+}
+
+// .list__week {
+// 	list-style-type: none;
+// 	margin: 0;
+// 	padding: 0;
+// 	display: flex;
+// 	background-color: @list-dates-bg;
+// }
+
+// .list__date {
+// 	width: 40px;
+// 	padding: 8px 0 7px;
+// 	text-align: center;
+// 	border-left: 1px solid @list-border-color;
+// 	border-bottom: 2px solid @list-border-color;
+// 	color: @text-gray;
+//	fill: @text-gray;
+
+// 	.list__week &:first-child {
+// 		border-left-width: 2px;
+// 		width: 42px;
+// 	}
+
+// 	&--today {
+// 		background-color: #DCFFE4;
+// 		border-bottom-color: #BFDDC7;
+// 		border-left-color: #BFDDC7;
+// 		border-right: 1px solid #BFDDC7;
+// 		color: #165c26;
+//		fill: #165c26;
+// 		margin-right: -1px;
+// 		position: relative;
+// 		width: 41px;
+// 	}
+
+// 	&--holiday {
+// 		border-bottom-color: #E34C26;
+// 	}
+// }

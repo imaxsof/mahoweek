@@ -1,0 +1,185 @@
+// To Do
+//------------------------------------------------------------------------------
+
+.todo__item {
+	display: flex;
+
+	&--add {
+		border-radius: 0 0 @list-radius @list-radius;
+		overflow: hidden;
+		font-size: @font-size-small;
+	}
+}
+
+.todo__status {
+	width: 41px;
+	position: relative;
+	cursor: pointer;
+
+	&::before {
+		position: absolute;
+		width: 17px;
+		height: 17px;
+		content: "";
+		top: 11px;
+		left: 14px;
+		border: 1px solid fade(@text-gray, 50%);
+		border-radius: (@list-radius / 2);
+	}
+
+	&:hover::before {
+		border-color: @text-gray;
+	}
+
+	.todo__item--add & {
+		cursor: default;
+
+		&::before {
+			display: none;
+		}
+	}
+}
+
+.todo__done {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	color: #165c26;
+	fill: #165c26;
+
+	svg {
+		position: absolute;
+		width: 25px;
+		height: 25px;
+		top: 7px;
+		left: 10px;
+		opacity: 0;
+
+		.todo__item[data-status="done"] & {
+			opacity: 1;
+		}
+	}
+}
+
+.todo__add {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	color: fade(@text-gray, 75%);
+	fill: fade(@text-gray, 75%);
+
+	svg {
+		position: absolute;
+		width: 25px;
+		height: 25px;
+		top: 7px;
+		left: 10px;
+	}
+}
+
+.todo__name {
+	padding: 8px 0 7px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	flex: 1 0 0;
+	border-bottom: 1px solid @list-border-color;
+
+	.todo__item[data-status="done"] & {
+		text-decoration: line-through;
+	}
+
+	.todo__item--add & {
+		border-bottom: 0;
+	}
+}
+
+.todo__input {
+	border: 0;
+	padding: 0;
+	width: 100%;
+	outline: none;
+	margin: -8px -15px -7px 0;
+	padding: 8px 15px 7px 0;
+	height: 39px;
+}
+
+.todo__option {
+	width: 39px;
+	position: relative;
+	cursor: pointer;
+	border-bottom: 1px solid @list-border-color;
+}
+
+.todo__remove {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	color: fade(@text-gray, 75%);
+	fill: fade(@text-gray, 75%);
+
+	&:hover {
+		color: @text-gray;
+		fill: @text-gray;
+	}
+
+	svg {
+		position: absolute;
+		width: 25px;
+		height: 25px;
+		top: 7px;
+		left: 6px;
+		opacity: 0;
+
+		.todo__item:hover & {
+			opacity: 1;
+		}
+	}
+}
+
+// .todo__week {
+// 	list-style-type: none;
+// 	margin: 0;
+// 	padding: 0;
+// 	display: flex;
+// 	background-color: @list-dates-bg;
+
+// 	@media (max-width: 1199px) {
+// 		display: none;
+// 	}
+// }
+
+// .todo__date {
+// 	width: 40px;
+// 	padding: 8px 0 7px;
+// 	text-align: center;
+// 	border-left: 1px solid @list-border-color;
+// 	border-bottom: 1px solid @list-border-color;
+// 	color: #6a737d;
+
+// 	.todo__week &:first-child {
+// 		border-left-width: 2px;
+// 		width: 42px;
+// 	}
+
+// 	.todo__item--add & {
+// 		border-bottom: 0;
+// 	}
+
+// 	&--today {
+// 		background-color: #DCFFE4;
+// 		border-bottom-color: #BFDDC7;
+// 		border-left-color: #BFDDC7;
+// 		border-right: 1px solid #BFDDC7;
+// 		color: #165c26;
+// 		margin-right: -1px;
+// 		position: relative;
+// 		width: 41px;
+// 	}
+// }
