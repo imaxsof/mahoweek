@@ -1,3 +1,10 @@
+// To Do
+//------------------------------------------------------------------------------
+
+var todo = $('.todo');
+
+
+
 // Генерируем ячейки календаря
 //------------------------------------------------------------------------------
 
@@ -71,7 +78,7 @@ function todoItem(id, note, status) {
 		}
 
 		// Выводим список
-		$('.todo').prepend(todoList);
+		todo.prepend(todoList);
 	}
 
 }());
@@ -83,7 +90,7 @@ function todoItem(id, note, status) {
 
 (function() {
 
-	$('.todo').on('click', '.js-toggle-status', function() {
+	todo.on('click', '.js-toggle-status', function() {
 		// Получаем данные
 		var isThis = $(this),
 			todoId = isThis.parents('.todo__item').attr('data-id'),
@@ -118,7 +125,7 @@ function todoItem(id, note, status) {
 
 (function() {
 
-	$('.todo').on('click', '.js-remove-todo', function() {
+	todo.on('click', '.js-remove-todo', function() {
 		// Получаем данные
 		var isThis = $(this),
 			todoId = isThis.parents('.todo__item').attr('data-id');
@@ -136,7 +143,7 @@ function todoItem(id, note, status) {
 		isThis.parents('.todo__item').remove();
 
 		// Если в списке не осталось дел
-		if ($('.todo__item:not(.todo__item--add)').length == 0) {
+		if (todo.find('.todo__item:not(.todo__item--add)').length == 0) {
 			// Ставим фокус на добавление
 			$('.js-add-todo').focus();
 		}
@@ -151,7 +158,7 @@ function todoItem(id, note, status) {
 
 (function() {
 
-	$('.js-edit-todo').on('keyup', function(e) {
+	todo.on('keyup', '.js-edit-todo', function(e) {
 		// Получаем данные
 		var isThis = $(this),
 			todoId = isThis.parents('.todo__item').attr('data-id'),
@@ -217,7 +224,7 @@ function todoItem(id, note, status) {
 		isThis.val('');
 
 		// Выводим дело в списке
-		$('.todo__item--add').before(todoItem(todoCreatedTime, todoNote));
+		todo.find('.todo__item--add').before(todoItem(todoCreatedTime, todoNote));
 
 		// Прижимаем прокрутку к низу экрана
 		$('body').scrollTop(1000000);
@@ -225,12 +232,12 @@ function todoItem(id, note, status) {
 
 	// Если поле добавления в фокусе
 	$('.js-add-todo').focusin(function() {
-		$('.todo__item--add').addClass('todo__item--focus');
+		todo.find('.todo__item--add').addClass('todo__item--focus');
 	});
 
 	// Если поле добавления не в фокусе
 	$('.js-add-todo').focusout(function() {
-		$('.todo__item--add').removeClass('todo__item--focus');
+		todo.find('.todo__item--add').removeClass('todo__item--focus');
 	});
 
 }());
@@ -243,12 +250,12 @@ function todoItem(id, note, status) {
 (function() {
 
 	// // При ховере мышкой
-	// $('.todo').on('mouseenter', '.todo__item', function() {
+	// todo.on('mouseenter', '.todo__item', function() {
 	// 	// Получаем данные
 	// 	var isThis = $(this);
 
 	// 	// Убираем выделение с других дел
-	// 	$('.todo__item').removeClass('todo__item--active');
+	// 	todo.find('.todo__item').removeClass('todo__item--active');
 
 	// 	// Выделяем текущее дело
 	// 	isThis.addClass('todo__item--active');
