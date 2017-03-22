@@ -26,7 +26,7 @@ function todoItem(id, note, status) {
 	return '' +
 	'<div class="todo__item" data-id="' + id + '" data-status="' + status + '">' +
 		'<div class="todo__status">' +
-			'<div class="todo__done  js-toggle-status  js-status-done">' +
+			'<div class="todo__check  js-toggle-status  js-status-done">' +
 				'<svg>' +
 					'<use xlink:href="#ei-check-icon"></use>' +
 				'</svg>' +
@@ -36,7 +36,7 @@ function todoItem(id, note, status) {
 			note +
 		'</div>' +
 		'<div class="todo__option">' +
-			'<div class="todo__remove  js-remove-todo">' +
+			'<div class="todo__trash  js-remove-todo">' +
 				'<svg>' +
 					'<use xlink:href="#ei-trash-icon"></use>' +
 				'</svg>' +
@@ -135,8 +135,9 @@ function todoItem(id, note, status) {
 		// Удаляем дело из списка
 		isThis.parents('.todo__item').remove();
 
-		// Если в списке не осталось дел, то ставим фокус на добавление
+		// Если в списке не осталось дел
 		if ($('.todo__item:not(.todo__item--add)').length == 0) {
+			// Ставим фокус на добавление
 			$('.js-add-todo').focus();
 		}
 	});
@@ -191,5 +192,47 @@ function todoItem(id, note, status) {
 		// Прижимаем прокрутку к низу экрана
 		$('body').scrollTop(1000000);
 	});
+
+	// Если поле добавления в фокусе
+	$('.js-add-todo').focusin(function() {
+		$('.todo__item--add').addClass('todo__item--focus');
+	});
+
+	// Если поле добавления не в фокусе
+	$('.js-add-todo').focusout(function() {
+		$('.todo__item--add').removeClass('todo__item--focus');
+	});
+
+}());
+
+
+
+// Выделяем дело
+//------------------------------------------------------------------------------
+
+(function() {
+
+	// // При ховере мышкой
+	// $('.todo').on('mouseenter', '.todo__item', function() {
+	// 	// Получаем данные
+	// 	var isThis = $(this);
+
+	// 	// Убираем выделение с других дел
+	// 	$('.todo__item').removeClass('todo__item--active');
+
+	// 	// Выделяем текущее дело
+	// 	isThis.addClass('todo__item--active');
+
+	// 	// // Если текущее дело является полем добавления дела,
+	// 	// // то ставим в него фокус
+	// 	// if (isThis.hasClass('todo__item--add')) {
+	// 	//  	$('.js-add-todo').focus();
+
+	// 	// // Если нет и поле не заполнено,
+	// 	// // то фокус убираем
+	// 	// } else if ($('.js-add-todo').val() == '') {
+	// 	// 	$('.js-add-todo').blur();
+	// 	// }
+	// });
 
 }());

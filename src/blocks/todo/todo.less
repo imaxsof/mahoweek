@@ -3,32 +3,50 @@
 
 .todo__item {
 	display: flex;
+	margin-top: -1px;
+
+	&--active {
+		background-color: @todo-active;
+	}
 
 	&--add {
 		border-radius: 0 0 @list-radius @list-radius;
-		overflow: hidden;
 		font-size: @font-size-small;
 	}
 }
 
 .todo__status {
-	width: 41px;
+	width: 44px;
 	position: relative;
 	cursor: pointer;
 
 	&::before {
 		position: absolute;
-		width: 17px;
-		height: 17px;
+		width: 19px;
+		height: 19px;
 		content: "";
 		top: 11px;
-		left: 14px;
-		border: 1px solid fade(@text-gray, 50%);
+		left: 15px;
+		border-width: 1px;
+		border-style: solid;
 		border-radius: (@list-radius / 2);
+		background-color: #fff;
+	}
+
+	&::before {
+		border-color: lighten(@text-gray, 20%);
+
+		.todo__item[data-status="done"] & {
+			border-color: lighten(@text-gray, 40%);
+		}
 	}
 
 	&:hover::before {
 		border-color: @text-gray;
+
+		.todo__item[data-status="done"] & {
+			border-color: lighten(@text-gray, 20%);
+		}
 	}
 
 	.todo__item--add & {
@@ -40,21 +58,21 @@
 	}
 }
 
-.todo__done {
+.todo__check {
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	color: #165c26;
-	fill: #165c26;
+	color: @text-green;
+	fill: @text-green;
 
 	svg {
 		position: absolute;
 		width: 25px;
 		height: 25px;
-		top: 7px;
-		left: 10px;
+		top: 8px;
+		left: 12px;
 		opacity: 0;
 
 		.todo__item[data-status="done"] & {
@@ -63,26 +81,31 @@
 	}
 }
 
-.todo__add {
+.todo__plus {
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	color: fade(@text-gray, 75%);
-	fill: fade(@text-gray, 75%);
+	color: lighten(@text-gray, 20%);
+	fill: lighten(@text-gray, 20%);
+
+	.todo__item--focus & {
+		color: @text-gray;
+		fill: @text-gray;
+	}
 
 	svg {
 		position: absolute;
 		width: 25px;
 		height: 25px;
-		top: 7px;
-		left: 10px;
+		top: 8px;
+		left: 12px;
 	}
 }
 
 .todo__name {
-	padding: 8px 0 7px;
+	padding: 9px 0 7px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
@@ -91,6 +114,8 @@
 
 	.todo__item[data-status="done"] & {
 		text-decoration: line-through;
+		color: @text-lighten;
+		fill: @text-lighten;
 	}
 
 	.todo__item--add & {
@@ -115,29 +140,30 @@
 	border-bottom: 1px solid @list-border-color;
 }
 
-.todo__remove {
+.todo__trash {
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	color: fade(@text-gray, 75%);
-	fill: fade(@text-gray, 75%);
+	color: lighten(@text-red, 20%);
+	fill: lighten(@text-red, 20%);
 
 	&:hover {
-		color: @text-gray;
-		fill: @text-gray;
+		color: @text-red;
+		fill: @text-red;
 	}
 
 	svg {
 		position: absolute;
 		width: 25px;
 		height: 25px;
-		top: 7px;
-		left: 6px;
+		top: 8px;
+		left: 5px;
 		opacity: 0;
 
-		.todo__item:hover & {
+		.todo__item:hover &,
+		.mobile & {
 			opacity: 1;
 		}
 	}

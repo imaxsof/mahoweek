@@ -25,6 +25,10 @@ body {
 	fill: @text-color;
 }
 
-input::placeholder {
-	color: @text-lighten;
+input {
+	background-color: transparent;
+
+	&::placeholder {
+		color: @text-lighten;
+	}
 }
