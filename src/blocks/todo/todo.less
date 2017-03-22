@@ -112,12 +112,6 @@
 	flex: 1 0 0;
 	border-bottom: 1px solid @list-border-color;
 
-	.todo__item[data-status="done"] & {
-		text-decoration: line-through;
-		color: @text-lighten;
-		fill: @text-lighten;
-	}
-
 	.todo__item--add & {
 		border-bottom: 0;
 	}
@@ -131,6 +125,17 @@
 	margin: -8px -15px -7px 0;
 	padding: 8px 15px 7px 0;
 	height: 39px;
+	cursor: default;
+
+	&:focus,
+	.todo__item--add & {
+		cursor: text;
+	}
+
+	.todo__item[data-status="done"] & {
+		color: @text-lighten;
+		text-decoration: line-through;
+	}
 }
 
 .todo__option {

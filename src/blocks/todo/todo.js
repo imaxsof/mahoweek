@@ -33,7 +33,7 @@ function todoItem(id, note, status) {
 			'</div>' +
 		'</div>' +
 		'<div class="todo__name">' +
-			note +
+			'<input class="todo__input  js-edit-todo" type="text" value="' + note + '">' +
 		'</div>' +
 		'<div class="todo__option">' +
 			'<div class="todo__trash  js-remove-todo">' +
@@ -139,6 +139,36 @@ function todoItem(id, note, status) {
 		if ($('.todo__item:not(.todo__item--add)').length == 0) {
 			// Ставим фокус на добавление
 			$('.js-add-todo').focus();
+		}
+	});
+
+}());
+
+
+
+// Редактирование дела
+//------------------------------------------------------------------------------
+
+(function() {
+
+	$('.js-edit-todo').on('keyup', function(e) {
+		// Получаем данные
+		var isThis = $(this),
+			todoId = isThis.parents('.todo__item').attr('data-id'),
+			todoNote = isThis.val();
+
+		// Парсим список дел
+		var todoStorage = JSON.parse(localStorage.getItem('todo'));
+
+		// Изменяем текст дела
+		todoStorage[todoId].note = todoNote;
+
+		// Обновляем дела в LocalStorage
+		localStorage.setItem('todo', JSON.stringify(todoStorage));
+
+		// Если был нажат Enter, то убираем фокус с этого поля
+		if (e.keyCode == 13) {
+			isThis.blur();
 		}
 	});
 
