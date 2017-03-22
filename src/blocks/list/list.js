@@ -14,7 +14,11 @@ function listProgress() {
 	var todoDone = $('.todo__item:not(.todo__item--add)[data-status="done"]').length;
 
 	// Высчитываем прогресс
-	var listProgress = todoDone * 100 / todoTotal / 100;
+	if (todoTotal > 0) {
+		var listProgress = todoDone * 100 / todoTotal / 100;
+	} else {
+		var listProgress = 0;
+	}
 
 	// Выводим прогресс
 	$('.list__progress').css({

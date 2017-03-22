@@ -152,12 +152,10 @@ function todoItem(id, note, status) {
 		if (todo.find('.todo__item:not(.todo__item--add)').length == 0) {
 			// Ставим фокус на добавление
 			$('.js-add-todo').focus();
-
-		// Если дела остались
-		} else {
-			// Расчитываем прогресс
-			listProgress();
 		}
+
+		// Расчитываем прогресс
+		listProgress();
 	});
 
 }());
