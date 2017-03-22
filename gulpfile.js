@@ -7,6 +7,7 @@
 
 const gulp = require('gulp'),
 	concat = require('gulp-concat'),
+	htmlmin = require('gulp-html-minifier'),
 	csso = require('gulp-csso'),
 	less = require('gulp-less'),
 	autoprefixer = require('gulp-autoprefixer'),
@@ -26,6 +27,7 @@ const gulp = require('gulp'),
 //------------------------------------------------------------------------------
 
 const paths = {
+	docs: 'docs/',
 	dist: {
 		base: 'dist/',
 		css: 'dist/css/',
@@ -67,6 +69,11 @@ const paths = {
 gulp.task('html', function() {
 	return multipipe(
 		gulp.src(paths.src.base),
+		htmlmin({
+			collapseInlineTagWhitespace: true,
+			collapseWhitespace: true,
+			removeComments: true
+		}),
 		gulp.dest(paths.dist.base),
 		browserSync.stream()
 	);
@@ -76,7 +83,9 @@ gulp.task('css:libs', function() {
 	return multipipe(
 		gulp.src(paths.src.css.libs),
 		concat('libs.min.css'),
-		csso({restructure: false}),
+		csso({
+			restructure: false
+		}),
 		gulp.dest(paths.dist.css)
 	);
 });
@@ -103,7 +112,9 @@ gulp.task('js:libs', function() {
 	return multipipe(
 		gulp.src(paths.src.js.libs),
 		concat('libs.min.js'),
-		uglify({mangle: false}),
+		uglify({
+			mangle: false
+		}),
 		gulp.dest(paths.dist.js)
 	);
 });
@@ -123,6 +134,18 @@ gulp.task('js:app', function() {
 			message: 'Line: ' + err.line
 		}
 	}));
+});
+
+
+
+// Build Docs
+//------------------------------------------------------------------------------
+
+gulp.task('docs', ['clean:docs', 'default'], function() {
+	return multipipe(
+		gulp.src(paths.dist.base + '**'),
+		gulp.dest(paths.docs)
+	);
 });
 
 
@@ -148,8 +171,12 @@ gulp.task('watch', function() {
 // Clean
 //------------------------------------------------------------------------------
 
-gulp.task('clean', function() {
+gulp.task('clean:dist', function() {
 	return del.sync(['dist/**', '!dist']);
+});
+
+gulp.task('clean:docs', function() {
+	return del.sync(['docs/**', '!docs']);
 });
 
 
@@ -157,4 +184,4 @@ gulp.task('clean', function() {
 // Default
 //------------------------------------------------------------------------------
 
-gulp.task('default', gulpsync.sync(['clean', 'html', 'css:libs', 'css:main', 'js:libs', 'js:app']));
+gulp.task('default', gulpsync.sync(['clean:dist', 'html', 'css:libs', 'css:main', 'js:libs', 'js:app']));
