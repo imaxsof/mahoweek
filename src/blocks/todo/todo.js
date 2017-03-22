@@ -79,6 +79,9 @@ function todoItem(id, note, status) {
 
 		// Выводим список
 		todo.prepend(todoList);
+
+		// Расчитываем прогресс
+		listProgress();
 	}
 
 }());
@@ -114,6 +117,9 @@ function todoItem(id, note, status) {
 
 		// Обновляем дело в списке
 		isThis.parents('.todo__item').attr('data-status', newStatus);
+
+		// Расчитываем прогресс
+		listProgress();
 	});
 
 }());
@@ -146,6 +152,11 @@ function todoItem(id, note, status) {
 		if (todo.find('.todo__item:not(.todo__item--add)').length == 0) {
 			// Ставим фокус на добавление
 			$('.js-add-todo').focus();
+
+		// Если дела остались
+		} else {
+			// Расчитываем прогресс
+			listProgress();
 		}
 	});
 
@@ -228,6 +239,9 @@ function todoItem(id, note, status) {
 
 		// Прижимаем прокрутку к низу экрана
 		$('body').scrollTop(1000000);
+
+		// Расчитываем прогресс
+		listProgress();
 	});
 
 	// Если поле добавления в фокусе

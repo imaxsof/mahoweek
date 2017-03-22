@@ -1,6 +1,30 @@
 // List
 //------------------------------------------------------------------------------
 
+
+
+// Строим прогресс выполненных дел
+//------------------------------------------------------------------------------
+
+function listProgress() {
+	// Считаем общее кол-во дел
+	var todoTotal = $('.todo__item:not(.todo__item--add)').length;
+
+	// Считаем кол-во выполненных
+	var todoDone = $('.todo__item:not(.todo__item--add)[data-status="done"]').length;
+
+	// Высчитываем прогресс
+	var listProgress = todoDone * 100 / todoTotal / 100;
+
+	// Выводим прогресс
+	$('.list__progress').css({
+		'-webkit-transform': 'scaleX(' + listProgress + ')',
+		'transform': 'scaleX(' + listProgress + ')'
+	});
+}
+
+
+
 // (function() {
 
 // 	// Получаем текущую дату
