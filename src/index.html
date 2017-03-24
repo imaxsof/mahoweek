@@ -3,7 +3,7 @@
 <html lang="ru">
 	<head>
 		<meta charset="utf-8">
-		<title>Dosho: краткосрочный список дел</title>
+		<title>Dosho: список краткосрочных дел</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="format-detection" content="telephone=no">
 		<link href="css/libs.min.css" rel="stylesheet">
@@ -31,14 +31,14 @@
 			</symbol>
 		</svg>
 
-		<main class="page">
-			<header class="page__header">
+		<main class="board">
+			<header class="board__header">
 				<div class="logo">
 					Dosho
 				</div>
 			</header>
 
-			<div class="page__content">
+			<div class="board__lists">
 				<div class="list">
 					<div class="list__head">
 						<div class="list__name">
@@ -46,40 +46,21 @@
 
 							<div class="list__progress"></div>
 						</div>
-
-						<!-- <ul class="list__week"></ul> -->
 					</div>
 
-					<div class="todo">
-						<label class="todo__item  todo__item--add  todo__item--focus">
-							<div class="todo__status">
-								<div class="todo__plus">
+					<div class="list__tasks">
+						<label class="task  task--add  task--focus">
+							<div class="task__status">
+								<div class="task__plus">
 									<svg>
 										<use xlink:href="#ei-plus-icon"></use>
 									</svg>
 								</div>
 							</div>
 
-							<div class="todo__name">
-								<input class="todo__input  js-add-todo" type="text" autofocus>
+							<div class="task__name">
+								<input class="task__input  js-add-task" type="text" autofocus>
 							</div>
-
-							<!-- <ul class="todo__week">
-								<li class="todo__date"></li>
-								<li class="todo__date"></li>
-								<li class="todo__date"></li>
-								<li class="todo__date"></li>
-								<li class="todo__date"></li>
-								<li class="todo__date"></li>
-								<li class="todo__date"></li>
-								<li class="todo__date"></li>
-								<li class="todo__date"></li>
-								<li class="todo__date"></li>
-								<li class="todo__date"></li>
-								<li class="todo__date"></li>
-								<li class="todo__date"></li>
-								<li class="todo__date"></li>
-							</ul> -->
 						</label>
 					</div>
 				</div>

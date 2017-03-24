@@ -1,13 +1,9 @@
-// To Do
+// Task
 //------------------------------------------------------------------------------
 
-.todo__item {
+.task {
 	display: flex;
 	margin-top: -1px;
-
-	&--active {
-		background-color: @todo-active;
-	}
 
 	&--add {
 		border-radius: 0 0 @list-radius @list-radius;
@@ -15,7 +11,7 @@
 	}
 }
 
-.todo__status {
+.task__status {
 	width: 44px;
 	position: relative;
 	cursor: pointer;
@@ -36,7 +32,7 @@
 	&::before {
 		border-color: lighten(@text-gray, 20%);
 
-		.todo__item[data-status="done"] & {
+		.task[data-completed="1"] & {
 			border-color: lighten(@text-gray, 40%);
 		}
 	}
@@ -44,12 +40,12 @@
 	&:hover::before {
 		border-color: @text-gray;
 
-		.todo__item[data-status="done"] & {
+		.task[data-completed="1"] & {
 			border-color: lighten(@text-gray, 20%);
 		}
 	}
 
-	.todo__item--add & {
+	.task--add & {
 		cursor: default;
 
 		&::before {
@@ -58,7 +54,7 @@
 	}
 }
 
-.todo__check {
+.task__check {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -75,13 +71,13 @@
 		left: 12px;
 		opacity: 0;
 
-		.todo__item[data-status="done"] & {
+		.task[data-completed="1"] & {
 			opacity: 1;
 		}
 	}
 }
 
-.todo__plus {
+.task__plus {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -90,7 +86,7 @@
 	color: lighten(@text-gray, 20%);
 	fill: lighten(@text-gray, 20%);
 
-	.todo__item--focus & {
+	.task--focus & {
 		color: @text-gray;
 		fill: @text-gray;
 	}
@@ -104,7 +100,7 @@
 	}
 }
 
-.todo__name {
+.task__name {
 	padding: 9px 0 7px;
 	text-overflow: ellipsis;
 	overflow: hidden;
@@ -112,12 +108,12 @@
 	flex: 1 0 0;
 	border-bottom: 1px solid @list-border-color;
 
-	.todo__item--add & {
+	.task--add & {
 		border-bottom: 0;
 	}
 }
 
-.todo__input {
+.task__input {
 	border: 0;
 	padding: 0;
 	width: 100%;
@@ -128,24 +124,24 @@
 	cursor: default;
 
 	&:focus,
-	.todo__item--add & {
+	.task--add & {
 		cursor: text;
 	}
 
-	.todo__item[data-status="done"] & {
+	.task[data-completed="1"] & {
 		color: @text-lighten;
 		text-decoration: line-through;
 	}
 }
 
-.todo__option {
+.task__options {
 	width: 39px;
 	position: relative;
 	cursor: pointer;
 	border-bottom: 1px solid @list-border-color;
 }
 
-.todo__trash {
+.task__trash {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -167,50 +163,9 @@
 		left: 5px;
 		opacity: 0;
 
-		.todo__item:hover &,
+		.task:hover &,
 		.mobile & {
 			opacity: 1;
 		}
 	}
 }
-
-// .todo__week {
-// 	list-style-type: none;
-// 	margin: 0;
-// 	padding: 0;
-// 	display: flex;
-// 	background-color: @list-dates-bg;
-
-// 	@media (max-width: 1199px) {
-// 		display: none;
-// 	}
-// }
-
-// .todo__date {
-// 	width: 40px;
-// 	padding: 8px 0 7px;
-// 	text-align: center;
-// 	border-left: 1px solid @list-border-color;
-// 	border-bottom: 1px solid @list-border-color;
-// 	color: #6a737d;
-
-// 	.todo__week &:first-child {
-// 		border-left-width: 2px;
-// 		width: 42px;
-// 	}
-
-// 	.todo__item--add & {
-// 		border-bottom: 0;
-// 	}
-
-// 	&--today {
-// 		background-color: #DCFFE4;
-// 		border-bottom-color: #BFDDC7;
-// 		border-left-color: #BFDDC7;
-// 		border-right: 1px solid #BFDDC7;
-// 		color: #165c26;
-// 		margin-right: -1px;
-// 		position: relative;
-// 		width: 41px;
-// 	}
-// }
