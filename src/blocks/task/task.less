@@ -8,6 +8,30 @@
 	&--add {
 		border-radius: 0 0 @list-radius @list-radius;
 		font-size: @font-size-small;
+		overflow: hidden;
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		margin-top: 0;
+		border-top: 1px solid transparent;
+	}
+
+	&--fixed {
+		position: fixed;
+		border-radius: 0;
+		background-color: fade(@list-bg, 95%);
+		left: 5px;
+		right: 5px;
+		width: auto;
+		z-index: 1;
+		border-top-color: @list-border-color;
+
+		@media (min-width: 560px) {
+			left: auto;
+			right: auto;
+			width: 100%;
+			max-width: 550px;
+		}
 	}
 }
 
@@ -47,10 +71,15 @@
 
 	.task--add & {
 		cursor: default;
+		border-top: 1px solid transparent;
 
 		&::before {
 			display: none;
 		}
+	}
+
+	.task--fixed & {
+		border-top-color: @list-border-color;
 	}
 }
 
@@ -79,7 +108,7 @@
 
 .task__plus {
 	position: absolute;
-	top: 0;
+	top: -1px;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -110,6 +139,8 @@
 
 	.task--add & {
 		border-bottom: 0;
+		padding-top: 8px;
+		border-top: 1px solid @list-border-color;
 	}
 }
 
@@ -130,8 +161,7 @@
 	}
 
 	.task--add & {
-		padding-right: 39px;
-		mask-image: none;
+		width: calc(~"100% - 39px");
 	}
 
 	.task[data-completed="1"] & {

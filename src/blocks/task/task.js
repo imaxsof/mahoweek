@@ -178,6 +178,23 @@ function makeTask(id, name, completed) {
 
 		// Расчитываем прогресс
 		makeProgress();
+
+		// Если не мобилка
+		if (!$('body').hasClass('mobile') && taskList.find('.task--add').hasClass('task--fixed')) {
+			// Определяем переменные
+			var doc = $(window),
+				docHeight = doc.height(),
+				docScrollTop = doc.scrollTop(),
+				taskListOffsetTop = taskList.offset().top,
+				taskListHeight = taskList.height() - 1,
+				taskAddHeight = taskList.find('.task--add').innerHeight();
+
+			// Если реальная позиция блока добавления дела достигнута
+			if (docScrollTop + docHeight - taskAddHeight > taskListOffsetTop + taskListHeight) {
+				// Снимаем фиксирование
+				taskList.find('.task--add').removeClass('task--fixed');
+			}
+		}
 	});
 
 }());
@@ -232,7 +249,7 @@ function makeTask(id, name, completed) {
 
 (function() {
 
-	$('.js-add-task').focus().on('change', function() {
+	$('.js-add-task').on('change', function() {
 		// Получаем данные
 		var isThis = $(this),
 			taskName = isThis.val();
@@ -265,16 +282,80 @@ function makeTask(id, name, completed) {
 
 		// Расчитываем прогресс
 		makeProgress();
-	});
 
-	// Если поле добавления в фокусе
-	$('.js-add-task').focusin(function() {
-		taskList.find('.task--add').addClass('task--focus');
-	});
-
-	// Если поле добавления не в фокусе
-	$('.js-add-task').focusout(function() {
-		taskList.find('.task--add').removeClass('task--focus');
+		// Если не мобилка
+		if (!$('body').hasClass('mobile')) {
+			// Прижимаем прокрутку к низу экрана
+			$('body').scrollTop(1000000);
+		}
 	});
 
 }());
+
+
+
+// Фиксирование блока добавления дела
+//------------------------------------------------------------------------------
+
+(function() {
+
+	// Если не мобилка
+	if (!$('body').hasClass('mobile')) {
+		// Определяем переменные
+		var doc = $(window),
+			docHeight = doc.height(),
+			docScrollTop = doc.scrollTop(),
+			taskListOffsetTop = taskList.offset().top,
+			taskListHeight = taskList.height() - 1,
+			taskAddHeight = taskList.find('.task--add').innerHeight();
+
+		// Если изначально блока не видно
+		if (docScrollTop + docHeight - taskAddHeight <= taskListOffsetTop + taskListHeight) {
+			// Фиксируем
+			taskList.find('.task--add').addClass('task--fixed');
+		}
+
+		// Скроллим
+		doc.on('scroll', function() {
+			// Смотрим где сейчас скролл
+			docScrollTop = doc.scrollTop();
+
+			// Могло измениться
+			taskListOffsetTop = taskList.offset().top;
+			taskListHeight = taskList.height() - 1;
+
+			// Если реальная позиция блока ниже
+			if (docScrollTop + docHeight - taskAddHeight <= taskListOffsetTop + taskListHeight) {
+				// Фиксируем
+				taskList.find('.task--add').addClass('task--fixed');
+
+			// Если реальная позиция блока достигнута
+			} else {
+				// Снимаем фиксирование
+				taskList.find('.task--add').removeClass('task--fixed');
+			}
+		});
+	}
+
+}());
+
+
+
+// Фокусировка поля добавления дела
+//------------------------------------------------------------------------------
+
+// Если не мобилка
+if (!$('body').hasClass('mobile')) {
+	// Ставим фокус
+	$('.js-add-task').focus();
+}
+
+// Если поле добавления в фокусе
+$('.js-add-task').focusin(function() {
+	taskList.find('.task--add').addClass('task--focus');
+});
+
+// Если поле добавления не в фокусе
+$('.js-add-task').focusout(function() {
+	taskList.find('.task--add').removeClass('task--focus');
+});
