@@ -118,14 +118,20 @@
 	padding: 0;
 	width: 100%;
 	outline: none;
-	margin: -8px -15px -7px 0;
-	padding: 8px 15px 7px 0;
+	margin: -8px 0 -7px 0;
+	padding: 8px 0 7px 0;
 	height: 39px;
 	cursor: default;
+	mask-image: linear-gradient(90deg, #000 95%, rgba(0, 0, 0, 0));
 
 	&:focus,
 	.task--add & {
 		cursor: text;
+	}
+
+	.task--add & {
+		padding-right: 39px;
+		mask-image: none;
 	}
 
 	.task[data-completed="1"] & {

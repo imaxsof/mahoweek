@@ -1,3 +1,10 @@
+// List
+//------------------------------------------------------------------------------
+
+var list = $('.list');
+
+
+
 // Создаем прогресс выполненных дел
 //------------------------------------------------------------------------------
 
@@ -16,8 +23,42 @@ function makeProgress() {
 	}
 
 	// Выводим прогресс
-	$('.list__progress').css({
+	list.find('.list__progress').css({
 		'-webkit-transform': 'scaleX(' + progress + ')',
 		'transform': 'scaleX(' + progress + ')'
 	});
 }
+
+
+
+// Фиксирование шапки списка
+//------------------------------------------------------------------------------
+
+(function() {
+
+	// Если не мобилка
+	if (!$('body').hasClass('mobile')) {
+		// Определяем переменные
+		var doc = $(window),
+			docScrollTop = doc.scrollTop(),
+			listOffsetTop = list.offset().top;
+
+		// Скроллим
+		doc.on('scroll', function() {
+			// Смотрим где сейчас скролл
+			docScrollTop = doc.scrollTop();
+
+			// Если скролл больше расстояния до списка
+			if (docScrollTop >= listOffsetTop) {
+				// Фиксируем
+				list.find('.list__head').addClass('list__head--fixed');
+
+			// Если скролл меньше расстояния до списка
+			} else {
+				// Снимаем фиксирование
+				list.find('.list__head').removeClass('list__head--fixed');
+			}
+		});
+	}
+
+}());

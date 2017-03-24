@@ -5,6 +5,8 @@
 	background-color: fade(@list-bg, 95%);
 	box-shadow: 0 0 80px fade(@text-color, 10%);
 	border-radius: @list-radius;
+	position: relative;
+	padding-top: 41px;
 }
 
 .list__head {
@@ -12,6 +14,26 @@
 	font-size: @font-size-small;
 	border-radius: @list-radius @list-radius 0 0;
 	overflow: hidden;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+
+	&--fixed {
+		position: fixed;
+		border-radius: 0;
+		background-color: fade(@list-bg, 95%);
+		left: 5px;
+		right: 5px;
+		width: auto;
+
+		@media (min-width: 560px) {
+			left: auto;
+			right: auto;
+			width: 100%;
+			max-width: 550px;
+		}
+	}
 }
 
 .list__name {
