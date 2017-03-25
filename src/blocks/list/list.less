@@ -2,7 +2,7 @@
 //------------------------------------------------------------------------------
 
 .list {
-	background-color: fade(@list-bg, 95%);
+	background-color: fade(@list-bg, 97%);
 	box-shadow: 0 0 80px fade(@text-color, 10%);
 	border-radius: @list-radius;
 	position: relative;
@@ -22,7 +22,7 @@
 	&--fixed {
 		position: fixed;
 		border-radius: 0;
-		background-color: fade(@list-bg, 95%);
+		background-color: fade(@list-bg, 97%);
 		left: 5px;
 		right: 5px;
 		width: auto;
@@ -52,7 +52,7 @@
 	bottom: -2px;
 	width: 100%;
 	height: 2px;
-	background-color: @list-progress-color;
+	background-color: lighten(@text-blue, 30%);
 	transform: scaleX(0);
 	transform-origin: 0 50%;
 }

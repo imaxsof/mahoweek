@@ -36,11 +36,7 @@ function makeTask(id, name, completed) {
 	return '' +
 	'<div class="task" data-id="' + id + '"' + completed + '>' +
 		'<div class="task__status">' +
-			'<div class="task__check  js-completed-task">' +
-				'<svg>' +
-					'<use xlink:href="#ei-check-icon"></use>' +
-				'</svg>' +
-			'</div>' +
+			'<div class="task__check  js-completed-task"></div>' +
 		'</div>' +
 		'<div class="task__name">' +
 			'<input class="task__input  js-edit-task" type="text" value="' + name + '">' +

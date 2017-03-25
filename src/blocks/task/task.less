@@ -19,7 +19,7 @@
 	&--fixed {
 		position: fixed;
 		border-radius: 0;
-		background-color: fade(@list-bg, 95%);
+		background-color: fade(@list-bg, 97%);
 		left: 5px;
 		right: 5px;
 		width: auto;
@@ -36,46 +36,13 @@
 }
 
 .task__status {
-	width: 44px;
+	width: 43px;
 	position: relative;
 	cursor: pointer;
-
-	&::before {
-		position: absolute;
-		width: 19px;
-		height: 19px;
-		content: "";
-		top: 11px;
-		left: 15px;
-		border-width: 1px;
-		border-style: solid;
-		border-radius: (@list-radius / 2);
-		background-color: #fff;
-	}
-
-	&::before {
-		border-color: lighten(@text-gray, 20%);
-
-		.task[data-completed="1"] & {
-			border-color: lighten(@text-gray, 40%);
-		}
-	}
-
-	&:hover::before {
-		border-color: @text-gray;
-
-		.task[data-completed="1"] & {
-			border-color: lighten(@text-gray, 20%);
-		}
-	}
 
 	.task--add & {
 		cursor: default;
 		border-top: 1px solid transparent;
-
-		&::before {
-			display: none;
-		}
 	}
 
 	.task--fixed & {
@@ -89,19 +56,31 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	color: @text-green;
-	fill: @text-green;
 
-	svg {
+	&::before {
 		position: absolute;
-		width: 25px;
-		height: 25px;
-		top: 8px;
-		left: 12px;
-		opacity: 0;
+		width: 17px;
+		height: 17px;
+		content: "";
+		top: 12px;
+		left: 15px;
+		border-radius: 50%;
+	}
+
+	&::before {
+		background-color: @list-border-color;
 
 		.task[data-completed="1"] & {
-			opacity: 1;
+			background-color: lighten(@text-green, 15%);
+			transform: scale3d(0.4117, 0.4117, 1);
+		}
+	}
+
+	&:hover::before {
+		background-color: darken(@list-border-color, 10%);
+
+		.task[data-completed="1"] & {
+			background-color: @text-green;
 		}
 	}
 }
@@ -112,12 +91,10 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	color: lighten(@text-gray, 20%);
-	fill: lighten(@text-gray, 20%);
+	fill: darken(@list-border-color, 13%);
 
 	.task--focus & {
-		color: @text-gray;
-		fill: @text-gray;
+		fill: darken(@list-border-color, 30%);
 	}
 
 	svg {
@@ -125,7 +102,7 @@
 		width: 25px;
 		height: 25px;
 		top: 8px;
-		left: 12px;
+		left: 11px;
 	}
 }
 
@@ -165,8 +142,8 @@
 	}
 
 	.task[data-completed="1"] & {
-		color: @text-lighten;
 		text-decoration: line-through;
+		color: @text-lighten;
 	}
 }
 
@@ -183,11 +160,9 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	color: lighten(@text-red, 20%);
 	fill: lighten(@text-red, 20%);
 
 	&:hover {
-		color: @text-red;
 		fill: @text-red;
 	}
 
