@@ -1,55 +1,8 @@
 // Task
 //------------------------------------------------------------------------------
 
+// Назначаем глобальные переменные
 var taskList = $('.list__tasks');
-
-
-
-// Генератор хеша
-//------------------------------------------------------------------------------
-
-function makeHash() {
-	var hash = '',
-		possible = '0123456789abcdefghijklmnopqrstuvwxyz';
-
-	for (var i = 0; i < 8; i ++) {
-		hash += possible.charAt(Math.floor(Math.random() * possible.length));
-	}
-
-	return hash;
-}
-
-
-
-// Генерируем дело
-//------------------------------------------------------------------------------
-
-function makeTask(id, name, completed) {
-	// Определяем статус дела
-	if (completed == 1) {
-		var completed = ' data-completed="1"';
-	} else {
-		var completed = '';
-	}
-
-	// Генерируем код
-	return '' +
-	'<div class="task" data-id="' + id + '"' + completed + '>' +
-		'<div class="task__status">' +
-			'<div class="task__check  js-completed-task"></div>' +
-		'</div>' +
-		'<div class="task__name">' +
-			'<input class="task__input  js-edit-task" type="text" value="' + name + '">' +
-		'</div>' +
-		'<div class="task__options">' +
-			'<div class="task__trash  js-remove-task">' +
-				'<svg>' +
-					'<use xlink:href="#ei-trash-icon"></use>' +
-				'</svg>' +
-			'</div>' +
-		'</div>' +
-	'</div>';
-}
 
 
 
@@ -80,15 +33,97 @@ function makeTask(id, name, completed) {
 
 
 
+// Фиксируем блок добавления дела
+//------------------------------------------------------------------------------
+
+(function() {
+
+	// Если не мобилка
+	if (!$('body').hasClass('mobile')) {
+		// Определяем переменные
+		var doc = $(window),
+			docHeight = doc.height(),
+			docScrollTop = doc.scrollTop(),
+			taskListOffsetTop = taskList.offset().top,
+			taskListHeight = taskList.height() - 1,
+			taskAddHeight = taskList.find('.task--add').innerHeight();
+
+		// Если изначально блока не видно
+		if (docScrollTop + docHeight - taskAddHeight <= taskListOffsetTop + taskListHeight) {
+			// Фиксируем
+			taskList.find('.task--add').addClass('task--fixed');
+		}
+
+		// Скроллим или ресайзим
+		doc.on('scroll resize', function() {
+			var isThis = $(this);
+
+			// Смотрим где сейчас скролл
+			docScrollTop = isThis.scrollTop();
+
+			// Могло измениться
+			docHeight = isThis.height();
+			taskListOffsetTop = taskList.offset().top;
+			taskListHeight = taskList.height() - 1;
+
+			// Если реальная позиция блока ниже
+			if (docScrollTop + docHeight - taskAddHeight <= taskListOffsetTop + taskListHeight) {
+				// Фиксируем
+				taskList.find('.task--add').addClass('task--fixed');
+
+			// Если реальная позиция блока достигнута
+			} else {
+				// Снимаем фиксирование
+				taskList.find('.task--add').removeClass('task--fixed');
+			}
+		});
+	}
+
+}());
+
+
+
+// Фокусируем поле добавления дела
+//------------------------------------------------------------------------------
+
+(function() {
+
+	// Если не мобилка
+	if (!$('body').hasClass('mobile')) {
+		// Ставим фокус
+		taskList.find('.js-add-task').focus();
+	}
+
+	// Если поле добавления в фокусе
+	taskList.find('.js-add-task').focusin(function() {
+		var isThis = $(this);
+
+		// Ставим метку о фокусе
+		isThis.parents('.task--add').addClass('task--focus');
+	});
+
+	// Если поле добавления не в фокусе
+	taskList.find('.js-add-task').focusout(function() {
+		var isThis = $(this);
+
+		// Снимаем метку о фокусе
+		$(this).parents('.task--add').removeClass('task--focus');
+	});
+
+}());
+
+
+
 // Изменяем статуса дела
 //------------------------------------------------------------------------------
 
 (function() {
 
 	taskList.on('click', '.js-completed-task', function() {
-		// Получаем данные
-		var isThis = $(this),
-			taskId = isThis.parents('.task').attr('data-id'),
+		var isThis = $(this);
+
+		// Получаем хеш дела и метку о выполнении
+		var taskId = isThis.parents('.task').attr('data-id'),
 			taskCompleted = isThis.parents('.task').attr('data-completed');
 
 		// Парсим хранилище
@@ -105,8 +140,7 @@ function makeTask(id, name, completed) {
 		// Если дело не выполнено
 		if (!taskCompleted) {
 			// Получаем метку времени
-			var date = new Date(),
-				taskCompletedTime = date.getTime();
+			var taskCompletedTime = new Date().getTime();
 
 			// Помечаем дело как выполненное
 			doshoStorage.tasks[taskIndex].completed = 1;
@@ -136,15 +170,16 @@ function makeTask(id, name, completed) {
 
 
 
-// Удаление дела
+// Удаляем дела
 //------------------------------------------------------------------------------
 
 (function() {
 
 	taskList.on('click', '.js-remove-task', function() {
-		// Получаем данные
-		var isThis = $(this),
-			taskId = isThis.parents('.task').attr('data-id');
+		var isThis = $(this);
+
+		// Получаем хеш дела
+		var taskId = isThis.parents('.task').attr('data-id');
 
 		// Парсим хранилище
 		var doshoStorage = JSON.parse(localStorage.getItem('dosho'));
@@ -169,7 +204,7 @@ function makeTask(id, name, completed) {
 		// Если в списке не осталось дел
 		if (taskList.find('.task:not(.task--add)').length == 0) {
 			// Ставим фокус на добавление
-			$('.js-add-task').focus();
+			taskList.find('.js-add-task').focus();
 		}
 
 		// Расчитываем прогресс
@@ -197,15 +232,16 @@ function makeTask(id, name, completed) {
 
 
 
-// Редактирование дела
+// Редактируем дело
 //------------------------------------------------------------------------------
 
 (function() {
 
 	taskList.on('keyup change', '.js-edit-task', function(e) {
-		// Получаем данные
-		var isThis = $(this),
-			taskId = isThis.parents('.task').attr('data-id'),
+		var isThis = $(this);
+
+		// Получаем хеш и текст дела
+		var taskId = isThis.parents('.task').attr('data-id'),
 			taskName = isThis.val();
 
 		// Парсим хранилище
@@ -220,8 +256,7 @@ function makeTask(id, name, completed) {
 		var taskIndex = doshoStorage.tasks.indexOf(taskElement[0]);
 
 		// Получаем метку времени
-		var date = new Date(),
-			taskLastChange = date.getTime();
+		var taskLastChange = new Date().getTime();
 
 		// Изменяем текст дела
 		doshoStorage.tasks[taskIndex].name = taskName;
@@ -240,19 +275,19 @@ function makeTask(id, name, completed) {
 
 
 
-// Добавление дела
+// Добавляем дело
 //------------------------------------------------------------------------------
 
 (function() {
 
 	$('.js-add-task').on('change', function() {
-		// Получаем данные
-		var isThis = $(this),
-			taskName = isThis.val();
+		var isThis = $(this);
+
+		// Получаем текст дела
+		var taskName = isThis.val();
 
 		// Получаем метку времени
-		var date = new Date(),
-			taskCreatedTime = date.getTime();
+		var taskCreatedTime = new Date().getTime();
 
 		// Генерируем хеш
 		var taskId = makeHash();
@@ -290,68 +325,54 @@ function makeTask(id, name, completed) {
 
 
 
-// Фиксирование блока добавления дела
+// Генерируем хеш
 //------------------------------------------------------------------------------
 
-(function() {
+function makeHash() {
 
-	// Если не мобилка
-	if (!$('body').hasClass('mobile')) {
-		// Определяем переменные
-		var doc = $(window),
-			docHeight = doc.height(),
-			docScrollTop = doc.scrollTop(),
-			taskListOffsetTop = taskList.offset().top,
-			taskListHeight = taskList.height() - 1,
-			taskAddHeight = taskList.find('.task--add').innerHeight();
+	// Определяем переменные
+	var hash = '',
+		possible = '0123456789abcdefghijklmnopqrstuvwxyz';
 
-		// Если изначально блока не видно
-		if (docScrollTop + docHeight - taskAddHeight <= taskListOffsetTop + taskListHeight) {
-			// Фиксируем
-			taskList.find('.task--add').addClass('task--fixed');
-		}
-
-		// Скроллим
-		doc.on('scroll', function() {
-			// Смотрим где сейчас скролл
-			docScrollTop = doc.scrollTop();
-
-			// Могло измениться
-			taskListOffsetTop = taskList.offset().top;
-			taskListHeight = taskList.height() - 1;
-
-			// Если реальная позиция блока ниже
-			if (docScrollTop + docHeight - taskAddHeight <= taskListOffsetTop + taskListHeight) {
-				// Фиксируем
-				taskList.find('.task--add').addClass('task--fixed');
-
-			// Если реальная позиция блока достигнута
-			} else {
-				// Снимаем фиксирование
-				taskList.find('.task--add').removeClass('task--fixed');
-			}
-		});
+	// Генерируем
+	for (var i = 0; i < 8; i ++) {
+		hash += possible.charAt(Math.floor(Math.random() * possible.length));
 	}
 
-}());
-
-
-
-// Фокусировка поля добавления дела
-//------------------------------------------------------------------------------
-
-// Если не мобилка
-if (!$('body').hasClass('mobile')) {
-	// Ставим фокус
-	$('.js-add-task').focus();
+	// Выводим
+	return hash;
 }
 
-// Если поле добавления в фокусе
-$('.js-add-task').focusin(function() {
-	taskList.find('.task--add').addClass('task--focus');
-});
 
-// Если поле добавления не в фокусе
-$('.js-add-task').focusout(function() {
-	taskList.find('.task--add').removeClass('task--focus');
-});
+
+// Генерируем дело
+//------------------------------------------------------------------------------
+
+function makeTask(id, name, completed) {
+
+	// Определяем статус дела
+	if (completed == 1) {
+		var completed = ' data-completed="1"';
+	} else {
+		var completed = '';
+	}
+
+	// Генерируем код
+	return '' +
+	'<div class="task" data-id="' + id + '"' + completed + '>' +
+		'<div class="task__status">' +
+			'<div class="task__check  js-completed-task"></div>' +
+		'</div>' +
+		'<div class="task__name">' +
+			'<input class="task__input  js-edit-task" type="text" value="' + name + '">' +
+		'</div>' +
+		'<div class="task__options">' +
+			'<div class="task__trash  js-remove-task">' +
+				'<svg>' +
+					'<use xlink:href="#ei-trash-icon"></use>' +
+				'</svg>' +
+			'</div>' +
+		'</div>' +
+	'</div>';
+
+}

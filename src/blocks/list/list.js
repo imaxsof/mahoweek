@@ -1,7 +1,44 @@
 // List
 //------------------------------------------------------------------------------
 
+// Назначаем глобальные переменные
 var list = $('.list');
+
+
+
+// Фиксируем шапку списка
+//------------------------------------------------------------------------------
+
+(function() {
+
+	// Если не мобилка
+	if (!$('body').hasClass('mobile')) {
+		// Определяем переменные
+		var doc = $(window),
+			docScrollTop = doc.scrollTop(),
+			listOffsetTop = list.offset().top;
+
+		// Скроллим
+		doc.on('scroll', function() {
+			var isThis = $(this);
+
+			// Смотрим где сейчас скролл
+			docScrollTop = isThis.scrollTop();
+
+			// Если скролл больше расстояния до списка
+			if (docScrollTop >= listOffsetTop) {
+				// Фиксируем
+				list.find('.list__head').addClass('list__head--fixed');
+
+			// Если скролл меньше расстояния до списка
+			} else {
+				// Снимаем фиксирование
+				list.find('.list__head').removeClass('list__head--fixed');
+			}
+		});
+	}
+
+}());
 
 
 
@@ -9,6 +46,7 @@ var list = $('.list');
 //------------------------------------------------------------------------------
 
 function makeProgress() {
+
 	// Считаем общее кол-во дел
 	var taskTotal = $('.task:not(.task--add)').length;
 
@@ -27,38 +65,5 @@ function makeProgress() {
 		'-webkit-transform': 'scaleX(' + progress + ')',
 		'transform': 'scaleX(' + progress + ')'
 	});
+
 }
-
-
-
-// Фиксирование шапки списка
-//------------------------------------------------------------------------------
-
-(function() {
-
-	// Если не мобилка
-	if (!$('body').hasClass('mobile')) {
-		// Определяем переменные
-		var doc = $(window),
-			docScrollTop = doc.scrollTop(),
-			listOffsetTop = list.offset().top;
-
-		// Скроллим
-		doc.on('scroll', function() {
-			// Смотрим где сейчас скролл
-			docScrollTop = doc.scrollTop();
-
-			// Если скролл больше расстояния до списка
-			if (docScrollTop >= listOffsetTop) {
-				// Фиксируем
-				list.find('.list__head').addClass('list__head--fixed');
-
-			// Если скролл меньше расстояния до списка
-			} else {
-				// Снимаем фиксирование
-				list.find('.list__head').removeClass('list__head--fixed');
-			}
-		});
-	}
-
-}());

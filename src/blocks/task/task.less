@@ -91,10 +91,10 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	fill: darken(@list-border-color, 13%);
+	fill: lighten(@text-gray, 20%);
 
 	.task--focus & {
-		fill: darken(@list-border-color, 30%);
+		fill: @text-gray;
 	}
 
 	svg {
@@ -142,7 +142,7 @@
 	}
 
 	.task[data-completed="1"] & {
-		text-decoration: line-through;
+		font-size: @font-size-small;
 		color: @text-lighten;
 	}
 }
