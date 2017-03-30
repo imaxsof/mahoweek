@@ -334,7 +334,7 @@ var taskList = $('.list__tasks');
 		delay: 500,
 		handle: '.task__name',
 		animation: 0,
-		filter: '.task--add',
+		filter: '.task--add .task__name',
 		ghostClass: 'task--ghost',
 		chosenClass: 'task--chosen',
 		dragClass: 'task--drag',
