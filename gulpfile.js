@@ -35,7 +35,8 @@ const paths = {
 	},
 	src: {
 		base: [
-			'src/*.html'
+			'src/*.html',
+			'src/CNAME'
 		],
 		css: {
 			libs: [
