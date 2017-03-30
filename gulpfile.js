@@ -47,6 +47,7 @@ const paths = {
 		},
 		js: {
 			libs: [
+				'node_modules/sortablejs/Sortable.min.js',
 				'node_modules/jquery/dist/jquery.min.js'
 			],
 			app: [

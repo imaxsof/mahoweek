@@ -325,6 +325,36 @@ var taskList = $('.list__tasks');
 
 
 
+// Сортируем вручную дела
+//------------------------------------------------------------------------------
+
+(function() {
+
+	var taskListSortable = Sortable.create(document.querySelector('.list__tasks'), {
+		delay: 500,
+		handle: '.task__name',
+		animation: 0,
+		filter: '.task--add',
+		ghostClass: 'task--ghost',
+		chosenClass: 'task--chosen',
+		dragClass: 'task--drag',
+		scrollSensitivity: 80,
+		onEnd: function (evt) {
+			// Парсим хранилище
+			var doshoStorage = JSON.parse(localStorage.getItem('dosho'));
+
+			// Сортируем
+			doshoStorage.tasks.splice(evt.newIndex, 0, doshoStorage.tasks.splice(evt.oldIndex, 1)[0]);
+
+			// Обновляем хранилище
+			localStorage.setItem('dosho', JSON.stringify(doshoStorage));
+		}
+	});
+
+}());
+
+
+
 // Генерируем хеш
 //------------------------------------------------------------------------------
 

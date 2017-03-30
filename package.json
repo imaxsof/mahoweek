@@ -3,7 +3,8 @@
   "version": "1.2.3",
   "dependencies": {
     "jquery": "^2.2.4",
-    "normalize.css": "5.0.0"
+    "normalize.css": "5.0.0",
+    "sortablejs": "^1.5.1"
   },
   "devDependencies": {
     "browser-sync": "^2.18.8",
