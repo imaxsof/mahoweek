@@ -12,15 +12,15 @@ var taskList = $('.list__tasks');
 (function() {
 
 	// Парсим хранилище
-	var doshoStorage = JSON.parse(localStorage.getItem('dosho'));
+	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
 	// Генерируем список
 	var taskListCreate = '';
 
 	// Пробегаемся по каждому делу
-	for (var i = 0; i < doshoStorage.tasks.length; i ++) {
+	for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
 		// Создаем строку с делом
-		taskListCreate += makeTask(doshoStorage.tasks[i].id, doshoStorage.tasks[i].name, doshoStorage.tasks[i].completed);
+		taskListCreate += makeTask(mahoweekStorage.tasks[i].id, mahoweekStorage.tasks[i].name, mahoweekStorage.tasks[i].completed);
 	}
 
 	// Выводим список
@@ -127,15 +127,15 @@ var taskList = $('.list__tasks');
 			taskCompleted = isThis.parents('.task').attr('data-completed');
 
 		// Парсим хранилище
-		var doshoStorage = JSON.parse(localStorage.getItem('dosho'));
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
 		// Получаем элемент дела в хранилище
-		var taskElement = doshoStorage.tasks.filter(function(value) {
+		var taskElement = mahoweekStorage.tasks.filter(function(value) {
 			return value.id == taskId;
 		});
 
 		// Получаем индекс дела в хранилище
-		var taskIndex = doshoStorage.tasks.indexOf(taskElement[0]);
+		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
 
 		// Если дело не выполнено
 		if (!taskCompleted) {
@@ -143,8 +143,8 @@ var taskList = $('.list__tasks');
 			var taskCompletedTime = new Date().getTime();
 
 			// Помечаем дело как выполненное
-			doshoStorage.tasks[taskIndex].completed = 1;
-			doshoStorage.tasks[taskIndex].completedTime = taskCompletedTime;
+			mahoweekStorage.tasks[taskIndex].completed = 1;
+			mahoweekStorage.tasks[taskIndex].completedTime = taskCompletedTime;
 
 			// Обновляем дело в списке
 			isThis.parents('.task').attr('data-completed', 1);
@@ -152,15 +152,15 @@ var taskList = $('.list__tasks');
 		// Если дело было выполнено
 		} else {
 			// Помечаем дело как невыполненное
-			delete doshoStorage.tasks[taskIndex].completed;
-			delete doshoStorage.tasks[taskIndex].completedTime;
+			delete mahoweekStorage.tasks[taskIndex].completed;
+			delete mahoweekStorage.tasks[taskIndex].completedTime;
 
 			// Обновляем дело в списке
 			isThis.parents('.task').removeAttr('data-completed');
 		}
 
 		// Обновляем хранилище
-		localStorage.setItem('dosho', JSON.stringify(doshoStorage));
+		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
 		// Расчитываем прогресс
 		makeProgress();
@@ -182,21 +182,21 @@ var taskList = $('.list__tasks');
 		var taskId = isThis.parents('.task').attr('data-id');
 
 		// Парсим хранилище
-		var doshoStorage = JSON.parse(localStorage.getItem('dosho'));
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
 		// Получаем элемент дела в хранилище
-		var taskElement = doshoStorage.tasks.filter(function(value) {
+		var taskElement = mahoweekStorage.tasks.filter(function(value) {
 			return value.id == taskId;
 		});
 
 		// Получаем индекс дела в хранилище
-		var taskIndex = doshoStorage.tasks.indexOf(taskElement[0]);
+		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
 
 		// Удаляем дело
-		doshoStorage.tasks.splice(taskIndex, 1);
+		mahoweekStorage.tasks.splice(taskIndex, 1);
 
 		// Обновляем хранилище
-		localStorage.setItem('dosho', JSON.stringify(doshoStorage));
+		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
 		// Удаляем дело из списка
 		isThis.parents('.task').remove();
@@ -245,25 +245,25 @@ var taskList = $('.list__tasks');
 			taskName = isThis.val();
 
 		// Парсим хранилище
-		var doshoStorage = JSON.parse(localStorage.getItem('dosho'));
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
 		// Получаем элемент дела в хранилище
-		var taskElement = doshoStorage.tasks.filter(function(value) {
+		var taskElement = mahoweekStorage.tasks.filter(function(value) {
 			return value.id == taskId;
 		});
 
 		// Получаем индекс дела в хранилище
-		var taskIndex = doshoStorage.tasks.indexOf(taskElement[0]);
+		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
 
 		// Получаем метку времени
 		var taskLastChange = new Date().getTime();
 
 		// Изменяем текст дела
-		doshoStorage.tasks[taskIndex].name = taskName;
-		doshoStorage.tasks[taskIndex].lastChange = taskLastChange;
+		mahoweekStorage.tasks[taskIndex].name = taskName;
+		mahoweekStorage.tasks[taskIndex].lastChange = taskLastChange;
 
 		// Обновляем хранилище
-		localStorage.setItem('dosho', JSON.stringify(doshoStorage));
+		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
 		// Если был нажат Enter, то убираем фокус с этого поля
 		if (e.keyCode == 13) {
@@ -293,17 +293,17 @@ var taskList = $('.list__tasks');
 		var taskId = makeHash();
 
 		// Парсим хранилище
-		var doshoStorage = JSON.parse(localStorage.getItem('dosho'));
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
 		// Добавляем новое дело
-		doshoStorage.tasks.push({
+		mahoweekStorage.tasks.push({
 			id: taskId,
 			name: taskName,
 			createdTime: taskCreatedTime,
 		});
 
 		// Обновляем хранилище
-		localStorage.setItem('dosho', JSON.stringify(doshoStorage));
+		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
 		// Стираем поле ввода
 		isThis.val('');
@@ -341,13 +341,13 @@ var taskList = $('.list__tasks');
 		scrollSensitivity: 80,
 		onEnd: function (evt) {
 			// Парсим хранилище
-			var doshoStorage = JSON.parse(localStorage.getItem('dosho'));
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
 			// Сортируем
-			doshoStorage.tasks.splice(evt.newIndex, 0, doshoStorage.tasks.splice(evt.oldIndex, 1)[0]);
+			mahoweekStorage.tasks.splice(evt.newIndex, 0, mahoweekStorage.tasks.splice(evt.oldIndex, 1)[0]);
 
 			// Обновляем хранилище
-			localStorage.setItem('dosho', JSON.stringify(doshoStorage));
+			localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 		}
 	});
 

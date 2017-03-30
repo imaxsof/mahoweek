@@ -2,15 +2,15 @@
 //------------------------------------------------------------------------------
 
 // Если хранилища не существует
-if (!localStorage.getItem('dosho')) {
+if (!localStorage.getItem('mahoweek')) {
 	// Генерируем первоначальные данные
-	var doshoData = {
+	var mahoweekData = {
 		tasks: [],
 		settings: {}
 	}
 
 	// Создаем хранилище с первоначальными данными
-	localStorage.setItem('dosho', JSON.stringify(doshoData));
+	localStorage.setItem('mahoweek', JSON.stringify(mahoweekData));
 }
 
 
