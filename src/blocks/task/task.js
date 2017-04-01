@@ -107,7 +107,57 @@ var taskList = $('.list__tasks');
 		var isThis = $(this);
 
 		// Снимаем метку о фокусе
-		$(this).parents('.task--add').removeClass('task--focus');
+		isThis.parents('.task--add').removeClass('task--focus');
+	});
+
+}());
+
+
+
+// Добавляем дело
+//------------------------------------------------------------------------------
+
+(function() {
+
+	$('.js-add-task').on('change', function() {
+		var isThis = $(this);
+
+		// Получаем текст дела
+		var taskName = isThis.val();
+
+		// Получаем метку времени
+		var taskCreatedTime = new Date().getTime();
+
+		// Генерируем хеш
+		var taskId = makeHash();
+
+		// Парсим хранилище
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+
+		// Добавляем новое дело
+		mahoweekStorage.tasks.push({
+			id: taskId,
+			name: taskName,
+			createdTime: taskCreatedTime,
+		});
+
+		// Обновляем хранилище
+		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+
+		// Стираем поле ввода
+		isThis.val('');
+
+		// Выводим дело в списке
+		taskList.find('.task--add').before(makeTask(taskId, taskName));
+
+		// Расчитываем прогресс
+		makeProgress();
+
+		// Если не мобилка
+		if (!$('body').hasClass('mobile')) {
+			// Прижимаем прокрутку к низу экрана
+			$('body').scrollTop(10000);
+		}
 	});
 
 }());
@@ -164,6 +214,123 @@ var taskList = $('.list__tasks');
 
 		// Расчитываем прогресс
 		makeProgress();
+	});
+
+}());
+
+
+
+// Показываем поле для редактирования
+//------------------------------------------------------------------------------
+
+(function() {
+
+	// Задаем данные
+	var xy1 = 0;
+	var xy2 = 0;
+
+	// Определяем событие при нажатии
+	var startEvent = $('body').hasClass('mobile') ? 'touchstart' : 'mousedown';
+
+	// Старт события
+	taskList.on(startEvent, '.task:not(.task--add) .task__name', function(e) {
+		// Высчитываем сумму
+		if (e.type == 'touchstart') {
+			var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+			xy1 = touch.pageX + touch.pageY;
+		} else {
+			xy1 = e.pageX + e.pageY;
+		}
+
+		// Убираем фокус в поле добавления дела
+		taskList.find('.js-add-task').blur();
+	});
+
+	// Определяем событие при отпускании
+	var endEvent = $('body').hasClass('mobile') ? 'touchend' : 'mouseup';
+
+	// Конец события
+	taskList.on(endEvent, '.task:not(.task--add) .task__name', function(e) {
+		var isThis = $(this);
+
+		// Высчитываем сумму
+		if (e.type == 'touchend') {
+			var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+			xy2 = touch.pageX + touch.pageY;
+		} else {
+			xy2 = e.pageX + e.pageY;
+		}
+
+		// Если это была левая кнопка мышки
+		if (e.type == 'mouseup' && e.which != 1) {
+			// Прекращаем выполнение
+			return false;
+		}
+
+		// Если это было явное действие для редактирования
+		// и если это клик мышкой, то это должна быть левая кнопка
+		if (xy1 == xy2) {
+			// Если поля для редактирования еще нет
+			if (!isThis.parents('.task').find('.task__input').length) {
+				// Берем название дела
+				var taskName = isThis.text();
+
+				// Создаем поле
+				isThis.html('<input class="task__input  js-edit-task" type="text" maxlength="100" value="">');
+
+				// Вставляем текст дела и фокусируем
+				isThis.parents('.task').find('.task__input').focus().val(taskName);
+
+				// При расфокусировке
+				isThis.parents('.task').find('.task__input').focusout(function() {
+					// Заменяем поле редактирования на название дела
+					isThis.text($(this).val());
+				});
+			}
+		}
+	});
+
+}());
+
+
+
+// Редактируем дело
+//------------------------------------------------------------------------------
+
+(function() {
+
+	taskList.on('keyup change', '.js-edit-task', function(e) {
+		var isThis = $(this);
+
+		// Получаем хеш и текст дела
+		var taskId = isThis.parents('.task').attr('data-id'),
+			taskName = isThis.val();
+
+		// Парсим хранилище
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+
+		// Получаем элемент дела в хранилище
+		var taskElement = mahoweekStorage.tasks.filter(function(value) {
+			return value.id == taskId;
+		});
+
+		// Получаем индекс дела в хранилище
+		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
+
+		// Получаем метку времени
+		var taskLastChange = new Date().getTime();
+
+		// Изменяем текст дела
+		mahoweekStorage.tasks[taskIndex].name = taskName;
+		mahoweekStorage.tasks[taskIndex].lastChange = taskLastChange;
+
+		// Обновляем хранилище
+		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+
+		// Если был нажат Enter, то убираем фокус с этого поля
+		if (e.keyCode == 13) {
+			isThis.blur();
+		}
 	});
 
 }());
@@ -232,114 +399,25 @@ var taskList = $('.list__tasks');
 
 
 
-// Редактируем дело
-//------------------------------------------------------------------------------
-
-(function() {
-
-	taskList.on('keyup change', '.js-edit-task', function(e) {
-		var isThis = $(this);
-
-		// Получаем хеш и текст дела
-		var taskId = isThis.parents('.task').attr('data-id'),
-			taskName = isThis.val();
-
-		// Парсим хранилище
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
-
-		// Получаем элемент дела в хранилище
-		var taskElement = mahoweekStorage.tasks.filter(function(value) {
-			return value.id == taskId;
-		});
-
-		// Получаем индекс дела в хранилище
-		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
-
-		// Получаем метку времени
-		var taskLastChange = new Date().getTime();
-
-		// Изменяем текст дела
-		mahoweekStorage.tasks[taskIndex].name = taskName;
-		mahoweekStorage.tasks[taskIndex].lastChange = taskLastChange;
-
-		// Обновляем хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
-
-		// Если был нажат Enter, то убираем фокус с этого поля
-		if (e.keyCode == 13) {
-			isThis.blur();
-		}
-	});
-
-}());
-
-
-
-// Добавляем дело
-//------------------------------------------------------------------------------
-
-(function() {
-
-	$('.js-add-task').on('change', function() {
-		var isThis = $(this);
-
-		// Получаем текст дела
-		var taskName = isThis.val();
-
-		// Получаем метку времени
-		var taskCreatedTime = new Date().getTime();
-
-		// Генерируем хеш
-		var taskId = makeHash();
-
-		// Парсим хранилище
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
-
-		// Добавляем новое дело
-		mahoweekStorage.tasks.push({
-			id: taskId,
-			name: taskName,
-			createdTime: taskCreatedTime,
-		});
-
-		// Обновляем хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
-
-		// Стираем поле ввода
-		isThis.val('');
-
-		// Выводим дело в списке
-		taskList.find('.task--add').before(makeTask(taskId, taskName));
-
-		// Расчитываем прогресс
-		makeProgress();
-
-		// Если не мобилка
-		if (!$('body').hasClass('mobile')) {
-			// Прижимаем прокрутку к низу экрана
-			$('body').scrollTop(1000000);
-		}
-	});
-
-}());
-
-
-
 // Сортируем вручную дела
 //------------------------------------------------------------------------------
 
 (function() {
 
 	var taskListSortable = Sortable.create(document.querySelector('.list__tasks'), {
-		delay: 500,
-		handle: '.task__name',
+		delay: 200,
 		animation: 0,
-		filter: '.task--add .task__name',
+		filter: '.task--add, .task__input',
+		preventOnFilter: false,
 		ghostClass: 'task--ghost',
 		chosenClass: 'task--chosen',
 		dragClass: 'task--drag',
 		scrollSensitivity: 80,
-		onEnd: function (evt) {
+		onChoose: function() {
+			// Добавляем класс сортировки
+			taskList.addClass('list__tasks--drag');
+		},
+		onEnd: function(evt) {
 			// Парсим хранилище
 			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
@@ -348,6 +426,9 @@ var taskList = $('.list__tasks');
 
 			// Обновляем хранилище
 			localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+
+			// Удаляем класс сортировки
+			taskList.removeClass('list__tasks--drag');
 		}
 	});
 
@@ -394,7 +475,7 @@ function makeTask(id, name, completed) {
 			'<div class="task__check  js-completed-task"></div>' +
 		'</div>' +
 		'<div class="task__name">' +
-			'<input class="task__input  js-edit-task" type="text" value="' + name + '">' +
+			name +
 		'</div>' +
 		'<div class="task__options">' +
 			'<div class="task__trash  js-remove-task">' +

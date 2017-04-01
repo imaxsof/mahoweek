@@ -4,6 +4,8 @@
 .task {
 	display: flex;
 	margin-top: -1px;
+	position: relative;
+	height: 41px;
 
 	&--add {
 		border-radius: 0 0 @list-radius @list-radius;
@@ -23,7 +25,7 @@
 		left: 5px;
 		right: 5px;
 		width: auto;
-		z-index: 1;
+		z-index: 5;
 		border-top-color: @list-border-color;
 
 		@media (min-width: 560px) {
@@ -33,26 +35,46 @@
 			max-width: 550px;
 		}
 	}
+
+	&[data-completed="1"] {
+		font-size: @font-size-small;
+	}
+
+	&--chosen {
+		background-color: fade(@list-bg, 97%);
+	}
+
+	&--ghost {
+		.mobile & {
+			opacity: 0;
+		}
+	}
 }
 
 .task__status {
 	width: 41px;
 	position: relative;
 	cursor: pointer;
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid transparent;
 
 	.task--add & {
 		cursor: default;
-		border-top: 1px solid transparent;
 	}
 
-	.task--fixed & {
+	.task--fixed &,
+	.task--chosen & {
 		border-top-color: @list-border-color;
+	}
+
+	.task--chosen & {
+		border-bottom-color: @list-border-color;
 	}
 }
 
 .task__check {
 	position: absolute;
-	top: 0;
+	top: -1px;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -107,17 +129,20 @@
 }
 
 .task__name {
-	padding: 9px 0 7px;
+	padding: 8px 0 7px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
 	flex: 1 0 0;
+	border-top: 1px solid @list-border-color;
 	border-bottom: 1px solid @list-border-color;
 
 	.task--add & {
 		border-bottom: 0;
-		padding-top: 8px;
-		border-top: 1px solid @list-border-color;
+	}
+
+	.task[data-completed="1"] & {
+		color: @text-lighten;
 	}
 }
 
@@ -129,20 +154,12 @@
 	margin: -8px 0 -7px 0;
 	padding: 8px 0 7px 0;
 	height: 39px;
-	cursor: default;
-	mask-image: linear-gradient(90deg, #000 95%, rgba(0, 0, 0, 0));
-
-	&:focus,
-	.task--add & {
-		cursor: text;
-	}
 
 	.task--add & {
 		width: calc(~"100% - 39px");
 	}
 
 	.task[data-completed="1"] & {
-		font-size: @font-size-small;
 		color: @text-lighten;
 	}
 }
@@ -151,12 +168,13 @@
 	width: 41px;
 	position: relative;
 	cursor: pointer;
+	border-top: 1px solid @list-border-color;
 	border-bottom: 1px solid @list-border-color;
 }
 
 .task__trash {
 	position: absolute;
-	top: 0;
+	top: -1px;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -177,6 +195,10 @@
 		.task:hover &,
 		.mobile & {
 			opacity: 1;
+		}
+
+		.list__tasks--drag & {
+			opacity: 0 !important;
 		}
 	}
 }
