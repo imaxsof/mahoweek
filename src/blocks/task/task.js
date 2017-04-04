@@ -422,14 +422,26 @@ var taskList = $('.list__tasks');
 				// Парсим хранилище
 				var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-				// Сортируем
-				mahoweekStorage.tasks.splice(evt.newIndex, 0, mahoweekStorage.tasks.splice(evt.oldIndex, 1)[0]);
+				// Получаем удаленный элемент
+				var taskRemove = mahoweekStorage.tasks.splice(evt.oldIndex, 1)[0];
 
-				// Обновляем хранилище
-				localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+				// Если элемент существует
+				if (taskRemove !== undefined) {
+					// Сортируем
+					mahoweekStorage.tasks.splice(evt.newIndex, 0, taskRemove);
 
-				// Удаляем класс сортировки
-				taskList.removeClass('list__tasks--drag');
+					// Обновляем хранилище
+					localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+
+					// Удаляем класс сортировки
+					taskList.removeClass('list__tasks--drag');
+
+				// Если не существует
+				} else {
+					// Перезагружаем страницу
+					// во избежание ошибок
+					location.reload();
+				}
 			}
 		}
 	});
