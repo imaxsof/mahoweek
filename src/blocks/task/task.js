@@ -418,17 +418,19 @@ var taskList = $('.list__tasks');
 			taskList.addClass('list__tasks--drag');
 		},
 		onEnd: function(evt) {
-			// Парсим хранилище
-			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+			if (Number.isInteger(evt.oldIndex) && Number.isInteger(evt.newIndex) && evt.oldIndex != evt.newIndex) {
+				// Парсим хранилище
+				var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-			// Сортируем
-			mahoweekStorage.tasks.splice(evt.newIndex, 0, mahoweekStorage.tasks.splice(evt.oldIndex, 1)[0]);
+				// Сортируем
+				mahoweekStorage.tasks.splice(evt.newIndex, 0, mahoweekStorage.tasks.splice(evt.oldIndex, 1)[0]);
 
-			// Обновляем хранилище
-			localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+				// Обновляем хранилище
+				localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
-			// Удаляем класс сортировки
-			taskList.removeClass('list__tasks--drag');
+				// Удаляем класс сортировки
+				taskList.removeClass('list__tasks--drag');
+			}
 		}
 	});
 

@@ -42,6 +42,8 @@
 
 	&--chosen {
 		background-color: fade(@list-bg, 97%);
+		box-shadow: 0 0 20px @list-border-color;
+		z-index: 10;
 	}
 
 	&--ghost {
@@ -156,7 +158,7 @@
 	height: 39px;
 
 	.task--add & {
-		width: calc(~"100% - 39px");
+		width: calc(~"100% - 41px");
 	}
 
 	.task[data-completed="1"] & {
