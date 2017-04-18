@@ -2,12 +2,17 @@
 //------------------------------------------------------------------------------
 
 .list {
-	background-color: fade(@list-bg, 97%);
+	background-color: fade(@list-bg, 98%);
 	box-shadow: 0 0 80px fade(@text-color, 10%);
 	border-radius: @list-radius;
 	position: relative;
 	padding-top: 41px;
 	padding-bottom: 39px;
+
+	@media (min-width: 1200px) {
+		background-color: transparent;
+		background-image: linear-gradient(90deg, fade(@list-bg, 98%) 560px, fade(@grid-bg, 98%) 560px);
+	}
 }
 
 .list__head {
@@ -18,12 +23,12 @@
 	position: absolute;
 	top: 0;
 	width: 100%;
-	z-index: 1;
+	z-index: 2;
 
 	&--fixed {
 		position: fixed;
 		border-radius: 0;
-		background-color: fade(@list-bg, 97%);
+		background-color: fade(@list-bg, 98%);
 		left: 5px;
 		right: 5px;
 		width: auto;
@@ -35,13 +40,19 @@
 			width: 100%;
 			max-width: 550px;
 		}
+
+		@media (min-width: 1200px) {
+			max-width: 1120px;
+			background-color: transparent;
+			background-image: linear-gradient(90deg, fade(@list-bg, 98%) 560px, fade(@grid-bg, 98%) 560px);
+		}
 	}
 }
 
 .list__wrap {
 	flex: 1 0 0;
 	padding: 8px 15px 7px;
-	border-bottom: 2px solid @list-border-color;
+	border-bottom: 2px solid @list-border;
 	position: relative;
 }
 

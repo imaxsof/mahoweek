@@ -14,13 +14,13 @@ var taskList = $('.list__tasks');
 	// Парсим хранилище
 	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-	// Генерируем список
+	// Начинаем генерировать список
 	var taskListCreate = '';
 
 	// Пробегаемся по каждому делу
 	for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
 		// Создаем строку с делом
-		taskListCreate += makeTask(mahoweekStorage.tasks[i].id, mahoweekStorage.tasks[i].name, mahoweekStorage.tasks[i].completed);
+		taskListCreate += makeTask(mahoweekStorage.tasks[i].id, mahoweekStorage.tasks[i].name, mahoweekStorage.tasks[i].completed, mahoweekStorage.tasks[i].markers);
 	}
 
 	// Выводим список
@@ -30,6 +30,13 @@ var taskList = $('.list__tasks');
 	makeProgress();
 
 }());
+
+
+
+// Выводим сетку дат в строку добавления дела
+//------------------------------------------------------------------------------
+
+taskList.find('.task--add .task__grid').html(makeGrid());
 
 
 
@@ -321,6 +328,7 @@ var taskList = $('.list__tasks');
 		var taskLastChange = new Date().getTime();
 
 		// Изменяем текст дела
+		// и помечаем время редактирования
 		mahoweekStorage.tasks[taskIndex].name = taskName;
 		mahoweekStorage.tasks[taskIndex].lastChange = taskLastChange;
 
@@ -393,6 +401,84 @@ var taskList = $('.list__tasks');
 				taskList.find('.task--add').removeClass('task--fixed');
 			}
 		}
+	});
+
+}());
+
+
+
+// Добавляем метку делу
+//------------------------------------------------------------------------------
+
+(function() {
+
+	taskList.on('click', '.task:not([data-completed="1"]) .js-marker-task:not(.grid__date--past)', function() {
+		var isThis = $(this);
+
+		// Получаем хеш дела и дату
+		var taskId = isThis.parents('.task').attr('data-id'),
+			taskDay = isThis.attr('data-day');
+
+		// Парсим хранилище
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+
+		// Получаем элемент дела в хранилище
+		var taskElement = mahoweekStorage.tasks.filter(function(value) {
+			return value.id == taskId;
+		});
+
+		// Получаем индекс дела в хранилище
+		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
+
+		// Если массива маркеров не существовало
+		if (!mahoweekStorage.tasks[taskIndex].markers) {
+			// Создаем такой и сразу заполняем
+			mahoweekStorage.tasks[taskIndex].markers = [{
+				day: taskDay,
+				label: 'bull'
+			}];
+
+			// Добавляем метку в ячейку
+			isThis.html('<svg class="grid__bull"><use xlink:href="#ei-bull-icon"></use></svg>');
+
+		// Если существовало
+		} else {
+			// Проверяем существовала ли уже метка на это число
+			var markerElement = mahoweekStorage.tasks[taskIndex].markers.filter(function(value) {
+				return value.day == taskDay;
+			});
+
+			// Если существовала, то удаляем
+			if (markerElement != '') {
+				// Получаем индекс метки
+				var markerIndex = mahoweekStorage.tasks[taskIndex].markers.indexOf(markerElement[0]);
+
+				// Удаляем метку
+				mahoweekStorage.tasks[taskIndex].markers.splice(markerIndex, 1);
+
+				// Очищаем ячейку
+				isThis.html('');
+
+			// Иначе создаем новую
+			} else {
+				mahoweekStorage.tasks[taskIndex].markers.push({
+					day: taskDay,
+					label: 'bull'
+				});
+
+				// Добавляем метку в ячейку
+				isThis.html('<svg class="grid__bull"><use xlink:href="#ei-bull-icon"></use></svg>');
+			}
+		}
+
+		// Получаем метку времени
+		var taskLastChange = new Date().getTime();
+
+		// Помечаем время редактирования
+		mahoweekStorage.tasks[taskIndex].lastChange = taskLastChange;
+
+		// Обновляем хранилище
+		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 	});
 
 }());
@@ -473,7 +559,7 @@ function makeHash() {
 // Генерируем дело
 //------------------------------------------------------------------------------
 
-function makeTask(id, name, completed) {
+function makeTask(id, name, completed, markers) {
 
 	// Определяем статус дела
 	if (completed == 1) {
@@ -497,6 +583,9 @@ function makeTask(id, name, completed) {
 					'<use xlink:href="#ei-trash-icon"></use>' +
 				'</svg>' +
 			'</div>' +
+		'</div>' +
+		'<div class="task__grid  grid">' +
+			makeGrid('task', markers) +
 		'</div>' +
 	'</div>';
 

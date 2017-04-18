@@ -21,18 +21,24 @@
 	&--fixed {
 		position: fixed;
 		border-radius: 0;
-		background-color: fade(@list-bg, 97%);
+		background-color: fade(@list-bg, 98%);
 		left: 5px;
 		right: 5px;
 		width: auto;
 		z-index: 5;
-		border-top-color: @list-border-color;
+		border-top-color: @list-border;
 
 		@media (min-width: 560px) {
 			left: auto;
 			right: auto;
 			width: 100%;
 			max-width: 550px;
+		}
+
+		@media (min-width: 1200px) {
+			max-width: 1120px;
+			background-color: transparent;
+			background-image: linear-gradient(90deg, fade(@list-bg, 98%) 560px, fade(@grid-bg, 98%) 560px);
 		}
 	}
 
@@ -41,9 +47,14 @@
 	}
 
 	&--chosen {
-		background-color: fade(@list-bg, 97%);
-		box-shadow: 0 0 20px @list-border-color;
+		background-color: fade(@list-bg, 98%);
+		box-shadow: 0 0 20px @list-border;
 		z-index: 10;
+
+		@media (min-width: 1200px) {
+			background-color: transparent;
+			background-image: linear-gradient(90deg, fade(@list-bg, 98%) 560px, fade(@grid-bg, 98%) 560px);
+		}
 	}
 
 	&--ghost {
@@ -66,11 +77,11 @@
 
 	.task--fixed &,
 	.task--chosen & {
-		border-top-color: @list-border-color;
+		border-top-color: @list-border;
 	}
 
 	.task--chosen & {
-		border-bottom-color: @list-border-color;
+		border-bottom-color: @list-border;
 	}
 }
 
@@ -92,7 +103,7 @@
 	}
 
 	&::before {
-		background-color: @list-border-color;
+		background-color: @list-border;
 
 		.task[data-completed="1"] & {
 			background-color: lighten(@text-green, 15%);
@@ -101,7 +112,7 @@
 	}
 
 	&:hover::before {
-		background-color: darken(@list-border-color, 10%);
+		background-color: darken(@list-border, 10%);
 
 		.task[data-completed="1"] & {
 			background-color: @text-green;
@@ -136,8 +147,8 @@
 	overflow: hidden;
 	white-space: nowrap;
 	flex: 1 0 0;
-	border-top: 1px solid @list-border-color;
-	border-bottom: 1px solid @list-border-color;
+	border-top: 1px solid @list-border;
+	border-bottom: 1px solid @list-border;
 
 	.task--add & {
 		border-bottom: 0;
@@ -170,8 +181,8 @@
 	width: 41px;
 	position: relative;
 	cursor: pointer;
-	border-top: 1px solid @list-border-color;
-	border-bottom: 1px solid @list-border-color;
+	border-top: 1px solid @list-border;
+	border-bottom: 1px solid @list-border;
 }
 
 .task__trash {

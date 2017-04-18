@@ -8,5 +8,6 @@
 // Blocks
 //------------------------------------------------------------------------------
 
+//= ../blocks/grid/grid.js
 //= ../blocks/list/list.js
 //= ../blocks/task/task.js

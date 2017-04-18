@@ -1,0 +1,89 @@
+// Grid
+//------------------------------------------------------------------------------
+
+.grid {
+	display: none;
+
+	@media (min-width: 1200px) {
+		display: flex;
+	}
+}
+
+.grid__date {
+	width: 40px;
+	border-top: 1px solid @list-border;
+	border-left: 1px solid @list-border;
+	border-bottom: 1px solid @list-border;
+	position: relative;
+	text-align: center;
+	cursor: pointer;
+
+	&:first-child {
+		width: 41px;
+		border-left-width: 2px;
+	}
+
+	&--past {
+		background-image: linear-gradient(135deg, transparent 3px, lighten(@text-lighten, 20%) 3px, transparent 4px);
+		background-size: 5px 5px;
+		background-repeat: repeat;
+		cursor: default;
+		color: @text-lighten;
+		fill: @text-lighten;
+	}
+
+	&--today {
+		background-color: @grid-today-bg;
+		border-right: 1px solid @grid-today-border;
+		border-color: @grid-today-border;
+		width: 41px;
+		margin-right: -1px;
+		z-index: 1;
+	}
+
+	.list__head & {
+		border-top-width: 0;
+		border-bottom-width: 2px;
+		padding: 8px 0 7px;
+		cursor: default;
+
+		&--holiday::before {
+			position: absolute;
+			content: "";
+			left: 0;
+			right: 0;
+			bottom: -2px;
+			height: 2px;
+			background-color: lighten(@text-red, 20%);
+		}
+
+		&--holiday + .grid__date--holiday:not(.grid__date--today)::before {
+			left: -1px;
+		}
+	}
+
+	.task--add & {
+		border-bottom-width: 0;
+		cursor: default;
+	}
+
+	.task--fixed & {
+		border-top-color: @list-border;
+	}
+
+	.task[data-completed="1"] & {
+		cursor: default;
+	}
+}
+
+.grid__bull {
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	top: 7px;
+	left: 7px;
+
+	.task[data-completed="1"] & {
+		opacity: 0;
+	}
+}
