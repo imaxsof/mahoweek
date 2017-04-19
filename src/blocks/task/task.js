@@ -177,11 +177,13 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 (function() {
 
 	taskList.on('click', '.js-completed-task', function() {
-		var isThis = $(this);
+		var isThis = $(this),
+			task = isThis.parents('.task');
 
-		// Получаем хеш дела и метку о выполнении
-		var taskId = isThis.parents('.task').attr('data-id'),
-			taskCompleted = isThis.parents('.task').attr('data-completed');
+		// Получаем хеш дела, метку о выполнении и дату текущего дня
+		var taskId = task.attr('data-id'),
+			taskCompleted = task.hasClass('task--completed'),
+			taskDateToday = task.find('.grid__date--today').attr('data-date');
 
 		// Парсим хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
@@ -196,24 +198,99 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 
 		// Если дело не выполнено
 		if (!taskCompleted) {
-			// Получаем метку времени
-			var taskCompletedTime = new Date().getTime();
+			// Переключаем метку выполнения в календаре
+			task.find('.grid__date--today').toggleClass('grid__date--completed');
 
-			// Помечаем дело как выполненное
-			mahoweekStorage.tasks[taskIndex].completed = 1;
-			mahoweekStorage.tasks[taskIndex].completedTime = taskCompletedTime;
+			// Переключаем метку в хранилище
+			if (task.find('.grid__date--today').hasClass('grid__date--completed')) {
+				var markerAct = 'add';
+			} else {
+				var markerAct = 'del';
+			}
 
-			// Обновляем дело в списке
-			isThis.parents('.task').attr('data-completed', 1);
+			// Если дело не многоразовое
+			if (task.find('.grid__date--today').nextAll('.grid__date--bull').length <= 1) {
+				// Окончательно ставим метку выполнения в календарь и в хранилище
+				task.find('.grid__date--today').addClass('grid__date--completed');
+				markerAct = 'add';
+
+				// Получаем метку времени
+				var taskCompletedTime = new Date().getTime();
+
+				// Помечаем дело как выполненное
+				mahoweekStorage.tasks[taskIndex].completed = 1;
+				mahoweekStorage.tasks[taskIndex].completedTime = taskCompletedTime;
+
+				// Обновляем дело в списке
+				task.addClass('task--completed');
+			}
 
 		// Если дело было выполнено
 		} else {
+			// Убираем метку в хранилище
+			var markerAct = 'del';
+
+			// Убираем метку выполнения в календаре
+			task.find('.grid__date--today').removeClass('grid__date--completed');
+
 			// Помечаем дело как невыполненное
 			delete mahoweekStorage.tasks[taskIndex].completed;
 			delete mahoweekStorage.tasks[taskIndex].completedTime;
 
 			// Обновляем дело в списке
-			isThis.parents('.task').removeAttr('data-completed');
+			task.removeClass('task--completed');
+		}
+
+		// Заносим изменения в массив маркеров
+		// и если массива маркеров не существовало
+		if (markerAct == 'add' && !mahoweekStorage.tasks[taskIndex].markers) {
+			// Создаем такой и сразу заполняем
+			mahoweekStorage.tasks[taskIndex].markers = [{
+				date: taskDateToday,
+				completed: 1
+			}];
+
+		// Если существовало
+		} else {
+			// Проверяем существовала ли уже метка на это число
+			var markerElement = mahoweekStorage.tasks[taskIndex].markers.filter(function(value) {
+				return value.date == taskDateToday;
+			});
+
+			// Если существовала
+			if (markerElement != '') {
+				// Получаем индекс метки
+				var markerIndex = mahoweekStorage.tasks[taskIndex].markers.indexOf(markerElement[0]);
+
+				// Если действие добавления
+				if (markerAct == 'add') {
+					// Добавляем информацию о выполнении
+					mahoweekStorage.tasks[taskIndex].markers[markerIndex].completed = 1;
+
+				// Если удаления
+				} else {
+					// Если была установлена метка,
+					// то удаляем только информацию о выполнении
+					if (mahoweekStorage.tasks[taskIndex].markers[markerIndex].label) {
+						delete mahoweekStorage.tasks[taskIndex].markers[markerIndex].completed;
+
+					// Иначе удаляем метку полностью
+					} else {
+						mahoweekStorage.tasks[taskIndex].markers.splice(markerIndex, 1);
+					}
+				}
+
+			// Если не существовало
+			} else {
+				// Если действие добавления
+				if (markerAct == 'add') {
+					// Добавляем метку только с информацией о выполнении
+					mahoweekStorage.tasks[taskIndex].markers.push({
+						date: taskDateToday,
+						completed: 1
+					});
+				}
+			}
 		}
 
 		// Обновляем хранилище
@@ -325,12 +402,12 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
 
 		// Получаем метку времени
-		var taskLastChange = new Date().getTime();
+		// var taskLastChange = new Date().getTime();
 
 		// Изменяем текст дела
 		// и помечаем время редактирования
 		mahoweekStorage.tasks[taskIndex].name = taskName;
-		mahoweekStorage.tasks[taskIndex].lastChange = taskLastChange;
+		// mahoweekStorage.tasks[taskIndex].lastChange = taskLastChange;
 
 		// Обновляем хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
@@ -412,12 +489,12 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 
 (function() {
 
-	taskList.on('click', '.task:not([data-completed="1"]) .js-marker-task:not(.grid__date--past)', function() {
+	taskList.on('click', '.task:not(.task--completed) .js-marker-task:not(.grid__date--past):not(.grid__date--completed)', function() {
 		var isThis = $(this);
 
 		// Получаем хеш дела и дату
 		var taskId = isThis.parents('.task').attr('data-id'),
-			taskDay = isThis.attr('data-day');
+			taskDate = isThis.attr('data-date');
 
 		// Парсим хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
@@ -434,18 +511,18 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 		if (!mahoweekStorage.tasks[taskIndex].markers) {
 			// Создаем такой и сразу заполняем
 			mahoweekStorage.tasks[taskIndex].markers = [{
-				day: taskDay,
+				date: taskDate,
 				label: 'bull'
 			}];
 
-			// Добавляем метку в ячейку
-			isThis.html('<svg class="grid__bull"><use xlink:href="#ei-bull-icon"></use></svg>');
+			// Добавляем метку для ячейки
+			isThis.addClass('grid__date--bull');
 
 		// Если существовало
 		} else {
 			// Проверяем существовала ли уже метка на это число
 			var markerElement = mahoweekStorage.tasks[taskIndex].markers.filter(function(value) {
-				return value.day == taskDay;
+				return value.date == taskDate;
 			});
 
 			// Если существовала, то удаляем
@@ -456,26 +533,26 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 				// Удаляем метку
 				mahoweekStorage.tasks[taskIndex].markers.splice(markerIndex, 1);
 
-				// Очищаем ячейку
-				isThis.html('');
+				// Убираем метку для ячейки
+				isThis.removeClass('grid__date--bull');
 
 			// Иначе создаем новую
 			} else {
 				mahoweekStorage.tasks[taskIndex].markers.push({
-					day: taskDay,
+					date: taskDate,
 					label: 'bull'
 				});
 
-				// Добавляем метку в ячейку
-				isThis.html('<svg class="grid__bull"><use xlink:href="#ei-bull-icon"></use></svg>');
+				// Добавляем метку для ячейки
+				isThis.addClass('grid__date--bull');
 			}
 		}
 
 		// Получаем метку времени
-		var taskLastChange = new Date().getTime();
+		// var taskLastChange = new Date().getTime();
 
 		// Помечаем время редактирования
-		mahoweekStorage.tasks[taskIndex].lastChange = taskLastChange;
+		// mahoweekStorage.tasks[taskIndex].lastChange = taskLastChange;
 
 		// Обновляем хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
@@ -552,6 +629,7 @@ function makeHash() {
 
 	// Выводим
 	return hash;
+
 }
 
 
@@ -563,14 +641,14 @@ function makeTask(id, name, completed, markers) {
 
 	// Определяем статус дела
 	if (completed == 1) {
-		var completed = ' data-completed="1"';
+		var completed = ' task--completed';
 	} else {
 		var completed = '';
 	}
 
 	// Генерируем код
 	return '' +
-	'<div class="task" data-id="' + id + '"' + completed + '>' +
+	'<div class="task' + completed + '" data-id="' + id + '">' +
 		'<div class="task__status">' +
 			'<div class="task__check  js-completed-task"></div>' +
 		'</div>' +

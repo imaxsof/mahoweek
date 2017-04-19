@@ -42,7 +42,7 @@
 		}
 	}
 
-	&[data-completed="1"] {
+	&--completed {
 		font-size: @font-size-small;
 	}
 
@@ -105,7 +105,7 @@
 	&::before {
 		background-color: @list-border;
 
-		.task[data-completed="1"] & {
+		.task--completed & {
 			background-color: lighten(@text-green, 15%);
 			transform: scale3d(0.4117, 0.4117, 1);
 		}
@@ -114,7 +114,7 @@
 	&:hover::before {
 		background-color: darken(@list-border, 10%);
 
-		.task[data-completed="1"] & {
+		.task--completed & {
 			background-color: @text-green;
 		}
 	}
@@ -154,7 +154,7 @@
 		border-bottom: 0;
 	}
 
-	.task[data-completed="1"] & {
+	.task--completed & {
 		color: @text-lighten;
 	}
 }
@@ -172,7 +172,7 @@
 		width: calc(~"100% - 41px");
 	}
 
-	.task[data-completed="1"] & {
+	.task--completed & {
 		color: @text-lighten;
 	}
 }

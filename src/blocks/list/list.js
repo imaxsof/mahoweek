@@ -58,7 +58,7 @@ function makeProgress() {
 	var taskTotal = $('.task:not(.task--add)').length;
 
 	// Считаем кол-во выполненных
-	var taskCompleted = $('.task:not(.task--add)[data-completed="1"]').length;
+	var taskCompleted = $('.task--completed').length;
 
 	// Высчитываем прогресс
 	if (taskTotal > 0) {
