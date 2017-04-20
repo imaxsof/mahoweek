@@ -3,9 +3,24 @@
 
 .logo {
 	h1 {
-		font-size: 24px;
+		font-size: 18px;
+		font-family: Verdana, @font-family;
+		text-transform: uppercase;
 		line-height: 30px;
 		font-weight: 500;
 		margin: 0;
+		position: relative;
+		padding-left: 12px;
+
+		&::before {
+			position: absolute;
+			content: "";
+			width: 7px;
+			height: 7px;
+			border-radius: 50%;
+			top: 12px;
+			left: -1px;
+			background-color: lighten(@text-green, 15%);
+		}
 	}
 }

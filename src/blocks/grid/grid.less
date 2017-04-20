@@ -35,10 +35,15 @@
 	&--today {
 		background-color: @grid-today-bg;
 		border-right: 1px solid @grid-today-border;
-		border-color: @grid-today-border;
+		border-color: @grid-today-border !important;
 		width: 41px;
 		margin-right: -1px;
 		z-index: 1;
+
+		.task--add.task--fixed & {
+			margin-top: -1px;
+			border-top-width: 2px;
+		}
 	}
 
 	&--bull,
@@ -57,8 +62,8 @@
 
 	&--bull {
 		&::before {
-			border-color: lighten(@text-lighten, 15%);
-			background-color: lighten(@text-lighten, 15%);
+			border-color: darken(@list-border, 14%);
+			background-color: darken(@list-border, 14%);
 
 			.grid__date--past& {
 				border-color: lighten(@text-red, 45%);
@@ -70,6 +75,16 @@
 				border-color: @text-yellow;
 				background-color: @text-yellow;
 			}
+		}
+
+		&:not(.grid__date--past):hover::before {
+			border-color: darken(@list-border, 24%);
+			background-color: darken(@list-border, 24%);
+		}
+
+		&.grid__date--today:not(.grid__date--completed):hover::before {
+			border-color: darken(@text-yellow, 13%);
+			background-color: darken(@text-yellow, 13%);
 		}
 
 		.task--completed .grid__date:not(.grid__date--past):not(.grid__date--today)&::before {

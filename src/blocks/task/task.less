@@ -7,10 +7,20 @@
 	position: relative;
 	height: 41px;
 
+	body:not(.mobile) &:not(.task--add):hover {
+		background-color: transparent;
+		background-image: linear-gradient(90deg, fade(@list-bg, 98%) 560px, fade(@grid-bg, 98%) 560px);
+	}
+
+	.list__tasks--drag &:not(.task--chosen):not(.task--add) {
+		background-color: transparent !important;
+		background-image: none !important;
+	}
+
 	&--add {
 		border-radius: 0 0 @list-radius @list-radius;
 		font-size: @font-size-small;
-		overflow: hidden;
+		// overflow: hidden;
 		position: absolute;
 		bottom: 0;
 		width: 100%;
@@ -65,7 +75,7 @@
 }
 
 .task__status {
-	width: 41px;
+	width: 39px;
 	position: relative;
 	cursor: pointer;
 	border-top: 1px solid transparent;
@@ -94,25 +104,25 @@
 
 	&::before {
 		position: absolute;
-		width: 17px;
-		height: 17px;
+		width: 15px;
+		height: 15px;
 		content: "";
-		top: 12px;
+		top: 13px;
 		left: 14px;
 		border-radius: 50%;
 	}
 
 	&::before {
-		background-color: @list-border;
+		background-color: darken(@list-border, 5%);
 
 		.task--completed & {
 			background-color: lighten(@text-green, 15%);
-			transform: scale3d(0.4117, 0.4117, 1);
+			transform: scale3d(0.4666, 0.4666, 1);
 		}
 	}
 
 	&:hover::before {
-		background-color: darken(@list-border, 10%);
+		background-color: darken(@list-border, 15%);
 
 		.task--completed & {
 			background-color: @text-green;
@@ -126,10 +136,10 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	fill: lighten(@text-gray, 20%);
+	fill: darken(@list-border, 20%);
 
 	.task--focus & {
-		fill: @text-gray;
+		fill: darken(@list-border, 35%);
 	}
 
 	svg {
@@ -137,7 +147,7 @@
 		width: 25px;
 		height: 25px;
 		top: 8px;
-		left: 10px;
+		left: 9px;
 	}
 }
 
@@ -192,9 +202,21 @@
 	right: 0;
 	bottom: 0;
 	fill: lighten(@text-red, 20%);
+	opacity: 0;
 
 	&:hover {
 		fill: @text-red;
+		opacity: 1;
+	}
+
+	.task__name:hover ~ .task__options &,
+	.task__status:hover ~ .task__options &,
+	.mobile & {
+		opacity: 1;
+	}
+
+	.list__tasks--drag & {
+		opacity: 0 !important;
 	}
 
 	svg {
@@ -203,15 +225,5 @@
 		height: 25px;
 		top: 8px;
 		left: 8px;
-		opacity: 0;
-
-		.task:hover &,
-		.mobile & {
-			opacity: 1;
-		}
-
-		.list__tasks--drag & {
-			opacity: 0 !important;
-		}
 	}
 }

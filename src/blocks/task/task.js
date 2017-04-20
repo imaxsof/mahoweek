@@ -209,7 +209,7 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 			}
 
 			// Если дело не многоразовое
-			if (task.find('.grid__date--today').nextAll('.grid__date--bull').length <= 1) {
+			if ((task.find('.grid__date--today').hasClass('grid__date--bull') && !task.find('.grid__date--today').nextAll('.grid__date--bull').length) || (!task.find('.grid__date--today').hasClass('grid__date--bull') && task.find('.grid__date--today').nextAll('.grid__date--bull').length <= 1)) {
 				// Окончательно ставим метку выполнения в календарь и в хранилище
 				task.find('.grid__date--today').addClass('grid__date--completed');
 				markerAct = 'add';
