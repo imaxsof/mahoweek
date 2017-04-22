@@ -1,12 +1,7 @@
 // Task
 //------------------------------------------------------------------------------
 
-// Назначаем глобальные переменные
-var taskList = $('.list__tasks');
-
-
-
-// Выводим список дел
+// Выводим список дел в листы
 //------------------------------------------------------------------------------
 
 (function() {
@@ -14,79 +9,69 @@ var taskList = $('.list__tasks');
 	// Парсим хранилище
 	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-	// Начинаем генерировать список
-	var taskListCreate = '';
-
 	// Пробегаемся по каждому делу
 	for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
-		// Создаем строку с делом
-		taskListCreate += makeTask(mahoweekStorage.tasks[i].id, mahoweekStorage.tasks[i].name, mahoweekStorage.tasks[i].completed, mahoweekStorage.tasks[i].markers);
+		// Заносим дело в свой лист
+		LIST_BOARD.find('.list[data-id="' + mahoweekStorage.tasks[i].listId + '"] .task--add').before(makeTask(mahoweekStorage.tasks[i].id, mahoweekStorage.tasks[i].name, mahoweekStorage.tasks[i].completed, mahoweekStorage.tasks[i].markers));
 	}
 
-	// Выводим список
-	taskList.prepend(taskListCreate);
-
-	// Расчитываем прогресс
-	makeProgress();
+	// Пробегаемся по каждому листу
+	for (var i = 0; i < mahoweekStorage.lists.length; i ++) {
+		// Рассчитываем прогресс листа
+		makeProgress(mahoweekStorage.lists[i].id);
+	}
 
 }());
-
-
-
-// Выводим сетку дат в строку добавления дела
-//------------------------------------------------------------------------------
-
-taskList.find('.task--add .task__grid').html(makeGrid());
 
 
 
 // Фиксируем блок добавления дела
 //------------------------------------------------------------------------------
 
-(function() {
+// (function() {
 
-	// Если не мобилка
-	if (!$('body').hasClass('mobile')) {
-		// Определяем переменные
-		var doc = $(window),
-			docHeight = doc.height(),
-			docScrollTop = doc.scrollTop(),
-			taskListOffsetTop = taskList.offset().top,
-			taskListHeight = taskList.height() - 1,
-			taskAddHeight = taskList.find('.task--add').innerHeight();
+// 	// Если не мобилка
+// 	if (!MOBILE) {
+// 		// Определяем переменные
+// 		var doc = $(window),
+// 			docHeight = doc.height(),
+// 			docScrollTop = doc.scrollTop(),
+// 			taskListOffsetTop = taskList.offset().top,
+// 			taskListHeight = taskList.height() - 1,
+// 			taskAddHeight = taskList.find('.task--add').innerHeight();
 
-		// Если изначально блока не видно
-		if (docScrollTop + docHeight - taskAddHeight <= taskListOffsetTop + taskListHeight) {
-			// Фиксируем
-			taskList.find('.task--add').addClass('task--fixed');
-		}
+// 		// Если изначально блока не видно
+// 		if (docScrollTop + docHeight - taskAddHeight <= taskListOffsetTop + taskListHeight) {
+// 			// Фиксируем
+// 			taskList.find('.task--add').addClass('task--fixed');
+// 		}
 
-		// Скроллим или ресайзим
-		doc.on('scroll resize', function() {
-			var isThis = $(this);
+// 		// Скроллим или ресайзим
+// 		doc.on('scroll resize', function() {
+// 			var isThis = $(this);
 
-			// Смотрим где сейчас скролл
-			docScrollTop = isThis.scrollTop();
+// 			// Смотрим где сейчас скролл
+// 			docScrollTop = isThis.scrollTop();
 
-			// Могло измениться
-			docHeight = isThis.height();
-			taskListOffsetTop = taskList.offset().top;
-			taskListHeight = taskList.height() - 1;
+// 			// Могло измениться
+// 			docHeight = isThis.height();
+// 			taskListOffsetTop = taskList.offset().top;
+// 			taskListHeight = taskList.height() - 1;
 
-			// Если реальная позиция блока ниже
-			if (docScrollTop + docHeight - taskAddHeight <= taskListOffsetTop + taskListHeight) {
-				// Фиксируем
-				taskList.find('.task--add').addClass('task--fixed');
+// 			// Если реальная позиция блока ниже
+// 			if (docScrollTop + docHeight - taskAddHeight <= taskListOffsetTop + taskListHeight) {
+// 				// Фиксируем
+// 				taskList.find('.task--add').addClass('task--fixed');
 
-			// Если реальная позиция блока достигнута
-			} else {
-				// Снимаем фиксирование
-				taskList.find('.task--add').removeClass('task--fixed');
-			}
-		});
-	}
+// 			// Если реальная позиция блока достигнута
+// 			} else {
+// 				// Снимаем фиксирование
+// 				taskList.find('.task--add').removeClass('task--fixed');
+// 			}
+// 		});
+// 	}
 
-}());
+// }());
 
 
 
@@ -96,13 +81,13 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 (function() {
 
 	// Если не мобилка
-	if (!$('body').hasClass('mobile')) {
-		// Ставим фокус
-		taskList.find('.js-add-task').focus();
-	}
+	// if (!MOBILE) {
+	// 	// Ставим фокус
+	// 	taskList.find('.js-add-task').focus();
+	// }
 
 	// Если поле добавления в фокусе
-	taskList.find('.js-add-task').focusin(function() {
+	LIST_BOARD.find('.js-add-task').focusin(function() {
 		var isThis = $(this);
 
 		// Ставим метку о фокусе
@@ -110,7 +95,7 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 	});
 
 	// Если поле добавления не в фокусе
-	taskList.find('.js-add-task').focusout(function() {
+	LIST_BOARD.find('.js-add-task').focusout(function() {
 		var isThis = $(this);
 
 		// Снимаем метку о фокусе
@@ -126,8 +111,11 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 
 (function() {
 
-	$('.js-add-task').on('change', function() {
+	LIST_BOARD.on('change', '.js-add-task', function() {
 		var isThis = $(this);
+
+		// Получаем хеш листа
+		var listId = isThis.parents('.list').attr('data-id');
 
 		// Получаем текст дела
 		var taskName = isThis.val();
@@ -135,7 +123,7 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 		// Получаем метку времени
 		var taskCreatedTime = new Date().getTime();
 
-		// Генерируем хеш
+		// Генерируем хеш дела
 		var taskId = makeHash();
 
 		// Парсим хранилище
@@ -144,27 +132,28 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 		// Добавляем новое дело
 		mahoweekStorage.tasks.push({
 			id: taskId,
+			listId: listId,
 			name: taskName,
-			createdTime: taskCreatedTime,
+			createdTime: taskCreatedTime
 		});
 
 		// Обновляем хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
-		// Стираем поле ввода
+		// Стираем поле ввода добавления дела
 		isThis.val('');
 
-		// Выводим дело в списке
-		taskList.find('.task--add').before(makeTask(taskId, taskName));
+		// Выводим дело в листе
+		isThis.parents('.task--add').before(makeTask(taskId, taskName));
 
-		// Расчитываем прогресс
-		makeProgress();
+		// Рассчитываем прогресс листа
+		makeProgress(listId);
 
-		// Если не мобилка
-		if (!$('body').hasClass('mobile')) {
-			// Прижимаем прокрутку к низу экрана
-			$('body').scrollTop(10000);
-		}
+		// Находим созданное дело
+		var taskNew = isThis.parents('.task--add').prev();
+
+		// Смещаем позицию прокрутки на высоту строки дела
+		$('body').scrollTop($(window).scrollTop() + taskNew.outerHeight(true));
 	});
 
 }());
@@ -176,12 +165,13 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 
 (function() {
 
-	taskList.on('click', '.js-completed-task', function() {
+	LIST_BOARD.on('click', '.js-completed-task', function() {
 		var isThis = $(this),
 			task = isThis.parents('.task');
 
-		// Получаем хеш дела, метку о выполнении и дату текущего дня
-		var taskId = task.attr('data-id'),
+		// Получаем хеш листа, хеш дела, метку о выполнении и дату текущего дня
+		var listId = task.parents('.list').attr('data-id'),
+			taskId = task.attr('data-id'),
 			taskCompleted = task.hasClass('task--completed'),
 			taskDateToday = task.find('.grid__date--today').attr('data-date');
 
@@ -198,10 +188,10 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 
 		// Если дело не выполнено
 		if (!taskCompleted) {
-			// Переключаем метку выполнения в календаре
+			// Переключаем метку выполнения в сетке дат
 			task.find('.grid__date--today').toggleClass('grid__date--completed');
 
-			// Переключаем метку в хранилище
+			// Переключаем метку выполнения в хранилище
 			if (task.find('.grid__date--today').hasClass('grid__date--completed')) {
 				var markerAct = 'add';
 			} else {
@@ -210,7 +200,7 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 
 			// Если дело не многоразовое
 			if ((task.find('.grid__date--today').hasClass('grid__date--bull') && !task.find('.grid__date--today').nextAll('.grid__date--bull').length) || (!task.find('.grid__date--today').hasClass('grid__date--bull') && task.find('.grid__date--today').nextAll('.grid__date--bull').length <= 1)) {
-				// Окончательно ставим метку выполнения в календарь и в хранилище
+				// Окончательно ставим метку выполнения в сетке дат и в хранилище
 				task.find('.grid__date--today').addClass('grid__date--completed');
 				markerAct = 'add';
 
@@ -221,30 +211,30 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 				mahoweekStorage.tasks[taskIndex].completed = 1;
 				mahoweekStorage.tasks[taskIndex].completedTime = taskCompletedTime;
 
-				// Обновляем дело в списке
+				// Обновляем дело в листе
 				task.addClass('task--completed');
 			}
 
 		// Если дело было выполнено
 		} else {
-			// Убираем метку в хранилище
-			var markerAct = 'del';
-
-			// Убираем метку выполнения в календаре
+			// Убираем метку выполнения из сетки дат
 			task.find('.grid__date--today').removeClass('grid__date--completed');
+
+			// Убираем метку выполнения в хранилище
+			var markerAct = 'del';
 
 			// Помечаем дело как невыполненное
 			delete mahoweekStorage.tasks[taskIndex].completed;
 			delete mahoweekStorage.tasks[taskIndex].completedTime;
 
-			// Обновляем дело в списке
+			// Обновляем дело в листе
 			task.removeClass('task--completed');
 		}
 
 		// Заносим изменения в массив маркеров
 		// и если массива маркеров не существовало
 		if (markerAct == 'add' && !mahoweekStorage.tasks[taskIndex].markers) {
-			// Создаем такой и сразу заполняем
+			// Создаем массив маркеров и заполняем
 			mahoweekStorage.tasks[taskIndex].markers = [{
 				date: taskDateToday,
 				completed: 1
@@ -252,22 +242,22 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 
 		// Если существовало
 		} else {
-			// Проверяем существовала ли уже метка на это число
+			// Проверяем существовала ли уже метка на это число в хранилище
 			var markerElement = mahoweekStorage.tasks[taskIndex].markers.filter(function(value) {
 				return value.date == taskDateToday;
 			});
 
-			// Если существовала
+			// Если метка существовала
 			if (markerElement != '') {
 				// Получаем индекс метки
 				var markerIndex = mahoweekStorage.tasks[taskIndex].markers.indexOf(markerElement[0]);
 
-				// Если действие добавления
+				// Если действие добавления метки
 				if (markerAct == 'add') {
 					// Добавляем информацию о выполнении
 					mahoweekStorage.tasks[taskIndex].markers[markerIndex].completed = 1;
 
-				// Если удаления
+				// Если удаления метки
 				} else {
 					// Если была установлена метка,
 					// то удаляем только информацию о выполнении
@@ -280,9 +270,9 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 					}
 				}
 
-			// Если не существовало
+			// Если метка не существовала
 			} else {
-				// Если действие добавления
+				// Если действие добавления метки
 				if (markerAct == 'add') {
 					// Добавляем метку только с информацией о выполнении
 					mahoweekStorage.tasks[taskIndex].markers.push({
@@ -296,94 +286,20 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 		// Обновляем хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
-		// Расчитываем прогресс
-		makeProgress();
+		// Рассчитываем прогресс листа
+		makeProgress(listId);
 	});
 
 }());
 
 
 
-// Показываем поле для редактирования
+// Редактируем текст дела
 //------------------------------------------------------------------------------
 
 (function() {
 
-	// Задаем данные
-	var xy1 = 0;
-	var xy2 = 0;
-
-	// Определяем событие при нажатии
-	var startEvent = $('body').hasClass('mobile') ? 'touchstart' : 'mousedown';
-
-	// Старт события
-	taskList.on(startEvent, '.task:not(.task--add) .task__name', function(e) {
-		// Высчитываем сумму
-		if (e.type == 'touchstart') {
-			var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-			xy1 = touch.pageX + touch.pageY;
-		} else {
-			xy1 = e.pageX + e.pageY;
-		}
-
-		// Убираем фокус в поле добавления дела
-		taskList.find('.js-add-task').blur();
-	});
-
-	// Определяем событие при отпускании
-	var endEvent = $('body').hasClass('mobile') ? 'touchend' : 'mouseup';
-
-	// Конец события
-	taskList.on(endEvent, '.task:not(.task--add) .task__name', function(e) {
-		var isThis = $(this);
-
-		// Высчитываем сумму
-		if (e.type == 'touchend') {
-			var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-			xy2 = touch.pageX + touch.pageY;
-		} else {
-			xy2 = e.pageX + e.pageY;
-		}
-
-		// Если это была левая кнопка мышки
-		if (e.type == 'mouseup' && e.which != 1) {
-			// Прекращаем выполнение
-			return false;
-		}
-
-		// Если это было явное действие для редактирования
-		// и если это клик мышкой, то это должна быть левая кнопка
-		if (xy1 == xy2) {
-			// Если поля для редактирования еще нет
-			if (!isThis.parents('.task').find('.task__input').length) {
-				// Берем название дела
-				var taskName = isThis.text();
-
-				// Создаем поле
-				isThis.html('<input class="task__input  js-edit-task" type="text" maxlength="100" value="">');
-
-				// Вставляем текст дела и фокусируем
-				isThis.parents('.task').find('.task__input').focus().val(taskName);
-
-				// При расфокусировке
-				isThis.parents('.task').find('.task__input').focusout(function() {
-					// Заменяем поле редактирования на название дела
-					isThis.text($(this).val());
-				});
-			}
-		}
-	});
-
-}());
-
-
-
-// Редактируем дело
-//------------------------------------------------------------------------------
-
-(function() {
-
-	taskList.on('keyup change', '.js-edit-task', function(e) {
+	LIST_BOARD.on('keyup change', '.js-edit-task', function(e) {
 		var isThis = $(this);
 
 		// Получаем хеш и текст дела
@@ -422,16 +338,17 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 
 
 
-// Удаляем дела
+// Удаляем дело
 //------------------------------------------------------------------------------
 
 (function() {
 
-	taskList.on('click', '.js-remove-task', function() {
+	LIST_BOARD.on('click', '.js-remove-task', function() {
 		var isThis = $(this);
 
-		// Получаем хеш дела
-		var taskId = isThis.parents('.task').attr('data-id');
+		// Получаем хеш листа и хеш дела
+		var listId = isThis.parents('.list').attr('data-id'),
+			taskId = isThis.parents('.task').attr('data-id');
 
 		// Парсим хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
@@ -450,34 +367,34 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 		// Обновляем хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
-		// Удаляем дело из списка
+		// Удаляем дело из листа
 		isThis.parents('.task').remove();
 
-		// Если в списке не осталось дел
-		if (taskList.find('.task:not(.task--add)').length == 0) {
-			// Ставим фокус на добавление
-			taskList.find('.js-add-task').focus();
-		}
+		// // Если в листе не осталось дел
+		// if (taskList.find('.task:not(.task--add)').length == 0) {
+		// 	// Ставим фокус на добавление дела
+		// 	taskList.find('.js-add-task').focus();
+		// }
 
-		// Расчитываем прогресс
-		makeProgress();
+		// Рассчитываем прогресс листа
+		makeProgress(listId);
 
-		// Если не мобилка
-		if (!$('body').hasClass('mobile') && taskList.find('.task--add').hasClass('task--fixed')) {
-			// Определяем переменные
-			var doc = $(window),
-				docHeight = doc.height(),
-				docScrollTop = doc.scrollTop(),
-				taskListOffsetTop = taskList.offset().top,
-				taskListHeight = taskList.height() - 1,
-				taskAddHeight = taskList.find('.task--add').innerHeight();
+		// // Если не мобилка
+		// if (!MOBILE && taskList.find('.task--add').hasClass('task--fixed')) {
+		// 	// Определяем переменные
+		// 	var doc = $(window),
+		// 		docHeight = doc.height(),
+		// 		docScrollTop = doc.scrollTop(),
+		// 		taskListOffsetTop = taskList.offset().top,
+		// 		taskListHeight = taskList.height() - 1,
+		// 		taskAddHeight = taskList.find('.task--add').innerHeight();
 
-			// Если реальная позиция блока добавления дела достигнута
-			if (docScrollTop + docHeight - taskAddHeight > taskListOffsetTop + taskListHeight) {
-				// Снимаем фиксирование
-				taskList.find('.task--add').removeClass('task--fixed');
-			}
-		}
+		// 	// Если реальная позиция блока добавления дела достигнута
+		// 	if (docScrollTop + docHeight - taskAddHeight > taskListOffsetTop + taskListHeight) {
+		// 		// Снимаем фиксирование
+		// 		taskList.find('.task--add').removeClass('task--fixed');
+		// 	}
+		// }
 	});
 
 }());
@@ -489,7 +406,7 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 
 (function() {
 
-	taskList.on('click', '.task:not(.task--completed) .js-marker-task:not(.grid__date--past):not(.grid__date--completed)', function() {
+	LIST_BOARD.on('click', '.task:not(.task--completed) .js-marker-task:not(.grid__date--past):not(.grid__date--completed)', function() {
 		var isThis = $(this);
 
 		// Получаем хеш дела и дату
@@ -509,13 +426,13 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 
 		// Если массива маркеров не существовало
 		if (!mahoweekStorage.tasks[taskIndex].markers) {
-			// Создаем такой и сразу заполняем
+			// Создаем массив маркеров и заполняем
 			mahoweekStorage.tasks[taskIndex].markers = [{
 				date: taskDate,
 				label: 'bull'
 			}];
 
-			// Добавляем метку для ячейки
+			// Добавляем метку в сетку дат
 			isThis.addClass('grid__date--bull');
 
 		// Если существовало
@@ -533,7 +450,7 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 				// Удаляем метку
 				mahoweekStorage.tasks[taskIndex].markers.splice(markerIndex, 1);
 
-				// Убираем метку для ячейки
+				// Убираем метку из сетки дат
 				isThis.removeClass('grid__date--bull');
 
 			// Иначе создаем новую
@@ -565,72 +482,56 @@ taskList.find('.task--add .task__grid').html(makeGrid());
 // Сортируем вручную дела
 //------------------------------------------------------------------------------
 
-(function() {
+// (function() {
 
-	var taskListSortable = Sortable.create(document.querySelector('.list__tasks'), {
-		delay: 200,
-		animation: 0,
-		filter: '.task--add, .task__input',
-		preventOnFilter: false,
-		ghostClass: 'task--ghost',
-		chosenClass: 'task--chosen',
-		dragClass: 'task--drag',
-		scrollSensitivity: 80,
-		onChoose: function() {
-			// Добавляем класс сортировки
-			taskList.addClass('list__tasks--drag');
-		},
-		onEnd: function(evt) {
-			if (Number.isInteger(evt.oldIndex) && Number.isInteger(evt.newIndex) && evt.oldIndex != evt.newIndex) {
-				// Парсим хранилище
-				var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+// 	LIST_BOARD.find('.list__tasks').each(function() {
+// 		Sortable.create(this, {
+// 			group: "name",
+// 			delay: 200,
+// 			animation: 0,
+// 			filter: '.task--add, .task__input',
+// 			preventOnFilter: false,
+// 			ghostClass: 'task--ghost',
+// 			chosenClass: 'task--chosen',
+// 			dragClass: 'task--drag',
+// 			scrollSensitivity: 80,
+// 			onChoose: function() {
+// 				// Добавляем класс сортировки
+// 				LIST_BOARD.find('.list__tasks').addClass('list__tasks--drag');
+// 			},
+// 			onEnd: function(evt) {
+// 				console.log(evt.oldIndex + ' ' + evt.newIndex);
 
-				// Получаем удаленный элемент
-				var taskRemove = mahoweekStorage.tasks.splice(evt.oldIndex, 1)[0];
+// 				if (Number.isInteger(evt.oldIndex) && Number.isInteger(evt.newIndex) && evt.oldIndex != evt.newIndex) {
+// 					// Парсим хранилище
+// 					var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-				// Если элемент существует
-				if (taskRemove !== undefined) {
-					// Сортируем
-					mahoweekStorage.tasks.splice(evt.newIndex, 0, taskRemove);
+// 					// Получаем удаленный элемент
+// 					var taskRemove = mahoweekStorage.tasks.splice(evt.oldIndex, 1)[0];
 
-					// Обновляем хранилище
-					localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+// 					// Если элемент существует
+// 					if (taskRemove !== undefined) {
+// 						// Сортируем
+// 						mahoweekStorage.tasks.splice(evt.newIndex, 0, taskRemove);
 
-					// Удаляем класс сортировки
-					taskList.removeClass('list__tasks--drag');
+// 						// Обновляем хранилище
+// 						localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
-				// Если не существует
-				} else {
-					// Перезагружаем страницу
-					// во избежание ошибок
-					location.reload();
-				}
-			}
-		}
-	});
+// 						// Удаляем класс сортировки
+// 						LIST_BOARD.find('.list__tasks').removeClass('list__tasks--drag');
 
-}());
+// 					// Если не существует
+// 					} else {
+// 						// Перезагружаем страницу
+// 						// во избежание ошибок
+// 						location.reload();
+// 					}
+// 				}
+// 			}
+// 		});
+// 	});
 
-
-
-// Генерируем хеш
-//------------------------------------------------------------------------------
-
-function makeHash() {
-
-	// Определяем переменные
-	var hash = '',
-		possible = '0123456789abcdefghijklmnopqrstuvwxyz';
-
-	// Генерируем
-	for (var i = 0; i < 8; i ++) {
-		hash += possible.charAt(Math.floor(Math.random() * possible.length));
-	}
-
-	// Выводим
-	return hash;
-
-}
+// }());
 
 
 
@@ -649,17 +550,19 @@ function makeTask(id, name, completed, markers) {
 	// Генерируем код
 	return '' +
 	'<div class="task' + completed + '" data-id="' + id + '">' +
-		'<div class="task__status">' +
-			'<div class="task__check  js-completed-task"></div>' +
-		'</div>' +
-		'<div class="task__name">' +
-			name +
-		'</div>' +
-		'<div class="task__options">' +
-			'<div class="task__trash  js-remove-task">' +
-				'<svg>' +
-					'<use xlink:href="#ei-trash-icon"></use>' +
-				'</svg>' +
+		'<div class="task__wrap">' +
+			'<div class="task__status">' +
+				'<div class="task__check  js-completed-task"></div>' +
+			'</div>' +
+			'<div class="task__name  js-name">' +
+				name +
+			'</div>' +
+			'<div class="task__options">' +
+				'<div class="task__trash  js-remove-task">' +
+					'<svg>' +
+						'<use xlink:href="#ei-trash-icon"></use>' +
+					'</svg>' +
+				'</div>' +
 			'</div>' +
 		'</div>' +
 		'<div class="task__grid  grid">' +

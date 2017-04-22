@@ -74,6 +74,11 @@
 	}
 }
 
+.task__wrap {
+	flex: 1 0 0;
+	display: flex;
+}
+
 .task__status {
 	width: 39px;
 	position: relative;
@@ -170,10 +175,6 @@
 }
 
 .task__input {
-	border: 0;
-	padding: 0;
-	width: 100%;
-	outline: none;
 	margin: -8px 0 -7px 0;
 	padding: 8px 0 7px 0;
 	height: 39px;
@@ -209,8 +210,7 @@
 		opacity: 1;
 	}
 
-	.task__name:hover ~ .task__options &,
-	.task__status:hover ~ .task__options &,
+	.task__wrap:hover &,
 	.mobile & {
 		opacity: 1;
 	}

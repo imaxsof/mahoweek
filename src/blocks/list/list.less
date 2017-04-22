@@ -3,15 +3,35 @@
 
 .list {
 	background-color: fade(@list-bg, 98%);
-	box-shadow: 0 0 80px fade(@text-color, 10%);
+	box-shadow: 0 0 50px fade(@text-color, 10%);
 	border-radius: @list-radius;
 	position: relative;
 	padding-top: 41px;
 	padding-bottom: 39px;
+	margin-bottom: 30px;
 
 	@media (min-width: 1200px) {
 		background-color: transparent;
 		background-image: linear-gradient(90deg, fade(@list-bg, 98%) 560px, fade(@grid-bg, 98%) 560px);
+	}
+
+	&--add {
+		background-color: fade(@list-bg, 98%);
+		background-image: none;
+		border-radius: 20px;
+		padding: 8px 15px 7px 35px;
+		margin: 0 0 0 auto;
+		cursor: pointer;
+		font-size: @font-size-small;
+		color: @text-gray;
+		fill: darken(@list-border, 20%);
+		width: 144px;
+		white-space: nowrap;
+
+		&:hover {
+			color: @text-color;
+			fill: darken(@list-border, 35%);
+		}
 	}
 }
 
@@ -51,14 +71,63 @@
 
 .list__wrap {
 	flex: 1 0 0;
-	padding: 8px 15px 7px;
 	border-bottom: 2px solid @list-border;
 	position: relative;
+	display: flex;
 }
 
 .list__name {
+	padding: 8px 15px 7px;
 	color: @text-gray;
-	fill: @text-gray;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	flex: 1 0 0;
+}
+
+.list__input {
+	height: 39px;
+	margin: -8px 0 -7px;
+	padding: 8px 0 7px;
+	color: @text-gray;
+}
+
+.list__options {
+	width: 41px;
+	position: relative;
+	cursor: pointer;
+}
+
+.list__trash {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	fill: lighten(@text-red, 20%);
+	opacity: 0;
+
+	&:hover {
+		fill: @text-red;
+		opacity: 1;
+	}
+
+	.list__wrap:hover &,
+	.mobile & {
+		opacity: 1;
+	}
+
+	// .list__tasks--drag & {
+	// 	opacity: 0 !important;
+	// }
+
+	svg {
+		position: absolute;
+		width: 25px;
+		height: 25px;
+		top: 8px;
+		left: 8px;
+	}
 }
 
 .list__progress {
@@ -70,4 +139,12 @@
 	background-color: lighten(@text-blue, 30%);
 	transform: scaleX(0);
 	transform-origin: 0 50%;
+}
+
+.list__plus {
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	top: 7px;
+	left: 9px;
 }
