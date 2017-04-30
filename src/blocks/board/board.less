@@ -7,32 +7,46 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
+	background-color: @board-bg;
+	background-repeat: no-repeat;
 	background-size: cover;
-	background-position: 50%;
+	background-position: 50% 50%;
 
-	&--zen {
-		background-color: #fafbfc; // #000;
-		// background-image: url("https://images.unsplash.com/photo-1475511522384-48b3ad92b287?dpr=1&auto=format&fit=crop&w=1500&h=844&q=80&cs=tinysrgb&crop=&bg=");
+	&--leaves {
+		background-color: #323e37;
+		background-image: url("../img/themes/leaves-xs.jpg");
 
-		/*&::before {
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			content: "";
-			background-color: #000;
-			opacity: 0.3;
-		}*/
+		@media (min-width: 768px) {
+			background-image: url("../img/themes/leaves-sm.jpg");
+		}
+
+		@media (min-width: 992px) {
+			background-image: url("../img/themes/leaves-md.jpg");
+		}
+
+		@media (min-width: 1200px) {
+			background-image: url("../img/themes/leaves-lg.jpg");
+		}
 	}
 }
 
 .board__header {
-	padding: 20px;
-	width: 100%;
-	max-width: 560px;
+	padding: 19px 20px 20px;
 	margin: auto;
 	position: relative;
+	display: flex;
+	justify-content: space-between;
+	line-height: 30px;
+
+	&::before {
+		position: absolute;
+		top: 0;
+		left: -1000px;
+		right: -1000px;
+		height: 100px;
+		content: "";
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0.48) 0, rgba(0, 0, 0, 0));
+	}
 
 	@media (min-width: 1200px) {
 		max-width: 1130px;
@@ -40,9 +54,7 @@
 }
 
 .board__lists {
-	padding: 0 5px 30px;
-	width: 100%;
-	max-width: 560px;
+	padding: 0 0 10px;
 	margin: auto;
 	position: relative;
 

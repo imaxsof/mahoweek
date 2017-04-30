@@ -2,18 +2,14 @@
 //------------------------------------------------------------------------------
 
 .grid {
-	display: none;
-
-	@media (min-width: 1200px) {
-		display: flex;
-	}
+	display: flex;
 }
 
 .grid__date {
 	width: 40px;
-	border-top: 1px solid @list-border;
-	border-left: 1px solid @list-border;
-	border-bottom: 1px solid @list-border;
+	border-top: 1px solid @grid-border;
+	border-left: 1px solid @grid-border;
+	border-bottom: 1px solid @grid-border;
 	position: relative;
 	text-align: center;
 	cursor: pointer;
@@ -24,12 +20,12 @@
 	}
 
 	&--past {
-		background-image: linear-gradient(135deg, transparent 3px, lighten(@text-lighten, 20%) 3px, transparent 4px);
+		background-image: linear-gradient(135deg, transparent 3px, @grid-past-bg 3px, transparent 4px);
 		background-size: 5px 5px;
 		background-repeat: repeat;
 		background-position: 50%;
 		cursor: default;
-		color: @text-lighten;
+		color: @dark-disabled;
 	}
 
 	&--today {
@@ -62,29 +58,29 @@
 
 	&--bull {
 		&::before {
-			border-color: darken(@list-border, 14%);
-			background-color: darken(@list-border, 14%);
+			border-color: @grid-pea;
+			background-color: @grid-pea;
 
 			.grid__date--past& {
-				border-color: lighten(@text-red, 45%);
-				background-color: lighten(@text-red, 45%);
+				border-color: @grid-pea-past;
+				background-color: @grid-pea-past;
 				transform: scale3d(0.6363, 0.6363, 1);
 			}
 
 			.grid__date--today:not(.grid__date--completed)& {
-				border-color: @text-yellow;
-				background-color: @text-yellow;
+				border-color: @grid-pea-today;
+				background-color: @grid-pea-today;
 			}
 		}
 
-		&:not(.grid__date--past):not(.grid__date--completed):hover::before {
-			border-color: darken(@list-border, 24%);
-			background-color: darken(@list-border, 24%);
+		body:not(.mobile) &:not(.grid__date--past):not(.grid__date--completed):hover::before {
+			border-color: @grid-pea-hover;
+			background-color: @grid-pea-hover;
 		}
 
-		&.grid__date--today:not(.grid__date--completed):hover::before {
-			border-color: darken(@text-yellow, 13%);
-			background-color: darken(@text-yellow, 13%);
+		body:not(.mobile) &.grid__date--today:not(.grid__date--completed):hover::before {
+			border-color: @grid-pea-today-hover;
+			background-color: @grid-pea-today-hover;
 		}
 
 		.task--completed .grid__date:not(.grid__date--past):not(.grid__date--today)&::before {
@@ -96,13 +92,13 @@
 		cursor: default;
 
 		&::before {
-			border-color: lighten(@text-green, 15%);
-			background-color: lighten(@text-green, 15%);
+			border-color: @grid-pea-complete;
+			background-color: @grid-pea-complete;
 			transform: scale3d(0.6363, 0.6363, 1);
 
 			.grid__date--past& {
-				border-color: lighten(@text-green, 40%);
-				background-color: lighten(@text-green, 40%);
+				border-color: @grid-pea-past-complete;
+				background-color: @grid-pea-past-complete;
 			}
 		}
 	}
@@ -120,11 +116,11 @@
 			right: 0;
 			bottom: -2px;
 			height: 2px;
-			background-color: lighten(@text-red, 20%);
+			background-color: @grid-holiday-border;
 			z-index: 1;
 		}
 
-		&--holiday + .grid__date--holiday:not(.grid__date--today)::before {
+		&--holiday + .grid__date--holiday::before {
 			left: -1px;
 		}
 	}
@@ -135,7 +131,7 @@
 	}
 
 	.task--fixed & {
-		border-top-color: @list-border;
+		border-top-color: @grid-border;
 	}
 
 	.task--completed & {

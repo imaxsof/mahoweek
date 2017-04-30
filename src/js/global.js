@@ -12,39 +12,86 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 
 
 
-// Берем листы на доске
+// Определяем элементы доски
 //------------------------------------------------------------------------------
 
-var LIST_BOARD = $('.board__lists');
+var THEME_BOARD = $('.board__theme'),
+	LIST_BOARD = $('.board__lists');
 
 
 
 // Работаем с хранилищем
 //------------------------------------------------------------------------------
 
-// Если хранилища не существует
-if (!localStorage.getItem('mahoweek')) {
-	// Создаем данные для листа
-	var listId = makeHash(),
-		listName = 'Краткосрочный план дел',
-		listCreatedTime = new Date().getTime();
+(function() {
 
-	// Генерируем объект данных
-	var mahoweekData = {
-		lists: [
-			{
-				id: listId,
-				name: listName,
-				createdTime: listCreatedTime
+	// Если хранилища не существует
+	if (!localStorage.getItem('mahoweek')) {
+		// Генерируем объекты данных
+		var mahoweekData = {
+			lists: [{
+				id: makeHash(),
+				name: 'Краткосрочный план дел',
+				createdTime: new Date().getTime()
+			}],
+			tasks: [],
+			settings: {
+				theme: 'leaves'
 			}
-		],
-		tasks: [],
-		settings: {}
+		}
+
+		// Создаем хранилище
+		localStorage.setItem('mahoweek', JSON.stringify(mahoweekData));
+
+		// Добавляем тему к доске
+		THEME_BOARD.addClass('board__theme--leaves');
+
+	// Если хранилище существует
+	} else {
+		// Парсим хранилище
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+
+		// Добавляем тему к доске
+		THEME_BOARD.addClass('board__theme--' + mahoweekStorage.settings.theme);
+
+		// Временная мера из-за ввода новой архитектуры хранилища
+		//
+		// Если массива листов не существует
+		if (!mahoweekStorage.lists) {
+			// Генерируем хеш листа
+			var listId = makeHash();
+
+			// Создаем массив листов и заполняем
+			mahoweekStorage.lists = [{
+				id: listId,
+				name: 'Краткосрочный план дел',
+				createdTime: new Date().getTime()
+			}];
+
+			// Пробегаемся по каждому делу
+			for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
+				// Заносим в каждое дело причастность к листу
+				mahoweekStorage.tasks[i].listId = listId;
+			}
+
+			// Обновляем хранилище
+			localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+		}
+
+		// Если темы не существует
+		if (mahoweekStorage.settings.theme === undefined) {
+			// Добавляем тему в настройки
+			mahoweekStorage.settings.theme = 'leaves';
+
+			// Добавляем тему к доске
+			THEME_BOARD.addClass('board__theme--' + mahoweekStorage.settings.theme);
+
+			// Обновляем хранилище
+			localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+		}
 	}
 
-	// Создаем хранилище
-	localStorage.setItem('mahoweek', JSON.stringify(mahoweekData));
-}
+}());
 
 
 

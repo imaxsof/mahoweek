@@ -74,12 +74,10 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 
 (function() {
 
-	LIST_BOARD.on('click', '.js-add-list', function() {
-		var isThis = $(this);
-
+	$('.js-add-list').on('click', function() {
 		// Создаем данные для листа
 		var listId = makeHash(),
-			listName = 'Краткосрочный план дел №' + (LIST_BOARD.find('.list:not(.list--add)').length + 1),
+			listName = 'Краткосрочный план дел №' + (LIST_BOARD.find('.list').length + 1),
 			listCreatedTime = new Date().getTime();
 
 		// Парсим хранилище
@@ -96,18 +94,21 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
 		// Выводим лист на доске
-		isThis.before(makeList(listId, listName));
+		LIST_BOARD.append(makeList(listId, listName));
 
 		// Находим созданный лист
-		var listNew = isThis.prev();
+		var listNew = LIST_BOARD.find('.list:last-child');
 
 		// Выводим сетку дат в шапку листа
 		// и в строку добавления дела
 		listNew.find('.list__grid').html(makeGrid('list'));
 		listNew.find('.task__grid').html(makeGrid());
 
-		// Смещаем позицию прокрутки на высоту нового листа
-		$('body').scrollTop($(window).scrollTop() + listNew.outerHeight(true));
+		// Ставим фокус в поле добавления дел в созданном листе
+		listNew.find('.js-add-task').focus();
+
+		// Смещаем позицию прокрутки в самый низ
+		$('body').scrollTop(10000);
 	});
 
 }());
@@ -161,41 +162,106 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 	LIST_BOARD.on('click', '.js-remove-list', function() {
 		var isThis = $(this);
 
-		// Получаем хеш листа
-		var listId = isThis.parents('.list').attr('data-id');
+		// Получаем хеш листа и кол-во дел в нем
+		var listId = isThis.parents('.list').attr('data-id'),
+			taskTotal = isThis.parents('.list').find('.task:not(.task--add)').length;
 
-		// Парсим хранилище
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
-
-		// Получаем элемент листа в хранилище
-		var listElement = mahoweekStorage.lists.filter(function(value) {
-			return value.id == listId;
-		});
-
-		// Получаем индекс листа в хранилище
-		var listIndex = mahoweekStorage.lists.indexOf(listElement[0]);
-
-		// Удаляем лист
-		mahoweekStorage.lists.splice(listIndex, 1);
-
-		// Готовим новый массив для дел
-		var tasksNew = [];
-
-		// Помещаем в него те дела, которые не надо удалять
-		for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
-			if (mahoweekStorage.tasks[i].listId != listId) {
-				tasksNew.push(mahoweekStorage.tasks[i]);
-			}
+		// Если в удаляемом листе были дела
+		if (taskTotal) {
+			// Задаем вопрос
+			var question = confirm('При удалении листа, все дела, находящиеся в нем, так же будут удалены.');
 		}
 
-		// Заменяем старый массив дел на новый с удаленными делами
-		mahoweekStorage.tasks = tasksNew;
+		// Если ответом на вопрос было «Да»
+		if (!taskTotal || question) {
+			// Парсим хранилище
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-		// Обновляем хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+			// Получаем элемент листа в хранилище
+			var listElement = mahoweekStorage.lists.filter(function(value) {
+				return value.id == listId;
+			});
 
-		// Удаляем лист из доски
-		isThis.parents('.list').remove();
+			// Получаем индекс листа в хранилище
+			var listIndex = mahoweekStorage.lists.indexOf(listElement[0]);
+
+			// Удаляем лист
+			mahoweekStorage.lists.splice(listIndex, 1);
+
+			// Если в удаляемом листе были дела
+			if (taskTotal) {
+				// Готовим новый массив для дел
+				var tasksNew = [];
+
+				// Помещаем в него те дела, которые не надо удалять
+				for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
+					if (mahoweekStorage.tasks[i].listId != listId) {
+						tasksNew.push(mahoweekStorage.tasks[i]);
+					}
+				}
+
+				// Заменяем старый массив дел на новый с удаленными делами
+				mahoweekStorage.tasks = tasksNew;
+			}
+
+			// Обновляем хранилище
+			localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+
+			// Удаляем лист из доски
+			isThis.parents('.list').remove();
+		}
+	});
+
+}());
+
+
+
+// Сортируем вручную листы
+//------------------------------------------------------------------------------
+
+(function() {
+
+	Sortable.create(document.querySelector('.board__lists'), {
+		delay: 200,
+		animation: 0,
+		handle: '.list__name',
+		filter: '.list__input',
+		preventOnFilter: false,
+		ghostClass: 'list--ghost',
+		chosenClass: 'list--chosen',
+		dragClass: 'list--drag',
+		scrollSensitivity: 80,
+		onChoose: function() {
+			// Добавляем класс сортировки
+			LIST_BOARD.addClass('board__lists--drag');
+		},
+		onEnd: function(evt) {
+			if (Number.isInteger(evt.oldIndex) && Number.isInteger(evt.newIndex) && evt.oldIndex != evt.newIndex) {
+				// Парсим хранилище
+				var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+
+				// Получаем удаленный элемент
+				var listRemove = mahoweekStorage.lists.splice(evt.oldIndex, 1)[0];
+
+				// Если элемент существует
+				if (listRemove !== undefined) {
+					// Сортируем
+					mahoweekStorage.lists.splice(evt.newIndex, 0, listRemove);
+
+					// Обновляем хранилище
+					localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+
+				// Если не существует
+				} else {
+					// Перезагружаем страницу
+					// во избежание ошибок
+					location.reload();
+				}
+			}
+
+			// Удаляем класс сортировки
+			LIST_BOARD.removeClass('board__lists--drag');
+		}
 	});
 
 }());
@@ -246,7 +312,7 @@ function makeList(id, name) {
 				'<div class="list__options">' +
 					'<div class="list__trash  js-remove-list">' +
 						'<svg>' +
-							'<use xlink:href="#ei-trash-icon"></use>' +
+							'<use xlink:href="#icon-trash"></use>' +
 						'</svg>' +
 					'</div>' +
 				'</div>' +
@@ -260,7 +326,7 @@ function makeList(id, name) {
 					'<div class="task__status">' +
 						'<div class="task__plus">' +
 							'<svg>' +
-								'<use xlink:href="#ei-plus-icon"></use>' +
+								'<use xlink:href="#icon-plus"></use>' +
 							'</svg>' +
 						'</div>' +
 					'</div>' +

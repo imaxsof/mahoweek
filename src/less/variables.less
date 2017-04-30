@@ -1,27 +1,106 @@
-// Variables
+// Core
 //------------------------------------------------------------------------------
 
-// Core
 @font-size: 16px;
 @font-size-small: 14px;
 @line-height: 24px;
 @font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-// Text color
-@text-color: #24292e;
-@text-gray: #6a737d;
-@text-lighten: #a3aab1;
-@text-red: #cb2431;
-@text-green: #2CBE4E;
-@text-blue: #0373d6;
-@text-yellow: #ffe733;
+
+
+// Color
+//------------------------------------------------------------------------------
+
+@dark-primary: lighten(#000, 13%);
+@dark-secondary: lighten(#000, 46%);
+@dark-disabled: lighten(#000, 62%);
+@dark-divider: lighten(#000, 88%);
+
+@light-primary: #fff;
+@light-secondary: darken(#fff, 30%);
+@light-disabled: darken(#fff, 50%);
+@light-divider: darken(#fff, 88%);
+
+@color-red: #F44336; // #ff3b30;
+@color-yellow: #FDD835;
+@color-green: #4cd964;
+@color-teal-blue: #5ac8fa;
+@color-blue: #007aff;
+
+
+
+// Board
+//------------------------------------------------------------------------------
+
+@board-bg: #303030;
+
+
+
+// Logo
+//------------------------------------------------------------------------------
+
+@logo-text: @light-primary;
+@logo-pea: @color-green;
+
+
+
+// Menu
+//------------------------------------------------------------------------------
+
+@menu-link: @light-secondary;
+@menu-link-hover: @light-primary;
+
+
 
 // List
-@list-bg: #fff;
-@list-border: #eaecef;
+//------------------------------------------------------------------------------
+
+@list-bg: fade(#fff, 98%);
+@list-bg-ghost: fade(@list-bg, 50%);
+@list-border: @dark-divider;
 @list-radius: 4px;
+@list-progress: @color-teal-blue;
+
+@list-trash: lighten(@color-red, 13%);
+@list-trash-hover: @color-red;
+
+
+
+// Task
+//------------------------------------------------------------------------------
+
+@task-bg: @list-bg;
+@task-bg-hover: #fff;
+@task-border: @list-border;
+
+@task-pea: darken(@list-border, 5%);
+@task-pea-hover: darken(@task-pea, 10%);
+@task-pea-complete: @logo-pea;
+@task-pea-complete-hover: darken(@task-pea-complete, 10%);
+
+@task-plus: @dark-disabled;
+@task-plus-focus: @dark-secondary;
+
+@task-trash: @list-trash;
+@task-trash-hover: @list-trash-hover;
+
+
 
 // Grid
-@grid-bg: #f6f8fa;
-@grid-today-bg: fade(@grid-bg, 98%); //#DCFFE4;
-@grid-today-border: darken(@list-border, 5%); //#BFDDC7;
+//------------------------------------------------------------------------------
+
+@grid-bg: fade(#fafafa, 98%);
+@grid-bg-hover: #fafafa;
+@grid-border: @list-border;
+@grid-past-bg: darken(@grid-border, 5%);
+@grid-today-bg: fade(@grid-bg, 98%);
+@grid-today-border: darken(@grid-border, 10%);;
+@grid-holiday-border: lighten(@color-red, 13%);
+
+@grid-pea: @task-pea;
+@grid-pea-hover: @task-pea-hover;
+@grid-pea-today: @color-yellow;
+@grid-pea-today-hover: darken(@grid-pea-today, 13%);
+@grid-pea-complete: @logo-pea;
+@grid-pea-past: lighten(@color-red, 31%);
+@grid-pea-past-complete: lighten(@logo-pea, 23%);

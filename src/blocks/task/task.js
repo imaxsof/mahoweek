@@ -25,66 +25,10 @@
 
 
 
-// Фиксируем блок добавления дела
-//------------------------------------------------------------------------------
-
-// (function() {
-
-// 	// Если не мобилка
-// 	if (!MOBILE) {
-// 		// Определяем переменные
-// 		var doc = $(window),
-// 			docHeight = doc.height(),
-// 			docScrollTop = doc.scrollTop(),
-// 			taskListOffsetTop = taskList.offset().top,
-// 			taskListHeight = taskList.height() - 1,
-// 			taskAddHeight = taskList.find('.task--add').innerHeight();
-
-// 		// Если изначально блока не видно
-// 		if (docScrollTop + docHeight - taskAddHeight <= taskListOffsetTop + taskListHeight) {
-// 			// Фиксируем
-// 			taskList.find('.task--add').addClass('task--fixed');
-// 		}
-
-// 		// Скроллим или ресайзим
-// 		doc.on('scroll resize', function() {
-// 			var isThis = $(this);
-
-// 			// Смотрим где сейчас скролл
-// 			docScrollTop = isThis.scrollTop();
-
-// 			// Могло измениться
-// 			docHeight = isThis.height();
-// 			taskListOffsetTop = taskList.offset().top;
-// 			taskListHeight = taskList.height() - 1;
-
-// 			// Если реальная позиция блока ниже
-// 			if (docScrollTop + docHeight - taskAddHeight <= taskListOffsetTop + taskListHeight) {
-// 				// Фиксируем
-// 				taskList.find('.task--add').addClass('task--fixed');
-
-// 			// Если реальная позиция блока достигнута
-// 			} else {
-// 				// Снимаем фиксирование
-// 				taskList.find('.task--add').removeClass('task--fixed');
-// 			}
-// 		});
-// 	}
-
-// }());
-
-
-
 // Фокусируем поле добавления дела
 //------------------------------------------------------------------------------
 
 (function() {
-
-	// Если не мобилка
-	// if (!MOBILE) {
-	// 	// Ставим фокус
-	// 	taskList.find('.js-add-task').focus();
-	// }
 
 	// Если поле добавления в фокусе
 	LIST_BOARD.find('.js-add-task').focusin(function() {
@@ -317,13 +261,8 @@
 		// Получаем индекс дела в хранилище
 		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
 
-		// Получаем метку времени
-		// var taskLastChange = new Date().getTime();
-
 		// Изменяем текст дела
-		// и помечаем время редактирования
 		mahoweekStorage.tasks[taskIndex].name = taskName;
-		// mahoweekStorage.tasks[taskIndex].lastChange = taskLastChange;
 
 		// Обновляем хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
@@ -370,31 +309,8 @@
 		// Удаляем дело из листа
 		isThis.parents('.task').remove();
 
-		// // Если в листе не осталось дел
-		// if (taskList.find('.task:not(.task--add)').length == 0) {
-		// 	// Ставим фокус на добавление дела
-		// 	taskList.find('.js-add-task').focus();
-		// }
-
 		// Рассчитываем прогресс листа
 		makeProgress(listId);
-
-		// // Если не мобилка
-		// if (!MOBILE && taskList.find('.task--add').hasClass('task--fixed')) {
-		// 	// Определяем переменные
-		// 	var doc = $(window),
-		// 		docHeight = doc.height(),
-		// 		docScrollTop = doc.scrollTop(),
-		// 		taskListOffsetTop = taskList.offset().top,
-		// 		taskListHeight = taskList.height() - 1,
-		// 		taskAddHeight = taskList.find('.task--add').innerHeight();
-
-		// 	// Если реальная позиция блока добавления дела достигнута
-		// 	if (docScrollTop + docHeight - taskAddHeight > taskListOffsetTop + taskListHeight) {
-		// 		// Снимаем фиксирование
-		// 		taskList.find('.task--add').removeClass('task--fixed');
-		// 	}
-		// }
 	});
 
 }());
@@ -464,12 +380,6 @@
 				isThis.addClass('grid__date--bull');
 			}
 		}
-
-		// Получаем метку времени
-		// var taskLastChange = new Date().getTime();
-
-		// Помечаем время редактирования
-		// mahoweekStorage.tasks[taskIndex].lastChange = taskLastChange;
 
 		// Обновляем хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
@@ -560,7 +470,7 @@ function makeTask(id, name, completed, markers) {
 			'<div class="task__options">' +
 				'<div class="task__trash  js-remove-task">' +
 					'<svg>' +
-						'<use xlink:href="#ei-trash-icon"></use>' +
+						'<use xlink:href="#icon-trash"></use>' +
 					'</svg>' +
 				'</div>' +
 			'</div>' +

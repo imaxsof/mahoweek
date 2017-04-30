@@ -1,0 +1,54 @@
+// Menu
+//------------------------------------------------------------------------------
+
+.menu {
+	margin: -20px -10px;
+	padding: 0;
+	list-style-type: none;
+	display: flex;
+}
+
+.menu__item {
+	font-size: @font-size-small;
+
+	&--add {
+		button {
+			width: 35px;
+
+			@media (min-width: 768px) {
+				width: auto;
+			}
+		}
+
+		svg {
+			width: 25px;
+			height: 25px;
+			position: absolute;
+			top: 22.5px;
+			left: 5px;
+
+			@media (min-width: 768px) {
+				opacity: 0.5;
+			}
+		}
+	}
+
+	button {
+		line-height: 32px;
+		padding: 20px 10px 18px;
+		text-indent: -9999px;
+		color: @menu-link;
+		fill: @menu-link;
+
+		&:hover,
+		.mobile & {
+			color: @menu-link-hover;
+			fill: @menu-link-hover;
+		}
+
+		@media (min-width: 768px) {
+			text-indent: inherit;
+			padding-left: 31px;
+		}
+	}
+}
