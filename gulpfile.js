@@ -31,12 +31,16 @@ const paths = {
 	dist: {
 		base: 'dist/',
 		css: 'dist/css/',
+		img: 'dist/img/',
 		js: 'dist/js/'
 	},
 	src: {
 		base: [
 			'src/*.html',
 			'src/CNAME'
+		],
+		img: [
+			'src/img/**/*.{jpg,jpeg,gif,png,svg}'
 		],
 		css: {
 			libs: [
@@ -78,6 +82,13 @@ gulp.task('html', function() {
 		}),
 		gulp.dest(paths.dist.base),
 		browserSync.stream()
+	);
+});
+
+gulp.task('img', function() {
+	return multipipe(
+		gulp.src(paths.src.img),
+		gulp.dest(paths.dist.img)
 	);
 });
 
@@ -186,4 +197,4 @@ gulp.task('clean:docs', function() {
 // Default
 //------------------------------------------------------------------------------
 
-gulp.task('default', gulpsync.sync(['clean:dist', 'html', 'css:libs', 'css:main', 'js:libs', 'js:app']));
+gulp.task('default', gulpsync.sync(['clean:dist', 'html', 'img', 'css:libs', 'css:main', 'js:libs', 'js:app']));
