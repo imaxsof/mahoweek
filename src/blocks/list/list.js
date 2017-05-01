@@ -1,7 +1,7 @@
 // List
 //------------------------------------------------------------------------------
 
-// Выводим список листов на доске
+// Выводим списки на доске
 //------------------------------------------------------------------------------
 
 (function() {
@@ -9,22 +9,22 @@
 	// Парсим хранилище
 	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-	// Начинаем генерировать листы
+	// Начинаем генерировать списки
 	var listBoardCreate = '';
 
-	// Пробегаемся по каждому листу
+	// Пробегаемся по каждому списку
 	for (var i = 0; i < mahoweekStorage.lists.length; i ++) {
 		listBoardCreate += makeList(mahoweekStorage.lists[i].id, mahoweekStorage.lists[i].name);
 	}
 
-	// Выводим листы
+	// Выводим списки
 	LIST_BOARD.prepend(listBoardCreate);
 
 }());
 
 
 
-// Выводим сетку дат в шапку листов
+// Выводим сетку дат в шапку списков
 // и в строки добавления дела
 //------------------------------------------------------------------------------
 
@@ -33,7 +33,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 
 
 
-// // Фиксируем шапку листа
+// // Фиксируем шапку списков
 // //------------------------------------------------------------------------------
 
 // (function() {
@@ -52,12 +52,12 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 // 			// Смотрим где сейчас скролл
 // 			docScrollTop = isThis.scrollTop();
 
-// 			// Если скролл больше расстояния до листа
+// 			// Если скролл больше расстояния до списка
 // 			if (docScrollTop >= listOffsetTop) {
 // 				// Фиксируем
 // 				list.find('.list__head').addClass('list__head--fixed');
 
-// 			// Если скролл меньше расстояния до листа
+// 			// Если скролл меньше расстояния до списка
 // 			} else {
 // 				// Снимаем фиксирование
 // 				list.find('.list__head').removeClass('list__head--fixed');
@@ -69,13 +69,13 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 
 
 
-// Добавляем лист
+// Добавляем список
 //------------------------------------------------------------------------------
 
 (function() {
 
 	$('.js-add-list').on('click', function() {
-		// Создаем данные для листа
+		// Создаем данные для списка
 		var listId = makeHash(),
 			listName = 'Краткосрочный план дел №' + (LIST_BOARD.find('.list').length + 1),
 			listCreatedTime = new Date().getTime();
@@ -83,7 +83,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 		// Парсим хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-		// Добавляем новый лист
+		// Добавляем новый список
 		mahoweekStorage.lists.push({
 			id: listId,
 			name: listName,
@@ -93,29 +93,35 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 		// Обновляем хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
-		// Выводим лист на доске
+		// Выводим список на доске
 		LIST_BOARD.append(makeList(listId, listName));
 
-		// Находим созданный лист
+		// Находим созданный список
 		var listNew = LIST_BOARD.find('.list:last-child');
 
-		// Выводим сетку дат в шапку листа
+		// Выводим сетку дат в шапку списка
 		// и в строку добавления дела
 		listNew.find('.list__grid').html(makeGrid('list'));
 		listNew.find('.task__grid').html(makeGrid());
 
-		// Ставим фокус в поле добавления дел в созданном листе
+		// Ставим фокус в поле добавления дел в созданном списке
 		listNew.find('.js-add-task').focus();
 
-		// Смещаем позицию прокрутки в самый низ
-		$('body').scrollTop(10000);
+		// Берем данные окна
+		var win = $(window);
+
+		// Если созданный список выходит за рамки видимости
+		if (listNew.offset().top > win.scrollTop() + win.height() - 30 - 80) {
+			// Смещаем позицию прокрутки до созданного списка
+			$('body').scrollTop(listNew.offset().top);
+		}
 	});
 
 }());
 
 
 
-// Редактируем заголовок листа
+// Редактируем заголовок списка
 //------------------------------------------------------------------------------
 
 (function() {
@@ -123,22 +129,22 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 	LIST_BOARD.on('keyup change', '.js-edit-list', function(e) {
 		var isThis = $(this);
 
-		// Получаем хеш и заголовок листа
+		// Получаем хеш и заголовок списка
 		var listId = isThis.parents('.list').attr('data-id'),
 			listName = isThis.val();
 
 		// Парсим хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-		// Получаем элемент листа в хранилище
+		// Получаем элемент списка в хранилище
 		var listElement = mahoweekStorage.lists.filter(function(value) {
 			return value.id == listId;
 		});
 
-		// Получаем индекс листа в хранилище
+		// Получаем индекс списка в хранилище
 		var listIndex = mahoweekStorage.lists.indexOf(listElement[0]);
 
-		// Изменяем заголовок листа
+		// Изменяем заголовок списка
 		mahoweekStorage.lists[listIndex].name = listName;
 
 		// Обновляем хранилище
@@ -154,7 +160,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 
 
 
-// Удаляем лист
+// Удаляем список
 //------------------------------------------------------------------------------
 
 (function() {
@@ -162,14 +168,14 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 	LIST_BOARD.on('click', '.js-remove-list', function() {
 		var isThis = $(this);
 
-		// Получаем хеш листа и кол-во дел в нем
+		// Получаем хеш списка и кол-во дел в нем
 		var listId = isThis.parents('.list').attr('data-id'),
 			taskTotal = isThis.parents('.list').find('.task:not(.task--add)').length;
 
-		// Если в удаляемом листе были дела
+		// Если в удаляемом списке были дела
 		if (taskTotal) {
 			// Задаем вопрос
-			var question = confirm('При удалении листа, все дела, находящиеся в нем, так же будут удалены.');
+			var question = confirm('При удалении списка, все дела, находящиеся в нём, так же будут удалены.');
 		}
 
 		// Если ответом на вопрос было «Да»
@@ -177,18 +183,18 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 			// Парсим хранилище
 			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-			// Получаем элемент листа в хранилище
+			// Получаем элемент списка в хранилище
 			var listElement = mahoweekStorage.lists.filter(function(value) {
 				return value.id == listId;
 			});
 
-			// Получаем индекс листа в хранилище
+			// Получаем индекс списка в хранилище
 			var listIndex = mahoweekStorage.lists.indexOf(listElement[0]);
 
-			// Удаляем лист
+			// Удаляем список
 			mahoweekStorage.lists.splice(listIndex, 1);
 
-			// Если в удаляемом листе были дела
+			// Если в удаляемом списке были дела
 			if (taskTotal) {
 				// Готовим новый массив для дел
 				var tasksNew = [];
@@ -207,7 +213,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 			// Обновляем хранилище
 			localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
-			// Удаляем лист из доски
+			// Удаляем список из доски
 			isThis.parents('.list').remove();
 		}
 	});
@@ -216,7 +222,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 
 
 
-// Сортируем вручную листы
+// Сортируем вручную списки
 //------------------------------------------------------------------------------
 
 (function() {
@@ -268,7 +274,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 
 
 
-// Генерируем прогресс листа
+// Генерируем прогресс списка
 //------------------------------------------------------------------------------
 
 function makeProgress(id) {
@@ -296,7 +302,7 @@ function makeProgress(id) {
 
 
 
-// Генерируем список листов
+// Генерируем списки
 //------------------------------------------------------------------------------
 
 function makeList(id, name) {

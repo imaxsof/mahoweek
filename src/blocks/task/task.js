@@ -1,7 +1,7 @@
 // Task
 //------------------------------------------------------------------------------
 
-// Выводим список дел в листы
+// Выводим дела в списки
 //------------------------------------------------------------------------------
 
 (function() {
@@ -11,13 +11,13 @@
 
 	// Пробегаемся по каждому делу
 	for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
-		// Заносим дело в свой лист
+		// Заносим дело в свой список
 		LIST_BOARD.find('.list[data-id="' + mahoweekStorage.tasks[i].listId + '"] .task--add').before(makeTask(mahoweekStorage.tasks[i].id, mahoweekStorage.tasks[i].name, mahoweekStorage.tasks[i].completed, mahoweekStorage.tasks[i].markers));
 	}
 
-	// Пробегаемся по каждому листу
+	// Пробегаемся по каждому списку
 	for (var i = 0; i < mahoweekStorage.lists.length; i ++) {
-		// Рассчитываем прогресс листа
+		// Рассчитываем прогресс выполнения списка
 		makeProgress(mahoweekStorage.lists[i].id);
 	}
 
@@ -58,7 +58,7 @@
 	LIST_BOARD.on('change', '.js-add-task', function() {
 		var isThis = $(this);
 
-		// Получаем хеш листа
+		// Получаем хеш списка
 		var listId = isThis.parents('.list').attr('data-id');
 
 		// Получаем текст дела
@@ -87,17 +87,23 @@
 		// Стираем поле ввода добавления дела
 		isThis.val('');
 
-		// Выводим дело в листе
+		// Выводим дело в списке
 		isThis.parents('.task--add').before(makeTask(taskId, taskName));
 
-		// Рассчитываем прогресс листа
+		// Рассчитываем прогресс выполнения списка
 		makeProgress(listId);
 
 		// Находим созданное дело
 		var taskNew = isThis.parents('.task--add').prev();
 
-		// Смещаем позицию прокрутки на высоту строки дела
-		$('body').scrollTop($(window).scrollTop() + taskNew.outerHeight(true));
+		// Берем данные окна
+		var win = $(window);
+
+		// Если созданное дело вытесняет за рамки экрана конец списка
+		if (taskNew.offset().top > win.scrollTop() + win.height() - 30 - 40 - 39) {
+			// Смещаем позицию прокрутки на высоту строки дела
+			$('body').scrollTop(win.scrollTop() + taskNew.outerHeight(true));
+		}
 	});
 
 }());
@@ -113,7 +119,7 @@
 		var isThis = $(this),
 			task = isThis.parents('.task');
 
-		// Получаем хеш листа, хеш дела, метку о выполнении и дату текущего дня
+		// Получаем хеш списка, хеш дела, метку о выполнении и дату текущего дня
 		var listId = task.parents('.list').attr('data-id'),
 			taskId = task.attr('data-id'),
 			taskCompleted = task.hasClass('task--completed'),
@@ -155,7 +161,7 @@
 				mahoweekStorage.tasks[taskIndex].completed = 1;
 				mahoweekStorage.tasks[taskIndex].completedTime = taskCompletedTime;
 
-				// Обновляем дело в листе
+				// Обновляем дело в списке
 				task.addClass('task--completed');
 			}
 
@@ -171,7 +177,7 @@
 			delete mahoweekStorage.tasks[taskIndex].completed;
 			delete mahoweekStorage.tasks[taskIndex].completedTime;
 
-			// Обновляем дело в листе
+			// Обновляем дело в списке
 			task.removeClass('task--completed');
 		}
 
@@ -230,7 +236,7 @@
 		// Обновляем хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
-		// Рассчитываем прогресс листа
+		// Рассчитываем прогресс выполнения списка
 		makeProgress(listId);
 	});
 
@@ -285,7 +291,7 @@
 	LIST_BOARD.on('click', '.js-remove-task', function() {
 		var isThis = $(this);
 
-		// Получаем хеш листа и хеш дела
+		// Получаем хеш списке и хеш дела
 		var listId = isThis.parents('.list').attr('data-id'),
 			taskId = isThis.parents('.task').attr('data-id');
 
@@ -306,10 +312,10 @@
 		// Обновляем хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
-		// Удаляем дело из листа
+		// Удаляем дело из списка
 		isThis.parents('.task').remove();
 
-		// Рассчитываем прогресс листа
+		// Рассчитываем прогресс выполнения списка
 		makeProgress(listId);
 	});
 

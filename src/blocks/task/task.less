@@ -71,14 +71,14 @@
 	display: flex;
 	background-image: linear-gradient(180deg, transparent 1px, @task-bg 1px);
 	width: calc(~"100vw - 17px");
-	max-width: 471px;
+	max-width: 456px;
 
 	body:not(.mobile) .task:not(.task--add):hover & {
 		background-color: @task-bg-hover;
 	}
 
 	@media (min-width: 992px) {
-		max-width: calc(~"100vw - 561px - 10px");
+		max-width: calc(~"100vw - 561px - 40px");
 	}
 
 	@media (min-width: 1200px) {
@@ -189,10 +189,6 @@
 	margin: -8px 0 -7px 0;
 	padding: 8px 0 7px 0;
 	height: 39px;
-
-	.task--add & {
-		width: calc(~"100% - 41px");
-	}
 
 	.task--completed & {
 		color: @dark-disabled;

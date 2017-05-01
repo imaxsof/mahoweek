@@ -94,7 +94,7 @@ function makeGrid(type, data) {
 		// Открываем код
 		grid += '<div class="grid__date' + dateClass + '" data-date="' + dataDate +'">';
 
-		// Если это шапка листа
+		// Если это шапка списка
 		if (type == 'list') {
 			// Выводим дату
 			grid += day;

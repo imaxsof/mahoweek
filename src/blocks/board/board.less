@@ -39,17 +39,22 @@
 	line-height: 30px;
 
 	&::before {
-		position: absolute;
+		position: fixed;
 		top: 0;
-		left: -1000px;
-		right: -1000px;
+		left: 0;
+		right: 0;
 		height: 100px;
 		content: "";
 		background: linear-gradient(180deg, rgba(0, 0, 0, 0.48) 0, rgba(0, 0, 0, 0));
 	}
 
+	@media (min-width: 768px) {
+		padding-left: 35px;
+		padding-right: 35px;
+	}
+
 	@media (min-width: 1200px) {
-		max-width: 1130px;
+		max-width: 1160px;
 	}
 }
 
@@ -59,6 +64,6 @@
 	position: relative;
 
 	@media (min-width: 1200px) {
-		max-width: 1130px;
+		max-width: 1160px;
 	}
 }
