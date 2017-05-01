@@ -36,8 +36,7 @@ const paths = {
 	},
 	src: {
 		base: [
-			'src/*.html',
-			'src/CNAME'
+			'src/*.html'
 		],
 		img: [
 			'src/img/**/*.{jpg,jpeg,gif,png,svg}'
