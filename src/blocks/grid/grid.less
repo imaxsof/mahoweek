@@ -39,11 +39,14 @@
 		&:first-child {
 			width: 42px;
 		}
+	}
 
-		.task--add.task--fixed & {
-			margin-top: -1px;
-			border-top-width: 2px;
-		}
+	&--holiday + &--holiday + & {
+		border-left-color: @grid-separator;
+	}
+
+	&--holiday + &--holiday&--today {
+		border-right-color: @grid-separator !important;
 	}
 
 	&--bull,
@@ -132,10 +135,6 @@
 	.task--add & {
 		border-bottom-width: 0;
 		cursor: default;
-	}
-
-	.task--fixed & {
-		border-top-color: @grid-border;
 	}
 
 	.task--completed & {
