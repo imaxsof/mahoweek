@@ -75,6 +75,8 @@
 
 @task-pea: darken(@list-border, 5%);
 @task-pea-hover: darken(@task-pea, 10%);
+@task-pea-today: @color-yellow;
+@task-pea-today-hover: darken(@grid-pea-today, 13%);
 @task-pea-complete: @logo-pea;
 @task-pea-complete-hover: darken(@task-pea-complete, 10%);
 
@@ -99,8 +101,8 @@
 
 @grid-pea: @task-pea;
 @grid-pea-hover: @task-pea-hover;
-@grid-pea-today: @color-yellow;
-@grid-pea-today-hover: darken(@grid-pea-today, 13%);
+@grid-pea-today: @task-pea-today;
+@grid-pea-today-hover: @task-pea-today-hover;
 @grid-pea-complete: @logo-pea;
 @grid-pea-past: lighten(@color-red, 31%);
 @grid-pea-past-complete: lighten(@logo-pea, 23%);

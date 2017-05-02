@@ -131,6 +131,10 @@
 	&::before {
 		background-color: @task-pea;
 
+		.task--today & {
+			background-color: @task-pea-today;
+		}
+
 		.task--completed & {
 			background-color: @task-pea-complete;
 			transform: scale3d(0.4666, 0.4666, 1);
@@ -139,6 +143,10 @@
 
 	body:not(.mobile) &:hover::before {
 		background-color: @task-pea-hover;
+	}
+
+	body:not(.mobile) .task--today &:hover::before {
+		background-color: @task-pea-today-hover;
 	}
 
 	body:not(.mobile) .task--completed &:hover::before {

@@ -1,6 +1,87 @@
 // Grid
 //------------------------------------------------------------------------------
 
+// Добавляем метку
+//------------------------------------------------------------------------------
+
+(function() {
+
+	LIST_BOARD.on('click', '.task:not(.task--completed) .js-marker-task:not(.grid__date--past):not(.grid__date--completed)', function() {
+		var isThis = $(this);
+
+		// Получаем хеш дела и дату
+		var taskId = isThis.parents('.task').attr('data-id'),
+			taskDate = isThis.attr('data-date');
+
+		// Парсим хранилище
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+
+		// Получаем элемент дела в хранилище
+		var taskElement = mahoweekStorage.tasks.filter(function(value) {
+			return value.id == taskId;
+		});
+
+		// Получаем индекс дела в хранилище
+		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
+
+		// Если массива маркеров не существовало
+		if (!mahoweekStorage.tasks[taskIndex].markers) {
+			// Создаем массив маркеров и заполняем
+			mahoweekStorage.tasks[taskIndex].markers = [{
+				date: taskDate,
+				label: 'bull'
+			}];
+
+			// Добавляем метку в сетку дат
+			isThis.addClass('grid__date--bull');
+
+		// Если существовало
+		} else {
+			// Проверяем существовала ли уже метка на это число
+			var markerElement = mahoweekStorage.tasks[taskIndex].markers.filter(function(value) {
+				return value.date == taskDate;
+			});
+
+			// Если существовала, то удаляем
+			if (markerElement != '') {
+				// Получаем индекс метки
+				var markerIndex = mahoweekStorage.tasks[taskIndex].markers.indexOf(markerElement[0]);
+
+				// Удаляем метку
+				mahoweekStorage.tasks[taskIndex].markers.splice(markerIndex, 1);
+
+				// Убираем метку из сетки дат
+				isThis.removeClass('grid__date--bull');
+
+			// Иначе создаем новую
+			} else {
+				mahoweekStorage.tasks[taskIndex].markers.push({
+					date: taskDate,
+					label: 'bull'
+				});
+
+				// Добавляем метку для ячейки
+				isThis.addClass('grid__date--bull');
+			}
+		}
+
+		// В итоге, если у дела есть метка на сегодняшний день и она не выполнена
+		if (isThis.parents('.task').find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length) {
+			// Помечаем дело как сегодняшнее
+			isThis.parents('.task').addClass('task--today');
+		} else {
+			// Помечаем сегодняшнее дело выполненным
+			isThis.parents('.task').removeClass('task--today');
+		}
+
+		// Обновляем хранилище
+		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+	});
+
+}());
+
+
+
 // Генерируем сетку дат
 //------------------------------------------------------------------------------
 

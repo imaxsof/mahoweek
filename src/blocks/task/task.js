@@ -13,6 +13,15 @@
 	for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
 		// Заносим дело в свой список
 		LIST_BOARD.find('.list[data-id="' + mahoweekStorage.tasks[i].listId + '"] .task--add').before(makeTask(mahoweekStorage.tasks[i].id, mahoweekStorage.tasks[i].name, mahoweekStorage.tasks[i].completed, mahoweekStorage.tasks[i].markers));
+
+		// Находим это дело
+		var task = LIST_BOARD.find('.task[data-id="' + mahoweekStorage.tasks[i].id + '"]');
+
+		// Если у этого дела есть метка на сегодняшний день и она не выполнена
+		if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length) {
+			// Помечаем дело как сегодняшнее
+			task.addClass('task--today');
+		}
 	}
 
 	// Пробегаемся по каждому списку
@@ -181,6 +190,15 @@
 			task.removeClass('task--completed');
 		}
 
+		// В итоге, если у дела есть метка на сегодняшний день и она не выполнена
+		if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length) {
+			// Помечаем дело как сегодняшнее
+			task.addClass('task--today');
+		} else {
+			// Помечаем сегодняшнее дело выполненным
+			task.removeClass('task--today');
+		}
+
 		// Заносим изменения в массив маркеров
 		// и если массива маркеров не существовало
 		if (markerAct == 'add' && !mahoweekStorage.tasks[taskIndex].markers) {
@@ -317,78 +335,6 @@
 
 		// Рассчитываем прогресс выполнения списка
 		makeProgress(listId);
-	});
-
-}());
-
-
-
-// Добавляем метку делу
-//------------------------------------------------------------------------------
-
-(function() {
-
-	LIST_BOARD.on('click', '.task:not(.task--completed) .js-marker-task:not(.grid__date--past):not(.grid__date--completed)', function() {
-		var isThis = $(this);
-
-		// Получаем хеш дела и дату
-		var taskId = isThis.parents('.task').attr('data-id'),
-			taskDate = isThis.attr('data-date');
-
-		// Парсим хранилище
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
-
-		// Получаем элемент дела в хранилище
-		var taskElement = mahoweekStorage.tasks.filter(function(value) {
-			return value.id == taskId;
-		});
-
-		// Получаем индекс дела в хранилище
-		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
-
-		// Если массива маркеров не существовало
-		if (!mahoweekStorage.tasks[taskIndex].markers) {
-			// Создаем массив маркеров и заполняем
-			mahoweekStorage.tasks[taskIndex].markers = [{
-				date: taskDate,
-				label: 'bull'
-			}];
-
-			// Добавляем метку в сетку дат
-			isThis.addClass('grid__date--bull');
-
-		// Если существовало
-		} else {
-			// Проверяем существовала ли уже метка на это число
-			var markerElement = mahoweekStorage.tasks[taskIndex].markers.filter(function(value) {
-				return value.date == taskDate;
-			});
-
-			// Если существовала, то удаляем
-			if (markerElement != '') {
-				// Получаем индекс метки
-				var markerIndex = mahoweekStorage.tasks[taskIndex].markers.indexOf(markerElement[0]);
-
-				// Удаляем метку
-				mahoweekStorage.tasks[taskIndex].markers.splice(markerIndex, 1);
-
-				// Убираем метку из сетки дат
-				isThis.removeClass('grid__date--bull');
-
-			// Иначе создаем новую
-			} else {
-				mahoweekStorage.tasks[taskIndex].markers.push({
-					date: taskDate,
-					label: 'bull'
-				});
-
-				// Добавляем метку для ячейки
-				isThis.addClass('grid__date--bull');
-			}
-		}
-
-		// Обновляем хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 	});
 
 }());
