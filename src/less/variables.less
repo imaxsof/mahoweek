@@ -56,6 +56,7 @@
 //------------------------------------------------------------------------------
 
 @list-bg: fade(#fff, 98%);
+@list-bg-header: #fff;
 @list-bg-ghost: fade(@list-bg, 50%);
 @list-border: @dark-divider;
 @list-radius: 4px;
@@ -69,7 +70,7 @@
 // Task
 //------------------------------------------------------------------------------
 
-@task-bg: @list-bg;
+@task-bg: fade(#fff, 98%);
 @task-bg-hover: #fff;
 @task-border: @list-border;
 
@@ -93,6 +94,7 @@
 
 @grid-bg: fade(#fafafa, 98%);
 @grid-bg-hover: #fafafa;
+@grid-bg-header: @grid-bg-hover;
 @grid-border: @list-border;
 @grid-separator: darken(@grid-border, 10%);
 @grid-past-bg: darken(@grid-border, 5%);

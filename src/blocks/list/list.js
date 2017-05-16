@@ -33,42 +33,6 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 
 
 
-// // Фиксируем шапку списков
-// //------------------------------------------------------------------------------
-
-// (function() {
-
-// 	// Если не мобилка
-// 	if (!MOBILE) {
-// 		// Определяем переменные
-// 		var doc = $(window),
-// 			docScrollTop = doc.scrollTop(),
-// 			listOffsetTop = list.offset().top;
-
-// 		// Скроллим
-// 		doc.on('scroll', function() {
-// 			var isThis = $(this);
-
-// 			// Смотрим где сейчас скролл
-// 			docScrollTop = isThis.scrollTop();
-
-// 			// Если скролл больше расстояния до списка
-// 			if (docScrollTop >= listOffsetTop) {
-// 				// Фиксируем
-// 				list.find('.list__head').addClass('list__head--fixed');
-
-// 			// Если скролл меньше расстояния до списка
-// 			} else {
-// 				// Снимаем фиксирование
-// 				list.find('.list__head').removeClass('list__head--fixed');
-// 			}
-// 		});
-// 	}
-
-// }());
-
-
-
 // Добавляем список
 //------------------------------------------------------------------------------
 
