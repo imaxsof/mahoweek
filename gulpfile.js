@@ -19,7 +19,8 @@ const gulp = require('gulp'),
 	notify = require('gulp-notify'),
 	multipipe = require('multipipe'),
 	browserSync = require('browser-sync').create(),
-	gulpsync = require('gulp-sync')(gulp);
+	gulpsync = require('gulp-sync')(gulp),
+	gulpHtmlVersion = require('gulp-html-version');
 
 
 
@@ -36,6 +37,10 @@ const paths = {
 	},
 	src: {
 		base: [
+			'src/*.*',
+			'src/CNAME'
+		],
+		html: [
 			'src/*.html'
 		],
 		img: [
@@ -60,7 +65,7 @@ const paths = {
 		}
 	},
 	watch: {
-		base: 'src/**/*.html',
+		html: 'src/**/*.html',
 		css: 'src/**/*.less',
 		js: 'src/**/*.js'
 	}
@@ -71,9 +76,17 @@ const paths = {
 // Build
 //------------------------------------------------------------------------------
 
-gulp.task('html', function() {
+gulp.task('base', function() {
 	return multipipe(
 		gulp.src(paths.src.base),
+		gulp.dest(paths.dist.base)
+	);
+});
+
+gulp.task('html', function() {
+	return multipipe(
+		gulp.src(paths.src.html),
+		gulpHtmlVersion(),
 		htmlmin({
 			collapseInlineTagWhitespace: true,
 			collapseWhitespace: true,
@@ -173,7 +186,7 @@ gulp.task('watch', function() {
 		notify: false
 	});
 
-	gulp.watch(paths.watch.base, ['html']);
+	gulp.watch(paths.watch.html, ['html']);
 	gulp.watch(paths.watch.css, ['css:main']);
 	gulp.watch(paths.watch.js, ['js:app']);
 });
@@ -196,4 +209,4 @@ gulp.task('clean:docs', function() {
 // Default
 //------------------------------------------------------------------------------
 
-gulp.task('default', gulpsync.sync(['clean:dist', 'html', 'img', 'css:libs', 'css:main', 'js:libs', 'js:app']));
+gulp.task('default', gulpsync.sync(['clean:dist', 'base', 'html', 'img', 'css:libs', 'css:main', 'js:libs', 'js:app']));
