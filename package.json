@@ -1,6 +1,6 @@
 {
   "name": "mahoweek",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "dependencies": {
     "jquery": "^2.2.4",
     "normalize.css": "5.0.0",
