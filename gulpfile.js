@@ -48,7 +48,8 @@ const paths = {
 		],
 		css: {
 			libs: [
-				'node_modules/normalize.css/normalize.css'
+				'node_modules/normalize.css/normalize.css',
+				'node_modules/cartonbox/docs/css/cartonbox.min.css'
 			],
 			main: [
 				'src/less/main.less'
@@ -57,7 +58,8 @@ const paths = {
 		js: {
 			libs: [
 				'node_modules/sortablejs/Sortable.min.js',
-				'node_modules/jquery/dist/jquery.min.js'
+				'node_modules/jquery/dist/jquery.min.js',
+				'node_modules/cartonbox/docs/js/cartonbox.min.js'
 			],
 			app: [
 				'src/js/app.js'
