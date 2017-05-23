@@ -20,7 +20,8 @@ const gulp = require('gulp'),
 	multipipe = require('multipipe'),
 	browserSync = require('browser-sync').create(),
 	gulpsync = require('gulp-sync')(gulp),
-	gulpHtmlVersion = require('gulp-html-version');
+	gulpHtmlVersion = require('gulp-html-version'),
+	typograf = require('gulp-typograf');
 
 
 
@@ -89,6 +90,9 @@ gulp.task('html', function() {
 	return multipipe(
 		gulp.src(paths.src.html),
 		gulpHtmlVersion(),
+		typograf({
+			locale: ['ru', 'en-US']
+		}),
 		htmlmin({
 			collapseInlineTagWhitespace: true,
 			collapseWhitespace: true,

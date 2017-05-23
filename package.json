@@ -21,6 +21,7 @@
     "gulp-notify": "^2.2.0",
     "gulp-rigger": "^0.5.8",
     "gulp-sync": "^0.1.4",
+    "gulp-typograf": "^3.0.0",
     "gulp-uglify": "2.0.1",
     "gulp-wrap": "^0.13.0",
     "multipipe": "^1.0.2"
