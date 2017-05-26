@@ -112,13 +112,13 @@ var BOARD = $('.board'),
 	var startEvent = MOBILE ? 'touchstart' : 'mousedown';
 
 	// Старт события
-	LIST_BOARD.on(startEvent, '.js-name', function(e) {
+	LIST_BOARD.on(startEvent, '.js-name', function(event) {
 		// Высчитываем сумму
-		if (e.type == 'touchstart') {
-			var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+		if (event.type == 'touchstart') {
+			var touch = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
 			xy1 = touch.pageX + touch.pageY;
 		} else {
-			xy1 = e.pageX + e.pageY;
+			xy1 = event.pageX + event.pageY;
 		}
 
 		// Убираем фокус из поля добавления дела
@@ -129,19 +129,19 @@ var BOARD = $('.board'),
 	var endEvent = MOBILE ? 'touchend' : 'mouseup';
 
 	// Конец события
-	LIST_BOARD.on(endEvent, '.js-name', function(e) {
+	LIST_BOARD.on(endEvent, '.js-name', function(event) {
 		var isThis = $(this);
 
 		// Высчитываем сумму
-		if (e.type == 'touchend') {
-			var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
+		if (event.type == 'touchend') {
+			var touch = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
 			xy2 = touch.pageX + touch.pageY;
 		} else {
-			xy2 = e.pageX + e.pageY;
+			xy2 = event.pageX + event.pageY;
 		}
 
 		// Если это была не левая кнопка мышки
-		if (e.type == 'mouseup' && e.which != 1) {
+		if (event.type == 'mouseup' && event.which != 1) {
 			// Прекращаем выполнение
 			return false;
 		}

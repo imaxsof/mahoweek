@@ -273,7 +273,7 @@
 
 (function() {
 
-	LIST_BOARD.on('keyup change', '.js-edit-task', function(e) {
+	LIST_BOARD.on('keyup change', '.js-edit-task', function(event) {
 		var isThis = $(this);
 
 		// Получаем хеш и текст дела
@@ -298,7 +298,7 @@
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
 		// Если был нажат Enter, то убираем фокус с этого поля
-		if (e.keyCode == 13) {
+		if (event.keyCode == 13) {
 			isThis.blur();
 		}
 	});

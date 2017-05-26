@@ -4,6 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Mahoweek: краткосрочный план дел</title>
+		<meta name="description" content="Веб-сервис по ведению краткосрочного плана дел. Поможет организовать список задач и наметить на календарной сетке даты их выполнения на одну-две недели вперёд.">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 		<meta name="format-detection" content="telephone=no">
 		<link href="/css/libs.min.css" rel="stylesheet">
@@ -79,9 +80,9 @@
 		</main>
 
 		<div class="hidden">
-			<a href="#welcome" class="cartonbox  js-open-welcome" data-cb-type="inline" data-cb-hash="welcome" data-cb-design="cartonbox-no-close"></a>
+			<a href="#welcome-popup" class="cartonbox  js-open-welcome" data-cb-type="inline" data-cb-hash="welcome" data-cb-design="cartonbox-no-close"></a>
 
-			<div id="welcome" class="welcome">
+			<div id="welcome-popup" class="welcome">
 				<div class="welcome__logo  logo  logo--dark  logo--big  logo--center">
 					<h2>Mahoweek</h2>
 				</div>
@@ -114,7 +115,7 @@
 		<script src="/js/app.min.js"></script>
 
 		<script>
-			(function(d,w,c){(w[c]=w[c]||[]).push(function(){try{w.yaCounter43856389=new Ya.Metrika({id:43856389,clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});}catch(e){}});var n=d.getElementsByTagName("script")[0],s=d.createElement("script"),f=function(){n.parentNode.insertBefore(s,n);};s.type="text/javascript";s.async=true;s.src="https://mc.yandex.ru/metrika/watch.js";if(w.opera=="[object Opera]"){d.addEventListener("DOMContentLoaded",f,false);}else{f();}})(document,window,"yandex_metrika_callbacks");
+			window.onerror=function t(a,e,s,i,d){if(window.JSON&&!(t.count>5)){for(var r=43856389,l={},n=l,o=d&&d.stack,c=["JS "+(!e||/mahoweek\.ru|cdn\.com/.test(e)?"in":"ex")+"ternal errors","message: "+a,o?"stack: "+o:e?"file: "+e+":"+s+":"+i:"nofile","href: "+location.href],g=0;g<c.length-1;g++){var k=c[g];n[k]={},n=n[k]}n[c[g]]=1;var f="https://mc.yandex.ru/watch/"+r+"/?site-info="+encodeURIComponent(JSON.stringify(l))+"&rn="+Math.random();"function"==typeof navigator.sendBeacon?navigator.sendBeacon(f," "):(new Image).src=f,t.count?t.count++:t.count=1}};(function(d,w,c){(w[c]=w[c]||[]).push(function(){try{w.yaCounter43856389=new Ya.Metrika({id:43856389,clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true,trackHash:true});}catch(e){}});var n=d.getElementsByTagName("script")[0],s=d.createElement("script"),f=function(){n.parentNode.insertBefore(s,n);};s.type="text/javascript";s.async=true;s.src="https://mc.yandex.ru/metrika/watch.js";if(w.opera=="[object Opera]"){d.addEventListener("DOMContentLoaded",f,false);}else{f();}})(document,window,"yandex_metrika_callbacks");
 		</script>
 	</body>
 </html>

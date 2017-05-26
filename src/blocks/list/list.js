@@ -90,7 +90,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 
 (function() {
 
-	LIST_BOARD.on('keyup change', '.js-edit-list', function(e) {
+	LIST_BOARD.on('keyup change', '.js-edit-list', function(event) {
 		var isThis = $(this);
 
 		// Получаем хеш и заголовок списка
@@ -115,7 +115,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
 		// Если был нажат Enter, то убираем фокус с этого поля
-		if (e.keyCode == 13) {
+		if (event.keyCode == 13) {
 			isThis.blur();
 		}
 	});
@@ -191,8 +191,10 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 
 (function() {
 
+	var sortableDelay = MOBILE ? 200 : 0;
+
 	Sortable.create(document.querySelector('.board__lists'), {
-		delay: 200,
+		delay: sortableDelay,
 		animation: 0,
 		handle: '.list__name',
 		filter: '.list__input',
