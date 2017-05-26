@@ -36,7 +36,11 @@
 	position: relative;
 	display: flex;
 	justify-content: space-between;
-	line-height: 30px;
+	visibility: hidden;
+
+	.board--load & {
+		visibility: visible;
+	}
 
 	&::before {
 		position: fixed;
@@ -62,6 +66,11 @@
 	padding: 0 0 10px;
 	margin: auto;
 	position: relative;
+	visibility: hidden;
+
+	.board--load & {
+		visibility: visible;
+	}
 
 	@media (min-width: 1200px) {
 		max-width: 1160px;

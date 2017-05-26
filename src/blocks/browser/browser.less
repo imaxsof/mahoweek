@@ -1,0 +1,71 @@
+// Browser
+//------------------------------------------------------------------------------
+
+.browser {
+	padding-bottom: 56.25%;
+	background-color: @board-bg;
+	background-size: cover;
+	background-position: 50% 0;
+	background-repeat: no-repeat;
+	border-radius: (@border-radius / 2) (@border-radius / 2) 0 0;
+	border-top: 10px solid @dark-divider;
+	position: relative;
+
+	@media (min-width: 768px) {
+		border-top-width: 21px;
+		margin-right: 20px;
+		margin-left: 20px;
+		border-radius: @border-radius @border-radius 0 0;
+	}
+
+	&::before {
+		position: absolute;
+		content: "";
+		height: 1px;
+		left: -7.5px;
+		right: -7.5px;
+		bottom: -1px;
+		background-color: @dark-divider;
+
+		@media (min-width: 768px) {
+			left: -20px;
+			right: -20px;
+		}
+	}
+}
+
+.browser__header {
+	position: absolute;
+	top: -7px;
+	left: 10px;
+	width: 4px;
+	height: 4px;
+	border-radius: 50%;
+	background-color: @dark-disabled;
+
+	@media (min-width: 768px) {
+		top: -14px;
+		left: 18px;
+		width: 7px;
+		height: 7px;
+	}
+
+	&::before,
+	&::after {
+		position: absolute;
+		content: "";
+		top: 0;
+		width: 100%;
+		padding-bottom: 100%;
+		border-radius: 50%;
+		background-color: @dark-disabled;
+	}
+
+	&::before {
+		left: -150%;
+	}
+
+	&::after {
+		right: -150%;
+	}
+}

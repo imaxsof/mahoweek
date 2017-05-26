@@ -43,19 +43,31 @@ input {
 	}
 }
 
-button {
+button,
+.btn {
 	outline: none;
+	display: inline-block;
+	text-decoration: none;
 	border: 0;
-	background-color: transparent;
-	padding: 0;
-	color: @dark-secondary;
-	fill: @dark-secondary;
+	border-radius: (@border-radius / 2);
+	background-color: @btn-bg;
+	padding: 10px 15px;
+	color: @light-primary;
+	fill: @light-primary;
 	cursor: pointer;
 	line-height: @line-height;
 	position: relative;
+	min-width: 200px;
 
 	&:hover {
-		color: @dark-primary;
-		fill: @dark-primary;
+		background-color: @btn-bg-hover;
 	}
+
+	&:active {
+		top: 1px;
+	}
+}
+
+.hidden {
+	display: none;
 }

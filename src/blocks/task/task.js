@@ -30,6 +30,12 @@
 		makeProgress(mahoweekStorage.lists[i].id);
 	}
 
+	// Если окно приветствия не открыто
+	if (window.location.hash != '#welcome') {
+		// Показываем содержимое доски
+		BOARD.addClass('board--load');
+	}
+
 }());
 
 

@@ -2,15 +2,18 @@
 //------------------------------------------------------------------------------
 
 .logo {
-	h1 {
-		font-size: 18px;
-		font-family: Verdana, @font-family;
-		text-transform: uppercase;
+	color: @logo-light;
+	font-family: Verdana, @font-family;
+	text-transform: uppercase;
+	line-height: 30px;
+
+	h1,
+	h2 {
 		font-weight: 500;
+		font-size: 18px;
 		margin: 0;
 		position: relative;
-		padding-left: 13px;
-		color: @logo-text;
+		padding: 0 13px;
 
 		&::before {
 			position: absolute;
@@ -22,5 +25,28 @@
 			left: -1px;
 			background-color: @logo-pea;
 		}
+	}
+
+	&--dark {
+		color: @logo-dark;
+	}
+
+	&--big {
+		h1,
+		h2 {
+			font-size: 24px;
+			padding: 0 16px;
+
+			&::before {
+				width: 10px;
+				height: 10px;
+				top: 10px;
+			}
+		}
+	}
+
+	&--center {
+		display: flex;
+		justify-content: center;
 	}
 }

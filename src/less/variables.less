@@ -4,6 +4,7 @@
 @font-size: 16px;
 @font-size-small: 14px;
 @line-height: 24px;
+@border-radius: 4px;
 @font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 
@@ -39,7 +40,9 @@
 // Logo
 //------------------------------------------------------------------------------
 
-@logo-text: @light-primary;
+@logo-dark: @dark-primary;
+@logo-light: @light-primary;
+
 @logo-pea: @color-green;
 
 
@@ -52,6 +55,14 @@
 
 
 
+// Button
+//------------------------------------------------------------------------------
+
+@btn-bg: darken(@task-pea-complete, 15%);
+@btn-bg-hover: darken(@btn-bg, 5%);
+
+
+
 // List
 //------------------------------------------------------------------------------
 
@@ -59,7 +70,6 @@
 @list-bg-header: #fff;
 @list-bg-ghost: fade(@list-bg, 50%);
 @list-border: @dark-divider;
-@list-radius: 4px;
 @list-progress: @color-teal-blue;
 
 @list-trash: lighten(@color-red, 13%);

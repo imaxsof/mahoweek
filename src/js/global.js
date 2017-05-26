@@ -15,8 +15,9 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 // Определяем элементы доски
 //------------------------------------------------------------------------------
 
-var THEME_BOARD = $('.board__theme'),
-	LIST_BOARD = $('.board__lists');
+var BOARD = $('.board'),
+	THEME_BOARD = BOARD.find('.board__theme'),
+	LIST_BOARD = BOARD.find('.board__lists');
 
 
 
@@ -45,6 +46,9 @@ var THEME_BOARD = $('.board__theme'),
 
 		// Добавляем тему к доске
 		THEME_BOARD.addClass('board__theme--leaves');
+
+		// Помечаем, что это первый визит пользователя на сайт
+		$('body').attr('data-visit', 'first');
 
 	// Если хранилище существует
 	} else {
