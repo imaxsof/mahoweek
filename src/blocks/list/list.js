@@ -303,7 +303,7 @@ function makeList(id, name) {
 						'</div>' +
 					'</div>' +
 					'<div class="task__name">' +
-						'<input class="task__input  js-add-task" type="text">' +
+						'<input class="task__input  js-add-task" type="text" maxlength="255">' +
 					'</div>' +
 				'</div>' +
 				'<div class="task__grid  grid"></div>' +

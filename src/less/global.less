@@ -29,6 +29,17 @@ body {
 	}
 }
 
+a {
+	text-decoration-skip: ink;
+	text-decoration-color: fade(@link-color, 30%);
+	color: @link-color;
+
+	&:hover {
+		color: @link-color-hover !important;
+		text-decoration-color: fade(@link-color-hover, 30%) !important;
+	}
+}
+
 input {
 	background-color: transparent;
 	line-height: @line-height;

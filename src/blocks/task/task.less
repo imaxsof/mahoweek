@@ -159,12 +159,22 @@
 	border-top: 1px solid @task-border;
 	border-bottom: 1px solid @task-border;
 
+	a {
+		text-decoration-color: fade(@dark-primary, 30%);
+		color: @dark-primary;
+	}
+
 	.task--add & {
 		border-bottom: 0;
 	}
 
 	.task--completed & {
 		color: @dark-disabled;
+
+		a {
+			text-decoration-color: fade(@dark-disabled, 30%);
+			color: @dark-disabled;
+		}
 	}
 }
 

@@ -146,42 +146,45 @@ var BOARD = $('.board'),
 			return false;
 		}
 
-		// Если это было явное действие для редактирования
-		if (xy1 == xy2) {
-			// Если это список и поля для редактирования еще нет
-			if (isThis.hasClass('list__name') && !isThis.parents('.list').find('.list__input').length) {
-				// Берем заголовок списка
-				var listName = isThis.text();
+		// Если это был не клик по ссылке
+		if (!$(event.target).hasClass('js-link-task')) {
+			// Если это было явное действие для редактирования
+			if (xy1 == xy2) {
+				// Если это список и поля для редактирования еще нет
+				if (isThis.hasClass('list__name') && !isThis.parents('.list').find('.list__input').length) {
+					// Берем заголовок списка
+					var listName = isThis.text();
 
-				// Создаем поле для редактирования
-				isThis.html('<input class="list__input  js-edit-list" type="text" maxlength="100" value="">');
+					// Создаем поле для редактирования
+					isThis.html('<input class="list__input  js-edit-list" type="text" maxlength="255" value="">');
 
-				// Вставляем заголовок списка и фокусируем
-				isThis.parents('.list').find('.list__input').focus().val(listName);
+					// Вставляем заголовок списка и фокусируем
+					isThis.parents('.list').find('.list__input').focus().val(listName);
 
-				// При расфокусировке
-				isThis.parents('.list').find('.list__input').focusout(function() {
-					// Заменяем поле редактирования на заголовок списка
-					isThis.text($(this).val());
-				});
-			}
+					// При расфокусировке
+					isThis.parents('.list').find('.list__input').focusout(function() {
+						// Заменяем поле редактирования на заголовок списка
+						isThis.text($(this).val());
+					});
+				}
 
-			// Если это дело и поля для редактирования еще нет
-			if (isThis.hasClass('task__name') && !isThis.parents('.task').find('.task__input').length) {
-				// Берем текст дела
-				var taskName = isThis.text();
+				// Если это дело и поля для редактирования еще нет
+				if (isThis.hasClass('task__name') && !isThis.parents('.task').find('.task__input').length) {
+					// Берем текст дела
+					var taskName = isThis.text();
 
-				// Создаем поле для редактирования
-				isThis.html('<input class="task__input  js-edit-task" type="text" maxlength="100" value="">');
+					// Создаем поле для редактирования
+					isThis.html('<input class="task__input  js-edit-task" type="text" maxlength="255" value="">');
 
-				// Вставляем текст дела и фокусируем
-				isThis.parents('.task').find('.task__input').focus().val(taskName);
+					// Вставляем текст дела и фокусируем
+					isThis.parents('.task').find('.task__input').focus().val(taskName);
 
-				// При расфокусировке
-				isThis.parents('.task').find('.task__input').focusout(function() {
-					// Заменяем поле редактирования на текст дела
-					isThis.text($(this).val());
-				});
+					// При расфокусировке
+					isThis.parents('.task').find('.task__input').focusout(function() {
+						// Заменяем поле редактирования на текст дела
+						isThis.html(remakeTaskName($(this).val()));
+					});
+				}
 			}
 		}
 	});

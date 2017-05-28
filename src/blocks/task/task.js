@@ -403,6 +403,17 @@
 
 
 
+// Обрабатываем строку с делом
+//------------------------------------------------------------------------------
+
+function remakeTaskName(name) {
+
+	return name.replace(/(http(s)?:\/\/(www\.)?)([\S]+[^ ,\.!])/ig, '<a href="$1$4" class="js-link-task" target="_blank" rel="noopener noreferrer"><span class="hidden">$1</span>$4</a>');
+
+}
+
+
+
 // Генерируем дело
 //------------------------------------------------------------------------------
 
@@ -423,7 +434,7 @@ function makeTask(id, name, completed, markers) {
 				'<div class="task__check  js-completed-task"></div>' +
 			'</div>' +
 			'<div class="task__name  js-name">' +
-				name +
+				remakeTaskName(name) +
 			'</div>' +
 			'<div class="task__options">' +
 				'<div class="task__trash  js-remove-task">' +
