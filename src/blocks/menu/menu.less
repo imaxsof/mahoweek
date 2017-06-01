@@ -15,34 +15,11 @@
 .menu__item {
 	font-size: @font-size-small;
 
-	&--add,
-	&--about {
-		button,
-		.btn {
-			width: 35px;
-			min-width: auto;
-			top: auto;
-
-			@media (min-width: 768px) {
-				width: auto;
-			}
-		}
-
-		svg {
-			width: 25px;
-			height: 25px;
-			position: absolute;
-			top: 22.5px;
-			left: 5px;
-
-			@media (min-width: 768px) {
-				opacity: 0.5;
-			}
-		}
-	}
-
 	button,
 	.btn {
+		width: 35px;
+		min-width: auto;
+		top: auto;
 		line-height: 32px;
 		padding: 20px 15px 18px;
 		text-indent: -9999px;
@@ -52,7 +29,7 @@
 
 		&:hover,
 		.mobile & {
-			color: @menu-link-hover;
+			color: @menu-link-hover !important;
 			fill: @menu-link-hover;
 			background-color: transparent;
 		}
@@ -60,6 +37,19 @@
 		@media (min-width: 768px) {
 			text-indent: inherit;
 			padding-left: 31px;
+			width: auto;
+		}
+	}
+
+	svg {
+		width: 25px;
+		height: 25px;
+		position: absolute;
+		top: 22.5px;
+		left: 5px;
+
+		@media (min-width: 768px) {
+			opacity: 0.5;
 		}
 	}
 }

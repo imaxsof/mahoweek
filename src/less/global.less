@@ -29,6 +29,40 @@ body {
 	}
 }
 
+h1 {
+	font-family: Verdana, @font-family;
+	text-transform: uppercase;
+	font-weight: 500;
+	font-size: 18px;
+	margin: 0;
+	position: relative;
+	line-height: 30px;
+}
+
+h2 {
+	font-size: 24px;
+	line-height: 30px;
+	font-weight: 500;
+	font-family: Verdana, @font-family;
+	text-transform: uppercase;
+	margin-top: 0;
+	margin-bottom: 15px;
+	position: relative;
+
+	@media (min-width: 768px) {
+		margin-bottom: 25px !important;
+	}
+}
+
+p {
+	margin-top: 0;
+	margin-bottom: 15px;
+
+	@media (min-width: 768px) {
+		margin-bottom: 25px;
+	}
+}
+
 a {
 	text-decoration-skip: ink;
 	text-decoration-color: fade(@link-color, 30%);
@@ -79,6 +113,21 @@ button,
 	}
 }
 
+
+
+// Helpers
+//------------------------------------------------------------------------------
+
 .hidden {
 	display: none;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.center-block {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
