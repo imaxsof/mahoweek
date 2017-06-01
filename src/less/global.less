@@ -12,7 +12,6 @@ html {
 	overflow-y: scroll;
 	-webkit-font-smoothing: antialiased;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-	user-select: none;
 }
 
 body {
@@ -26,6 +25,10 @@ body {
 
 	@media (min-width: 992px) {
 		overflow-x: initial;
+	}
+
+	&.mobile {
+		user-select: none;
 	}
 }
 
@@ -68,7 +71,7 @@ a {
 	text-decoration-color: fade(@link-color, 30%);
 	color: @link-color;
 
-	&:hover {
+	body:not(.mobile) &:hover {
 		color: @link-color-hover !important;
 		text-decoration-color: fade(@link-color-hover, 30%) !important;
 	}
@@ -104,11 +107,11 @@ button,
 	position: relative;
 	min-width: 200px;
 
-	&:hover {
+	body:not(.mobile) &:hover {
 		background-color: @btn-bg-hover;
 	}
 
-	&:active {
+	body:not(.mobile) &:active {
 		top: 1px;
 	}
 }

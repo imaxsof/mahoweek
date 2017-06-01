@@ -11,19 +11,39 @@
 	}
 
 	.ya-share2 {
-		min-height: 24px;
+		min-height: 34px;
 
 		&__container {
 			text-align: center;
 			margin-bottom: -10px;
 		}
 
-		li {
-			margin: 0 5px 10px;
+		&__item {
+			margin: 0 5px 10px !important;
+			position: relative;
+			opacity: 1 !important;
+
+			body:not(.mobile) &:hover {
+				opacity: 0.9 !important;
+			}
+
+			body:not(.mobile) &:active {
+				top: 1px;
+			}
+		}
+
+		&__icon:active {
+			box-shadow: none;
 		}
 
 		&__badge {
 			border-radius: (@border-radius / 2);
+			padding: 5px;
+		}
+
+		&__counter:before {
+			top: 7px;
+			bottom: 7px;
 		}
 	}
 }

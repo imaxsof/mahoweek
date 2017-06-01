@@ -19,7 +19,7 @@
 	.btn {
 		width: 35px;
 		min-width: auto;
-		top: auto;
+		top: auto !important;
 		line-height: 32px;
 		padding: 20px 15px 18px;
 		text-indent: -9999px;
@@ -30,8 +30,8 @@
 		&:hover,
 		.mobile & {
 			color: @menu-link-hover !important;
-			fill: @menu-link-hover;
-			background-color: transparent;
+			fill: @menu-link-hover !important;
+			background-color: transparent !important;
 		}
 
 		@media (min-width: 768px) {
