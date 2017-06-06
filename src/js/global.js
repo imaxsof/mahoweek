@@ -17,7 +17,8 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 
 var BOARD = $('.board'),
 	THEME_BOARD = BOARD.find('.board__theme'),
-	LIST_BOARD = BOARD.find('.board__lists');
+	LIST_BOARD = BOARD.find('.board__lists'),
+	SETTINGS_FORM = $('.form--settings');
 
 
 

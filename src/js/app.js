@@ -12,3 +12,4 @@
 //= ../blocks/list/list.js
 //= ../blocks/task/task.js
 //= ../blocks/grid/grid.js
+//= ../blocks/form/form.js

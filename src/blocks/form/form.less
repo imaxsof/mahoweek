@@ -1,0 +1,49 @@
+// Form
+//------------------------------------------------------------------------------
+
+.form__theme {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	margin-left: -5px;
+	margin-right: -5px;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+
+	@media (min-width: 768px) {
+		margin-top: 30px;
+		margin-bottom: 20px;
+	}
+
+	input {
+		position: absolute;
+		left: -9999px;
+	}
+
+	label {
+		width: 33.33%;
+		padding-bottom: 33.33%;
+		position: relative;
+
+		@media (min-width: 768px) {
+			width: 16.66%;
+			padding-bottom: 16.66%;
+		}
+	}
+
+	span {
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		bottom: 5px;
+		left: 5px;
+		background-color: @light-secondary;
+		background-size: cover;
+		cursor: pointer;
+		border-radius: (@border-radius / 2);
+	}
+
+	input:checked + span {
+		cursor: default;
+	}
+}
