@@ -38,7 +38,7 @@
 
 .list__head {
 	width: calc(~"100vw + 554px");
-	max-width: 1057px;
+	max-width: 941px;
 	padding: 0 5px;
 	display: flex;
 	font-size: @font-size-small;
@@ -47,6 +47,7 @@
 	z-index: 2;
 
 	@media (min-width: 768px) {
+		max-width: 1057px;
 		padding-left: 20px;
 		padding-right: 20px;
 	}
@@ -71,9 +72,13 @@
 	position: relative;
 	display: flex;
 	width: calc(~"100vw - 17px");
-	max-width: 456px;
+	max-width: 370px;
 	background-color: @list-bg-header;
 	border-radius: @border-radius 0 0 0;
+
+	@media (min-width: 768px) {
+		max-width: 456px;
+	}
 
 	@media (min-width: 992px) {
 		max-width: calc(~"100vw - 561px - 40px");
@@ -156,10 +161,11 @@
 
 .list__tasks {
 	width: calc(~"100vw + 554px");
+	max-width: 941px;
 	padding: 0 5px;
-	max-width: 1057px;
 
 	@media (min-width: 768px) {
+		max-width: 1057px;
 		padding-left: 20px;
 		padding-right: 20px;
 	}

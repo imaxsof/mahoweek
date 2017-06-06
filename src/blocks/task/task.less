@@ -47,10 +47,14 @@
 	display: flex;
 	background-image: linear-gradient(180deg, transparent 1px, @task-bg 1px);
 	width: calc(~"100vw - 17px");
-	max-width: 456px;
+	max-width: 370px;
 
 	body:not(.mobile) .task:not(.task--add):hover & {
 		background-color: @task-bg-hover;
+	}
+
+	@media (min-width: 768px) {
+		max-width: 456px;
 	}
 
 	@media (min-width: 992px) {
