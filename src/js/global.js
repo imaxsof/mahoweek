@@ -1,6 +1,16 @@
 // Global
 //------------------------------------------------------------------------------
 
+// Скроллим к началу страницы
+// во избежании скролла к анкору при первоначальном открытии модального окна
+//------------------------------------------------------------------------------
+
+setTimeout(function() {
+	$('body').scrollTop(0);
+}, 1);
+
+
+
 // Определяем мобилку
 //------------------------------------------------------------------------------
 
@@ -29,24 +39,57 @@ var BOARD = $('.board'),
 
 	// Если хранилища не существует
 	if (!localStorage.getItem('mahoweek')) {
-		// Генерируем объекты данных
+		// Создаем некоторые объекты
+		var listId = makeHash(),
+			theme = 'leaves';
+
+		// Генерируем первоначальные данные
 		var mahoweekData = {
 			lists: [{
-				id: makeHash(),
+				id: listId,
 				name: 'Краткосрочный план дел',
 				createdTime: new Date().getTime()
 			}],
-			tasks: [],
+			tasks: [{
+				id: makeHash(),
+				listId: listId,
+				name: 'Прочитать справку о сайте: https://mahoweek.ru/#about',
+				createdTime: new Date().getTime()
+			},
+			/*{
+				id: makeHash(),
+				listId: listId,
+				name: 'Посмотреть как здесь всё устроено: https://mahoweek.ru/#tour',
+				createdTime: new Date().getTime()
+			},*/
+			{
+				id: makeHash(),
+				listId: listId,
+				name: 'Настроить доску: https://mahoweek.ru/#settings',
+				createdTime: new Date().getTime()
+			},
+			{
+				id: makeHash(),
+				listId: listId,
+				name: 'Добавить ещё дел в список',
+				createdTime: new Date().getTime()
+			},
+			{
+				id: makeHash(),
+				listId: listId,
+				name: 'Наметить на календарной сетке даты выполнения задач',
+				createdTime: new Date().getTime()
+			}],
 			settings: {
-				theme: 'leaves'
+				theme: theme
 			}
 		}
 
-		// Создаем хранилище
+		// Создаем хранилище с первоначальными данными
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekData));
 
 		// Добавляем тему к доске
-		THEME_BOARD.addClass('board__theme--leaves');
+		THEME_BOARD.addClass('board__theme--' + theme);
 
 		// Помечаем, что это первый визит пользователя на сайт
 		$('body').attr('data-visit', 'first');
@@ -58,42 +101,6 @@ var BOARD = $('.board'),
 
 		// Добавляем тему к доске
 		THEME_BOARD.addClass('board__theme--' + mahoweekStorage.settings.theme);
-
-		// Временная мера из-за ввода новой архитектуры хранилища
-		//
-		// Если массива списков не существует
-		if (!mahoweekStorage.lists) {
-			// Генерируем хеш списка
-			var listId = makeHash();
-
-			// Создаем массив списков и заполняем
-			mahoweekStorage.lists = [{
-				id: listId,
-				name: 'Краткосрочный план дел',
-				createdTime: new Date().getTime()
-			}];
-
-			// Пробегаемся по каждому делу
-			for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
-				// Заносим в каждое дело причастность к списку
-				mahoweekStorage.tasks[i].listId = listId;
-			}
-
-			// Обновляем хранилище
-			localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
-		}
-
-		// Если темы не существует
-		if (mahoweekStorage.settings.theme === undefined) {
-			// Добавляем тему в настройки
-			mahoweekStorage.settings.theme = 'leaves';
-
-			// Добавляем тему к доске
-			THEME_BOARD.addClass('board__theme--' + mahoweekStorage.settings.theme);
-
-			// Обновляем хранилище
-			localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
-		}
 	}
 
 }());
@@ -148,7 +155,7 @@ var BOARD = $('.board'),
 		}
 
 		// Если это был не клик по ссылке
-		if (!$(event.target).hasClass('js-link-task')) {
+		if (!$(event.target).hasClass('js-link-task') && !$(event.target).hasClass('cartonbox')) {
 			// Если это было явное действие для редактирования
 			if (xy1 == xy2) {
 				// Если это список и поля для редактирования еще нет
