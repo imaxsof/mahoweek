@@ -171,11 +171,20 @@
 	.task--completed & {
 		color: @dark-disabled;
 
+		strong {
+			font-weight: 500;
+		}
+
 		a {
 			text-decoration-color: fade(@dark-disabled, 30%);
 			color: @dark-disabled;
 		}
 	}
+}
+
+.task__time {
+	color: @dark-disabled;
+	font-weight: 500;
 }
 
 .task__input[type=text] {

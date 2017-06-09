@@ -410,11 +410,19 @@ function remakeTaskName(name) {
 
 	var remakeName = name;
 
-	// Превращаем урл в ссылку
+	// Работаем с УРЛ
 	if (/https:\/\/mahoweek\.ru\/#/.test(name)) {
 		remakeName = remakeName.replace(/(https:\/\/)(mahoweek\.ru\/#)([\S]+[^ ,\.!])/ig, '<a href="#$3" class="cartonbox" data-cb-type="inline" data-cb-hash="$3"><span class="hidden">$1</span>$2$3</a>');
 	} else {
 		remakeName = remakeName.replace(/(http(s)?:\/\/(www\.)?)([\S]+[^ ,\.!])/ig, '<a href="$1$4" class="js-link-task" target="_blank" rel="noopener noreferrer"><span class="hidden">$1</span>$4</a>');
+	}
+
+	// Работаем с временем
+	remakeName = remakeName.replace(/(.+)?(\s)?(\[)(\d\d:\d\d)(\])(\s)?(.+)?/ig, '<span class="hidden">$3</span><span class="task__time">$4</span><span class="hidden">$5</span> $1$7').trim();
+
+	// Работаем с важностью
+	if (/[!]{3,}/.test(name)) {
+		remakeName = '<strong>' + remakeName.replace(/([!]{3,})/ig, '<span class="hidden">$1</span>') + '</strong>';
 	}
 
 	// Выводим преобразованную строку
