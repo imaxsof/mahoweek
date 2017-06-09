@@ -28,16 +28,15 @@
 
 	label {
 		width: 33.33%;
-		padding-bottom: 33.33%;
 		position: relative;
+		display: block;
+		padding: 5px;
 	}
 
 	span {
-		position: absolute;
-		top: 5px;
-		right: 5px;
-		bottom: 5px;
-		left: 5px;
+		display: block;
+		position: relative;
+		padding-bottom: 100%;
 		background-color: @light-secondary;
 		background-size: cover;
 		cursor: pointer;
@@ -48,16 +47,14 @@
 		}
 
 		body:not(.mobile) &:active {
-			top: 6px;
-			bottom: 4px;
+			top: 1px;
 		}
 	}
 
 	input:checked + span {
 		cursor: default;
 		opacity: 1 !important;
-		top: 5px !important;
-		bottom: 5px !important;
+		top: 0 !important;
 
 		&::before {
 			position: absolute;

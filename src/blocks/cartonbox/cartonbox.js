@@ -5,7 +5,7 @@
 
 	// Настраиваем Картонбокс
 	var options = {
-		speed: 100,
+		speed: 1,
 		preload: false,
 		closeHtml: '<svg><use xlink:href="#icon-close"></use></svg>',
 		onStartBefore: function() {
