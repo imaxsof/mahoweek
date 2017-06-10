@@ -17,6 +17,20 @@
 		// Находим это дело
 		var task = LIST_BOARD.find('.task[data-id="' + mahoweekStorage.tasks[i].id + '"]');
 
+		// Если у этого дела есть невыполненные метки за прошедшие дни
+		// и если дело не было выполненным сегодня,
+		// а так же если последняя метка точно метка о пропуске
+		if (task.find('.grid__date.grid__date--past.grid__date--bull:not(.grid__date--completed)').length && !task.find('.grid__date.grid__date--today.grid__date--completed').length && task.find('.grid__date.grid__date--past.grid__date--bull:not(.grid__date--completed):last').index() > task.find('.grid__date.grid__date--past.grid__date--completed:last').index()) {
+			// Помечаем дело как невыполненное
+			task.addClass('task--past');
+		}
+
+		// Если у этого дела есть метка на любой будущий день
+		if (task.find('.grid__date:not(.grid__date--past):not(.grid__date--completed).grid__date--bull').length) {
+			// Помечаем дело как намеченное
+			task.addClass('task--bull');
+		}
+
 		// Если у этого дела есть метка на сегодняшний день и она не выполнена
 		if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length) {
 			// Помечаем дело как сегодняшнее

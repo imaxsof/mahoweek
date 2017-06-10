@@ -1,4 +1,4 @@
-![Интерфейс](https://mahoweek.ru/img/interface.png?v=2)
+![Интерфейс](https://mahoweek.ru/img/interface.png?v=3)
 
 # Mahoweek
 

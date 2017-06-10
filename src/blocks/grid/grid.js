@@ -65,12 +65,32 @@
 			}
 		}
 
-		// В итоге, если у дела есть метка на сегодняшний день и она не выполнена
+		// В итоге, если дела есть невыполненные метки за прошедшие дни
+		// и если дело не было выполненным сегодня,
+		// а так же если последняя метка точно о пропуске
+		if (isThis.parents('.task').find('.grid__date.grid__date--past.grid__date--bull:not(.grid__date--completed)').length && !isThis.parents('.task').find('.grid__date.grid__date--today.grid__date--completed').length && isThis.parents('.task').find('.grid__date.grid__date--past.grid__date--bull:not(.grid__date--completed):last').index() > isThis.parents('.task').find('.grid__date.grid__date--past.grid__date--completed:last').index()) {
+			// Помечаем дело как невыполненное
+			isThis.parents('.task').addClass('task--past');
+		} else {
+			// Размечаем дело как невыполненное
+			isThis.parents('.task').removeClass('task--past');
+		}
+
+		// В итоге, если у дела есть метка на любой будущий день
+		if (isThis.parents('.task').find('.grid__date:not(.grid__date--past):not(.grid__date--completed).grid__date--bull').length) {
+			// Помечаем дело как намеченное
+			isThis.parents('.task').addClass('task--bull');
+		} else {
+			// Размечаем дело как намеченное
+			isThis.parents('.task').removeClass('task--bull');
+		}
+
+		// А так же, если у дела есть метка на сегодняшний день и она не выполнена
 		if (isThis.parents('.task').find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length) {
 			// Помечаем дело как сегодняшнее
 			isThis.parents('.task').addClass('task--today');
 		} else {
-			// Помечаем сегодняшнее дело выполненным
+			// Размечаем дело как сегодняшнее
 			isThis.parents('.task').removeClass('task--today');
 		}
 
