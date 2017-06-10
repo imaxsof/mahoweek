@@ -14,6 +14,8 @@
 
 	&--add {
 		font-size: @font-size-small;
+		position: absolute;
+		bottom: 0;
 	}
 
 	&--completed {
@@ -185,6 +187,7 @@
 .task__time {
 	color: @dark-disabled;
 	font-weight: 500;
+	margin-right: 2px;
 }
 
 .task__input[type=text] {
@@ -228,9 +231,10 @@
 		opacity: 1;
 	}
 
-	// .list__tasks--drag & {
-	// 	opacity: 0 !important;
-	// }
+	.board__lists--drag &/*,
+	.list__tasks--drag &*/ {
+		opacity: 0 !important;
+	}
 
 	svg {
 		position: absolute;

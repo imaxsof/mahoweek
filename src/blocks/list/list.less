@@ -3,6 +3,7 @@
 
 .list {
 	position: relative;
+	padding-bottom: 40px;
 	margin: 0 0 20px;
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
@@ -129,7 +130,7 @@
 		opacity: 1;
 	}
 
-	body:not(.mobile) .board__lists--drag & {
+	.board__lists--drag & {
 		opacity: 0 !important;
 	}
 
@@ -148,7 +149,7 @@
 	bottom: -2px;
 	width: 100%;
 	height: 2px;
-	background-color: @list-progress;
+	background-image: linear-gradient(45deg, @list-progress-first, @list-progress-second);
 	transform: scaleX(0);
 	transform-origin: 0 50%;
 }
