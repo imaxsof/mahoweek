@@ -56,12 +56,12 @@ var BOARD = $('.board'),
 				name: 'Прочитать справку о сайте: https://mahoweek.ru/#about',
 				createdTime: new Date().getTime()
 			},
-			/*{
+			{
 				id: makeHash(),
 				listId: listId,
 				name: 'Посмотреть как здесь всё устроено: https://mahoweek.ru/#tour',
 				createdTime: new Date().getTime()
-			},*/
+			},
 			{
 				id: makeHash(),
 				listId: listId,

@@ -1,44 +1,55 @@
-// Browser
+// View
 //------------------------------------------------------------------------------
 
-.browser {
-	padding-bottom: 56.25%;
-	background-color: @light-secondary;
-	background-size: cover;
-	background-position: 50% 0;
-	background-repeat: no-repeat;
-	border-radius: (@border-radius / 2) (@border-radius / 2) 0 0;
-	border-top: 10px solid @dark-divider;
+.view {
 	position: relative;
+	background-color: @light-secondary;
+	background-repeat: no-repeat;
 	margin-top: 20px;
 	margin-bottom: 20px;
 
 	@media (min-width: 768px) {
-		border-top-width: 21px;
-		margin-right: 20px;
-		margin-left: 20px;
 		margin-top: 30px;
 		margin-bottom: 30px;
-		border-radius: @border-radius @border-radius 0 0;
 	}
 
-	&::before {
-		position: absolute;
-		content: "";
-		height: 1px;
-		left: -7.5px;
-		right: -7.5px;
-		bottom: -1px;
-		background-color: @dark-divider;
+	&--browser {
+		padding-bottom: 56.25%;
+		background-size: cover;
+		background-position: 50% 0;
+		border-radius: (@border-radius / 2) (@border-radius / 2) 0 0;
+		border-top: 10px solid @dark-divider;
 
 		@media (min-width: 768px) {
-			left: -20px;
-			right: -20px;
+			border-top-width: 21px;
+			border-radius: @border-radius @border-radius 0 0;
 		}
+
+		&::before {
+			position: absolute;
+			content: "";
+			height: 1px;
+			left: -7.5px;
+			right: -7.5px;
+			bottom: -1px;
+			background-color: @dark-divider;
+
+			@media (min-width: 768px) {
+				left: -15px;
+				right: -15px;
+			}
+		}
+	}
+
+	&--details {
+		border-radius: 50%;
+		width: 201px;
+		padding-bottom: 199px;
+		border: 1px solid @dark-divider;
 	}
 }
 
-.browser__header {
+.view__window {
 	position: absolute;
 	top: -7px;
 	left: 10px;

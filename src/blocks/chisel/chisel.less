@@ -1,0 +1,48 @@
+// Chisel
+//------------------------------------------------------------------------------
+
+.chisel {
+	margin-top: 30px;
+	margin-right: -15px;
+	margin-bottom: 30px;
+	margin-left: -15px;
+	padding-top: 30px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+	padding-left: 15px;
+
+	@media (min-width: 768px) {
+		margin-top: 60px;
+		margin-right: -60px;
+		margin-bottom: 60px;
+		margin-left: -60px;
+		padding-top: 60px;
+		padding-right: 60px;
+		padding-bottom: 35px;
+		padding-left: 60px;
+	}
+
+	.view + & {
+		margin-top: 35px;
+
+		@media (min-width: 768px) {
+			margin-top: 65px;
+		}
+	}
+
+	.bricks + & {
+		margin-top: 15px;
+
+		@media (min-width: 768px) {
+			margin-top: 35px;
+		}
+	}
+
+	&--default {
+		background-color: #F5F5F5;
+	}
+
+	&--warning {
+		background-color: #FFECB3;
+	}
+}

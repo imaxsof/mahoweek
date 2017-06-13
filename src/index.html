@@ -99,7 +99,7 @@
 		</main>
 
 		<div class="hidden">
-			<a href="#welcome" class="cartonbox  js-open-welcome" data-cb-type="inline" data-cb-hash="welcome" data-cb-design="cartonbox-no-close"></a>
+			<a href="#welcome" class="cartonbox  js-open-welcome" data-cb-type="inline" data-cb-hash="welcome" data-cb-design="cartonbox-no-close">Добро пожаловать!</a>
 
 			<div id="welcome">
 				<div class="logo  logo--dark  logo--big  logo--center">
@@ -108,19 +108,19 @@
 
 				<p class="text-center  center-block" style="max-width: 470px;">Веб-сервис по ведению краткосрочного плана дел. Поможет организовать список задач и наметить на календарной сетке даты их выполнения на одну-две недели вперёд.</p>
 
-				<div class="browser" style="background-image: url(/img/interface.png?v=3);">
-					<div class="browser__header"></div>
+				<div class="view  view--browser" style="background-image: url(/img/interface.png?v=3);">
+					<div class="view__window"></div>
 				</div>
 
 				<p class="text-center">Календарная сетка совмещена со списком дел. Такая наглядность позволяет мгновенно ориентироваться в запланированных сроках по каждой задаче и следить за своей продуктивностью на текущей неделе.</p>
 
-				<p class="text-center" style="padding: 5px 0;"><button type="button" class="js-close-welcome">Окей, начать</button></p>
+				<p class="text-center" style="padding-top: 5px; padding-bottom: 5px;"><button type="button" class="js-close-welcome">Окей, начать</button></p>
 			</div>
 
 			<form id="settings" class="form  form--settings">
 				<h2 class="text-center">Настройка</h2>
 
-				<p class="text-center" style="margin-bottom: -10px;">Фоновое изображение</p>
+				<p class="text-center">Фоновое изображение</p>
 
 				<div class="form__theme">
 					<label>
@@ -147,10 +147,79 @@
 
 				<p class="text-center  center-block" style="max-width: 470px;">Веб-сервис по ведению краткосрочного плана дел. Поможет организовать список задач и наметить на календарной сетке даты их выполнения на одну-две недели вперёд.</p>
 
+				<div class="chisel  chisel--default">
+					<p class="text-center" style="padding-top: 5px; padding-bottom: 5px;"><a href="#tour" class="btn  cartonbox" data-cb-type="inline" data-cb-hash="tour">Посмотреть как всё устроено</a></p>
+				</div>
+
+				<h3 class="text-center">Помощь</h3>
+
+				<p class="text-center  center-block" style="max-width: 470px;">Если вам понравился веб-сервис, вы можете оказать нам информационную поддержку. Просто расскажите друзьям и знакомым о нас и этим вы серьёзно нам поможете.</p>
+
 				<div class="share">
 					<script src="//yastatic.net/share2/share.js" async></script>
-					<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,twitter,lj,viber,whatsapp,skype,telegram" data-counter="" data-title="Mahoweek: краткосрочный план дел" data-image="https://mahoweek.ru/img/interface.png?v=3" data-url="https://mahoweek.ru" data-description="Веб-сервис поможет организовать список задач и наметить на календарной сетке даты их выполнения на одну-две недели вперёд." data-title:twitter="Mahoweek поможет организовать список дел и наметить на календарной сетке даты их выполнения:"></div>
+					<div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,gplus,twitter,lj,viber,whatsapp,skype,telegram" data-counter="" data-title="Mahoweek: краткосрочный план дел" data-image="https://mahoweek.ru/img/interface.png?v=3" data-url="https://mahoweek.ru" data-description="Веб-сервис поможет организовать список задач и наметить на календарной сетке даты их выполнения на одну-две недели вперёд." data-title:twitter="Mahoweek поможет организовать список дел и наметить на календарной сетке даты их выполнения:"></div>
 				</div>
+			</div>
+
+			<div id="tour">
+				<h2 class="text-center">Как всё устроено</h2>
+
+				<p class="text-center  center-block" style="max-width: 470px;">Рабочая среда — это доска со списками, в которых живут ваши дела с размеченными на календарной сетке метками.</p>
+
+				<div class="view  view--browser" style="background-image: url(/img/interface.png?v=3);">
+					<div class="view__window"></div>
+				</div>
+
+				<div class="chisel  chisel--default">
+					<div class="bricks">
+						<div class="bricks__col" style="padding-top: 5px;">
+							<div class="view  view--details  center-block" style="background-image: url(/img/interface.png?v=3); background-position: -70px -150px;"></div>
+						</div>
+
+						<div class="bricks__col  bricks__col--grow">
+							<h3>Статус</h3>
+
+							<p>У дела есть статус, по которому можно определить его состояние на текущий момент времени. Статус делится на 5 типов:</p>
+
+							<ul class="list-custom">
+								<li>Без метки в календарной сетке;</li>
+								<li>С одной или несколькими метками;</li>
+								<li>Намечено на сегодня;</li>
+								<li>Просрочено или не выполнено;</li>
+								<li>Успешно завершено.</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="bricks  bricks--reverse">
+					<div class="bricks__col" style="padding-top: 5px;">
+						<div class="view  view--details  center-block" style="background-image: url(/img/interface.png?v=3); background-position: -724px -200px;"></div>
+					</div>
+
+					<div class="bricks__col  bricks__col--grow">
+						<h3>Метки</h3>
+
+						<p>Метки — предполагаемые даты выполнения задач. Их может быть как одна так и несколько, а может и вообще не быть — все зависит от дела. Делятся на 4 типа:</p>
+
+						<ul class="list-custom">
+							<li>Намечено на будущие дни;</li>
+							<li>Намечено на сегодня;</li>
+							<li>Просрочено или не выполнено;</li>
+							<li>Успешно завершено.</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="chisel  chisel--warning">
+					<h3 class="text-center">Важно</h3>
+
+					<p class="text-center">Сайт использует <a href="//ru.wikipedia.org/wiki/Web_Storage" target="_blank" rel="noopener noreferrer">локальное хранилище</a> браузера для хранения данных, что позволяет пользоваться сервисом сразу и без регистрации. Не очищайте куки-файлы сайта в браузере во избежание потери данных.</p>
+				</div>
+
+				<h3 class="text-center">Обратная связь</h3>
+
+				<p class="text-center">Если вам что-то непонятно, или что-то вас смущает, или вы хотите, чтобы мы что-то добавили и улучшили, пишите на <a href="mailto:mahoweek@mahoweek.ru">mahoweek@mahoweek.ru</a>.</p>
 			</div>
 		</div>
 

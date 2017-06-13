@@ -61,6 +61,18 @@ h2 {
 	}
 }
 
+h3 {
+	margin-top: 0;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 26px;
+	margin-bottom: 15px;
+
+	@media (min-width: 768px) {
+		margin-bottom: 25px !important;
+	}
+}
+
 p {
 	margin-top: 0;
 	margin-bottom: 15px;
@@ -70,7 +82,7 @@ p {
 	}
 }
 
-a {
+a:not(.btn) {
 	text-decoration-skip: ink;
 	text-decoration-color: fade(@link-color, 30%);
 	color: @link-color;
@@ -137,4 +149,45 @@ button,
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.list-custom {
+	padding-left: 23px;
+	list-style: none;
+	margin-bottom: 15px;
+
+	@media (min-width: 768px) {
+		margin-bottom: 25px;
+	}
+
+	li {
+		margin-bottom: 5px;
+
+		@media (min-width: 768px) {
+			margin-bottom: 10px;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&::before {
+			position: absolute;
+			margin-left: -23px;
+			opacity: 0.5;
+		}
+	}
+}
+
+ul.list-custom li::before {
+	content: '—';
+}
+
+ol.list-custom {
+	counter-reset: code;
+
+	li::before {
+		counter-increment: code;
+		content: counter(code)".";
+	}
 }

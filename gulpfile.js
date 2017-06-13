@@ -94,7 +94,7 @@ gulp.task('html', function() {
 			locale: ['ru', 'en-US']
 		}),
 		htmlmin({
-			collapseInlineTagWhitespace: true,
+			// collapseInlineTagWhitespace: true,
 			collapseWhitespace: true,
 			removeComments: true
 		}),
