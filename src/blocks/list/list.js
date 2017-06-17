@@ -208,22 +208,22 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 			LIST_BOARD.addClass('board__lists--drag');
 		},
 		onEnd: function(evt) {
-			if (Number.isInteger(evt.oldIndex) && Number.isInteger(evt.newIndex) && evt.oldIndex != evt.newIndex) {
+			if (Number.isInteger(evt.oldIndex) && Number.isInteger(evt.newIndex) && evt.oldIndex >= 0 && evt.newIndex >= 0 && evt.oldIndex != evt.newIndex) {
 				// Парсим хранилище
 				var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-				// Получаем удаленный элемент
-				var listRemove = mahoweekStorage.lists.splice(evt.oldIndex, 1)[0];
+				// Проверяем присутствуют ли сортируемые списки в хранилище
+				if (mahoweekStorage.lists[evt.oldIndex] !== undefined && mahoweekStorage.lists[evt.newIndex] !== undefined) {
+					// Получаем удаленный элемент
+					var listRemove = mahoweekStorage.lists.splice(evt.oldIndex, 1)[0];
 
-				// Если элемент существует
-				if (listRemove !== undefined) {
 					// Сортируем
 					mahoweekStorage.lists.splice(evt.newIndex, 0, listRemove);
 
 					// Обновляем хранилище
 					localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
-				// Если не существует
+				// Если не присутствуют
 				} else {
 					// Перезагружаем страницу
 					// во избежание ошибок

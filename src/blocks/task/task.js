@@ -361,62 +361,6 @@
 
 
 
-// Сортируем вручную дела
-//------------------------------------------------------------------------------
-
-// (function() {
-
-// 	LIST_BOARD.find('.list__tasks').each(function() {
-// 		Sortable.create(this, {
-// 			group: "name",
-// 			delay: 200,
-// 			animation: 0,
-// 			filter: '.task--add, .task__input',
-// 			preventOnFilter: false,
-// 			ghostClass: 'task--ghost',
-// 			chosenClass: 'task--chosen',
-// 			dragClass: 'task--drag',
-// 			scrollSensitivity: 80,
-// 			onChoose: function() {
-// 				// Добавляем класс сортировки
-// 				LIST_BOARD.find('.list__tasks').addClass('list__tasks--drag');
-// 			},
-// 			onEnd: function(evt) {
-// 				console.log(evt.oldIndex + ' ' + evt.newIndex);
-
-// 				if (Number.isInteger(evt.oldIndex) && Number.isInteger(evt.newIndex) && evt.oldIndex != evt.newIndex) {
-// 					// Парсим хранилище
-// 					var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
-
-// 					// Получаем удаленный элемент
-// 					var taskRemove = mahoweekStorage.tasks.splice(evt.oldIndex, 1)[0];
-
-// 					// Если элемент существует
-// 					if (taskRemove !== undefined) {
-// 						// Сортируем
-// 						mahoweekStorage.tasks.splice(evt.newIndex, 0, taskRemove);
-
-// 						// Обновляем хранилище
-// 						localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
-
-// 						// Удаляем класс сортировки
-// 						LIST_BOARD.find('.list__tasks').removeClass('list__tasks--drag');
-
-// 					// Если не существует
-// 					} else {
-// 						// Перезагружаем страницу
-// 						// во избежание ошибок
-// 						location.reload();
-// 					}
-// 				}
-// 			}
-// 		});
-// 	});
-
-// }());
-
-
-
 // Обрабатываем строку с делом
 //------------------------------------------------------------------------------
 
