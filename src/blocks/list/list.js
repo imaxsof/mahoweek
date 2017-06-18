@@ -203,7 +203,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 		chosenClass: 'list--chosen',
 		dragClass: 'list--drag',
 		scrollSensitivity: 80,
-		onChoose: function() {
+		onClone: function() {
 			// Добавляем класс сортировки
 			LIST_BOARD.addClass('board__lists--drag');
 		},
