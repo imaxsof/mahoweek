@@ -68,19 +68,11 @@ h3 {
 	line-height: 24px;
 	text-transform: uppercase;
 	margin-bottom: 15px;
-
-	@media (min-width: 768px) {
-		margin-bottom: 25px !important;
-	}
 }
 
 p {
 	margin-top: 0;
 	margin-bottom: 15px;
-
-	@media (min-width: 768px) {
-		margin-bottom: 25px;
-	}
 }
 
 a:not(.btn) {
@@ -152,21 +144,19 @@ button,
 	margin-right: auto;
 }
 
+.pt-sm-10 {
+	@media (min-width: 768px) {
+		padding-top: 10px;
+	}
+}
+
 .list-custom {
 	padding-left: 23px;
 	list-style: none;
 	margin-bottom: 15px;
 
-	@media (min-width: 768px) {
-		margin-bottom: 25px;
-	}
-
 	li {
 		margin-bottom: 5px;
-
-		@media (min-width: 768px) {
-			margin-bottom: 10px;
-		}
 
 		&:last-child {
 			margin-bottom: 0;

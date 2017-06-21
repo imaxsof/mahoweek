@@ -65,7 +65,7 @@
 			}
 		}
 
-		// В итоге, если дела есть невыполненные метки за прошедшие дни
+		// В итоге, если у дела есть невыполненные метки за прошедшие дни
 		// и если дело не было выполненным сегодня,
 		// а так же если последняя метка точно о пропуске
 		if (isThis.parents('.task').find('.grid__date.grid__date--past.grid__date--bull:not(.grid__date--completed)').length && !isThis.parents('.task').find('.grid__date.grid__date--today.grid__date--completed').length && isThis.parents('.task').find('.grid__date.grid__date--past.grid__date--bull:not(.grid__date--completed):last').index() > isThis.parents('.task').find('.grid__date.grid__date--past.grid__date--completed:last').index()) {
