@@ -179,6 +179,9 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 
 			// Удаляем список из доски
 			isThis.parents('.list').remove();
+
+			// Меняем фавиконку
+			changeFavicon();
 		}
 	});
 

@@ -96,6 +96,9 @@
 
 		// Обновляем хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+
+		// Меняем фавиконку
+		changeFavicon();
 	});
 
 }());

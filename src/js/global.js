@@ -201,6 +201,36 @@ var BOARD = $('.board'),
 
 
 
+// Меняем фавиконку
+//------------------------------------------------------------------------------
+
+function changeFavicon() {
+
+	// Определяем фавиконки
+	var iconDefault = '/favicon-32x32.png?v=2',
+		iconToday = '/img/favicon-today.png';
+
+	// Считаем кол-во дел на сегодня
+	var taskTodayTotal = LIST_BOARD.find('.task--today').length;
+
+	// Удаляем текущие фавиконки
+	$('link[rel$=icon]').remove();
+
+	if (taskTodayTotal > 0) {
+		// Показываем, что на сегодня имеются дела
+		$('head').append($('<link rel="icon" type="image/png" sizes="32x32">').attr('href', iconToday));
+
+		// Показываем бабл с количеством дел
+		Tinycon.setBubble(taskTodayTotal);
+	} else {
+		// Показываем, что на сегодня дел не имеется
+		$('head').append($('<link rel="icon" type="image/png" sizes="32x32">').attr('href', iconDefault));
+	}
+
+}
+
+
+
 // Генерируем хеш
 //------------------------------------------------------------------------------
 
