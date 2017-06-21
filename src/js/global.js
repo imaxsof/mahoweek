@@ -167,7 +167,7 @@ var BOARD = $('.board'),
 					isThis.html('<input class="list__input  js-edit-list" type="text" maxlength="255" value="">');
 
 					// Вставляем заголовок списка и фокусируем
-					isThis.parents('.list').find('.list__input').focus().val(listName);
+					isThis.parents('.list').find('.list__input').val(listName).select();
 
 					// При расфокусировке
 					isThis.parents('.list').find('.list__input').focusout(function() {
@@ -185,7 +185,7 @@ var BOARD = $('.board'),
 					isThis.html('<input class="task__input  js-edit-task" type="text" maxlength="255" value="">');
 
 					// Вставляем текст дела и фокусируем
-					isThis.parents('.task').find('.task__input').focus().val(taskName);
+					isThis.parents('.task').find('.task__input').val(taskName).focus();
 
 					// При расфокусировке
 					isThis.parents('.task').find('.task__input').focusout(function() {
