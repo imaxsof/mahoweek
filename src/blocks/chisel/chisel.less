@@ -10,6 +10,7 @@
 	padding-right: 15px;
 	padding-bottom: 15px;
 	padding-left: 15px;
+	position: relative;
 
 	@media (min-width: 768px) {
 		margin-top: 60px;
@@ -22,7 +23,8 @@
 		padding-left: 60px;
 	}
 
-	.view + & {
+	.view + &,
+	.share + & {
 		margin-top: 45px;
 
 		@media (min-width: 768px) {
@@ -38,11 +40,58 @@
 		}
 	}
 
+	&--inset {
+		margin-right: 0;
+		margin-left: 0;
+
+		@media (min-width: 768px) {
+			margin-right: -30px;
+			margin-left: -30px;
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+	}
+
+	&--border {
+		border: 5px solid;
+
+		@media (min-width: 768px) {
+			border-width: 10px;
+		}
+
+		&::before {
+			position: absolute;
+			content: "";
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #fff;
+		}
+
+		> * {
+			position: relative;
+		}
+	}
+
 	&--default {
 		background-color: #F5F5F5;
+		border-color: #F5F5F5;
 	}
 
 	&--warning {
 		background-color: #FFECB3;
+		border-color: #FFECB3;
+	}
+
+	&--email {
+		border-color: transparent;
+		background-image: linear-gradient(135deg, #F5F5F5 12.5%, #64B5F6 12.5%, #64B5F6 25%, #F5F5F5 25%, #F5F5F5 37.5%, #E57373 37.5%, #E57373 50%, #F5F5F5 50%, #F5F5F5 62.5%, #64B5F6 62.5%, #64B5F6 75%, #F5F5F5 75%, #F5F5F5 87.5%, #E57373 87.5%);
+		background-size: 50px 50px;
+		background-repeat: repeat;
+
+		&::before {
+			background-color: #F5F5F5;
+		}
 	}
 }
