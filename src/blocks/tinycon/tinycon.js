@@ -19,8 +19,8 @@
 	var defaults = {
 		width: 16,
 		height: 16,
-		font: 8 * r + 'px Arial',
-		color: '#212121',
+		font: 11 * r + 'px Courier New',
+		color: '#000',
 		background: 'transparent',
 		fallback: true,
 		crossOrigin: true,
@@ -127,7 +127,7 @@
 			context.clearRect(0, 0, size, size);
 
 			// draw the favicon
-			context.drawImage(faviconImage, 0, 0, faviconImage.width, faviconImage.height, 0, 0, size, size);
+			context.drawImage(faviconImage, 2, 2, faviconImage.width, faviconImage.height, 0, 0, size, size);
 
 			// draw bubble over the top
 			if ((label + '').length > 0) drawBubble(context, label, color);
@@ -210,13 +210,13 @@
 		// context.stroke();
 
 		// label pseudo stroke
-		context.strokeStyle = "rgba(255, 255, 255, 0.75)";
+		context.strokeStyle = "rgba(255, 255, 255, 0.9)";
 		context.lineWidth = 2;
 		context.textAlign = "right";
 		context.textBaseline = "top";
 
 		// unfortunately webkit/mozilla are a pixel different in text positioning
-		context.strokeText(label, r === 2 ? 28 : 14, browser.mozilla ? 9*r : 8*r);
+		context.strokeText(label, r === 2 ? 32 : 16, browser.mozilla ? 7*r : 6*r);
 
 		// label
 		context.fillStyle = options.color;
@@ -224,7 +224,7 @@
 		context.textBaseline = "top";
 
 		// unfortunately webkit/mozilla are a pixel different in text positioning
-		context.fillText(label, r === 2 ? 28 : 14, browser.mozilla ? 9*r : 8*r);
+		context.fillText(label, r === 2 ? 32 : 16, browser.mozilla ? 7*r : 6*r);
 	};
 
 	var refreshFavicon = function(){

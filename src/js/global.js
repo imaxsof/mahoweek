@@ -207,8 +207,8 @@ var BOARD = $('.board'),
 function changeFavicon() {
 
 	// Определяем фавиконки
-	var iconDefault = '/favicon-32x32.png?v=2',
-		iconToday = '/img/favicon-today.png';
+	var iconDefault = '/favicon-32x32.png?v=3',
+		iconToday = '/img/favicon-today.png?v=2';
 
 	// Считаем кол-во дел на сегодня
 	var taskTodayTotal = LIST_BOARD.find('.task--today').length;
