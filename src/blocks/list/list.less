@@ -42,9 +42,9 @@
 	padding: 0 5px;
 	display: flex;
 	font-size: @font-size-small;
-	position: sticky;
 	top: 0;
 	z-index: 2;
+	position: relative;
 
 	@media (min-width: 768px) {
 		max-width: 1057px;
@@ -55,6 +55,7 @@
 	@media (min-width: 992px) {
 		width: calc(~"100vw");
 		max-width: none;
+		position: sticky;
 	}
 
 	@media (min-width: 1200px) {
