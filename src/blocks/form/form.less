@@ -2,9 +2,20 @@
 //------------------------------------------------------------------------------
 
 .form {
-	max-width: 440px;
-	margin-left: auto;
-	margin-right: auto;
+	&--settings {
+		max-width: 440px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	&--storage {
+		textarea {
+			font-family: "Courier New", monospace;
+			border: 0;
+			background-color: @board-bg;
+			color: @light-primary;
+		}
+	}
 }
 
 .form__theme {

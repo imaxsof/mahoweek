@@ -1,6 +1,36 @@
 // Global
 //------------------------------------------------------------------------------
 
+// Запускаем внутренний таймер
+//------------------------------------------------------------------------------
+
+(function() {
+
+	// Определяем первоначальные условия
+	var delay = 1000,
+		date = new Date();
+
+	// Запускаем рекурсивный таймаут
+	setTimeout(function timer() {
+		// Получаем актуальную дату
+		var newDate = new Date();
+
+		// Если наступил новый день
+		if (date.getDay() != newDate.getDay()) {
+			// Перезагружаем страницу
+			location.reload();
+
+			// Сбрасываем дату на новый день
+			date = newDate;
+		}
+
+		setTimeout(timer, delay);
+	}, delay);
+
+}());
+
+
+
 // Скроллим к началу страницы
 // во избежании скролла к анкору при первоначальном открытии модального окна
 //------------------------------------------------------------------------------
@@ -28,7 +58,8 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 var BOARD = $('.board'),
 	THEME_BOARD = BOARD.find('.board__theme'),
 	LIST_BOARD = BOARD.find('.board__lists'),
-	SETTINGS_FORM = $('.form--settings');
+	SETTINGS_FORM = $('.form--settings'),
+	STORAGE_FORM = $('.form--storage');
 
 
 

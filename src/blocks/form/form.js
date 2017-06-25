@@ -36,3 +36,26 @@
 	});
 
 }());
+
+
+
+// Редактируем данные локального хранилища
+//------------------------------------------------------------------------------
+
+(function() {
+
+	// Сохраняем изменения
+	STORAGE_FORM.on('submit', function(event) {
+		event.preventDefault();
+
+		// Берем и парсим отредактированные данные
+		var editedMahoweekStorage = JSON.parse(STORAGE_FORM.find('.js-edit-storage').val());
+
+		// Обновляем хранилище
+		localStorage.setItem('mahoweek', JSON.stringify(editedMahoweekStorage));
+
+		// Перезагружаем
+		location.replace('/');
+	});
+
+}());
