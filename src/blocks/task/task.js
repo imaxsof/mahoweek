@@ -17,25 +17,8 @@
 		// Находим это дело
 		var task = LIST_BOARD.find('.task[data-id="' + mahoweekStorage.tasks[i].id + '"]');
 
-		// Если у этого дела есть невыполненные метки за прошедшие дни
-		// и если дело не было выполненным сегодня,
-		// а так же если последняя метка точно метка о пропуске
-		if (task.find('.grid__date.grid__date--past.grid__date--bull:not(.grid__date--completed)').length && !task.find('.grid__date.grid__date--today.grid__date--completed').length && task.find('.grid__date.grid__date--past.grid__date--bull:not(.grid__date--completed):last').index() > task.find('.grid__date.grid__date--past.grid__date--completed:last').index()) {
-			// Помечаем дело как невыполненное
-			task.addClass('task--past');
-		}
-
-		// Если у этого дела есть метка на любой будущий день
-		if (task.find('.grid__date:not(.grid__date--past):not(.grid__date--completed).grid__date--bull').length) {
-			// Помечаем дело как намеченное
-			task.addClass('task--bull');
-		}
-
-		// Если у этого дела есть метка на сегодняшний день и она не выполнена
-		if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length) {
-			// Помечаем дело как сегодняшнее
-			task.addClass('task--today');
-		}
+		// Изменяем статус дела
+		changeTaskStatus(task);
 	}
 
 	// Пробегаемся по каждому списку
@@ -213,14 +196,8 @@
 			task.removeClass('task--completed');
 		}
 
-		// В итоге, если у дела есть метка на сегодняшний день и она не выполнена
-		if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length) {
-			// Помечаем дело как сегодняшнее
-			task.addClass('task--today');
-		} else {
-			// Помечаем сегодняшнее дело выполненным
-			task.removeClass('task--today');
-		}
+		// Изменяем статус дела
+		changeTaskStatus(task);
 
 		// Заносим изменения в массив маркеров
 		// и если массива маркеров не существовало
@@ -370,6 +347,44 @@
 
 
 
+// Работаем со статусом задачи
+//------------------------------------------------------------------------------
+
+function changeTaskStatus(task) {
+
+	// Если у дела есть невыполненные метки за прошедшие дни
+	// и если дело не было выполненным сегодня,
+	// а так же если последняя метка точно о пропуске
+	if (task.find('.grid__date.grid__date--past.grid__date--bull:not(.grid__date--completed)').length && !task.find('.grid__date.grid__date--today.grid__date--completed').length && task.find('.grid__date.grid__date--past.grid__date--bull:not(.grid__date--completed):last').index() > task.find('.grid__date.grid__date--past.grid__date--completed:last').index()) {
+		// Помечаем дело как невыполненное
+		task.addClass('task--past');
+	} else {
+		// Размечаем дело как невыполненное
+		task.removeClass('task--past');
+	}
+
+	// Если у дела есть метка на любой будущий день
+	if (task.find('.grid__date:not(.grid__date--past):not(.grid__date--completed).grid__date--bull').length) {
+		// Помечаем дело как намеченное
+		task.addClass('task--bull');
+	} else {
+		// Размечаем дело как намеченное
+		task.removeClass('task--bull');
+	}
+
+	// Если у дела есть метка на сегодняшний день и она не выполнена
+	if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length) {
+		// Помечаем дело как сегодняшнее
+		task.addClass('task--today');
+	} else {
+		// Размечаем дело как сегодняшнее
+		task.removeClass('task--today');
+	}
+
+}
+
+
+
 // Обрабатываем строку с делом
 //------------------------------------------------------------------------------
 
@@ -385,7 +400,7 @@ function remakeTaskName(name) {
 	}
 
 	// Работаем с временем
-	remakeName = remakeName.replace(/(.+)?(\s)?(\[)(\d\d:\d\d)(\])(\s)?(.+)?/ig, '<span class="hidden">$3</span><span class="task__time">$4</span><span class="hidden">$5</span> $1$7').trim();
+	remakeName = remakeName.replace(/(.+)?(\s)?(\[)((2[0-3]|[0-1]\d):([0-5]\d))(\])(\s)?(.+)?/ig, '<span class="hidden">$3</span><span class="task__time">$4</span><span class="hidden">$7</span> $1$9').trim();
 
 	// Работаем с важностью
 	if (/[!]{3,}/.test(name)) {

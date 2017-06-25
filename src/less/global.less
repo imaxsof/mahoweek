@@ -44,6 +44,7 @@ h1 {
 	margin: 0;
 	position: relative;
 	line-height: 30px;
+	letter-spacing: 1px;
 }
 
 h2 {
@@ -55,6 +56,7 @@ h2 {
 	margin-top: 0;
 	margin-bottom: 15px;
 	position: relative;
+	letter-spacing: 1px;
 
 	@media (min-width: 768px) {
 		margin-bottom: 25px !important;
@@ -66,8 +68,10 @@ h3 {
 	font-weight: 500;
 	font-size: 18px;
 	line-height: 24px;
+	font-family: Verdana, @font-family;
 	text-transform: uppercase;
 	margin-bottom: 15px;
+	letter-spacing: 1px;
 }
 
 p {
@@ -131,7 +135,11 @@ button,
 //------------------------------------------------------------------------------
 
 .hidden {
-	display: none;
+	position: absolute;
+	visibility: hidden;
+	height: 0;
+	width: 0;
+	overflow: hidden;
 }
 
 .text-center {

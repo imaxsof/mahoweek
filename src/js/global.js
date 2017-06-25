@@ -220,7 +220,7 @@ function changeFavicon() {
 		// Показываем, что на сегодня имеются дела
 		$('head').append($('<link rel="icon" type="image/png" sizes="32x32">').attr('href', iconToday));
 
-		// Показываем бабл с количеством дел
+		// Показываем счетчик с количеством дел
 		Tinycon.setBubble(taskTodayTotal);
 	} else {
 		// Показываем, что на сегодня дел не имеется
