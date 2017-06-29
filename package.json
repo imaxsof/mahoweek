@@ -5,11 +5,11 @@
     "cartonbox": "^1.5.4",
     "jquery": "^2.2.4",
     "normalize.css": "7.0.0",
-    "sortablejs": "^1.5.1"
+    "sortablejs": "^1.6.0"
   },
   "devDependencies": {
     "browser-sync": "^2.18.12",
-    "del": "^2.2.2",
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-concat": "^2.6.1",
@@ -17,7 +17,7 @@
     "gulp-csso": "^3.0.0",
     "gulp-html-minifier": "^0.1.8",
     "gulp-html-version": "^1.0.1",
-    "gulp-less": "^3.3.0",
+    "gulp-less": "^3.3.2",
     "gulp-notify": "^3.0.0",
     "gulp-rigger": "^0.5.8",
     "gulp-sync": "^0.1.4",
