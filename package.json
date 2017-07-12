@@ -1,6 +1,6 @@
 {
   "name": "mahoweek",
-  "version": "1.13.0",
+  "version": "1.13.1",
   "dependencies": {
     "cartonbox": "^1.5.4",
     "jquery": "^2.2.4",
