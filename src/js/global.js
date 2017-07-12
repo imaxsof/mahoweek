@@ -1,36 +1,6 @@
 // Global
 //------------------------------------------------------------------------------
 
-// Запускаем внутренний таймер
-//------------------------------------------------------------------------------
-
-(function() {
-
-	// Определяем первоначальные условия
-	var delay = 1000,
-		date = new Date();
-
-	// Запускаем рекурсивный таймаут
-	setTimeout(function timer() {
-		// Получаем актуальную дату
-		var newDate = new Date();
-
-		// Если наступил новый день
-		if (date.getDay() != newDate.getDay()) {
-			// Перезагружаем страницу
-			location.reload();
-
-			// Сбрасываем дату на новый день
-			date = newDate;
-		}
-
-		setTimeout(timer, delay);
-	}, delay);
-
-}());
-
-
-
 // Скроллим к началу страницы
 // во избежании скролла к анкору при первоначальном открытии модального окна
 //------------------------------------------------------------------------------
@@ -60,6 +30,76 @@ var BOARD = $('.board'),
 	LIST_BOARD = BOARD.find('.board__lists'),
 	SETTINGS_FORM = $('.form--settings'),
 	STORAGE_FORM = $('.form--storage');
+
+
+
+// Запускаем внутренний таймер
+//------------------------------------------------------------------------------
+
+(function() {
+
+	// Определяем первоначальные условия
+	var delay = 1000,
+		date = new Date();
+
+	// Запускаем рекурсивный таймаут
+	setTimeout(function timer() {
+		// Получаем актуальную дату
+		var newDate = new Date();
+
+		// Если наступил новый день
+		if (date.getDay() != newDate.getDay()) {
+			// Перезагружаем страницу
+			location.reload();
+
+			// Сбрасываем дату на новый день
+			date = newDate;
+		}
+
+		// // Если время оповещения ранее выставлялось
+		// // и пользователь разрешил оповещения
+		// if (localStorage.getItem('notify') && localStorage.getItem('notify') != 'none' && Notification.permission === 'granted') {
+		// 	// Получаем кол-во мс за которое нужно оповестить
+		// 	var notify = localStorage.getItem('notify');
+
+		// 	console.log(newDate.getHours());
+
+		// 	// Пробегаемся по каждому делу у которого установлено время
+		// 	LIST_BOARD.find('.task__time').each(function() {
+		// 		var isThis = $(this),
+		// 			task = isThis.parents('.task');
+
+		// 		// Определяем точное время выполнения каждого дела
+		// 		var scheduledTime = 0;
+
+		// 		// Если у дела есть метка на сегодняшний день, она не выполнена и время не прошло
+		// 		if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length && newDate) {
+		// 			scheduledTime = 1;
+
+		// 		// Или если дело запланировано на завтра
+		// 		} else if (task.find('.grid__date--today + .grid__date--bull').length) {
+		// 			scheduledTime = 2;
+		// 		}
+
+		// 		//console.log(scheduledTime);
+
+		// 		// Если у дела есть метка на сегодняшний день и она не выполнена
+		// 		// или дело запланировано на завтра
+		// 		// if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length || task.find('.grid__date--today + .grid__date--bull').length) {
+		// 		// 	// Определяем точное время выполнения каждого дела
+		// 		// 	var scheduledTime = 0;
+
+		// 		// 	if (scheduledTime) {
+		// 		// 		console.log(task.find('.task__name').text());
+		// 		// 	}
+		// 		// }
+		// 	});
+		// }
+
+		setTimeout(timer, delay);
+	}, delay);
+
+}());
 
 
 
