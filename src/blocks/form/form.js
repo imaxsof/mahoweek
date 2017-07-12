@@ -94,6 +94,9 @@
 
 	// Сохраняем параметры
 	SETTINGS_FORM.find(':checkbox, :radio').on('change', function() {
+		// Парсим хранилище
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+
 		// Определяем новые параметры
 		theme = SETTINGS_FORM.find('.js-choose-theme[name="theme"]:checked').val();
 
