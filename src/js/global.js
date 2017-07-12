@@ -50,7 +50,7 @@ var BOARD = $('.board'),
 		// Если наступил новый день
 		if (date.getDay() != newDate.getDay()) {
 			// Перезагружаем страницу
-			location.reload();
+			window.location.reload(true);
 
 			// Сбрасываем дату на новый день
 			date = newDate;

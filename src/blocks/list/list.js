@@ -230,7 +230,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 				// Если не присутствуют
 				} else {
 					// Перезагружаем страницу во избежание ошибок
-					location.reload();
+					window.location.reload(true);
 				}
 			}
 
