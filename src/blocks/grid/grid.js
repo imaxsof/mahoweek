@@ -161,7 +161,7 @@ function makeGrid(type, data) {
 						dateClass += ' grid__date--bull';
 					}
 
-					// Смотрим выполнена ли эта метка
+					// Смотрим выполнено ли дело в этот день
 					if (markerList[dataDate].split('|')[1] == 1) {
 						dateClass += ' grid__date--completed';
 					}

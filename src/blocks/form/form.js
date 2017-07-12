@@ -127,7 +127,7 @@
 		localStorage.setItem('mahoweek', JSON.stringify(editedMahoweekStorage));
 
 		// Перезагружаем
-		location.replace('/');
+		window.location.replace('/');
 	});
 
 }());
