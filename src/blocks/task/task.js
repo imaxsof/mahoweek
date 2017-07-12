@@ -17,8 +17,8 @@
 		// Находим это дело
 		var task = LIST_BOARD.find('.task[data-id="' + mahoweekStorage.tasks[i].id + '"]');
 
-		// Изменяем статус дела
-		changeTaskStatus(task);
+		// Изменяем стиль статуса дела
+		changeStyleTaskStatus(task);
 	}
 
 	// Пробегаемся по каждому списку
@@ -163,8 +163,8 @@
 				var markerAct = 'del';
 			}
 
-			// Если дело не многоразовое
-			if ((task.find('.grid__date--today').hasClass('grid__date--bull') && !task.find('.grid__date--today').nextAll('.grid__date--bull').length) || (!task.find('.grid__date--today').hasClass('grid__date--bull') && task.find('.grid__date--today').nextAll('.grid__date--bull').length <= 1)) {
+			// Если дело не запланировано в будущем
+			if (!task.find('.grid__date--today').nextAll('.grid__date--bull').length) {
 				// Окончательно ставим метку выполнения в сетке дат и в хранилище
 				task.find('.grid__date--today').addClass('grid__date--completed');
 				markerAct = 'add';
@@ -195,9 +195,6 @@
 			// Обновляем дело в списке
 			task.removeClass('task--completed');
 		}
-
-		// Изменяем статус дела
-		changeTaskStatus(task);
 
 		// Заносим изменения в массив маркеров
 		// и если массива маркеров не существовало
@@ -253,6 +250,9 @@
 
 		// Обновляем хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+
+		// Изменяем стиль статус дела
+		changeStyleTaskStatus(task);
 
 		// Рассчитываем прогресс выполнения списка
 		makeProgress(listId);
@@ -347,10 +347,10 @@
 
 
 
-// Работаем со статусом задачи
+// Работаем со стилем статуса дела
 //------------------------------------------------------------------------------
 
-function changeTaskStatus(task) {
+function changeStyleTaskStatus(task) {
 
 	// Если у дела есть невыполненные метки за прошедшие дни
 	// и если дело не было выполненным сегодня,

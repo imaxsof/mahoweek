@@ -89,10 +89,6 @@
 			border-color: @grid-pea-today-hover;
 			background-color: @grid-pea-today-hover;
 		}
-
-		.task--completed .grid__date:not(.grid__date--past):not(.grid__date--today)&::before {
-			opacity: 0;
-		}
 	}
 
 	&--completed {
@@ -134,10 +130,6 @@
 
 	.task--add & {
 		border-bottom-width: 0;
-		cursor: default;
-	}
-
-	.task--completed & {
 		cursor: default;
 	}
 }

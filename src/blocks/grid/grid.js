@@ -1,16 +1,18 @@
 // Grid
 //------------------------------------------------------------------------------
 
-// Добавляем метку
+// Добавляем/убираем метку
 //------------------------------------------------------------------------------
 
 (function() {
 
-	LIST_BOARD.on('click', '.task:not(.task--completed) .js-marker-task:not(.grid__date--past):not(.grid__date--completed)', function() {
-		var isThis = $(this);
+	LIST_BOARD.on('click', '.js-marker-task:not(.grid__date--past):not(.grid__date--completed)', function() {
+		var isThis = $(this),
+			task = isThis.parents('.task');
 
-		// Получаем хеш дела и дату
-		var taskId = isThis.parents('.task').attr('data-id'),
+		// Получаем хеш списка, хеш дела и дату
+		var listId = task.parents('.list').attr('data-id'),
+			taskId = task.attr('data-id'),
 			taskDate = isThis.attr('data-date');
 
 		// Парсим хранилище
@@ -34,6 +36,16 @@
 
 			// Добавляем метку в сетку дат
 			isThis.addClass('grid__date--bull');
+
+			// Если дело было выполнено
+			if (task.hasClass('task--completed')) {
+				// Помечаем дело как невыполненное
+				delete mahoweekStorage.tasks[taskIndex].completed;
+				delete mahoweekStorage.tasks[taskIndex].completedTime;
+
+				// Обновляем дело в списке
+				task.removeClass('task--completed');
+			}
 
 		// Если существовало
 		} else {
@@ -60,16 +72,29 @@
 					label: 'bull'
 				});
 
-				// Добавляем метку для ячейки
+				// Добавляем метку в сетку дат
 				isThis.addClass('grid__date--bull');
+
+				// Если дело было выполнено
+				if (task.hasClass('task--completed')) {
+					// Помечаем дело как невыполненное
+					delete mahoweekStorage.tasks[taskIndex].completed;
+					delete mahoweekStorage.tasks[taskIndex].completedTime;
+
+					// Обновляем дело в списке
+					task.removeClass('task--completed');
+				}
 			}
 		}
 
-		// Изменяем статус дела
-		changeTaskStatus(isThis.parents('.task'));
-
 		// Обновляем хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+
+		// Изменяем стиль статуса дела
+		changeStyleTaskStatus(task);
+
+		// Рассчитываем прогресс выполнения списка
+		makeProgress(listId);
 
 		// Меняем фавиконку
 		changeFavicon();
