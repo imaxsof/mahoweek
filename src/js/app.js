@@ -1,16 +1,16 @@
 // Core
 //------------------------------------------------------------------------------
 
-//= global.js
+@@include('global.js')
 
 
 
 // Blocks
 //------------------------------------------------------------------------------
 
-//= ../blocks/cartonbox/cartonbox.js
-//= ../blocks/tinycon/tinycon.js
-//= ../blocks/list/list.js
-//= ../blocks/task/task.js
-//= ../blocks/grid/grid.js
-//= ../blocks/form/form.js
+@@include('../blocks/cartonbox/cartonbox.js')
+@@include('../blocks/tinycon/tinycon.js')
+@@include('../blocks/list/list.js')
+@@include('../blocks/task/task.js')
+@@include('../blocks/grid/grid.js')
+@@include('../blocks/form/form.js')

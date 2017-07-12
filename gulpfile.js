@@ -15,8 +15,7 @@ const gulp = require('gulp'),
 	wrap = require("gulp-wrap"),
 	del = require('del'),
 	csscomb = require('gulp-csscomb'),
-	rigger = require('gulp-rigger'),
-	notify = require('gulp-notify'),
+	fileinclude = require('gulp-file-include'),
 	multipipe = require('multipipe'),
 	browserSync = require('browser-sync').create(),
 	gulpsync = require('gulp-sync')(gulp),
@@ -89,6 +88,7 @@ gulp.task('base', function() {
 gulp.task('html', function() {
 	return multipipe(
 		gulp.src(paths.src.html),
+		fileinclude(),
 		gulpHtmlVersion(),
 		typograf({
 			locale: ['ru', 'en-US']
@@ -131,12 +131,7 @@ gulp.task('css:main', function() {
 		csso(),
 		gulp.dest(paths.dist.css),
 		browserSync.stream()
-	).on('error', notify.onError(function(err) {
-		return {
-			title: 'css:main',
-			message: 'Line: ' + err.line
-		}
-	}));
+	);
 });
 
 gulp.task('js:libs', function() {
@@ -153,18 +148,13 @@ gulp.task('js:libs', function() {
 gulp.task('js:app', function() {
 	return multipipe(
 		gulp.src(paths.src.js.app),
-		rigger(),
+		fileinclude(),
 		concat('app.min.js'),
 		wrap("(function($){'use strict';<%= contents %>})(jQuery);"),
 		uglify(),
 		gulp.dest(paths.dist.js),
 		browserSync.stream()
-	).on('error', notify.onError(function(err) {
-		return {
-			title: 'js:app',
-			message: 'Line: ' + err.line
-		}
-	}));
+	);
 });
 
 
