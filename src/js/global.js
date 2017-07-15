@@ -45,7 +45,8 @@ var BOARD = $('.board'),
 	// Запускаем рекурсивный таймаут
 	setTimeout(function timer() {
 		// Получаем актуальную дату
-		var newDate = new Date();
+		var newDate = new Date(),
+			newDateTime = newDate.getTime();
 
 		// Если наступил новый день
 		if (date.getDay() != newDate.getDay()) {
@@ -56,45 +57,81 @@ var BOARD = $('.board'),
 			date = newDate;
 		}
 
-		// // Если время оповещения ранее выставлялось
-		// // и пользователь разрешил оповещения
-		// if (localStorage.getItem('notify') && localStorage.getItem('notify') != 'none' && Notification.permission === 'granted') {
-		// 	// Получаем кол-во мс за которое нужно оповестить
-		// 	var notify = localStorage.getItem('notify');
+		// Получаем время оповещения
+		var notify = localStorage.getItem('notify');
 
-		// 	console.log(newDate.getHours());
+		// Если время оповещения ранее выставлялось
+		// и пользователь разрешил оповещения
+		if (notify && notify != 'none' && Notification.permission === 'granted') {
+			// Получаем кол-во мс за которое нужно оповестить и реальное время
+			var notify = notify * 1,
+				realHours = newDate.getHours(),
+				realMinutes = newDate.getMinutes(),
+				realTime = (realHours < 10 ? '0' + realHours : realHours) + ':' + (realMinutes < 10 ? '0' + realMinutes : realMinutes);
 
-		// 	// Пробегаемся по каждому делу у которого установлено время
-		// 	LIST_BOARD.find('.task__time').each(function() {
-		// 		var isThis = $(this),
-		// 			task = isThis.parents('.task');
+			// Составляем заголовок и диапазон оповещения в мс
+			if (notify == 900000) {
+				var notifyTitle = '15 минут',
+					notifyRange = 60000 * 2;
+			} else if (notify == 1800000) {
+				var notifyTitle = '30 минут',
+					notifyRange = 60000 * 5;
+			} else if (notify == 3600000) {
+				var notifyTitle = '1 час',
+					notifyRange = 60000 * 10;
+			} else if (notify == 7200000) {
+				var notifyTitle = '2 часа',
+					notifyRange = 60000 * 15;
+			}
 
-		// 		// Определяем точное время выполнения каждого дела
-		// 		var scheduledTime = 0;
+			// Пробегаемся по каждому делу у которого установлено время
+			LIST_BOARD.find('.task__time').each(function() {
+				var isThis = $(this);
 
-		// 		// Если у дела есть метка на сегодняшний день, она не выполнена и время не прошло
-		// 		if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length && newDate) {
-		// 			scheduledTime = 1;
+				// Получаем объект дела, запланированное время выполнения и текст дела
+				var task = isThis.parents('.task'),
+					taskPresetTime = isThis.text(),
+					taskName = task.find('.task__name').text();
 
-		// 		// Или если дело запланировано на завтра
-		// 		} else if (task.find('.grid__date--today + .grid__date--bull').length) {
-		// 			scheduledTime = 2;
-		// 		}
+				// Удаляем лишнее в тексте дела
+				taskName = taskName.replace(/(\[)((2[0-3]|[0-1]\d):([0-5]\d))(\]) /ig, '');
+				taskName = taskName.replace(/[!]{3,}/ig, '');
 
-		// 		//console.log(scheduledTime);
+				// Если дело запланировано на сегодня
+				// и оно не выполнено и не просрочено по времени
+				if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length && taskPresetTime > realTime) {
+					// Берем дату выполнения дела
+					var taskDate = task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').attr('data-date');
 
-		// 		// Если у дела есть метка на сегодняшний день и она не выполнена
-		// 		// или дело запланировано на завтра
-		// 		// if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length || task.find('.grid__date--today + .grid__date--bull').length) {
-		// 		// 	// Определяем точное время выполнения каждого дела
-		// 		// 	var scheduledTime = 0;
+					// Определяем точную дату и время выполнения дела
+					var taskRunTime = taskDate + 'T' + taskPresetTime + ':00';
 
-		// 		// 	if (scheduledTime) {
-		// 		// 		console.log(task.find('.task__name').text());
-		// 		// 	}
-		// 		// }
-		// 	});
-		// }
+				// Либо если дело запланировано на завтра
+				} else if (task.find('.grid__date--today + .grid__date--bull').length) {
+					// Берем дату выполнения дела
+					var taskDate = task.find('.grid__date--today + .grid__date--bull').attr('data-date');
+
+					// Определяем точную дату и время выполнения дела
+					var taskRunTime = taskDate + 'T' + taskPresetTime + ':00';
+				}
+
+				// Если о деле планируется оповестить заранее
+				// и этого еще не было сделано
+				if (taskRunTime && (!task.attr('data-notify') || (task.attr('data-notify') && task.attr('data-notify') != taskRunTime))) {
+					// Если время оповещения подошло (проверка в пределах минуты)
+					if (newDateTime + notify >= Date.parse(taskRunTime) && newDateTime + notify <= Date.parse(taskRunTime) + notifyRange) {
+						// Показываем оповещение
+						var notification = new Notification('Через ' + notifyTitle + ' в ' + taskPresetTime, {
+							body: taskName,
+							icon: '/img/notify.png'
+						});
+
+						// Ставим метку, что оповещение уже было
+						task.attr('data-notify', taskRunTime);
+					}
+				}
+			});
+		}
 
 		setTimeout(timer, delay);
 	}, delay);
