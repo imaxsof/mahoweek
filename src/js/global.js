@@ -209,6 +209,30 @@ var BOARD = $('.board'),
 
 		// Добавляем тему к доске
 		THEME_BOARD.addClass('board__theme--' + mahoweekStorage.settings.theme);
+
+
+
+		// Временная мера
+		// Переводим даты меток в актуальный формат
+		//------------------------------------------------------------------------------
+
+		for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
+			if (mahoweekStorage.tasks[i].markers) {
+				for (var n = 0; n < mahoweekStorage.tasks[i].markers.length; n ++) {
+					if (/([\d]{2}).([\d]{2}).([\d]{4})/ig.test(mahoweekStorage.tasks[i].markers[n].date)) {
+						mahoweekStorage.tasks[i].markers[n].date = mahoweekStorage.tasks[i].markers[n].date.replace(/([\d]{2}).([\d]{2}).([\d]{4})/ig, '$3-$2-$1')
+					}
+				}
+			}
+		}
+
+		// Обновляем хранилище
+		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+
+		//------------------------------------------------------------------------------
+
+
+
 	}
 
 }());

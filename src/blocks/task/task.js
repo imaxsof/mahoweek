@@ -73,17 +73,11 @@
 	LIST_BOARD.on('change', '.js-add-task', function() {
 		var isThis = $(this);
 
-		// Получаем хеш списка
-		var listId = isThis.parents('.list').attr('data-id');
-
-		// Получаем текст дела
-		var taskName = isThis.val();
-
-		// Получаем метку времени
-		var taskCreatedTime = new Date().getTime();
-
-		// Генерируем хеш дела
-		var taskId = makeHash();
+		// Получаем хеш списка, хеш дела, текст дела и метку времени
+		var listId = isThis.parents('.list').attr('data-id'),
+			taskId = makeHash(),
+			taskName = isThis.val(),
+			taskCreatedTime = new Date().getTime();
 
 		// Парсим хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
