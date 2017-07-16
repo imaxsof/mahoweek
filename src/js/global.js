@@ -118,7 +118,7 @@ var BOARD = $('.board'),
 				// Если о деле планируется оповестить заранее
 				// и этого еще не было сделано
 				if (taskRunTime && (!task.attr('data-notify') || (task.attr('data-notify') && task.attr('data-notify') != taskRunTime))) {
-					// Если время оповещения подошло (проверка в пределах минуты)
+					// Если время оповещения в диапазоне подошло
 					if (newDateTime + notify >= Date.parse(taskRunTime) && newDateTime + notify <= Date.parse(taskRunTime) + notifyRange) {
 						// Показываем оповещение
 						var notification = new Notification('Через ' + notifyTitle + ' в ' + taskPresetTime, {
