@@ -145,7 +145,7 @@
 		// Получаем индекс дела в хранилище
 		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
 
-		// Если дело не выполнено
+		// Если дело невыполнено
 		if (!taskCompleted) {
 			// Переключаем метку выполнения в сетке дат
 			task.find('.grid__date--today').toggleClass('grid__date--completed');
@@ -366,7 +366,7 @@ function changeStyleTaskStatus(task) {
 		task.removeClass('task--bull');
 	}
 
-	// Если у дела есть метка на сегодняшний день и она не выполнена
+	// Если у дела есть метка на сегодняшний день и она невыполнена
 	if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length) {
 		// Помечаем дело как сегодняшнее
 		task.addClass('task--today');

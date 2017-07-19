@@ -98,7 +98,7 @@ var BOARD = $('.board'),
 				taskName = taskName.replace(/[!]{3,}/ig, '');
 
 				// Если дело запланировано на сегодня
-				// и оно не выполнено и не просрочено по времени
+				// и оно невыполнено и не просрочено по времени
 				if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length && taskPresetTime > realTime) {
 					// Берем дату выполнения дела
 					var taskDate = task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').attr('data-date');
@@ -213,9 +213,9 @@ var BOARD = $('.board'),
 
 
 		// Временная мера
-		// Переводим даты меток в актуальный формат
 		//------------------------------------------------------------------------------
 
+		// Переводим даты меток в актуальный формат (16.07.2017)
 		for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
 			if (mahoweekStorage.tasks[i].markers) {
 				for (var n = 0; n < mahoweekStorage.tasks[i].markers.length; n ++) {
