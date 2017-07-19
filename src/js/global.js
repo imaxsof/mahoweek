@@ -123,7 +123,8 @@ var BOARD = $('.board'),
 						// Показываем оповещение
 						var notification = new Notification('Через ' + notifyTitle + ' в ' + taskPresetTime, {
 							body: taskName,
-							icon: '/img/notify.png'
+							icon: '/img/notify.png?v=2',
+							requireInteraction: true
 						});
 
 						// Ставим метку, что оповещение уже было
