@@ -22,7 +22,7 @@
 		font: 11 * r + 'px Courier New',
 		color: '#000',
 		background: 'transparent',
-		fallback: true,
+		fallback: false,
 		crossOrigin: true,
 		abbreviate: true
 	};

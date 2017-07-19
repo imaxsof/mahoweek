@@ -190,7 +190,8 @@ var BOARD = $('.board'),
 				createdTime: new Date().getTime()
 			}],
 			settings: {
-				theme: theme
+				theme: theme,
+				faviconCounter: true
 			}
 		}
 
@@ -225,6 +226,11 @@ var BOARD = $('.board'),
 					}
 				}
 			}
+		}
+
+		// Добавляем настройку счетчика в фавиконке (19.07.2017)
+		if (!mahoweekStorage.settings.faviconCounter) {
+			mahoweekStorage.settings.faviconCounter = true;
 		}
 
 		// Обновляем хранилище
@@ -343,13 +349,17 @@ function changeFavicon() {
 	var iconDefault = '/favicon-32x32.png?v=3',
 		iconToday = '/img/favicon-today.png?v=2';
 
-	// Считаем кол-во дел на сегодня
-	var taskTodayTotal = LIST_BOARD.find('.task--today').length;
-
 	// Удаляем текущие фавиконки
 	$('link[rel$=icon]').remove();
 
-	if (taskTodayTotal > 0) {
+	// Парсим хранилище и находим настройку счетчика в фавиконке
+	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek')),
+		faviconCounter = mahoweekStorage.settings.faviconCounter;
+
+	// Считаем кол-во дел на сегодня
+	var taskTodayTotal = LIST_BOARD.find('.task--today').length;
+
+	if (taskTodayTotal > 0 && faviconCounter === true) {
 		// Показываем, что на сегодня имеются дела
 		$('head').append($('<link rel="icon" type="image/png" sizes="32x32">').attr('href', iconToday));
 

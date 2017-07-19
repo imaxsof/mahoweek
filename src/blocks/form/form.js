@@ -1,12 +1,72 @@
 // Form
 //------------------------------------------------------------------------------
 
+// Настраиваем счетчик в фавиконке
+//------------------------------------------------------------------------------
+
+(function() {
+
+	// Проверяем
+	var ua = (function() {
+		var agent = navigator.userAgent.toLowerCase();
+
+		return function (browser) {
+			return agent.indexOf(browser) !== -1;
+		};
+	}());
+
+	var browser = {
+		ie: ua('trident'),
+		chrome: ua('chrome'),
+		webkit: ua('chrome') || ua('safari'),
+		safari: ua('safari') && !ua('chrome'),
+		mozilla: ua('mozilla') && !ua('chrome') && !ua('safari')
+	};
+
+	// Если в браузере поддерживается смена фавиконки
+	if (document.createElement('canvas').getContext && !browser.ie && !browser.safari) {
+		// Показываем настройку
+		SETTINGS_FORM.find('.js-choose-favicon-counter').parents('.form__group').removeClass('form__group--hidden');
+
+		// Парсим хранилище и находим настройку счетчика в фавиконке
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek')),
+			faviconCounter = mahoweekStorage.settings.faviconCounter;
+
+		// Выставляем состояние чекбокса
+		if (faviconCounter === true) {
+			SETTINGS_FORM.find('.js-choose-favicon-counter').attr('checked', 'checked');
+		} else {
+			SETTINGS_FORM.find('.js-choose-favicon-counter').removeAttr('checked', 'checked');
+		}
+
+		// Меняем состояние чекбокса
+		SETTINGS_FORM.find('.js-choose-favicon-counter').on('change', function() {
+			// Получаем настройку счетчика в фавиконке
+			faviconCounter = SETTINGS_FORM.find('.js-choose-favicon-counter').prop('checked');
+
+			// Парсим хранилище и меняем настройку
+			mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+			mahoweekStorage.settings.faviconCounter = faviconCounter;
+
+			// Обновляем хранилище
+			localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+
+			// Меняем фавиконку
+			changeFavicon();
+		});
+	}
+
+
+}());
+
+
+
 // Настраиваем оповещения
 //------------------------------------------------------------------------------
 
 (function() {
 
-	// Если оповещения в браузере поддерживаются
+	// Если в браузере поддерживаются оповещения
 	if (('Notification' in window)) {
 		// Показываем настройку
 		SETTINGS_FORM.find('.js-choose-notify').parents('.form__group').removeClass('form__group--hidden');
