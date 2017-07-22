@@ -174,7 +174,7 @@ gulp.task('docs', ['clean:docs', 'default'], function() {
 // Watch
 //------------------------------------------------------------------------------
 
-gulp.task('watch', function() {
+gulp.task('watch', ['default'], function() {
 	browserSync.init({
 		server: {
 			baseDir: paths.dist.base
