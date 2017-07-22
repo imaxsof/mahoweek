@@ -1,24 +1,29 @@
 // Global
 //------------------------------------------------------------------------------
 
-// Скроллим к началу страницы
-// во избежании скролла к анкору при первоначальном открытии модального окна
+// Смотрим на используемые технологии
 //------------------------------------------------------------------------------
 
-setTimeout(function() {
-	$('body').scrollTop(0);
-}, 1);
-
-
-
-// Определяем мобилку
-//------------------------------------------------------------------------------
-
+// Определяем мобильное устройство
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-	$('body').addClass('mobile');
+	var MOBILE = true;
 
-	var MOBILE = 1;
+	$('body').addClass('mobile');
 }
+
+// Определяем браузер
+var FIREFOX = navigator.userAgent.toLowerCase().indexOf('firefox') > -1,
+	SAFARI = /^((?!chrome).)*safari/i.test(navigator.userAgent),
+	CHROME = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase()),
+	CHROMEIOS = navigator.userAgent.match('CriOS'),
+	MSIE = navigator.userAgent.match('MSIE'),
+	ANDROID = navigator.userAgent.toLowerCase().indexOf("android") > -1,
+	IPAD = navigator.userAgent.match(/iPad/i) !== null;
+
+// Определяем систему
+var WINDOWS = navigator.platform.toUpperCase().indexOf('WIN')!==-1,
+	OSX = navigator.platform.toUpperCase().indexOf('MAC')!==-1,
+	LINUX = navigator.platform.toUpperCase().indexOf('LINUX')!==-1;
 
 
 
@@ -30,6 +35,121 @@ var BOARD = $('.board'),
 	LIST_BOARD = BOARD.find('.board__lists'),
 	SETTINGS_FORM = $('.form--settings'),
 	STORAGE_FORM = $('.form--storage');
+
+
+
+// Скроллим к началу страницы во избежании скролла к анкору
+// при первоначальном открытии модального окна
+//------------------------------------------------------------------------------
+
+setTimeout(function() {
+	$('body').scrollTop(0);
+}, 1);
+
+
+
+// Работаем с хранилищем
+//------------------------------------------------------------------------------
+
+(function() {
+
+	// Если хранилища не существует
+	if (!localStorage.getItem('mahoweek')) {
+		// Создаем некоторые объекты
+		var listId = makeHash(),
+			theme = 'leaves';
+
+		// Генерируем первоначальные данные
+		var mahoweekData = {
+			lists: [{
+				id: listId,
+				name: 'Краткосрочный план дел',
+				createdTime: new Date().getTime()
+			}],
+			tasks: [{
+				id: makeHash(),
+				listId: listId,
+				name: 'Прочитать справку о сайте: https://mahoweek.ru/#about',
+				createdTime: new Date().getTime()
+			},
+			{
+				id: makeHash(),
+				listId: listId,
+				name: 'Посмотреть как здесь всё устроено: https://mahoweek.ru/#tour',
+				createdTime: new Date().getTime()
+			},
+			{
+				id: makeHash(),
+				listId: listId,
+				name: 'Настроить доску: https://mahoweek.ru/#settings',
+				createdTime: new Date().getTime()
+			},
+			{
+				id: makeHash(),
+				listId: listId,
+				name: 'Добавить ещё дел в список',
+				createdTime: new Date().getTime()
+			},
+			{
+				id: makeHash(),
+				listId: listId,
+				name: 'Наметить на календарной сетке даты выполнения задач',
+				createdTime: new Date().getTime()
+			}],
+			settings: {
+				theme: theme,
+				faviconCounter: true
+			}
+		}
+
+		// Создаем хранилище с первоначальными данными
+		localStorage.setItem('mahoweek', JSON.stringify(mahoweekData));
+
+		// Добавляем тему к доске
+		THEME_BOARD.addClass('board__theme--' + theme);
+
+		// Помечаем, что это первый визит пользователя на сайт
+		$('body').attr('data-visit', 'first');
+
+	// Если хранилище существует
+	} else {
+		// Парсим хранилище
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+
+		// Добавляем тему к доске
+		THEME_BOARD.addClass('board__theme--' + mahoweekStorage.settings.theme);
+
+
+
+		// Временная мера
+		//------------------------------------------------------------------------------
+
+		// Переводим даты меток в актуальный формат (16.07.2017)
+		for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
+			if (mahoweekStorage.tasks[i].markers) {
+				for (var n = 0; n < mahoweekStorage.tasks[i].markers.length; n ++) {
+					if (/([\d]{2}).([\d]{2}).([\d]{4})/ig.test(mahoweekStorage.tasks[i].markers[n].date)) {
+						mahoweekStorage.tasks[i].markers[n].date = mahoweekStorage.tasks[i].markers[n].date.replace(/([\d]{2}).([\d]{2}).([\d]{4})/ig, '$3-$2-$1')
+					}
+				}
+			}
+		}
+
+		// Добавляем настройку счетчика в фавиконке (19.07.2017)
+		if (!mahoweekStorage.settings.faviconCounter) {
+			mahoweekStorage.settings.faviconCounter = true;
+		}
+
+		// Обновляем хранилище
+		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+
+		//------------------------------------------------------------------------------
+
+
+
+	}
+
+}());
 
 
 
@@ -136,111 +256,6 @@ var BOARD = $('.board'),
 
 		setTimeout(timer, delay);
 	}, delay);
-
-}());
-
-
-
-// Работаем с хранилищем
-//------------------------------------------------------------------------------
-
-(function() {
-
-	// Если хранилища не существует
-	if (!localStorage.getItem('mahoweek')) {
-		// Создаем некоторые объекты
-		var listId = makeHash(),
-			theme = 'leaves';
-
-		// Генерируем первоначальные данные
-		var mahoweekData = {
-			lists: [{
-				id: listId,
-				name: 'Краткосрочный план дел',
-				createdTime: new Date().getTime()
-			}],
-			tasks: [{
-				id: makeHash(),
-				listId: listId,
-				name: 'Прочитать справку о сайте: https://mahoweek.ru/#about',
-				createdTime: new Date().getTime()
-			},
-			{
-				id: makeHash(),
-				listId: listId,
-				name: 'Посмотреть как здесь всё устроено: https://mahoweek.ru/#tour',
-				createdTime: new Date().getTime()
-			},
-			{
-				id: makeHash(),
-				listId: listId,
-				name: 'Настроить доску: https://mahoweek.ru/#settings',
-				createdTime: new Date().getTime()
-			},
-			{
-				id: makeHash(),
-				listId: listId,
-				name: 'Добавить ещё дел в список',
-				createdTime: new Date().getTime()
-			},
-			{
-				id: makeHash(),
-				listId: listId,
-				name: 'Наметить на календарной сетке даты выполнения задач',
-				createdTime: new Date().getTime()
-			}],
-			settings: {
-				theme: theme,
-				faviconCounter: true
-			}
-		}
-
-		// Создаем хранилище с первоначальными данными
-		localStorage.setItem('mahoweek', JSON.stringify(mahoweekData));
-
-		// Добавляем тему к доске
-		THEME_BOARD.addClass('board__theme--' + theme);
-
-		// Помечаем, что это первый визит пользователя на сайт
-		$('body').attr('data-visit', 'first');
-
-	// Если хранилище существует
-	} else {
-		// Парсим хранилище
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
-
-		// Добавляем тему к доске
-		THEME_BOARD.addClass('board__theme--' + mahoweekStorage.settings.theme);
-
-
-
-		// Временная мера
-		//------------------------------------------------------------------------------
-
-		// Переводим даты меток в актуальный формат (16.07.2017)
-		for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
-			if (mahoweekStorage.tasks[i].markers) {
-				for (var n = 0; n < mahoweekStorage.tasks[i].markers.length; n ++) {
-					if (/([\d]{2}).([\d]{2}).([\d]{4})/ig.test(mahoweekStorage.tasks[i].markers[n].date)) {
-						mahoweekStorage.tasks[i].markers[n].date = mahoweekStorage.tasks[i].markers[n].date.replace(/([\d]{2}).([\d]{2}).([\d]{4})/ig, '$3-$2-$1')
-					}
-				}
-			}
-		}
-
-		// Добавляем настройку счетчика в фавиконке (19.07.2017)
-		if (!mahoweekStorage.settings.faviconCounter) {
-			mahoweekStorage.settings.faviconCounter = true;
-		}
-
-		// Обновляем хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
-
-		//------------------------------------------------------------------------------
-
-
-
-	}
 
 }());
 

@@ -6,25 +6,8 @@
 
 (function() {
 
-	// Проверяем
-	var ua = (function() {
-		var agent = navigator.userAgent.toLowerCase();
-
-		return function (browser) {
-			return agent.indexOf(browser) !== -1;
-		};
-	}());
-
-	var browser = {
-		ie: ua('trident'),
-		chrome: ua('chrome'),
-		webkit: ua('chrome') || ua('safari'),
-		safari: ua('safari') && !ua('chrome'),
-		mozilla: ua('mozilla') && !ua('chrome') && !ua('safari')
-	};
-
 	// Если в браузере поддерживается смена фавиконки
-	if (document.createElement('canvas').getContext && !browser.ie && !browser.safari) {
+	if (document.createElement('canvas').getContext && !MSIE && !SAFARI) {
 		// Показываем настройку
 		SETTINGS_FORM.find('.js-choose-favicon-counter').parents('.form__group').removeClass('form__group--hidden');
 
@@ -55,7 +38,6 @@
 			changeFavicon();
 		});
 	}
-
 
 }());
 
