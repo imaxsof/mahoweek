@@ -5,7 +5,7 @@
 // Packages
 //------------------------------------------------------------------------------
 
-const gulp = require('gulp'),
+var gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	htmlmin = require('gulp-html-minifier'),
 	csso = require('gulp-csso'),
@@ -27,7 +27,7 @@ const gulp = require('gulp'),
 // Paths
 //------------------------------------------------------------------------------
 
-const paths = {
+var paths = {
 	docs: 'docs/',
 	dist: {
 		base: 'dist/',
