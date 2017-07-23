@@ -57,6 +57,7 @@ setTimeout(function() {
 	if (!localStorage.getItem('mahoweek')) {
 		// Создаем некоторые объекты
 		var listId = makeHash(),
+			dateTime = new Date().getTime(),
 			theme = 'leaves';
 
 		// Генерируем первоначальные данные
@@ -64,41 +65,42 @@ setTimeout(function() {
 			lists: [{
 				id: listId,
 				name: 'Краткосрочный план дел',
-				createdTime: new Date().getTime()
+				createdTime: dateTime
 			}],
 			tasks: [{
 				id: makeHash(),
 				listId: listId,
 				name: 'Прочитать справку о сайте: https://mahoweek.ru/#about',
-				createdTime: new Date().getTime()
+				createdTime: dateTime
 			},
 			{
 				id: makeHash(),
 				listId: listId,
 				name: 'Посмотреть как здесь всё устроено: https://mahoweek.ru/#tour',
-				createdTime: new Date().getTime()
+				createdTime: dateTime
 			},
 			{
 				id: makeHash(),
 				listId: listId,
 				name: 'Настроить доску: https://mahoweek.ru/#settings',
-				createdTime: new Date().getTime()
+				createdTime: dateTime
 			},
 			{
 				id: makeHash(),
 				listId: listId,
 				name: 'Добавить ещё дел в список',
-				createdTime: new Date().getTime()
+				createdTime: dateTime
 			},
 			{
 				id: makeHash(),
 				listId: listId,
 				name: 'Наметить на календарной сетке даты выполнения задач',
-				createdTime: new Date().getTime()
+				createdTime: dateTime
 			}],
 			settings: {
 				theme: theme,
-				faviconCounter: true
+				faviconCounter: true,
+				createdTime: dateTime
 			}
 		}
 
@@ -138,6 +140,11 @@ setTimeout(function() {
 		// Добавляем настройку счетчика в фавиконке (19.07.2017)
 		if (!mahoweekStorage.settings.faviconCounter) {
 			mahoweekStorage.settings.faviconCounter = true;
+		}
+
+		// Добавляем дату создания хранилища (23.07.2017)
+		if (!mahoweekStorage.settings.createdTime) {
+			mahoweekStorage.settings.createdTime = new Date().getTime();
 		}
 
 		// Обновляем хранилище
