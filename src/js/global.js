@@ -179,9 +179,6 @@ setTimeout(function() {
 		if (date.getDay() != newDate.getDay()) {
 			// Перезагружаем страницу
 			window.location.reload(true);
-
-			// Сбрасываем дату на новый день
-			date = newDate;
 		}
 
 		// Получаем время оповещения
