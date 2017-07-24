@@ -131,15 +131,24 @@
 	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
 	// Определяем текущие параметры
-	var theme = mahoweekStorage.settings.theme;
+	var theme = mahoweekStorage.settings.theme,
+		deleteCompletedTasks = mahoweekStorage.settings.deleteCompletedTasks;
 
 	// Выделяем текущую тему как активную
 	SETTINGS_FORM.find('.js-choose-theme[value="' + theme + '"]').attr('checked', 'checked');
+
+	// Выставляем состояние чекбокса настройки удаления выполненных дел
+	if (deleteCompletedTasks === true) {
+		SETTINGS_FORM.find('.js-choose-delete-completed-tasks').attr('checked', 'checked');
+	} else {
+		SETTINGS_FORM.find('.js-choose-delete-completed-tasks').removeAttr('checked', 'checked');
+	}
 
 	// Сохраняем параметры
 	SETTINGS_FORM.find(':checkbox, :radio').on('change', function() {
 		// Определяем новые параметры
 		theme = SETTINGS_FORM.find('.js-choose-theme[name="theme"]:checked').val();
+		deleteCompletedTasks = SETTINGS_FORM.find('.js-choose-delete-completed-tasks').prop('checked');
 
 		// Изменяем тему у доски
 		THEME_BOARD.attr('class', 'board__theme  board__theme--' + theme);
@@ -147,6 +156,7 @@
 		// Парсим хранилище и изменяем параметры
 		mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 		mahoweekStorage.settings.theme = theme;
+		mahoweekStorage.settings.deleteCompletedTasks = deleteCompletedTasks;
 
 		// Обновляем хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));

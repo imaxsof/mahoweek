@@ -6,11 +6,38 @@
 
 (function() {
 
+	// Вычисляем последний момент прошедшей недели
+	var dayNumber = new Date().getDay();
+
+	if (dayNumber == 0) {
+		dayNumber = 7;
+	}
+
+	var newDate = new Date();
+	newDate.setDate(newDate.getDate() - dayNumber);
+	newDate.setHours(23, 59, 59, 999);
+
+	// Итак, последний момент прошедшей недели
+	var lastMomentLastWeek = newDate.getTime();
+
+	// Готовим новый массив для дел
+	var tasksNew = [];
+
 	// Парсим хранилище
 	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
 	// Пробегаемся по каждому делу
 	for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
+		// Если включено удаление выполненных дел,
+		// а дело было реально выполнено и его дата выполнения совпадает с условием
+		if (mahoweekStorage.settings.deleteCompletedTasks && mahoweekStorage.tasks[i].completed && mahoweekStorage.tasks[i].completedTime <= lastMomentLastWeek) {
+			// Переходим к следующей итерации
+			continue;
+		}
+
+		// Помещаем в новый массив дела, которые остались
+		tasksNew.push(mahoweekStorage.tasks[i]);
+
 		// Заносим дело в свой список
 		LIST_BOARD.find('.list[data-id="' + mahoweekStorage.tasks[i].listId + '"] .task--add').before(makeTask(mahoweekStorage.tasks[i].id, mahoweekStorage.tasks[i].name, mahoweekStorage.tasks[i].completed, mahoweekStorage.tasks[i].markers));
 
@@ -26,6 +53,12 @@
 		// Рассчитываем прогресс выполнения списка
 		makeProgress(mahoweekStorage.lists[i].id);
 	}
+
+	// Заменяем старый массив дел на новый
+	mahoweekStorage.tasks = tasksNew;
+
+	// Обновляем хранилище
+	localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
 
 	// Если окно приветствия не открыто
 	if (window.location.hash != '#welcome') {

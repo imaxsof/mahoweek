@@ -100,7 +100,8 @@ setTimeout(function() {
 			settings: {
 				theme: theme,
 				faviconCounter: true,
-				createdTime: dateTime
+				createdTime: dateTime,
+				deleteCompletedTasks: false
 			}
 		}
 
@@ -138,13 +139,18 @@ setTimeout(function() {
 		}
 
 		// Добавляем настройку счетчика в фавиконке (19.07.2017)
-		if (!mahoweekStorage.settings.faviconCounter) {
+		if (mahoweekStorage.settings.faviconCounter === undefined) {
 			mahoweekStorage.settings.faviconCounter = true;
 		}
 
 		// Добавляем дату создания хранилища (23.07.2017)
-		if (!mahoweekStorage.settings.createdTime) {
+		if (mahoweekStorage.settings.createdTime === undefined) {
 			mahoweekStorage.settings.createdTime = new Date().getTime();
+		}
+
+		// Добавляем настройку удаления выполненных дел (24.07.2017)
+		if (mahoweekStorage.settings.deleteCompletedTasks === undefined) {
+			mahoweekStorage.settings.deleteCompletedTasks = false;
 		}
 
 		// Обновляем хранилище
