@@ -6,11 +6,11 @@
 
 (function() {
 
-	// Парсим хранилище
-	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
-
 	// Начинаем генерировать списки
 	var listBoardCreate = '';
+
+	// Парсим хранилище
+	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
 	// Пробегаемся по каждому списку
 	for (var i = 0; i < mahoweekStorage.lists.length; i ++) {
