@@ -11,6 +11,11 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 50% 50%;
+	visibility: hidden;
+
+	.board--load & {
+		visibility: visible;
+	}
 
 	&--dark {
 		background-color: @board-bg !important;

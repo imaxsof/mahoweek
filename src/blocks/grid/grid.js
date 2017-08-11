@@ -88,7 +88,7 @@
 		}
 
 		// Обновляем хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+		updateStorage(mahoweekStorage);
 
 		// Изменяем стиль статуса дела
 		changeStyleTaskStatus(task);

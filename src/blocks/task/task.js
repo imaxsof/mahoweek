@@ -54,11 +54,14 @@
 		makeProgress(mahoweekStorage.lists[i].id);
 	}
 
-	// Заменяем старый массив дел на новый
-	mahoweekStorage.tasks = tasksNew;
+	// Если массив дел изменился
+	if (mahoweekStorage.tasks.length != tasksNew.length) {
+		// Заменяем старый массив дел на новый
+		mahoweekStorage.tasks = tasksNew;
 
-	// Обновляем хранилище
-	localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+		// Обновляем хранилище
+		updateStorage(mahoweekStorage);
+	}
 
 	// Если окно приветствия не открыто
 	if (window.location.hash != '#welcome') {
@@ -124,7 +127,7 @@
 		});
 
 		// Обновляем хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+		updateStorage(mahoweekStorage);
 
 		// Стираем поле ввода добавления дела
 		isThis.val('');
@@ -276,7 +279,7 @@
 		}
 
 		// Обновляем хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+		updateStorage(mahoweekStorage);
 
 		// Изменяем стиль статус дела
 		changeStyleTaskStatus(task);
@@ -300,29 +303,30 @@
 	LIST_BOARD.on('keyup change', '.js-edit-task', function(event) {
 		var isThis = $(this);
 
-		// Получаем хеш и текст дела
-		var taskId = isThis.parents('.task').attr('data-id'),
-			taskName = isThis.val();
+		// Если был нажат Enter или пропал фокус и были изменения
+		if (event.keyCode == 13 || event.type == 'change') {
+			// Получаем хеш и текст дела
+			var taskId = isThis.parents('.task').attr('data-id'),
+				taskName = isThis.val();
 
-		// Парсим хранилище
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+			// Парсим хранилище
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-		// Получаем элемент дела в хранилище
-		var taskElement = mahoweekStorage.tasks.filter(function(value) {
-			return value.id == taskId;
-		});
+			// Получаем элемент дела в хранилище
+			var taskElement = mahoweekStorage.tasks.filter(function(value) {
+				return value.id == taskId;
+			});
 
-		// Получаем индекс дела в хранилище
-		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
+			// Получаем индекс дела в хранилище
+			var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
 
-		// Изменяем текст дела
-		mahoweekStorage.tasks[taskIndex].name = taskName;
+			// Изменяем текст дела
+			mahoweekStorage.tasks[taskIndex].name = taskName;
 
-		// Обновляем хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+			// Обновляем хранилище
+			updateStorage(mahoweekStorage);
 
-		// Если был нажат Enter, то убираем фокус с этого поля
-		if (event.keyCode == 13) {
+			// Убираем фокус с этого поля
 			isThis.blur();
 		}
 	});
@@ -358,7 +362,7 @@
 		mahoweekStorage.tasks.splice(taskIndex, 1);
 
 		// Обновляем хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+		updateStorage(mahoweekStorage);
 
 		// Удаляем дело из списка
 		isThis.parents('.task').remove();

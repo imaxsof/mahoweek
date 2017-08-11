@@ -32,7 +32,7 @@
 			mahoweekStorage.settings.faviconCounter = faviconCounter;
 
 			// Обновляем хранилище
-			localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+			updateStorage(mahoweekStorage);
 
 			// Меняем фавиконку
 			changeFavicon();
@@ -145,7 +145,7 @@
 	}
 
 	// Сохраняем параметры
-	SETTINGS_FORM.find(':checkbox, :radio').on('change', function() {
+	SETTINGS_FORM.find('.js-choose-theme, .js-choose-delete-completed-tasks').on('change', function() {
 		// Определяем новые параметры
 		theme = SETTINGS_FORM.find('.js-choose-theme[name="theme"]:checked').val();
 		deleteCompletedTasks = SETTINGS_FORM.find('.js-choose-delete-completed-tasks').prop('checked');
@@ -159,7 +159,7 @@
 		mahoweekStorage.settings.deleteCompletedTasks = deleteCompletedTasks;
 
 		// Обновляем хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+		updateStorage(mahoweekStorage);
 	});
 
 }());
@@ -181,7 +181,7 @@
 		// Обновляем хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(editedMahoweekStorage));
 
-		// Перезагружаем
+		// Редиректим на главную
 		window.location.replace('/');
 	});
 

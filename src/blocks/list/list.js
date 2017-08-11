@@ -55,7 +55,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 		});
 
 		// Обновляем хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+		updateStorage(mahoweekStorage);
 
 		// Выводим список на доске
 		LIST_BOARD.append(makeList(listId, listName));
@@ -93,29 +93,30 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 	LIST_BOARD.on('keyup change', '.js-edit-list', function(event) {
 		var isThis = $(this);
 
-		// Получаем хеш и заголовок списка
-		var listId = isThis.parents('.list').attr('data-id'),
-			listName = isThis.val();
+		// Если был нажат Enter или пропал фокус и были изменения
+		if (event.keyCode == 13 || event.type == 'change') {
+			// Получаем хеш и заголовок списка
+			var listId = isThis.parents('.list').attr('data-id'),
+				listName = isThis.val();
 
-		// Парсим хранилище
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+			// Парсим хранилище
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-		// Получаем элемент списка в хранилище
-		var listElement = mahoweekStorage.lists.filter(function(value) {
-			return value.id == listId;
-		});
+			// Получаем элемент списка в хранилище
+			var listElement = mahoweekStorage.lists.filter(function(value) {
+				return value.id == listId;
+			});
 
-		// Получаем индекс списка в хранилище
-		var listIndex = mahoweekStorage.lists.indexOf(listElement[0]);
+			// Получаем индекс списка в хранилище
+			var listIndex = mahoweekStorage.lists.indexOf(listElement[0]);
 
-		// Изменяем заголовок списка
-		mahoweekStorage.lists[listIndex].name = listName;
+			// Изменяем заголовок списка
+			mahoweekStorage.lists[listIndex].name = listName;
 
-		// Обновляем хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+			// Обновляем хранилище
+			updateStorage(mahoweekStorage);
 
-		// Если был нажат Enter, то убираем фокус с этого поля
-		if (event.keyCode == 13) {
+			// Убираем фокус с этого поля
 			isThis.blur();
 		}
 	});
@@ -176,7 +177,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 			}
 
 			// Обновляем хранилище
-			localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+			updateStorage(mahoweekStorage);
 
 			// Удаляем список из доски
 			isThis.parents('.list').remove();
@@ -225,7 +226,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 					mahoweekStorage.lists.splice(evt.newIndex, 0, listRemove);
 
 					// Обновляем хранилище
-					localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
+					updateStorage(mahoweekStorage);
 
 				// Если не присутствуют
 				} else {

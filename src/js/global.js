@@ -38,16 +38,6 @@ var BOARD = $('.board'),
 
 
 
-// Скроллим к началу страницы во избежании скролла к анкору
-// при первоначальном открытии модального окна
-//------------------------------------------------------------------------------
-
-setTimeout(function() {
-	$('body').scrollTop(0);
-}, 1);
-
-
-
 // Работаем с хранилищем
 //------------------------------------------------------------------------------
 
@@ -62,57 +52,62 @@ setTimeout(function() {
 
 		// Генерируем первоначальные данные
 		var mahoweekData = {
-			lists: [{
-				id: listId,
-				name: 'Краткосрочный план дел',
-				createdTime: dateTime
-			}],
-			tasks: [{
-				id: makeHash(),
-				listId: listId,
-				name: 'Прочитать справку о сайте: https://mahoweek.ru/#about',
-				createdTime: dateTime
-			},
-			{
-				id: makeHash(),
-				listId: listId,
-				name: 'Посмотреть как здесь всё устроено: https://mahoweek.ru/#tour',
-				createdTime: dateTime
-			},
-			{
-				id: makeHash(),
-				listId: listId,
-				name: 'Настроить доску: https://mahoweek.ru/#settings',
-				createdTime: dateTime
-			},
-			{
-				id: makeHash(),
-				listId: listId,
-				name: 'Добавить ещё дел в список',
-				createdTime: dateTime
-			},
-			{
-				id: makeHash(),
-				listId: listId,
-				name: 'Наметить на календарной сетке даты выполнения задач',
-				createdTime: dateTime
-			}],
+			lists: [
+				{
+					id: listId,
+					name: 'Краткосрочный план дел',
+					createdTime: dateTime
+				}
+			],
+			tasks: [
+				{
+					id: makeHash(),
+					listId: listId,
+					name: 'Прочитать справку о сайте: https://mahoweek.ru/#about',
+					createdTime: dateTime
+				},
+				{
+					id: makeHash(),
+					listId: listId,
+					name: 'Посмотреть как здесь всё устроено: https://mahoweek.ru/#tour',
+					createdTime: dateTime
+				},
+				{
+					id: makeHash(),
+					listId: listId,
+					name: 'Настроить доску: https://mahoweek.ru/#settings',
+					createdTime: dateTime
+				},
+				{
+					id: makeHash(),
+					listId: listId,
+					name: 'Добавить ещё дел в список',
+					createdTime: dateTime
+				},
+				{
+					id: makeHash(),
+					listId: listId,
+					name: 'Наметить на календарной сетке даты выполнения задач',
+					createdTime: dateTime
+				}
+			],
 			settings: {
-				theme: theme,
+				deleteCompletedTasks: false,
 				faviconCounter: true,
+				theme: theme,
 				createdTime: dateTime,
-				deleteCompletedTasks: false
+				updatedTime: dateTime
 			}
 		}
 
 		// Создаем хранилище с первоначальными данными
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekData));
 
-		// Добавляем тему к доске
-		THEME_BOARD.addClass('board__theme--' + theme);
+		// Добавляем тему к доске и делаем ее видимой
+		THEME_BOARD.addClass('board__theme--' + theme).css('visibility', 'visible');
 
-		// Помечаем, что это первый визит пользователя на сайт
-		$('body').attr('data-visit', 'first');
+		// Помечаем, что это стартовый визит пользователя на сайт
+		$('body').attr('data-visit', 'start');
 
 	// Если хранилище существует
 	} else {
@@ -151,6 +146,11 @@ setTimeout(function() {
 		// Добавляем настройку удаления выполненных дел (24.07.2017)
 		if (mahoweekStorage.settings.deleteCompletedTasks === undefined) {
 			mahoweekStorage.settings.deleteCompletedTasks = false;
+		}
+
+		// Добавляем дату обновления хранилища (11.08.2017)
+		if (mahoweekStorage.settings.updatedTime === undefined) {
+			mahoweekStorage.settings.updatedTime = new Date().getTime();
 		}
 
 		// Обновляем хранилище
@@ -417,3 +417,28 @@ function makeHash() {
 	return hash;
 
 }
+
+
+
+// Обновляем хранилище
+//------------------------------------------------------------------------------
+
+function updateStorage(data) {
+
+	// Записываем дату обновления
+	data.settings.updatedTime = new Date().getTime();
+
+	// Обновляем локально
+	localStorage.setItem('mahoweek', JSON.stringify(data));
+
+}
+
+
+
+// Fix: скроллим к началу страницы во избежании скролла к анкору
+// при первоначальном открытии модального окна
+//------------------------------------------------------------------------------
+
+setTimeout(function() {
+	$('body').scrollTop(0);
+}, 1);
