@@ -3,6 +3,7 @@
   "version": "1.15.0",
   "dependencies": {
     "cartonbox": "^1.5.4",
+    "firebase": "^4.2.0",
     "jquery": "^2.2.4",
     "normalize.css": "7.0.0",
     "sortablejs": "^1.6.0"
