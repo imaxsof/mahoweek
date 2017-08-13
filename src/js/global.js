@@ -92,19 +92,19 @@ var BOARD = $('.board'),
 				}
 			],
 			settings: {
+				createdTime: dateTime,
+				updatedTime: dateTime,
 				deleteCompletedTasks: false,
 				faviconCounter: true,
-				theme: theme,
-				createdTime: dateTime,
-				updatedTime: dateTime
+				theme: theme
 			}
 		}
 
 		// Создаем хранилище с первоначальными данными
 		localStorage.setItem('mahoweek', JSON.stringify(mahoweekData));
 
-		// Добавляем тему к доске и делаем ее видимой
-		THEME_BOARD.addClass('board__theme--' + theme).css('visibility', 'visible');
+		// Добавляем тему к доске
+		THEME_BOARD.addClass('board__theme--' + theme);
 
 		// Помечаем, что это стартовый визит пользователя на сайт
 		$('body').attr('data-visit', 'start');
@@ -205,6 +205,11 @@ var BOARD = $('.board'),
 		var newDate = new Date(),
 			newDateTime = newDate.getTime();
 
+		// Получаем реальные часы и минуты
+		var realHours = newDate.getHours(),
+			realMinutes = newDate.getMinutes(),
+			realTime = (realHours < 10 ? '0' + realHours : realHours) + ':' + (realMinutes < 10 ? '0' + realMinutes : realMinutes);
+
 		// Если наступил новый день
 		if (date.getDay() != newDate.getDay()) {
 			// Перезагружаем страницу
@@ -218,10 +223,7 @@ var BOARD = $('.board'),
 		// и пользователь разрешил оповещения
 		if (notify && notify != 'none' && Notification.permission === 'granted') {
 			// Получаем кол-во мс за которое нужно оповестить и реальное время
-			var notify = notify * 1,
-				realHours = newDate.getHours(),
-				realMinutes = newDate.getMinutes(),
-				realTime = (realHours < 10 ? '0' + realHours : realHours) + ':' + (realMinutes < 10 ? '0' + realMinutes : realMinutes);
+			var notify = notify * 1;
 
 			// Составляем заголовок и диапазон оповещения в мс
 			if (notify == 900000) {

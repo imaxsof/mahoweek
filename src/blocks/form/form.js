@@ -175,14 +175,28 @@
 	STORAGE_FORM.on('submit', function(event) {
 		event.preventDefault();
 
-		// Берем и парсим отредактированные данные
-		var editedMahoweekStorage = JSON.parse(STORAGE_FORM.find('.js-edit-storage').val());
+		// Получаем содержимое текстареи
+		var storageContent = STORAGE_FORM.find('.js-edit-storage').val();
 
-		// Обновляем хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(editedMahoweekStorage));
+		// Если значение не пусто и парсинг не вызвал ошибок
+		if (storageContent != '' && JSON.parse(storageContent)) {
+			// Берем и парсим отредактированные данные
+			var editedMahoweekStorage = JSON.parse(storageContent);
 
-		// Редиректим на главную
-		window.location.replace('/');
+			// Обновляем хранилище
+			localStorage.setItem('mahoweek', JSON.stringify(editedMahoweekStorage));
+
+			// Редиректим на главную
+			window.location.replace('/');
+
+		// Если содержимое пусто
+		} else if (storageContent == '') {
+			// Очищаем хранилище полностью
+			localStorage.clear();
+
+			// Редиректим на главную
+			window.location.replace('/');
+		}
 	});
 
 }());

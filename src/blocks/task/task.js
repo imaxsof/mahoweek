@@ -63,14 +63,11 @@
 		updateStorage(mahoweekStorage);
 	}
 
-	// Если окно приветствия не открыто
-	if (window.location.hash != '#welcome') {
-		// Показываем содержимое доски
-		BOARD.addClass('board--load');
+	// Показываем содержимое доски
+	BOARD.addClass('board--load');
 
-		// Меняем фавиконку
-		changeFavicon();
-	}
+	// Меняем фавиконку
+	changeFavicon();
 
 }());
 
@@ -281,7 +278,7 @@
 		// Обновляем хранилище
 		updateStorage(mahoweekStorage);
 
-		// Изменяем стиль статус дела
+		// Изменяем стиль статуса дела
 		changeStyleTaskStatus(task);
 
 		// Рассчитываем прогресс выполнения списка

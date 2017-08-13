@@ -39,12 +39,6 @@
 	// Закрываем окно приветствия
 	$('.js-close-welcome').on('click', function() {
 		$('.cartonbox-close').trigger('click');
-
-		// Показываем содержимое доски
-		BOARD.addClass('board--load');
-
-		// Убираем вставку видимости фонового изображения
-		THEME_BOARD.css('visibility', '');
 	});
 
 }());
