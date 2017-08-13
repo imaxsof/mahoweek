@@ -428,7 +428,7 @@ function remakeTaskName(name) {
 	}
 
 	// Работаем с временем
-	remakeName = remakeName.replace(/(.+)?(\s)?(\[)((2[0-3]|[0-1]\d):([0-5]\d))(\])(\s)?(.+)?/ig, '<span class="hidden">$3</span><span class="task__time">$4</span><span class="hidden">$7</span> $1$9').trim();
+	remakeName = remakeName.replace(/(.+)?(\s)?((2[0-3]|[0-1]\d):([0-5]\d))(\s)?(.+)?/ig, '<span class="task__time">$3</span> $1$7').trim();
 
 	// Работаем с важностью
 	if (/[!]{3,}/.test(name)) {
