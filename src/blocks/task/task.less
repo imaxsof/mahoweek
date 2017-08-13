@@ -181,6 +181,14 @@
 	color: @dark-disabled;
 	font-weight: 500;
 	margin-right: 2px;
+
+	.task--past:not(.task--bull) & {
+		color: @task-pea-past;
+	}
+
+	.task--now.task--bull:not(.task--completed) & {
+		color: @task-pea-today-hover;
+	}
 }
 
 .task__input[type=text] {

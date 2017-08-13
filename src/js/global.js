@@ -290,6 +290,23 @@ var BOARD = $('.board'),
 			});
 		}
 
+		// Пробегаемся по каждому делу у которого установлено время
+		LIST_BOARD.find('.task__time').each(function() {
+			var isThis = $(this);
+
+			// Получаем объект дела и запланированное время выполнения
+			var task = isThis.parents('.task'),
+				taskPresetTime = isThis.text();
+
+			// Если дело запланировано на сегодня
+			// и оно невыполнено, а время уже подошло
+			if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length && taskPresetTime <= realTime) {
+				task.addClass('task--now');
+			} else {
+				task.removeClass('task--now');
+			}
+		});
+
 		setTimeout(timer, delay);
 	}, delay);
 
