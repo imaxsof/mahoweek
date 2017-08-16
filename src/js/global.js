@@ -170,23 +170,23 @@ var BOARD = $('.board'),
 //------------------------------------------------------------------------------
 
 // Задаем конфигурацию Firebase
-// var firebaseConfig = {
-// 	apiKey: "AIzaSyBzWqGiMDErDxB_kUOO8-KYABo0_SYNap8",
-// 	authDomain: "mahoweek-8c3db.firebaseapp.com",
-// 	databaseURL: "https://mahoweek-8c3db.firebaseio.com"
-// };
+var firebaseConfig = {
+	apiKey: 'AIzaSyBzWqGiMDErDxB_kUOO8-KYABo0_SYNap8',
+	authDomain: 'mahoweek-8c3db.firebaseapp.com',
+	databaseURL: 'https://mahoweek-8c3db.firebaseio.com'
+};
 
 // Инициализируем Firebase
-// firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
-//
-// firebase.auth().onAuthStateChanged(function(user) {
-// 	if (user) {
-// 		UserSignIn(user);
-// 	} else {
-// 		UserSignOut();
-// 	}
-// });
+// «Слушаем» аутентификацию
+firebase.auth().onAuthStateChanged(function(user) {
+	if (user) {
+		UserSignIn(user);
+	} else {
+		UserSignOut();
+	}
+});
 
 
 
