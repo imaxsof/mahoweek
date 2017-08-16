@@ -91,6 +91,12 @@ a:not(.btn) {
 	}
 }
 
+fieldset {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
 input[type="text"] {
 	background-color: transparent;
 	line-height: @line-height;
@@ -149,7 +155,7 @@ button,
 	}
 
 	&--default {
-		border: 1px solid;
+		border: 1px solid @dark-disabled;
 		padding: 8px 13px;
 		background-color: @btn-default-bg;
 		color: @dark-primary;

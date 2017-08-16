@@ -431,8 +431,8 @@ function remakeTaskName(name) {
 	remakeName = remakeName.replace(/(.+)?(\s)?((2[0-3]|[0-1]\d):([0-5]\d))(\s)?(.+)?/ig, '<span class="task__time">$3</span> $1$7').trim();
 
 	// Работаем с важностью
-	if (/[!]{3,}/.test(name)) {
-		remakeName = '<strong>' + remakeName.replace(/([!]{3,})/ig, '<span class="hidden">$1</span>') + '</strong>';
+	if (/[!]{1,}/.test(name)) {
+		remakeName = '<strong>' + remakeName + '</strong>';
 	}
 
 	// Выводим преобразованную строку

@@ -2,12 +2,6 @@
 //------------------------------------------------------------------------------
 
 .form {
-	&--settings {
-		max-width: 440px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
 	&--storage {
 		textarea {
 			font-family: "Courier New", monospace;
@@ -18,9 +12,22 @@
 	}
 }
 
+.form__options {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 400px;
+}
+
 .form__group {
 	display: flex;
+	padding-bottom: 15px;
 	margin-bottom: 15px;
+	border-bottom: 1px solid @dark-divider;
+
+	.form__options &:last-child {
+		padding-bottom: 0;
+		border-bottom: 0;
+	}
 
 	&--hidden {
 		display: none;
@@ -90,20 +97,18 @@
 	margin-bottom: 15px;
 	margin-left: -5px;
 	margin-right: -5px;
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
+
+	label {
+		width: 33.33%;
+		float: left;
+		position: relative;
+		display: block;
+		padding: 5px;
+	}
 
 	input {
 		position: absolute;
 		left: -9999px;
-	}
-
-	label {
-		width: 33.33%;
-		position: relative;
-		display: block;
-		padding: 5px;
 	}
 
 	span {

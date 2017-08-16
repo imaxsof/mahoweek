@@ -250,8 +250,7 @@ var BOARD = $('.board'),
 					taskName = task.find('.task__name').text();
 
 				// Удаляем лишнее в тексте дела
-				taskName = taskName.replace(/(\[)((2[0-3]|[0-1]\d):([0-5]\d))(\]) /ig, '');
-				taskName = taskName.replace(/[!]{3,}/ig, '');
+				taskName = taskName.replace(/((2[0-3]|[0-1]\d):([0-5]\d)) /ig, '');
 
 				// Если дело запланировано на сегодня
 				// и оно невыполнено и не просрочено по времени
@@ -277,7 +276,7 @@ var BOARD = $('.board'),
 					// Если время оповещения в диапазоне подошло
 					if (newDateTime + notify >= Date.parse(taskRunTime) && newDateTime + notify <= Date.parse(taskRunTime) + notifyRange) {
 						// Показываем оповещение
-						var notification = new Notification('Через ' + notifyTitle + ' в ' + taskPresetTime, {
+						var notification = new Notification('Через ' + notifyTitle + ', в ' + taskPresetTime, {
 							body: taskName,
 							icon: '/img/notify.png?v=2',
 							requireInteraction: true
@@ -432,7 +431,7 @@ function changeFavicon() {
 		$('head').append($('<link rel="icon" type="image/png" sizes="32x32">').attr('href', iconToday));
 
 		// Показываем счетчик с количеством дел
-		Tinycon.setBubble(taskTodayTotal);
+		Tinycon.setBubble(taskTodayTotal <= 9 ? taskTodayTotal : '9+');
 	} else {
 		// Показываем, что на сегодня дел не имеется
 		$('head').append($('<link rel="icon" type="image/png" sizes="32x32">').attr('href', iconDefault));
