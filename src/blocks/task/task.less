@@ -24,6 +24,7 @@
 	background-image: linear-gradient(180deg, transparent 1px, @task-bg 1px);
 	width: calc(~"100vw - 17px");
 	max-width: 370px;
+	overflow: hidden;
 
 	body:not(.mobile) .task:not(.task--add):hover & {
 		background-color: @task-bg-hover;
@@ -228,8 +229,7 @@
 		opacity: 1;
 	}
 
-	.board__lists--drag &/*,
-	.list__tasks--drag &*/ {
+	.board__lists--drag & {
 		opacity: 0 !important;
 	}
 

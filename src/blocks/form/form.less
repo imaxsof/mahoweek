@@ -20,6 +20,7 @@
 
 .form__group {
 	display: flex;
+	align-items: center;
 	padding-bottom: 15px;
 	margin-bottom: 15px;
 	border-bottom: 1px solid @dark-divider;
@@ -73,7 +74,7 @@
 		}
 	}
 
-	input:hover + span::before {
+	body:not(.mobile) & input:hover + span::before {
 		transform: scale3d(1.1818, 1, 1);
 		transform-origin: 0 0;
 	}
@@ -86,7 +87,7 @@
 		}
 	}
 
-	input:hover:checked + span::before {
+	body:not(.mobile) & input:hover:checked + span::before {
 		transform: translate3d(calc(~"100% + 2px"), 0, 0) scale3d(1.1818, 1 ,1);
 		transform-origin: 100% 0;
 	}
@@ -125,15 +126,9 @@
 			opacity: 0.9;
 		}
 
-		body:not(.mobile) &:active {
-			top: 1px;
-		}
-	}
-
-	input:checked + span {
-		cursor: default;
-		opacity: 1 !important;
-		top: 0 !important;
+		// body:not(.mobile) &:active {
+		// 	top: 1px;
+		// }
 
 		&::before {
 			position: absolute;
