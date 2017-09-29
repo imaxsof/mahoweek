@@ -84,6 +84,7 @@ a:not(.btn) {
 	text-decoration-skip: ink;
 	text-decoration-color: fade(@link-color, 30%);
 	color: @link-color;
+	transition: @duration @timing-function;
 
 	body:not(.mobile) &:hover {
 		color: @link-color-hover !important;
@@ -149,6 +150,8 @@ button,
 	line-height: @line-height;
 	position: relative;
 	min-width: 200px;
+	transition-property: background-color;
+	transition: @duration @timing-function;
 
 	body:not(.mobile) &:active {
 		top: 1px;

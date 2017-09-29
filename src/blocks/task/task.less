@@ -25,6 +25,8 @@
 	width: calc(~"100vw - 17px");
 	max-width: 370px;
 	overflow: hidden;
+	transition-property: background-color;
+	transition: @duration @timing-function;
 
 	body:not(.mobile) .task:not(.task--add):hover & {
 		background-color: @task-bg-hover;
@@ -75,10 +77,8 @@
 		left: 14px;
 		border-radius: 50%;
 		border: 2px solid;
-	}
-
-	&::before {
 		border-color: @task-pea;
+		transition: @duration @timing-function;
 
 		.task--past & {
 			border-color: @task-pea-past;
@@ -132,6 +132,7 @@
 	right: 0;
 	bottom: 0;
 	fill: @task-plus;
+	transition: @duration @timing-function;
 
 	.task--focus & {
 		fill: @task-plus-focus;
@@ -218,6 +219,8 @@
 	bottom: 0;
 	fill: @task-trash;
 	opacity: 0;
+	transform: translate3d(100%, 0, 0);
+	transition: (@duration / 2) @timing-function;
 
 	body:not(.mobile) &:hover {
 		fill: @task-trash-hover;
@@ -227,6 +230,7 @@
 	.task__wrap:hover &,
 	.mobile & {
 		opacity: 1;
+		transform: translate3d(0, 0, 0);
 	}
 
 	.board__lists--drag & {
@@ -244,6 +248,7 @@
 
 .task__grid {
 	background-color: @grid-bg;
+	transition: @duration @timing-function;
 
 	body:not(.mobile) .task:not(.task--add):hover & {
 		background-color: @grid-bg-hover;

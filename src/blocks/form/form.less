@@ -61,6 +61,7 @@
 		display: block;
 		border-radius: (@border-radius / 2);
 		position: relative;
+		transition: (@duration / 2) @timing-function;
 
 		&::before {
 			position: absolute;
@@ -71,6 +72,7 @@
 			height: 22px;
 			background-color: @light-primary;
 			border-radius: (@border-radius / 4);
+			transition: (@duration / 2) @timing-function;
 		}
 	}
 
@@ -121,6 +123,7 @@
 		background-position: 50% 50%;
 		cursor: pointer;
 		border-radius: (@border-radius / 2);
+		transition: @duration @timing-function;
 
 		body:not(.mobile) &:hover {
 			opacity: 0.9;
@@ -139,6 +142,20 @@
 			left: 5px;
 			border: 1px solid fade(#fff, 50%);
 			border-radius: (@border-radius / 2);
+			transition: (@duration / 2) @timing-function;
+			opacity: 0;
+			transform: scale3d(0.97, 0.97, 1);
+		}
+	}
+
+	input:checked + span {
+		cursor: default;
+		opacity: 1 !important;
+		top: 0 !important;
+
+		&::before {
+			opacity: 1;
+			transform: scale3d(1, 1, 1);
 		}
 	}
 }
