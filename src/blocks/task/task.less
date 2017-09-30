@@ -6,6 +6,7 @@
 	margin-top: -1px;
 	position: relative;
 	height: 41px;
+	transition: @duration @timing-function;
 
 	&--add {
 		font-size: @font-size-small;
@@ -219,8 +220,8 @@
 	bottom: 0;
 	fill: @task-trash;
 	opacity: 0;
-	transform: translate3d(100%, 0, 0);
-	transition: (@duration / 2) @timing-function;
+	transform: scale3d(0.7, 0.7, 1);
+	transition: @duration @timing-function;
 
 	body:not(.mobile) &:hover {
 		fill: @task-trash-hover;
@@ -230,7 +231,7 @@
 	.task__wrap:hover &,
 	.mobile & {
 		opacity: 1;
-		transform: translate3d(0, 0, 0);
+		transform: scale3d(1, 1, 1);
 	}
 
 	.board__lists--drag & {

@@ -61,7 +61,7 @@
 		display: block;
 		border-radius: (@border-radius / 2);
 		position: relative;
-		transition: (@duration / 2) @timing-function;
+		transition: @duration @timing-function;
 
 		&::before {
 			position: absolute;
@@ -72,7 +72,7 @@
 			height: 22px;
 			background-color: @light-primary;
 			border-radius: (@border-radius / 4);
-			transition: (@duration / 2) @timing-function;
+			transition: @duration @timing-function;
 		}
 	}
 
@@ -142,9 +142,9 @@
 			left: 5px;
 			border: 1px solid fade(#fff, 50%);
 			border-radius: (@border-radius / 2);
-			transition: (@duration / 2) @timing-function;
+			transition: @duration @timing-function;
 			opacity: 0;
-			transform: scale3d(0.97, 0.97, 1);
+			transform: scale3d(0.95, 0.95, 1);
 		}
 	}
 

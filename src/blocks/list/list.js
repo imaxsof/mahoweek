@@ -200,7 +200,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 
 	Sortable.create(document.querySelector('.board__lists'), {
 		delay: sortableDelay,
-		animation: 200,
+		animation: 100,
 		handle: '.list__name',
 		filter: '.list__input',
 		preventOnFilter: false,

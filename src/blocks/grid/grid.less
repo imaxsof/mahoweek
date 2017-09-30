@@ -49,44 +49,44 @@
 		border-right-color: @grid-separator !important;
 	}
 
+	&::before {
+		position: absolute;
+		content: "";
+		width: 11px;
+		height: 11px;
+		border-radius: 50%;
+		top: 14px;
+		left: 14px;
+		transform: scale3d(0, 0, 1);
+		transition: @duration @timing-function;
+	}
+
 	&--bull,
 	&--completed {
 		&::before {
-			border: 2px solid;
-			position: absolute;
-			content: "";
-			width: 11px;
-			height: 11px;
-			border-radius: 50%;
-			top: 14px;
-			left: 14px;
+			transform: scale3d(1, 1, 1);
 		}
 	}
 
 	&--bull {
 		&::before {
-			border-color: @grid-pea;
 			background-color: @grid-pea;
 
 			.grid__date--past& {
-				border-color: @grid-pea-past;
 				background-color: @grid-pea-past;
 				transform: scale3d(0.6363, 0.6363, 1);
 			}
 
 			.grid__date--today:not(.grid__date--completed)& {
-				border-color: @grid-pea-today;
 				background-color: @grid-pea-today;
 			}
 		}
 
 		body:not(.mobile) &:not(.grid__date--past):not(.grid__date--completed):hover::before {
-			border-color: @grid-pea-hover;
 			background-color: @grid-pea-hover;
 		}
 
 		body:not(.mobile) &.grid__date--today:not(.grid__date--completed):hover::before {
-			border-color: @grid-pea-today-hover;
 			background-color: @grid-pea-today-hover;
 		}
 	}
@@ -95,12 +95,10 @@
 		cursor: default;
 
 		&::before {
-			border-color: @grid-pea-complete;
 			background-color: @grid-pea-complete;
 			transform: scale3d(0.6363, 0.6363, 1);
 
 			.grid__date--past& {
-				border-color: @grid-pea-past-complete;
 				background-color: @grid-pea-past-complete;
 			}
 		}
