@@ -17,7 +17,7 @@ var FIREFOX = navigator.userAgent.toLowerCase().indexOf('firefox') > -1,
 	CHROME = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase()),
 	CHROMEIOS = navigator.userAgent.match('CriOS'),
 	MSIE = navigator.userAgent.match('MSIE'),
-	ANDROID = navigator.userAgent.toLowerCase().indexOf("android") > -1,
+	ANDROID = navigator.userAgent.toLowerCase().indexOf('android') > -1,
 	IPAD = navigator.userAgent.match(/iPad/i) !== null;
 
 // Определяем систему

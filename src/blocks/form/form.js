@@ -79,7 +79,7 @@
 					// Запрашиваем права
 					Notification.requestPermission(function(permission) {
 						// И если пользователь разрешил оповещения
-						if (permission === "granted") {
+						if (permission === 'granted') {
 							// Записываем время оповещения
 							localStorage.setItem('notify', notifyValue);
 
