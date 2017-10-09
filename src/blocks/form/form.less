@@ -60,18 +60,22 @@
 		background-color: @checkbox-bg;
 		display: block;
 		border-radius: (@border-radius / 2);
+		border: 1px solid transparent;
+		overflow: hidden;
 		position: relative;
+		transition-property: background-color;
 		transition: @duration @timing-function;
 
 		&::before {
 			position: absolute;
 			content: "";
-			top: 1px;
-			left: 1px;
+			top: 0;
+			left: 0;
 			width: 22px;
 			height: 22px;
 			background-color: @light-primary;
 			border-radius: (@border-radius / 4);
+			transition-property: transform;
 			transition: @duration @timing-function;
 		}
 	}
@@ -123,15 +127,10 @@
 		background-position: 50% 50%;
 		cursor: pointer;
 		border-radius: (@border-radius / 2);
-		transition: @duration @timing-function;
 
 		body:not(.mobile) &:hover {
 			opacity: 0.9;
 		}
-
-		// body:not(.mobile) &:active {
-		// 	top: 1px;
-		// }
 
 		&::before {
 			position: absolute;
@@ -142,9 +141,9 @@
 			left: 5px;
 			border: 1px solid fade(#fff, 50%);
 			border-radius: (@border-radius / 2);
+			transition-property: opacity;
 			transition: @duration @timing-function;
 			opacity: 0;
-			transform: scale3d(0.95, 0.95, 1);
 		}
 	}
 
@@ -155,7 +154,6 @@
 
 		&::before {
 			opacity: 1;
-			transform: scale3d(1, 1, 1);
 		}
 	}
 }

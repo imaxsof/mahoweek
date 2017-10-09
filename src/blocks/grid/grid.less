@@ -57,21 +57,23 @@
 		border-radius: 50%;
 		top: 14px;
 		left: 14px;
-		transform: scale3d(0, 0, 1);
+		background-color: @grid-pea;
+		opacity: 0;
+		transform: scale3d(0.6363, 0.6363, 1);
+		transition-property: opacity, transform;
 		transition: @duration @timing-function;
 	}
 
 	&--bull,
 	&--completed {
 		&::before {
+			opacity: 1;
 			transform: scale3d(1, 1, 1);
 		}
 	}
 
 	&--bull {
 		&::before {
-			background-color: @grid-pea;
-
 			.grid__date--past& {
 				background-color: @grid-pea-past;
 				transform: scale3d(0.6363, 0.6363, 1);
@@ -110,7 +112,11 @@
 		padding: 8px 0 7px;
 		cursor: default;
 
-		&--holiday::before {
+		&::before {
+			display: none;
+		}
+
+		&--holiday::after {
 			position: absolute;
 			content: "";
 			left: 0;
@@ -121,7 +127,7 @@
 			z-index: 1;
 		}
 
-		&--holiday + .grid__date--holiday::before {
+		&--holiday + .grid__date--holiday::after {
 			left: -1px;
 		}
 	}

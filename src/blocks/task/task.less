@@ -6,6 +6,7 @@
 	margin-top: -1px;
 	position: relative;
 	height: 41px;
+	transition-property: font-size;
 	transition: @duration @timing-function;
 
 	&--add {
@@ -26,8 +27,6 @@
 	width: calc(~"100vw - 17px");
 	max-width: 370px;
 	overflow: hidden;
-	transition-property: background-color;
-	transition: @duration @timing-function;
 
 	body:not(.mobile) .task:not(.task--add):hover & {
 		background-color: @task-bg-hover;
@@ -79,6 +78,7 @@
 		border-radius: 50%;
 		border: 2px solid;
 		border-color: @task-pea;
+		transition-property: transform;
 		transition: @duration @timing-function;
 
 		.task--past & {
@@ -133,7 +133,6 @@
 	right: 0;
 	bottom: 0;
 	fill: @task-plus;
-	transition: @duration @timing-function;
 
 	.task--focus & {
 		fill: @task-plus-focus;
@@ -221,6 +220,7 @@
 	fill: @task-trash;
 	opacity: 0;
 	transform: scale3d(0.7, 0.7, 1);
+	transition-property: opacity, transform;
 	transition: @duration @timing-function;
 
 	body:not(.mobile) &:hover {
@@ -249,7 +249,6 @@
 
 .task__grid {
 	background-color: @grid-bg;
-	transition: @duration @timing-function;
 
 	body:not(.mobile) .task:not(.task--add):hover & {
 		background-color: @grid-bg-hover;
