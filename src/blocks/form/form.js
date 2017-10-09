@@ -7,7 +7,7 @@
 (function() {
 
 	// Если в браузере поддерживается смена фавиконки
-	if (document.createElement('canvas').getContext && !MSIE && !SAFARI) {
+	if (document.createElement('canvas').getContext && !MOBILE && !CHROMEIOS && !ANDROID && !IPAD && !MSIE && !SAFARI) {
 		// Показываем настройку
 		SETTINGS_FORM.find('.js-choose-favicon-counter').parents('.form__group').removeClass('form__group--hidden');
 
@@ -49,7 +49,7 @@
 (function() {
 
 	// Если в браузере поддерживаются оповещения
-	if (('Notification' in window)) {
+	if (('Notification' in window) && !MOBILE && !CHROMEIOS && !ANDROID && !IPAD) {
 		// Показываем настройку
 		SETTINGS_FORM.find('.js-choose-notify').parents('.form__group').removeClass('form__group--hidden');
 
@@ -71,6 +71,16 @@
 			} else {
 				// Если пользователь ранее разрешил оповещения
 				if (Notification.permission === 'granted') {
+					// Если до изменения оповещения были выключены
+					if (localStorage.getItem('notify') == 'none') {
+						// Показываем оповещение с краткой справкой
+						var notification = new Notification('Оповещения включены', {
+							body: 'Теперь добавьте время выполнения делам и держите сайт открытым в браузере, чтобы оповещения приходили.',
+							icon: '/img/notify.png?v=2',
+							requireInteraction: true
+						});
+					}
+
 					// Меняем время оповещения
 					localStorage.setItem('notify', notifyValue);
 

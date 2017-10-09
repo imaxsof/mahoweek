@@ -32,9 +32,10 @@ body {
 	}
 }
 
-svg {
-	transform: translateZ(0);
-}
+
+
+// Headers
+//------------------------------------------------------------------------------
 
 h1 {
 	font-family: Verdana, @font-family;
@@ -75,23 +76,81 @@ h3 {
 	letter-spacing: 1px;
 }
 
-p {
-	margin-top: 0;
-	margin-bottom: 15px;
-}
+
+
+// Links
+//------------------------------------------------------------------------------
 
 a:not(.btn) {
 	text-decoration-skip: ink;
 	text-decoration-color: fade(@link-color, 30%);
 	color: @link-color;
-	transition-property: color, text-decoration-color;
-	transition: @duration @timing-function;
 
 	body:not(.mobile) &:hover {
 		color: @link-color-hover !important;
 		text-decoration-color: fade(@link-color-hover, 30%) !important;
 	}
 }
+
+
+
+// Buttons
+//------------------------------------------------------------------------------
+
+button,
+.btn {
+	outline: none;
+	display: inline-block;
+	text-decoration: none;
+	border: 0;
+	border-radius: (@border-radius / 2);
+	padding: 10px 15px;
+	cursor: pointer;
+	line-height: @line-height;
+	position: relative;
+	min-width: 200px;
+
+	body:not(.mobile) &:active {
+		top: 1px;
+	}
+
+	&--default {
+		border: 1px solid @dark-disabled;
+		padding: 8px 13px;
+		background-color: @btn-default-bg;
+		color: @dark-primary;
+		fill: @dark-primary;
+
+		body:not(.mobile) &:hover {
+			background-color: @btn-default-bg-hover;
+		}
+	}
+
+	&--primary {
+		background-color: @btn-primary-bg;
+		color: @light-primary;
+		fill: @light-primary;
+
+		body:not(.mobile) &:hover {
+			background-color: @btn-primary-bg-hover;
+		}
+	}
+
+	&--danger {
+		background-color: @btn-danger-bg;
+		color: @light-primary;
+		fill: @light-primary;
+
+		body:not(.mobile) &:hover {
+			background-color: @btn-danger-bg-hover;
+		}
+	}
+}
+
+
+
+// Forms
+//------------------------------------------------------------------------------
 
 fieldset {
 	margin: 0;
@@ -139,56 +198,18 @@ textarea {
 	border: 1px solid @list-border;
 }
 
-button,
-.btn {
-	outline: none;
-	display: inline-block;
-	text-decoration: none;
-	border: 0;
-	border-radius: (@border-radius / 2);
-	padding: 10px 15px;
-	cursor: pointer;
-	line-height: @line-height;
-	position: relative;
-	min-width: 200px;
-	transition-property: background-color;
-	transition: @duration @timing-function;
 
-	body:not(.mobile) &:active {
-		top: 1px;
-	}
 
-	&--default {
-		border: 1px solid @dark-disabled;
-		padding: 8px 13px;
-		background-color: @btn-default-bg;
-		color: @dark-primary;
-		fill: @dark-primary;
+// Base
+//------------------------------------------------------------------------------
 
-		body:not(.mobile) &:hover {
-			background-color: @btn-default-bg-hover;
-		}
-	}
+p {
+	margin-top: 0;
+	margin-bottom: 15px;
+}
 
-	&--primary {
-		background-color: @btn-primary-bg;
-		color: @light-primary;
-		fill: @light-primary;
-
-		body:not(.mobile) &:hover {
-			background-color: @btn-primary-bg-hover;
-		}
-	}
-
-	&--danger {
-		background-color: @btn-danger-bg;
-		color: @light-primary;
-		fill: @light-primary;
-
-		body:not(.mobile) &:hover {
-			background-color: @btn-danger-bg-hover;
-		}
-	}
+svg {
+	transform: translateZ(0);
 }
 
 
