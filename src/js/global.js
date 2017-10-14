@@ -33,8 +33,7 @@ var WINDOWS = navigator.platform.toUpperCase().indexOf('WIN')!==-1,
 var BOARD = $('.board'),
 	THEME_BOARD = BOARD.find('.board__theme'),
 	LIST_BOARD = BOARD.find('.board__lists'),
-	SETTINGS_FORM = $('.form--settings'),
-	STORAGE_FORM = $('.form--storage');
+	SETTINGS_FORM = $('.form--settings');
 
 
 

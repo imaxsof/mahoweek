@@ -11,19 +11,6 @@
 		onStartBefore: function() {
 			// Переносим кнопку закрытия внутрь окна
 			$('.cartonbox-close').prependTo('.cartonbox-container');
-		},
-		onShowBefore: function() {
-			// Если открыто окно редактирования локального хранилища
-			if (window.location.hash == '#storage') {
-				// Парсим хранилище
-				var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
-
-				// Форматируем красиво вывод
-				var mahoweekStorage = JSON.stringify(mahoweekStorage, '', 2);
-
-				// Загружаем в текстарею содержимое локального хранилища
-				STORAGE_FORM.find('.js-edit-storage').val(mahoweekStorage);
-			}
 		}
 	};
 
