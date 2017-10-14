@@ -147,7 +147,7 @@ function makeGrid(type, data) {
 			day = newDate.getDate(time),        // число
 			month = newDate.getMonth(time) + 1, // месяц
 			year = newDate.getFullYear(time),   // год
-			newDayNumber = newDate.getDay(),       // номер дня
+			newDayNumber = newDate.getDay(),    // номер дня
 			dataDate = year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day);
 
 		// Делаем воскресенье номером 7
