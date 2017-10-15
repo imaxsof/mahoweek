@@ -30,7 +30,7 @@
 @color-yellow: #FDD835;
 @color-green: #4cd964;
 @color-teal-blue: #5ac8fa;
-@color-blue: #007aff;
+@color-blue: #1c7de6; // #007aff
 
 
 
@@ -92,8 +92,8 @@
 // List
 //------------------------------------------------------------------------------
 
-@list-bg: fade(#fff, 97%);
-@list-bg-header: #fff;
+@list-bg: fade(@light-primary, 97%);
+@list-bg-header: @light-primary;
 @list-bg-ghost: fade(@list-bg, 50%);
 @list-border: @dark-divider;
 @list-progress-first: @color-teal-blue;
@@ -107,8 +107,8 @@
 // Task
 //------------------------------------------------------------------------------
 
-@task-bg: fade(#fff, 97%);
-@task-bg-hover: #fff;
+@task-bg: fade(@light-primary, 97%);
+@task-bg-hover: @light-primary;
 @task-border: @list-border;
 
 @task-pea: darken(@list-border, 5%);

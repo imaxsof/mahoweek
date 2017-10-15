@@ -413,7 +413,7 @@ function changeStyleTaskStatus(task) {
 
 
 
-// Обрабатываем строку с делом
+// Форматируем текст дела
 //------------------------------------------------------------------------------
 
 function remakeTaskName(name) {
@@ -435,7 +435,7 @@ function remakeTaskName(name) {
 		remakeName = '<strong>' + remakeName + '</strong>';
 	}
 
-	// Выводим преобразованную строку
+	// Выводим отформатированный текст
 	return remakeName;
 
 }

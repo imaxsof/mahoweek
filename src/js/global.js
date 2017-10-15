@@ -384,7 +384,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 					// При расфокусировке
 					isThis.parents('.list').find('.list__input').focusout(function() {
 						// Заменяем поле редактирования на заголовок списка
-						isThis.text($(this).val());
+						isThis.html(remakeListName($(this).val()));
 					});
 				}
 

@@ -244,6 +244,27 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 
 
 
+// Форматируем заголовок списка
+//------------------------------------------------------------------------------
+
+function remakeListName(name) {
+
+	var remakeName = name;
+
+	// Работаем с УРЛ
+	if (/https:\/\/mahoweek\.ru\/#/.test(name)) {
+		remakeName = remakeName.replace(/(https:\/\/)(mahoweek\.ru\/#)([\S]+[^ ,\.!])/ig, '<a href="#$3" class="cartonbox" data-cb-type="inline" data-cb-hash="$3"><span class="hidden">$1</span>$2$3</a>');
+	} else {
+		remakeName = remakeName.replace(/(http(s)?:\/\/(www\.)?)([\S]+[^ ,\.!])/ig, '<a href="$1$4" class="js-link-task" target="_blank" rel="noopener noreferrer"><span class="hidden">$1</span>$4</a>');
+	}
+
+	// Выводим отформатированный заголовок
+	return remakeName;
+
+}
+
+
+
 // Генерируем прогресс списка
 //------------------------------------------------------------------------------
 
@@ -283,7 +304,7 @@ function makeList(id, name) {
 		'<div class="list__head">' +
 			'<div class="list__wrap">' +
 				'<div class="list__name  js-name">' +
-					name +
+					remakeListName(name) +
 				'</div>' +
 				'<div class="list__options">' +
 					'<div class="list__trash  js-remove-list">' +

@@ -82,13 +82,14 @@ h3 {
 //------------------------------------------------------------------------------
 
 a:not(.btn) {
-	text-decoration-skip: ink;
-	text-decoration-color: fade(@link-color, 30%);
+	// text-decoration-skip: ink;
+	// text-decoration-color: fade(@link-color, 30%);
+	text-decoration: none;
 	color: @link-color;
 
 	body:not(.mobile) &:hover {
 		color: @link-color-hover !important;
-		text-decoration-color: fade(@link-color-hover, 30%) !important;
+		// text-decoration-color: fade(@link-color-hover, 30%) !important;
 	}
 }
 
