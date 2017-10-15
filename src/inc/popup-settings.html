@@ -1,7 +1,7 @@
 <div id="settings">
 	<h2 class="text-center">Настройка</h2>
 
-	<div class="sync  sync--under-construction">
+	<div class="sync">
 		<h3 class="text-center">Синхронизация</h3>
 
 		<div class="sync__auth">
@@ -22,13 +22,21 @@
 				</button>
 			</p>
 
-			<p class="text-center  small"><a href="#privacy" class="cartonbox" data-cb-type="inline" data-cb-hash="privacy">Конфиденциальность</a> и <a href="#terms" class="cartonbox" data-cb-type="inline" data-cb-hash="terms">правила пользования</a></p>
+			<!-- <p class="text-center  small"><a href="#privacy" class="cartonbox" data-cb-type="inline" data-cb-hash="privacy">Конфиденциальность</a> и <a href="#terms" class="cartonbox" data-cb-type="inline" data-cb-hash="terms">правила пользования</a></p> -->
 		</div>
 
 		<div class="sync__user">
-			<p>Данные синхронизируются / Последняя синхронизация была сегодня в 20:00</p>
+			<div class="sync__data">
+				<div class="sync__indicator" data-type="default"></div>
 
-			<p><span class="js-toggle-auth">Отключить</span></p>
+				<div class="sync__ava"></div>
+			</div>
+
+			<div class="sync__name"></div>
+
+			<div class="sync__off">
+				<span class="btn  btn--default  js-toggle-auth">Отключить</span>
+			</div>
 		</div>
 	</div>
 

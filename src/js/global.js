@@ -168,30 +168,6 @@ var BOARD = $('.board'),
 
 
 
-// Работаем с синхронизацией
-//------------------------------------------------------------------------------
-
-// Задаем конфигурацию Firebase
-var firebaseConfig = {
-	apiKey: 'AIzaSyBzWqGiMDErDxB_kUOO8-KYABo0_SYNap8',
-	authDomain: 'mahoweek-8c3db.firebaseapp.com',
-	databaseURL: 'https://mahoweek-8c3db.firebaseio.com'
-};
-
-// Инициализируем Firebase
-firebase.initializeApp(firebaseConfig);
-
-// «Слушаем» аутентификацию
-firebase.auth().onAuthStateChanged(function(user) {
-	if (user) {
-		UserSignIn(user);
-	} else {
-		UserSignOut();
-	}
-});
-
-
-
 // Запускаем внутренний таймер
 //------------------------------------------------------------------------------
 
@@ -484,6 +460,27 @@ function updateStorage(data) {
 
 	// Обновляем локально
 	localStorage.setItem('mahoweek', JSON.stringify(data));
+
+	// Отправляем изменения в БД
+	if (firebase.auth().currentUser) {
+		// Показываем индикатор обновления
+		$('.sync__indicator').attr('data-type', 'process');
+
+		firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/database').set({
+			"lists": data.lists,
+			"tasks": data.tasks,
+			"settings": data.settings
+		}).then(function() {
+			// Показываем индикатор, что все окей
+			$('.sync__indicator').attr('data-type', 'ok');
+		}).catch(function(error) {
+			// Показываем индикатор краха
+			$('.sync__indicator').attr('data-type', 'fail');
+
+			// Выводим ошибку
+			console.error(error.code + ': ' + error.message);
+		});
+	}
 
 }
 
