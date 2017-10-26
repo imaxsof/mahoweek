@@ -101,7 +101,8 @@ firebase.initializeApp(firebaseConfig);
 				localStorage.clear();
 
 				// Редиректим на главную
-				window.location.replace('/');
+				window.location.replace('/#bye');
+				window.location.reload(true);
 			}).catch(function(error) {
 				// Выводим ошибку
 				console.error(error.code + ': ' + error.message);

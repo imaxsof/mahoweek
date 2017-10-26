@@ -108,8 +108,11 @@ var BOARD = $('.board'),
 		// Добавляем тему к доске
 		THEME_BOARD.addClass('board__theme--' + theme);
 
-		// Помечаем, что это стартовый визит пользователя на сайт
-		$('body').attr('data-visit', 'start');
+		// Если это было не отключение синхронизации
+		if (window.location.hash != '#bye') {
+			// Помечаем, что это стартовый визит пользователя на сайт
+			$('body').attr('data-visit', 'start');
+		}
 
 	// Если хранилище существует
 	} else {
