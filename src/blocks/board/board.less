@@ -27,9 +27,14 @@
 	background-size: cover;
 	background-position: 50% 50%;
 	visibility: hidden;
+	animation-name: none;
+	animation-duration: @duration;
+	animation-timing-function: @timing-function;
+	animation-fill-mode: both;
 
 	.board--load & {
 		visibility: visible;
+		animation-name: fallIn;
 	}
 
 	&--dark {
@@ -295,9 +300,14 @@
 	margin: auto;
 	position: relative;
 	visibility: hidden;
+	animation-name: none;
+	animation-duration: @duration;
+	animation-timing-function: @timing-function;
+	animation-fill-mode: both;
 
 	.board--load & {
 		visibility: visible;
+		animation-name: fadeInUp;
 	}
 
 	@media (min-width: 1200px) {

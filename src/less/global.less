@@ -275,3 +275,44 @@ ol.list-custom {
 		content: counter(code)".";
 	}
 }
+
+
+
+// Animation
+//------------------------------------------------------------------------------
+
+@keyframes fadeInDown {
+	0% {
+		opacity: 0;
+		transform: translate3d(0, -10px, 0);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		transform: translate3d(0, 10px, 0);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes fallIn {
+	0% {
+		opacity: 0;
+		transform: scale3d(1.05, 1.05, 1);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale3d(1, 1, 1);
+	}
+}

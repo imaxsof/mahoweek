@@ -3,6 +3,14 @@
 
 .logo {
 	color: @logo-light;
+	animation-name: none;
+	animation-duration: @duration;
+	animation-timing-function: @timing-function;
+	animation-fill-mode: both;
+
+	.board--load & {
+		animation-name: fadeInDown;
+	}
 
 	h1,
 	h2 {
