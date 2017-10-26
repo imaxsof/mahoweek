@@ -20,11 +20,11 @@
 	// Если это стартовый визит пользователя на сайт
 	if ($('body').attr('data-visit') == 'start') {
 		// Открываем окно приветствия
-		$('.js-open-welcome').trigger('click');
+		$('.js-open-hello').trigger('click');
 	}
 
 	// Закрываем окно приветствия
-	$('.js-close-welcome').on('click', function() {
+	$('.js-close-hello').on('click', function() {
 		$('.cartonbox-close').trigger('click');
 	});
 
