@@ -3,8 +3,8 @@
   "version": "1.17.0",
   "dependencies": {
     "cartonbox": "^1.5.4",
-    "firebase": "^4.5.1",
-    "jquery": "^2.2.4",
+    "firebase": "^4.6.0",
+    "jquery": "^3.2.1",
     "normalize.css": "7.0.0",
     "sortablejs": "^1.6.1"
   },
