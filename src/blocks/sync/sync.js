@@ -48,8 +48,8 @@ firebase.initializeApp(firebaseConfig);
 						// Обновляем хранилище
 						localStorage.setItem('mahoweek', JSON.stringify(data.val()));
 
-						// Редиректим на главную
-						window.location.replace('/');
+						// Перезагружаем страницу
+						window.location.reload(true);
 					}
 				});
 			}
@@ -154,7 +154,7 @@ firebase.initializeApp(firebaseConfig);
 			$('.sync__indicator').attr('data-type', 'process');
 
 			// Сверяем данные
-			firebase.database().ref('/users/' + firebase.auth().currentUser.uid + '/database').on('value', function(data) {
+			return firebase.database().ref('/users/' + firebase.auth().currentUser.uid + '/database').once('value').then(function(data) {
 				// Парсим хранилище
 				var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
@@ -163,8 +163,8 @@ firebase.initializeApp(firebaseConfig);
 					// Обновляем хранилище
 					localStorage.setItem('mahoweek', JSON.stringify(data.val()));
 
-					// Редиректим на главную
-					window.location.replace('/');
+					// Перезагружаем страницу
+					window.location.reload(true);
 
 				// Если в БД старая дата обновления
 				} else {
@@ -184,6 +184,9 @@ firebase.initializeApp(firebaseConfig);
 						console.error(error.code + ': ' + error.message);
 					});
 				}
+			}).catch(function(error) {
+				// Выводим ошибку
+				console.error(error.code + ': ' + error.message);
 			});
 		}
 	});
@@ -213,8 +216,8 @@ function checkUser(uid) {
 				// Ставим метку, что пользователь успешно авторизовался
 				localStorage.setItem('authorizedUser', true);
 
-				// Редиректим на главную
-				window.location.replace('/');
+				// Перезагружаем страницу
+				window.location.reload(true);
 			}).catch(function(error) {
 				// Выводим ошибку
 				console.error(error.code + ': ' + error.message);
@@ -228,8 +231,8 @@ function checkUser(uid) {
 			// Обновляем хранилище из БД
 			localStorage.setItem('mahoweek', JSON.stringify(data.val()));
 
-			// Редиректим на главную
-			window.location.replace('/');
+			// Перезагружаем страницу
+			window.location.reload(true);
 		}
 	}).catch(function(error) {
 		// Выводим ошибку
