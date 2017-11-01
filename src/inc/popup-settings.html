@@ -9,13 +9,13 @@
 
 			<p class="text-center">
 				Войти через&nbsp;
-				<button type="button" class="btn  btn--primary  js-toggle-auth" data-provider="facebook" style="margin-top: 5px; margin-bottom: 5px;">
+				<button type="button" class="btn  btn--primary  js-login-sync" data-provider="facebook" style="margin-top: 5px; margin-bottom: 5px;">
 					<svg>
 						<use xlink:href="#icon-facebook"></use>
 					</svg><span>Фейсбук</span>
 				</button>
 				&nbsp;или&nbsp;
-				<button type="button" class="btn  btn--primary  js-toggle-auth" data-provider="twitter" style="margin-top: 5px; margin-bottom: 5px;">
+				<button type="button" class="btn  btn--primary  js-login-sync" data-provider="twitter" style="margin-top: 5px; margin-bottom: 5px;">
 					<svg>
 						<use xlink:href="#icon-twitter"></use>
 					</svg><span>Твиттер</span>
@@ -34,8 +34,9 @@
 
 			<div class="sync__name"></div>
 
-			<div class="sync__off">
-				<span class="btn  btn--default  js-toggle-auth">Отключить</span>
+			<div class="sync__control">
+				<button type="button" class="btn  btn--primary  js-get-sync">Синхронизировать</button>
+				<button type="button" class="btn  btn--default  js-logout-sync">Отключить</button>
 			</div>
 		</div>
 	</div>

@@ -12,6 +12,30 @@
 }
 
 .sync__auth {
+	position: relative;
+
+	&::before {
+		position: absolute;
+		content: "";
+		z-index: 1;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-color: @light-primary;
+		opacity: 0;
+		visibility: hidden;
+		transition-property: opacity, visibility;
+		transition: @duration @timing-function;
+	}
+
+	&--load {
+		&::before {
+			opacity: 0.9;
+			visibility: visible;
+		}
+	}
+
 	.btn[data-provider="twitter"] {
 		background-color: #1DA1F3;
 		color: @light-primary;
@@ -130,6 +154,14 @@
 	min-height: @line-height;
 }
 
-.sync__off {
-	margin-top: 20px;
+.sync__control {
+	margin: 20px -5px -10px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	.btn {
+		min-width: auto;
+		margin: 0 5px 10px
+	}
 }

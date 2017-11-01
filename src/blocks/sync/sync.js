@@ -18,7 +18,7 @@ firebase.initializeApp(firebaseConfig);
 
 (function() {
 
-	// Если пользователь был авторизован
+	// Если пользователь авторизован
 	if (localStorage.getItem('authorizedUser')) {
 		// Показываем панель пользователя
 		$('.sync__auth').hide();
@@ -29,6 +29,7 @@ firebase.initializeApp(firebaseConfig);
 
 		// Получаем данные о пользователе из Firebase
 		firebase.auth().onAuthStateChanged(function(user) {
+			// Если пользователь идентифицирован
 			if (user) {
 				// Вставляем аватар и имя
 				$('.sync__ava').css('background-image', 'url(' + user.photoURL + ')');
@@ -37,8 +38,9 @@ firebase.initializeApp(firebaseConfig);
 				// Показываем индикатор, что все окей
 				$('.sync__indicator').attr('data-type', 'ok');
 
+				// Сверяем данные
 				firebase.database().ref('/users/' + user.uid + '/database').on('value', function(data) {
-					// Если в БД данные новее
+					// Если в БД дата обновления новее
 					if (data.val().settings.updatedTime > JSON.parse(localStorage.getItem('mahoweek')).settings.updatedTime) {
 						// Показываем индикатор обновления
 						$('.sync__indicator').attr('data-type', 'process');
@@ -63,14 +65,19 @@ firebase.initializeApp(firebaseConfig);
 
 (function() {
 
-	// Переключаем вход/выход пользователя
-	$('.js-toggle-auth').on('click', function() {
-		// Если пользователь не авторизован
+	// Логиним пользователя
+	$('.js-login-sync').on('click', function() {
+		var isThis = $(this);
+
+		// Показываем процесс аутентификации
+		$('.sync__auth').addClass('sync__auth--load');
+
+		// Если пользователь не идентифицирован
 		if (!firebase.auth().currentUser) {
 			// Определяем способы аутентификации
-			if ($(this).attr('data-provider') == 'twitter') {
+			if (isThis.attr('data-provider') == 'twitter') {
 				var provider = new firebase.auth.TwitterAuthProvider();
-			} else if ($(this).attr('data-provider') == 'facebook') {
+			} else if (isThis.attr('data-provider') == 'facebook') {
 				var provider = new firebase.auth.FacebookAuthProvider();
 				provider.addScope('public_profile');
 				provider.addScope('email');
@@ -83,6 +90,9 @@ firebase.initializeApp(firebaseConfig);
 					// Проверяем пользователя
 					checkUser(result.user.uid);
 				}).catch(function(error) {
+					// Скрываем процесс аутентификации
+					$('.sync__auth').removeClass('sync__auth--load');
+
 					// Выводим ошибку
 					console.error(error.code + ': ' + error.message);
 				});
@@ -92,9 +102,27 @@ firebase.initializeApp(firebaseConfig);
 				// Открываем аутентификацию в текущем окне
 				firebase.auth().signInWithRedirect(provider);
 			}
+		}
+	});
 
-		// Если пользователь был авторизован
-		} else {
+	// При редиректе после аутентификации
+	firebase.auth().getRedirectResult().then(function(result) {
+		if (result.credential) {
+			// Проверяем пользователя
+			checkUser(result.user.uid);
+		}
+	}).catch(function(error) {
+		// Скрываем процесс аутентификации
+		$('.sync__auth').removeClass('sync__auth--load');
+
+		// Выводим ошибку
+		console.error(error.code + ': ' + error.message);
+	});
+
+	// Разогиниваем пользователя
+	$('.js-logout-sync').on('click', function() {
+		// Если пользователь идентифицирован
+		if (firebase.auth().currentUser) {
 			// Разлогиниваем
 			firebase.auth().signOut().then(function() {
 				// Очищаем хранилище полностью
@@ -110,15 +138,54 @@ firebase.initializeApp(firebaseConfig);
 		}
 	});
 
-	// При редиректе после аутентификации
-	firebase.auth().getRedirectResult().then(function(result) {
-		if (result.credential) {
-			// Проверяем пользователя
-			checkUser(result.user.uid);
+}());
+
+
+
+// Синхронизируем вручную
+//------------------------------------------------------------------------------
+
+(function() {
+
+	$('.js-get-sync').on('click', function() {
+		// Если пользователь идентифицирован
+		if (firebase.auth().currentUser) {
+			// Показываем индикатор обновления
+			$('.sync__indicator').attr('data-type', 'process');
+
+			// Сверяем данные
+			firebase.database().ref('/users/' + firebase.auth().currentUser.uid + '/database').on('value', function(data) {
+				// Парсим хранилище
+				var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+
+				// Если в БД дата обновления новее или такая же
+				if (data.val().settings.updatedTime >= mahoweekStorage.settings.updatedTime) {
+					// Обновляем хранилище
+					localStorage.setItem('mahoweek', JSON.stringify(data.val()));
+
+					// Редиректим на главную
+					window.location.replace('/');
+
+				// Если в БД старая дата обновления
+				} else {
+					// Отправляем изменения в БД
+					firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/database').set({
+						"lists": mahoweekStorage.lists,
+						"tasks": mahoweekStorage.tasks,
+						"settings": mahoweekStorage.settings
+					}).then(function() {
+						// Показываем индикатор, что все окей
+						$('.sync__indicator').attr('data-type', 'ok');
+					}).catch(function(error) {
+						// Показываем индикатор краха
+						$('.sync__indicator').attr('data-type', 'fail');
+
+						// Выводим ошибку
+						console.error(error.code + ': ' + error.message);
+					});
+				}
+			});
 		}
-	}).catch(function(error) {
-		// Выводим ошибку
-		console.error(error.code + ': ' + error.message);
 	});
 
 }());
@@ -130,13 +197,13 @@ firebase.initializeApp(firebaseConfig);
 
 function checkUser(uid) {
 
-	// Парсим хранилище
-	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
-
 	// Проверяем, существует ли пользователь в БД
 	return firebase.database().ref('/users/' + uid + '/database').once('value').then(function(data) {
 		// Если пользователя нет
 		if (data.val() === null) {
+			// Парсим хранилище
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+
 			// Создаем пользователя в БД и заносим данные
 			firebase.database().ref('users/' + uid + '/database').set({
 				"lists": mahoweekStorage.lists,

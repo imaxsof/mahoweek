@@ -464,11 +464,12 @@ function updateStorage(data) {
 	// Обновляем локально
 	localStorage.setItem('mahoweek', JSON.stringify(data));
 
-	// Отправляем изменения в БД
+	// Если пользователь идентифицирован
 	if (firebase.auth().currentUser) {
 		// Показываем индикатор обновления
 		$('.sync__indicator').attr('data-type', 'process');
 
+		// Отправляем изменения в БД
 		firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/database').set({
 			"lists": data.lists,
 			"tasks": data.tasks,
