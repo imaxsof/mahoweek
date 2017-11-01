@@ -121,50 +121,6 @@ var BOARD = $('.board'),
 
 		// Добавляем тему к доске
 		THEME_BOARD.addClass('board__theme--' + mahoweekStorage.settings.theme);
-
-
-
-		// Временная мера
-		//------------------------------------------------------------------------------
-
-		// Переводим даты меток в актуальный формат (16.07.2017)
-		for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
-			if (mahoweekStorage.tasks[i].markers) {
-				for (var n = 0; n < mahoweekStorage.tasks[i].markers.length; n ++) {
-					if (/([\d]{2}).([\d]{2}).([\d]{4})/ig.test(mahoweekStorage.tasks[i].markers[n].date)) {
-						mahoweekStorage.tasks[i].markers[n].date = mahoweekStorage.tasks[i].markers[n].date.replace(/([\d]{2}).([\d]{2}).([\d]{4})/ig, '$3-$2-$1')
-					}
-				}
-			}
-		}
-
-		// Добавляем настройку счетчика в фавиконке (19.07.2017)
-		if (mahoweekStorage.settings.faviconCounter === undefined) {
-			mahoweekStorage.settings.faviconCounter = true;
-		}
-
-		// Добавляем дату создания хранилища (23.07.2017)
-		if (mahoweekStorage.settings.createdTime === undefined) {
-			mahoweekStorage.settings.createdTime = new Date().getTime();
-		}
-
-		// Добавляем настройку удаления выполненных дел (24.07.2017)
-		if (mahoweekStorage.settings.deleteCompletedTasks === undefined) {
-			mahoweekStorage.settings.deleteCompletedTasks = false;
-		}
-
-		// Добавляем дату обновления хранилища (11.08.2017)
-		if (mahoweekStorage.settings.updatedTime === undefined) {
-			mahoweekStorage.settings.updatedTime = new Date().getTime();
-		}
-
-		// Обновляем хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(mahoweekStorage));
-
-		//------------------------------------------------------------------------------
-
-
-
 	}
 
 }());
