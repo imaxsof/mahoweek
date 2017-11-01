@@ -81,15 +81,12 @@ h3 {
 // Links
 //------------------------------------------------------------------------------
 
-a:not(.btn) {
-	// text-decoration-skip: ink;
-	// text-decoration-color: fade(@link-color, 30%);
+a {
 	text-decoration: none;
 	color: @link-color;
 
 	body:not(.mobile) &:hover {
-		color: @link-color-hover !important;
-		// text-decoration-color: fade(@link-color-hover, 30%) !important;
+		color: @link-color-hover;
 	}
 }
 
@@ -98,18 +95,17 @@ a:not(.btn) {
 // Buttons
 //------------------------------------------------------------------------------
 
-button,
 .btn {
 	outline: none;
 	display: inline-block;
 	text-decoration: none;
 	border: 0;
 	border-radius: (@border-radius / 2);
-	padding: 10px 15px;
+	padding: 10px 20px;
 	cursor: pointer;
 	line-height: @line-height;
 	position: relative;
-	min-width: 200px;
+	min-width: 180px;
 	text-align: center;
 
 	body:not(.mobile) &:active {
@@ -118,10 +114,10 @@ button,
 
 	&--default {
 		border: 1px solid @dark-disabled;
-		padding: 8px 13px;
+		padding: 9px 19px;
 		background-color: @btn-default-bg;
-		color: @dark-primary;
-		fill: @dark-primary;
+		color: @dark-primary !important;
+		fill: @dark-primary !important;
 
 		body:not(.mobile) &:hover {
 			background-color: @btn-default-bg-hover;
@@ -130,8 +126,8 @@ button,
 
 	&--primary {
 		background-color: @btn-primary-bg;
-		color: @light-primary;
-		fill: @light-primary;
+		color: @light-primary !important;
+		fill: @light-primary !important;
 
 		body:not(.mobile) &:hover {
 			background-color: @btn-primary-bg-hover;
@@ -140,8 +136,8 @@ button,
 
 	&--danger {
 		background-color: @btn-danger-bg;
-		color: @light-primary;
-		fill: @light-primary;
+		color: @light-primary !important;
+		fill: @light-primary !important;
 
 		body:not(.mobile) &:hover {
 			background-color: @btn-danger-bg-hover;
@@ -316,3 +312,13 @@ ol.list-custom {
 		transform: scale3d(1, 1, 1);
 	}
 }
+
+// @keyframes spin {
+// 	0% {
+// 		transform:rotate(0deg);
+// 	}
+
+// 	100% {
+// 		transform:rotate(360deg);
+// 	}
+// }
