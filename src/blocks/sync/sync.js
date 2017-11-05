@@ -45,8 +45,15 @@ firebase.initializeApp(firebaseConfig);
 						// Показываем индикатор обновления
 						$('.sync__indicator').attr('data-type', 'process');
 
+						// Генерируем данные
+						var mahoweekData = {
+							lists: data.val().lists !== undefined ? [data.val().lists] : [],
+							tasks: data.val().tasks !== undefined ? [data.val().tasks] : [],
+							settings: data.val().settings
+						}
+
 						// Обновляем хранилище
-						localStorage.setItem('mahoweek', JSON.stringify(data.val()));
+						localStorage.setItem('mahoweek', JSON.stringify(mahoweekData));
 
 						// Перезагружаем страницу
 						window.location.reload(true);
@@ -160,8 +167,15 @@ firebase.initializeApp(firebaseConfig);
 
 				// Если в БД дата обновления новее или такая же
 				if (data.val().settings.updatedTime >= mahoweekStorage.settings.updatedTime) {
+					// Генерируем данные
+					var mahoweekData = {
+						lists: data.val().lists !== undefined ? [data.val().lists] : [],
+						tasks: data.val().tasks !== undefined ? [data.val().tasks] : [],
+						settings: data.val().settings
+					}
+
 					// Обновляем хранилище
-					localStorage.setItem('mahoweek', JSON.stringify(data.val()));
+					localStorage.setItem('mahoweek', JSON.stringify(mahoweekData));
 
 					// Перезагружаем страницу
 					window.location.reload(true);
@@ -228,8 +242,15 @@ function checkUser(uid) {
 			// Ставим метку, что пользователь успешно авторизовался
 			localStorage.setItem('authorizedUser', true);
 
+			// Генерируем данные
+			var mahoweekData = {
+				lists: data.val().lists !== undefined ? [data.val().lists] : [],
+				tasks: data.val().tasks !== undefined ? [data.val().tasks] : [],
+				settings: data.val().settings
+			}
+
 			// Обновляем хранилище из БД
-			localStorage.setItem('mahoweek', JSON.stringify(data.val()));
+			localStorage.setItem('mahoweek', JSON.stringify(mahoweekData));
 
 			// Перезагружаем страницу
 			window.location.reload(true);
