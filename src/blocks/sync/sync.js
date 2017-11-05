@@ -47,8 +47,8 @@ firebase.initializeApp(firebaseConfig);
 
 						// Генерируем данные
 						var mahoweekData = {
-							lists: data.val().lists !== undefined ? [data.val().lists] : [],
-							tasks: data.val().tasks !== undefined ? [data.val().tasks] : [],
+							lists: data.val().lists !== undefined ? data.val().lists : [],
+							tasks: data.val().tasks !== undefined ? data.val().tasks : [],
 							settings: data.val().settings
 						}
 
@@ -169,8 +169,8 @@ firebase.initializeApp(firebaseConfig);
 				if (data.val().settings.updatedTime >= mahoweekStorage.settings.updatedTime) {
 					// Генерируем данные
 					var mahoweekData = {
-						lists: data.val().lists !== undefined ? [data.val().lists] : [],
-						tasks: data.val().tasks !== undefined ? [data.val().tasks] : [],
+						lists: data.val().lists !== undefined ? data.val().lists : [],
+						tasks: data.val().tasks !== undefined ? data.val().tasks : [],
 						settings: data.val().settings
 					}
 
@@ -244,8 +244,8 @@ function checkUser(uid) {
 
 			// Генерируем данные
 			var mahoweekData = {
-				lists: data.val().lists !== undefined ? [data.val().lists] : [],
-				tasks: data.val().tasks !== undefined ? [data.val().tasks] : [],
+				lists: data.val().lists !== undefined ? data.val().lists : [],
+				tasks: data.val().tasks !== undefined ? data.val().tasks : [],
 				settings: data.val().settings
 			}
 
