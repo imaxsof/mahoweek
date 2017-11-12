@@ -4,8 +4,9 @@
 (function() {
 
 	// Настраиваем Картонбокс
-	var options = {
+	var cartonboxConfig = {
 		speed: 1,
+		nav: false,
 		preload: false,
 		closeHtml: '<svg><use xlink:href="#icon-close"></use></svg>',
 		onStartBefore: function() {
@@ -15,10 +16,10 @@
 	};
 
 	// Инициализируем Картонбокс
-	$.cartonbox(options);
+	$.cartonbox(cartonboxConfig);
 
-	// Если это стартовый визит пользователя на сайт
-	if ($('body').attr('data-visit') == 'start') {
+	// Если хеш содержит вывод приветственного сообщения
+	if (window.location.hash == '#hello') {
 		// Открываем окно приветствия
 		$('.js-open-hello').trigger('click');
 	}

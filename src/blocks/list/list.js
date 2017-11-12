@@ -4,12 +4,12 @@
 // Выводим списки на доске
 //------------------------------------------------------------------------------
 
-(function() {
+function loadList() {
 
 	// Начинаем генерировать списки
 	var listBoardCreate = '';
 
-	// Парсим хранилище
+	// Парсим Хранилище
 	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
 	// Пробегаемся по каждому списку
@@ -20,16 +20,12 @@
 	// Выводим списки
 	LIST_BOARD.prepend(listBoardCreate);
 
-}());
+	// Выводим сетку дат в шапку существующих списков
+	// и в строки добавления дела
+	LIST_BOARD.find('.list__grid').html(makeGrid('list'));
+	LIST_BOARD.find('.task__grid').html(makeGrid());
 
-
-
-// Выводим сетку дат в шапку существующих списков
-// и в строки добавления дела
-//------------------------------------------------------------------------------
-
-LIST_BOARD.find('.list__grid').html(makeGrid('list'));
-LIST_BOARD.find('.task__grid').html(makeGrid());
+}
 
 
 
@@ -44,7 +40,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 			listName = 'Краткосрочный план дел №' + (LIST_BOARD.find('.list').length + 1),
 			listCreatedTime = new Date().getTime();
 
-		// Парсим хранилище
+		// Парсим Хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
 		// Добавляем новый список
@@ -54,7 +50,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 			createdTime: listCreatedTime
 		});
 
-		// Обновляем хранилище
+		// Обновляем Хранилище
 		updateStorage(mahoweekStorage);
 
 		// Выводим список на доске
@@ -99,21 +95,21 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 			var listId = isThis.parents('.list').attr('data-id'),
 				listName = isThis.val();
 
-			// Парсим хранилище
+			// Парсим Хранилище
 			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-			// Получаем элемент списка в хранилище
+			// Получаем элемент списка в Хранилище
 			var listElement = mahoweekStorage.lists.filter(function(value) {
 				return value.id == listId;
 			});
 
-			// Получаем индекс списка в хранилище
+			// Получаем индекс списка в Хранилище
 			var listIndex = mahoweekStorage.lists.indexOf(listElement[0]);
 
 			// Изменяем заголовок списка
 			mahoweekStorage.lists[listIndex].name = listName;
 
-			// Обновляем хранилище
+			// Обновляем Хранилище
 			updateStorage(mahoweekStorage);
 
 			// Убираем фокус с этого поля
@@ -146,15 +142,15 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 		// Если в списке не было дел
 		// или ответом на вопрос было «Да»
 		if (!taskTotal || question) {
-			// Парсим хранилище
+			// Парсим Хранилище
 			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-			// Получаем элемент списка в хранилище
+			// Получаем элемент списка в Хранилище
 			var listElement = mahoweekStorage.lists.filter(function(value) {
 				return value.id == listId;
 			});
 
-			// Получаем индекс списка в хранилище
+			// Получаем индекс списка в Хранилище
 			var listIndex = mahoweekStorage.lists.indexOf(listElement[0]);
 
 			// Удаляем список
@@ -176,7 +172,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 				mahoweekStorage.tasks = tasksNew;
 			}
 
-			// Обновляем хранилище
+			// Обновляем Хранилище
 			updateStorage(mahoweekStorage);
 
 			// Удаляем список из доски
@@ -214,10 +210,10 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 		},
 		onEnd: function(evt) {
 			if (Number.isInteger(evt.oldIndex) && Number.isInteger(evt.newIndex) && evt.oldIndex >= 0 && evt.newIndex >= 0 && evt.oldIndex != evt.newIndex) {
-				// Парсим хранилище
+				// Парсим Хранилище
 				var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-				// Проверяем присутствуют ли сортируемые списки в хранилище
+				// Проверяем присутствуют ли сортируемые списки в Хранилище
 				if (mahoweekStorage.lists[evt.oldIndex] !== undefined && mahoweekStorage.lists[evt.newIndex] !== undefined) {
 					// Получаем удаленный элемент
 					var listRemove = mahoweekStorage.lists.splice(evt.oldIndex, 1)[0];
@@ -225,7 +221,7 @@ LIST_BOARD.find('.task__grid').html(makeGrid());
 					// Сортируем
 					mahoweekStorage.lists.splice(evt.newIndex, 0, listRemove);
 
-					// Обновляем хранилище
+					// Обновляем Хранилище
 					updateStorage(mahoweekStorage);
 
 				// Если не присутствуют

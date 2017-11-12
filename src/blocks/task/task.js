@@ -4,7 +4,7 @@
 // Выводим дела в списки
 //------------------------------------------------------------------------------
 
-(function() {
+function loadTask() {
 
 	// Вычисляем последний момент прошедшей недели
 	var dayNumber = new Date().getDay();
@@ -23,7 +23,7 @@
 	// Готовим новый массив для дел
 	var tasksNew = [];
 
-	// Парсим хранилище
+	// Парсим Хранилище
 	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
 	// Пробегаемся по каждому делу
@@ -59,7 +59,7 @@
 		// Заменяем старый массив дел на новый
 		mahoweekStorage.tasks = tasksNew;
 
-		// Обновляем хранилище
+		// Обновляем Хранилище
 		updateStorage(mahoweekStorage);
 	}
 
@@ -69,7 +69,7 @@
 	// Меняем фавиконку
 	changeFavicon();
 
-}());
+}
 
 
 
@@ -112,7 +112,7 @@
 			taskName = isThis.val(),
 			taskCreatedTime = new Date().getTime();
 
-		// Парсим хранилище
+		// Парсим Хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
 		// Добавляем новое дело
@@ -123,7 +123,7 @@
 			createdTime: taskCreatedTime
 		});
 
-		// Обновляем хранилище
+		// Обновляем Хранилище
 		updateStorage(mahoweekStorage);
 
 		// Стираем поле ввода добавления дела
@@ -167,15 +167,15 @@
 			taskCompleted = task.hasClass('task--completed'),
 			taskDateToday = task.find('.grid__date--today').attr('data-date');
 
-		// Парсим хранилище
+		// Парсим Хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-		// Получаем элемент дела в хранилище
+		// Получаем элемент дела в Хранилище
 		var taskElement = mahoweekStorage.tasks.filter(function(value) {
 			return value.id == taskId;
 		});
 
-		// Получаем индекс дела в хранилище
+		// Получаем индекс дела в Хранилище
 		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
 
 		// Если дело невыполнено
@@ -275,7 +275,7 @@
 			}
 		}
 
-		// Обновляем хранилище
+		// Обновляем Хранилище
 		updateStorage(mahoweekStorage);
 
 		// Изменяем стиль статуса дела
@@ -306,21 +306,21 @@
 			var taskId = isThis.parents('.task').attr('data-id'),
 				taskName = isThis.val();
 
-			// Парсим хранилище
+			// Парсим Хранилище
 			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-			// Получаем элемент дела в хранилище
+			// Получаем элемент дела в Хранилище
 			var taskElement = mahoweekStorage.tasks.filter(function(value) {
 				return value.id == taskId;
 			});
 
-			// Получаем индекс дела в хранилище
+			// Получаем индекс дела в Хранилище
 			var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
 
 			// Изменяем текст дела
 			mahoweekStorage.tasks[taskIndex].name = taskName;
 
-			// Обновляем хранилище
+			// Обновляем Хранилище
 			updateStorage(mahoweekStorage);
 
 			// Убираем фокус с этого поля
@@ -344,7 +344,7 @@
 		var listId = isThis.parents('.list').attr('data-id'),
 			taskId = isThis.parents('.task').attr('data-id');
 
-		// Парсим хранилище
+		// Парсим Хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
 		// Получаем элемент дела в хранилище
@@ -352,13 +352,13 @@
 			return value.id == taskId;
 		});
 
-		// Получаем индекс дела в хранилище
+		// Получаем индекс дела в Хранилище
 		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
 
 		// Удаляем дело
 		mahoweekStorage.tasks.splice(taskIndex, 1);
 
-		// Обновляем хранилище
+		// Обновляем Хранилище
 		updateStorage(mahoweekStorage);
 
 		// Удаляем дело из списка

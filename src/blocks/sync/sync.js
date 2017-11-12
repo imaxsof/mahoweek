@@ -13,7 +13,7 @@ firebase.initializeApp(firebaseConfig);
 
 
 
-// Работаем с идентификацией
+// Работаем с идентификацией пользователя
 //------------------------------------------------------------------------------
 
 (function() {
@@ -35,39 +35,57 @@ firebase.initializeApp(firebaseConfig);
 				$('.sync__ava').css('background-image', 'url(' + user.photoURL + ')');
 				$('.sync__name').text(user.displayName);
 
-				// Показываем индикатор, что все окей
-				$('.sync__indicator').attr('data-type', 'ok');
+				// Считаем кол-во синхронизаций изменений
+				var syncCount = 0;
 
-				// Сверяем данные
+				// Подключаемся к БД и синхронизируем изменения
 				firebase.database().ref('/users/' + user.uid + '/database').on('value', function(data) {
-					// Если в БД дата обновления новее
-					if (data.val().settings.updatedTime > JSON.parse(localStorage.getItem('mahoweek')).settings.updatedTime) {
-						// Показываем индикатор обновления
-						$('.sync__indicator').attr('data-type', 'process');
+					syncCount++;
 
-						// Генерируем данные
-						var mahoweekData = {
+					// Если в БД дата обновления новее, чем в Хранилище
+					if (data.val().settings.updatedTime > JSON.parse(localStorage.getItem('mahoweek')).settings.updatedTime) {
+						// Генерируем данные для Хранилища из БД
+						var storageData = {
 							lists: data.val().lists !== undefined ? data.val().lists : [],
 							tasks: data.val().tasks !== undefined ? data.val().tasks : [],
 							settings: data.val().settings
 						}
 
-						// Обновляем хранилище
-						localStorage.setItem('mahoweek', JSON.stringify(mahoweekData));
+						// Обновляем Хранилище
+						localStorage.setItem('mahoweek', JSON.stringify(storageData));
 
 						// Перезагружаем страницу
 						window.location.reload(true);
+
+					// Если это первая синхронизация
+					} else if (syncCount == 1) {
+						// Показываем индикатор, что все окей
+						$('.sync__indicator').attr('data-type', 'ok');
+
+						// Загружаем списки
+						loadList();
+
+						// Загружаем дела
+						loadTask();
 					}
 				});
 			}
 		});
+
+	// Если пользователь не авторизован
+	} else {
+		// Загружаем списки
+		loadList();
+
+		// Загружаем дела
+		loadTask();
 	}
 
 }());
 
 
 
-// Работаем с аутентификацией
+// Работаем с аутентификацией пользователя
 //------------------------------------------------------------------------------
 
 (function() {
@@ -114,6 +132,7 @@ firebase.initializeApp(firebaseConfig);
 
 	// При редиректе после аутентификации
 	firebase.auth().getRedirectResult().then(function(result) {
+		// Если данные от провайдера получены
 		if (result.credential) {
 			// Проверяем пользователя
 			checkUser(result.user.uid);
@@ -132,11 +151,13 @@ firebase.initializeApp(firebaseConfig);
 		if (firebase.auth().currentUser) {
 			// Разлогиниваем
 			firebase.auth().signOut().then(function() {
-				// Очищаем хранилище полностью
+				// Очищаем локальное хранилище полностью
 				localStorage.clear();
 
-				// Редиректим на главную
-				window.location.replace('/#bye');
+				// Добавляем хеш для вывода прощального сообщения
+				window.location.replace('#bye');
+
+				// Перезагружаем страницу
 				window.location.reload(true);
 			}).catch(function(error) {
 				// Выводим ошибку
@@ -149,7 +170,7 @@ firebase.initializeApp(firebaseConfig);
 
 
 
-// Синхронизируем вручную
+// Синхронизируем Хранилище и БД вручную
 //------------------------------------------------------------------------------
 
 (function() {
@@ -160,29 +181,29 @@ firebase.initializeApp(firebaseConfig);
 			// Показываем индикатор обновления
 			$('.sync__indicator').attr('data-type', 'process');
 
-			// Сверяем данные
+			// Подключаемся к БД единоразово
 			return firebase.database().ref('/users/' + firebase.auth().currentUser.uid + '/database').once('value').then(function(data) {
-				// Парсим хранилище
+				// Парсим Хранилище
 				var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-				// Если в БД дата обновления новее или такая же
+				// Если в БД дата обновления новее или такая же как в Хранилище
 				if (data.val().settings.updatedTime >= mahoweekStorage.settings.updatedTime) {
-					// Генерируем данные
-					var mahoweekData = {
+					// Генерируем данные для Хранилища из БД
+					var storageData = {
 						lists: data.val().lists !== undefined ? data.val().lists : [],
 						tasks: data.val().tasks !== undefined ? data.val().tasks : [],
 						settings: data.val().settings
 					}
 
-					// Обновляем хранилище
-					localStorage.setItem('mahoweek', JSON.stringify(mahoweekData));
+					// Обновляем Хранилище
+					localStorage.setItem('mahoweek', JSON.stringify(storageData));
 
 					// Перезагружаем страницу
 					window.location.reload(true);
 
 				// Если в БД старая дата обновления
 				} else {
-					// Отправляем изменения в БД
+					// Отправляем изменения в БД из Хранилища
 					firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/database').set({
 						"lists": mahoweekStorage.lists,
 						"tasks": mahoweekStorage.tasks,
@@ -190,6 +211,9 @@ firebase.initializeApp(firebaseConfig);
 					}).then(function() {
 						// Показываем индикатор, что все окей
 						$('.sync__indicator').attr('data-type', 'ok');
+
+						// Перезагружаем страницу
+						window.location.reload(true);
 					}).catch(function(error) {
 						// Показываем индикатор краха
 						$('.sync__indicator').attr('data-type', 'fail');
@@ -199,6 +223,9 @@ firebase.initializeApp(firebaseConfig);
 					});
 				}
 			}).catch(function(error) {
+				// Показываем индикатор краха
+				$('.sync__indicator').attr('data-type', 'fail');
+
 				// Выводим ошибку
 				console.error(error.code + ': ' + error.message);
 			});
@@ -209,19 +236,19 @@ firebase.initializeApp(firebaseConfig);
 
 
 
-// Работаем с авторизацией
+// Работаем с авторизацией пользователя
 //------------------------------------------------------------------------------
 
 function checkUser(uid) {
 
-	// Проверяем, существует ли пользователь в БД
+	// Подключаемся к БД единоразово
 	return firebase.database().ref('/users/' + uid + '/database').once('value').then(function(data) {
-		// Если пользователя нет
+		// Если пользователя в БД нет
 		if (data.val() === null) {
-			// Парсим хранилище
+			// Парсим Хранилище
 			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-			// Создаем пользователя в БД и заносим данные
+			// Создаем пользователя в БД и заносим данные из Хранилища
 			firebase.database().ref('users/' + uid + '/database').set({
 				"lists": mahoweekStorage.lists,
 				"tasks": mahoweekStorage.tasks,
@@ -237,20 +264,20 @@ function checkUser(uid) {
 				console.error(error.code + ': ' + error.message);
 			});
 
-		// Если пользователь есть
+		// Если пользователь в БД есть
 		} else {
-			// Ставим метку, что пользователь успешно авторизовался
-			localStorage.setItem('authorizedUser', true);
-
-			// Генерируем данные
-			var mahoweekData = {
+			// Генерируем данные для Хранилища из БД
+			var storageData = {
 				lists: data.val().lists !== undefined ? data.val().lists : [],
 				tasks: data.val().tasks !== undefined ? data.val().tasks : [],
 				settings: data.val().settings
 			}
 
-			// Обновляем хранилище из БД
-			localStorage.setItem('mahoweek', JSON.stringify(mahoweekData));
+			// Обновляем Хранилище
+			localStorage.setItem('mahoweek', JSON.stringify(storageData));
+
+			// Ставим метку, что пользователь успешно авторизовался
+			localStorage.setItem('authorizedUser', true);
 
 			// Перезагружаем страницу
 			window.location.reload(true);

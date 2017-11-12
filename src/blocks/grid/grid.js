@@ -15,15 +15,15 @@
 			taskId = task.attr('data-id'),
 			taskDate = isThis.attr('data-date');
 
-		// Парсим хранилище
+		// Парсим Хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-		// Получаем элемент дела в хранилище
+		// Получаем элемент дела в Хранилище
 		var taskElement = mahoweekStorage.tasks.filter(function(value) {
 			return value.id == taskId;
 		});
 
-		// Получаем индекс дела в хранилище
+		// Получаем индекс дела в Хранилище
 		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
 
 		// Если массива маркеров не существовало
@@ -54,7 +54,7 @@
 				return value.date == taskDate;
 			});
 
-			// Если существовала, то удаляем
+			// Если метка существовала
 			if (markerElement != '') {
 				// Получаем индекс метки
 				var markerIndex = mahoweekStorage.tasks[taskIndex].markers.indexOf(markerElement[0]);
@@ -65,8 +65,9 @@
 				// Убираем метку из сетки дат
 				isThis.removeClass('grid__date--bull');
 
-			// Иначе создаем новую
+			// Если метка не существовала
 			} else {
+				// Добавляем метку
 				mahoweekStorage.tasks[taskIndex].markers.push({
 					date: taskDate,
 					label: 'bull'
@@ -87,7 +88,7 @@
 			}
 		}
 
-		// Обновляем хранилище
+		// Обновляем Хранилище
 		updateStorage(mahoweekStorage);
 
 		// Изменяем стиль статуса дела
