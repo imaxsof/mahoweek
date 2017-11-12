@@ -69,6 +69,17 @@ firebase.initializeApp(firebaseConfig);
 						loadTask();
 					}
 				});
+
+			// Если пользователь не идентифицирован
+			} else {
+				// Очищаем локальное хранилище полностью
+				localStorage.clear();
+
+				// Добавляем хеш для вывода прощального сообщения
+				window.location.replace('#bye');
+
+				// Перезагружаем страницу
+				window.location.reload(true);
 			}
 		});
 
