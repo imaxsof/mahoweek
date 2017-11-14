@@ -296,7 +296,7 @@ function makeList(id, name) {
 
 	// Генерируем код
 	return '' +
-	'<div class="list" data-id="' + id + '">' +
+	'<section class="list" data-id="' + id + '">' +
 		'<div class="list__head">' +
 			'<div class="list__wrap">' +
 				'<div class="list__name  js-name">' +
@@ -330,6 +330,6 @@ function makeList(id, name) {
 				'<div class="task__grid  grid"></div>' +
 			'</label>' +
 		'</div>' +
-	'</div>';
+	'</section>';
 
 }

@@ -153,7 +153,7 @@ gulp.task('js:app', function() {
 		gulp.src(paths.src.js.app),
 		fileinclude(),
 		concat('app.min.js'),
-		wrap("(function($){'use strict';<%= contents %>})(jQuery);"),
+		wrap("(function($){'use strict';<%= contents %>}(jQuery));"),
 		uglify(),
 		gulp.dest(paths.dist.js),
 		browserSync.stream()
