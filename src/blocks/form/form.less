@@ -69,7 +69,8 @@
 		}
 	}
 
-	body:not(.mobile) & input:hover + span::before {
+	body:not(.mobile) & input:hover + span::before,
+	body:not(.mobile) & input:focus + span::before {
 		transform: scale3d(1.1818, 1, 1);
 		transform-origin: 0 0;
 	}
@@ -82,7 +83,8 @@
 		}
 	}
 
-	body:not(.mobile) & input:hover:checked + span::before {
+	body:not(.mobile) & input:hover:checked + span::before,
+	body:not(.mobile) & input:focus:checked + span::before {
 		transform: translate3d(calc(~"100% + 2px"), 0, 0) scale3d(1.1818, 1 ,1);
 		transform-origin: 100% 0;
 	}
@@ -117,7 +119,8 @@
 		cursor: pointer;
 		border-radius: (@border-radius / 2);
 
-		body:not(.mobile) &:hover {
+		body:not(.mobile) &:hover,
+		body:not(.mobile) &:focus {
 			opacity: 0.9;
 		}
 

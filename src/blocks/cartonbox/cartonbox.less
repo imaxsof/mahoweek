@@ -65,6 +65,8 @@
 	box-sizing: content-box;
 	padding: 10px;
 	position: absolute;
+	border: 0;
+	background: none;
 
 	@media (min-width: 768px) {
 		padding: 15px;
@@ -75,7 +77,8 @@
 		transition: none;
 	}
 
-	body:not(.mobile) &:hover svg {
+	body:not(.mobile) &:hover svg,
+	body:not(.mobile) &:focus svg {
 		fill: @dark-primary !important;
 	}
 }

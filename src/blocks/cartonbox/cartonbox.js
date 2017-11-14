@@ -11,7 +11,11 @@
 		closeHtml: '<svg><use xlink:href="#icon-close"></use></svg>',
 		onStartBefore: function() {
 			// Переносим кнопку закрытия внутрь окна
-			$('.cartonbox-close').prependTo('.cartonbox-container');
+			$('.cartonbox-close').attr({
+				"role": "button",
+				"tabindex": 0,
+				"aria-label": "Закрыть"
+			}).prependTo('.cartonbox-container');
 		}
 	};
 

@@ -15,10 +15,13 @@
 
 		&__item {
 			margin: 0 5px 10px !important;
-			position: relative;
-			opacity: 1 !important;
+		}
 
-			body:not(.mobile) &:hover {
+		&__link {
+			position: relative;
+
+			body:not(.mobile) &:hover,
+			body:not(.mobile) &:focus {
 				opacity: 0.9 !important;
 			}
 

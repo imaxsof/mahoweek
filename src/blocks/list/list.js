@@ -303,18 +303,18 @@ function makeList(id, name) {
 					remakeListName(name) +
 				'</div>' +
 				'<div class="list__options">' +
-					'<div class="list__trash  js-remove-list">' +
+					'<button class="list__trash  js-remove-list" aria-label="Удалить список">' +
 						'<svg>' +
 							'<use xlink:href="#icon-trash"></use>' +
 						'</svg>' +
-					'</div>' +
+					'</button>' +
 				'</div>' +
 				'<div class="list__progress"></div>' +
 			'</div>' +
 			'<div class="list__grid  grid"></div>' +
 		'</div>' +
 		'<div class="list__tasks">' +
-			'<label class="task  task--add">' +
+			'<label class="task  task--add" aria-label="Дело">' +
 				'<div class="task__wrap">' +
 					'<div class="task__status">' +
 						'<div class="task__plus">' +

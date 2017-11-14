@@ -128,18 +128,24 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
+	width: 100%;
+	border: 0;
+	padding: 0;
+	background: none;
 	fill: @list-trash;
 	opacity: 0;
 	transform: scale3d(0.7, 0.7, 1);
 	transition-property: opacity, transform;
 	transition: @duration @timing-function;
 
-	body:not(.mobile) &:hover {
+	body:not(.mobile) &:hover,
+	body:not(.mobile) &:focus {
 		fill: @list-trash-hover;
 		opacity: 1;
 	}
 
 	.list__wrap:hover &,
+	.list__wrap:focus-within &,
 	.mobile & {
 		opacity: 1;
 		transform: scale3d(1, 1, 1);

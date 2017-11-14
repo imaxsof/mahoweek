@@ -83,10 +83,12 @@ h3,
 //------------------------------------------------------------------------------
 
 a {
+	outline: none;
 	text-decoration: none;
 	color: @link-color;
 
-	body:not(.mobile) &:hover {
+	body:not(.mobile) &:hover,
+	body:not(.mobile) &:focus {
 		color: @link-color-hover;
 	}
 }
@@ -120,7 +122,8 @@ a {
 		color: @dark-primary !important;
 		fill: @dark-primary !important;
 
-		body:not(.mobile) &:hover {
+		body:not(.mobile) &:hover,
+		body:not(.mobile) &:focus {
 			background-color: @btn-default-bg-hover;
 		}
 	}
@@ -130,7 +133,8 @@ a {
 		color: @light-primary !important;
 		fill: @light-primary !important;
 
-		body:not(.mobile) &:hover {
+		body:not(.mobile) &:hover,
+		body:not(.mobile) &:focus {
 			background-color: @btn-primary-bg-hover;
 		}
 	}
@@ -140,7 +144,8 @@ a {
 		color: @light-primary !important;
 		fill: @light-primary !important;
 
-		body:not(.mobile) &:hover {
+		body:not(.mobile) &:hover,
+		body:not(.mobile) &:focus {
 			background-color: @btn-danger-bg-hover;
 		}
 	}
@@ -155,6 +160,11 @@ fieldset {
 	margin: 0;
 	padding: 0;
 	border: 0;
+}
+
+legend {
+	.h3;
+	width: 100%;
 }
 
 input[type="text"] {
@@ -186,15 +196,10 @@ select {
 	background-size: 25px 25px;
 }
 
-textarea {
-	width: 100%;
-	color: @dark-primary;
-	line-height: @line-height;
+button,
+[role="button"] {
 	outline: none;
-	padding: 10px 15px;
-	resize: vertical;
-	border-radius: (@border-radius / 2);
-	border: 1px solid @list-border;
+	cursor: pointer;
 }
 
 

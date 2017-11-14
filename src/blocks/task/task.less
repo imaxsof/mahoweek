@@ -29,7 +29,8 @@
 	max-width: 370px;
 	overflow: hidden;
 
-	body:not(.mobile) .task:not(.task--add):hover & {
+	body:not(.mobile) .task:not(.task--add):hover &,
+	body:not(.mobile) .task:not(.task--add):focus-within & {
 		background-color: @task-bg-hover;
 	}
 
@@ -68,6 +69,9 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
+	width: 100%;
+	border: 0;
+	background: none;
 
 	&::before {
 		position: absolute;
@@ -103,25 +107,30 @@
 		}
 	}
 
-	body:not(.mobile) &:hover::before {
+	body:not(.mobile) &:hover::before,
+	body:not(.mobile) &:focus::before {
 		border-color: @task-pea-hover;
 	}
 
-	body:not(.mobile) .task--past &:hover::before {
+	body:not(.mobile) .task--past &:hover::before,
+	body:not(.mobile) .task--past &:focus::before {
 		border-color: @task-pea-past-hover;
 	}
 
-	body:not(.mobile) .task--bull &:hover::before {
+	body:not(.mobile) .task--bull &:hover::before,
+	body:not(.mobile) .task--bull &:focus::before {
 		background-color: @task-pea-hover;
 		border-color: @task-pea-hover;
 	}
 
-	body:not(.mobile) .task--today &:hover::before {
+	body:not(.mobile) .task--today &:hover::before,
+	body:not(.mobile) .task--today &:focus::before {
 		background-color: @task-pea-today-hover;
 		border-color: @task-pea-today-hover;
 	}
 
-	body:not(.mobile) .task--completed &:hover::before {
+	body:not(.mobile) .task--completed &:hover::before,
+	body:not(.mobile) .task--completed &:focus::before {
 		background-color: @task-pea-complete-hover;
 		border-color: @task-pea-complete-hover;
 	}
@@ -212,18 +221,24 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
+	width: 100%;
+	border: 0;
+	padding: 0;
+	background: none;
 	fill: @task-trash;
 	opacity: 0;
 	transform: scale3d(0.7, 0.7, 1);
 	transition-property: opacity, transform;
 	transition: @duration @timing-function;
 
-	body:not(.mobile) &:hover {
+	body:not(.mobile) &:hover,
+	body:not(.mobile) &:focus {
 		fill: @task-trash-hover;
 		opacity: 1;
 	}
 
 	.task__wrap:hover &,
+	.task__wrap:focus-within &,
 	.mobile & {
 		opacity: 1;
 		transform: scale3d(1, 1, 1);
@@ -245,7 +260,8 @@
 .task__grid {
 	background-color: @grid-bg;
 
-	body:not(.mobile) .task:not(.task--add):hover & {
+	body:not(.mobile) .task:not(.task--add):hover &,
+	body:not(.mobile) .task:not(.task--add):focus-within & {
 		background-color: @grid-bg-hover;
 	}
 
