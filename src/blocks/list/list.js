@@ -64,8 +64,8 @@ function loadList() {
 		listNew.find('.list__grid').html(makeGrid('list'));
 		listNew.find('.task__grid').html(makeGrid());
 
-		// Ставим фокус в поле добавления дел в созданном списке
-		listNew.find('.js-add-task').focus();
+		// Показываем поле редактирования имени списка
+		listNew.find('.js-name').trigger('mouseup', ['run']);
 
 		// Берем данные окна
 		var win = $(window);

@@ -298,7 +298,7 @@ var BOARD = $('.board'),
 	var endEvent = MOBILE ? 'touchend' : 'mouseup';
 
 	// Конец события
-	LIST_BOARD.on(endEvent, '.js-name', function(event) {
+	LIST_BOARD.on(endEvent, '.js-name', function(event, run) {
 		var isThis = $(this);
 
 		// Высчитываем сумму
@@ -310,7 +310,7 @@ var BOARD = $('.board'),
 		}
 
 		// Если это была не левая кнопка мышки
-		if (event.type == 'mouseup' && event.which != 1) {
+		if (event.type == 'mouseup' && event.which != 1 && run != 'run') {
 			// Прекращаем выполнение
 			return false;
 		}
@@ -318,7 +318,7 @@ var BOARD = $('.board'),
 		// Если это был не клик по ссылке
 		if (!$(event.target).hasClass('js-link-task') && !$(event.target).hasClass('cartonbox')) {
 			// Если это было явное действие для редактирования
-			if (xy1 == xy2) {
+			if (xy1 == xy2 || run == 'run') {
 				// Если это список и поля для редактирования еще нет
 				if (isThis.hasClass('list__name') && !isThis.parents('.list').find('.list__input').length) {
 					// Берем заголовок списка
