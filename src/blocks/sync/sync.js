@@ -209,6 +209,9 @@ firebase.initializeApp(firebaseConfig);
 					// Обновляем Хранилище
 					localStorage.setItem('mahoweek', JSON.stringify(storageData));
 
+					// Добавляем данные в Метрику
+					yaCounter43856389.reachGoal('ya-manually-sync');
+
 					// Перезагружаем страницу
 					window.location.reload(true);
 
@@ -222,6 +225,9 @@ firebase.initializeApp(firebaseConfig);
 					}).then(function() {
 						// Показываем индикатор, что все окей
 						$('.sync__indicator').attr('data-type', 'ok');
+
+						// Добавляем данные в Метрику
+						yaCounter43856389.reachGoal('ya-manually-sync');
 
 						// Перезагружаем страницу
 						window.location.reload(true);

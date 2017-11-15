@@ -146,6 +146,9 @@ function loadTask() {
 			// Смещаем позицию прокрутки на высоту строки дела
 			$('body').scrollTop(win.scrollTop() + taskNew.outerHeight(true));
 		}
+
+		// Добавляем данные в Метрику
+		yaCounter43856389.reachGoal('ya-add-task');
 	});
 
 }());
@@ -369,6 +372,9 @@ function loadTask() {
 
 		// Меняем фавиконку
 		changeFavicon();
+
+		// Добавляем данные в Метрику
+		yaCounter43856389.reachGoal('ya-remove-task');
 	});
 
 }());

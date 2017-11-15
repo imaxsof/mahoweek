@@ -227,6 +227,9 @@ var BOARD = $('.board'),
 
 									// Ставим метку, что оповещение уже было
 									task.attr('data-notify', taskRunTime);
+
+									// Добавляем данные в Метрику
+									yaCounter43856389.reachGoal('ya-alert-triggered');
 								}
 							}
 						});
