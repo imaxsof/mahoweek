@@ -73,7 +73,7 @@ function loadList() {
 		// Если созданный список выходит за рамки видимости
 		if (listNew.offset().top > win.scrollTop() + win.height() - 30 - 80) {
 			// Смещаем позицию прокрутки до созданного списка
-			$('body').scrollTop(listNew.offset().top);
+			win.scrollTop(listNew.offset().top);
 		}
 	});
 

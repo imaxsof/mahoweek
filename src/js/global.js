@@ -258,7 +258,7 @@ var BOARD = $('.board'),
 		} else {
 			// Fix: скроллим к началу страницы во избежании скролла к анкору
 			// при первоначальном открытии модального окна
-			$('body').scrollTop(0);
+			$(window).scrollTop(0);
 		}
 
 		setTimeout(timer, delay);

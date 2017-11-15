@@ -144,7 +144,7 @@ function loadTask() {
 		// Если созданное дело вытесняет за рамки экрана конец списка
 		if (taskNew.offset().top > win.scrollTop() + win.height() - 30 - 40 - 39) {
 			// Смещаем позицию прокрутки на высоту строки дела
-			$('body').scrollTop(win.scrollTop() + taskNew.outerHeight(true));
+			win.scrollTop(win.scrollTop() + taskNew.outerHeight(true));
 		}
 
 		// Добавляем данные в Метрику
