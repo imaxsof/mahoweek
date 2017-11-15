@@ -35,12 +35,18 @@
 			visibility: visible;
 		}
 	}
+}
+
+.sync__btn {
+	display: flex;
+	justify-content: center;
 
 	.btn[data-provider="facebook"] {
 		background-color: #3B5998;
 		color: @light-primary;
 		fill: @light-primary;
 		min-width: 44px;
+		margin: 5px;
 
 		body:not(.mobile) &:hover,
 		body:not(.mobile) &:focus {
@@ -71,6 +77,7 @@
 		color: @light-primary;
 		fill: @light-primary;
 		min-width: 44px;
+		margin: 5px;
 
 		body:not(.mobile) &:hover,
 		body:not(.mobile) &:focus {
