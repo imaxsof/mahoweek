@@ -91,8 +91,9 @@ function loadList() {
 
 		// Если был нажат Enter или пропал фокус и были изменения
 		if (event.keyCode == 13 || event.type == 'change') {
-			// Получаем хеш и заголовок списка
-			var listId = isThis.parents('.list').attr('data-id'),
+			// Получаем объект списка, его хеш и заголовок
+			var list = isThis.parents('.list'),
+				listId = list.attr('data-id'),
 				listName = isThis.val();
 
 			// Парсим Хранилище
@@ -112,8 +113,14 @@ function loadList() {
 			// Обновляем Хранилище
 			updateStorage(mahoweekStorage);
 
-			// Убираем фокус с этого поля
-			isThis.blur();
+			// Если в списке нет ни одного дела
+			if (list.find('.task:not(.task--add)').length == 0) {
+				// Ставим фокус в поле добавления дел в созданном списке
+				list.find('.js-add-task').focus();
+			} else {
+				// Убираем фокус с этого поля
+				isThis.blur();
+			}
 		}
 	});
 
