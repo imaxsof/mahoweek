@@ -333,10 +333,17 @@ var BOARD = $('.board'),
 					// Вставляем заголовок списка и фокусируем
 					isThis.parents('.list').find('.list__input').val(listName).select();
 
+					// Скроллим список к началу
+					// и запрещаем скроллиться
+					isThis.parents('.list').scrollLeft(0).css('overflow-x', 'hidden');
+
 					// При расфокусировке
 					isThis.parents('.list').find('.list__input').focusout(function() {
 						// Заменяем поле редактирования на заголовок списка
 						isThis.html(remakeListName($(this).val()));
+
+						// Возвращаем списку скролл
+						isThis.parents('.list').css('overflow-x', '');
 					});
 				}
 
@@ -351,10 +358,17 @@ var BOARD = $('.board'),
 					// Вставляем текст дела и фокусируем
 					isThis.parents('.task').find('.task__input').val(taskName).focus();
 
+					// Скроллим список к началу
+					// и запрещаем скроллиться
+					isThis.parents('.list').scrollLeft(0).css('overflow-x', 'hidden');
+
 					// При расфокусировке
 					isThis.parents('.task').find('.task__input').focusout(function() {
 						// Заменяем поле редактирования на текст дела
 						isThis.html(remakeTaskName($(this).val()));
+
+						// Возвращаем списку скролл
+						isThis.parents('.list').css('overflow-x', '');
 					});
 				}
 			}

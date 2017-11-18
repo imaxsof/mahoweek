@@ -84,6 +84,10 @@ function loadTask() {
 
 		// Ставим метку о фокусе
 		isThis.parents('.task--add').addClass('task--focus');
+
+		// Скроллим список к началу
+		// и запрещаем скроллиться
+		isThis.parents('.list').scrollLeft(0).css('overflow-x', 'hidden');
 	});
 
 	// Если поле добавления не в фокусе
@@ -92,6 +96,9 @@ function loadTask() {
 
 		// Снимаем метку о фокусе
 		isThis.parents('.task--add').removeClass('task--focus');
+
+		// Возвращаем списку скролл
+		isThis.parents('.list').css('overflow-x', '');
 	});
 
 }());
