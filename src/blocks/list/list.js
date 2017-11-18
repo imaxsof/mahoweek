@@ -136,9 +136,10 @@ function loadList() {
 	LIST_BOARD.on('click', '.js-remove-list', function() {
 		var isThis = $(this);
 
-		// Получаем хеш списка и кол-во дел в нем
-		var listId = isThis.parents('.list').attr('data-id'),
-			taskTotal = isThis.parents('.list').find('.task:not(.task--add)').length;
+		// Получаем объект списка, его хеш списка и кол-во дел
+		var list = isThis.parents('.list'),
+			listId = list.attr('data-id'),
+			taskTotal = list.find('.task:not(.task--add)').length;
 
 		// Если в удаляемом списке были дела
 		if (taskTotal) {
@@ -183,7 +184,7 @@ function loadList() {
 			updateStorage(mahoweekStorage);
 
 			// Удаляем список из доски
-			isThis.parents('.list').remove();
+			list.remove();
 
 			// Меняем фавиконку
 			changeFavicon();
