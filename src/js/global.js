@@ -233,6 +233,23 @@ var BOARD = $('.board'),
 									yaCounter43856389.reachGoal('ya-alert-triggered');
 								}
 							}
+
+							// Если дело запланировано на сегодня и оно невыполнено,
+							// а время точно совпадает с текущим и еще не было оповещения
+							if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length && taskPresetTime == realTime && !task.hasClass('task--now')) {
+								// Показываем оповещение
+								var notification = new Notification('Время ' + taskPresetTime + '!', {
+									body: taskName,
+									icon: '/img/notify.png?v=2',
+									requireInteraction: true
+								});
+
+								// Помечаем, что время дела уже подошло
+								task.addClass('task--now');
+
+								// Добавляем данные в Метрику
+								yaCounter43856389.reachGoal('ya-alert-triggered');
+							}
 						});
 					}
 				}
