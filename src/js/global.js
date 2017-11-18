@@ -140,7 +140,7 @@ var BOARD = $('.board'),
 	// Запускаем рекурсивный таймаут
 	setTimeout(function timer() {
 		// Если все элементы доски загружены
-		if (BOARD.hasClass('board--load')) {
+		if ($('body').hasClass('ready')) {
 			// Получаем актуальную дату
 			var newDate = new Date(),
 				newDateTime = newDate.getTime();

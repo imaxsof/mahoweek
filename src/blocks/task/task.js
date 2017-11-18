@@ -64,7 +64,7 @@ function loadTask() {
 	}
 
 	// Показываем содержимое доски
-	BOARD.addClass('board--load');
+	$('body').addClass('ready');
 
 	// Меняем фавиконку
 	changeFavicon();
