@@ -15,6 +15,7 @@ var FIREFOX = navigator.userAgent.toLowerCase().indexOf('firefox') > -1,
 	CHROME = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase()),
 	CHROMEIOS = navigator.userAgent.match('CriOS'),
 	MSIE = navigator.userAgent.match('MSIE'),
+	EDGE = navigator.userAgent.match('Edge'),
 	ANDROID = navigator.userAgent.toLowerCase().indexOf('android') > -1,
 	IPAD = navigator.userAgent.match(/iPad/i) !== null;
 
@@ -133,7 +134,7 @@ var BOARD = $('.board'),
 (function() {
 
 	// Определяем первоначальные условия
-	var delay = 1000,
+	var delay = 500,
 		date = new Date();
 
 	// Запускаем рекурсивный таймаут
@@ -158,7 +159,7 @@ var BOARD = $('.board'),
 			} else {
 				// Если в браузере поддерживаются оповещения
 				// и браузер и устройство подходят
-				if (('Notification' in window) && !CHROMEIOS && !ANDROID && !IPAD && !MOBILE) {
+				if (('Notification' in window) && !MOBILE && (EDGE || FIREFOX || CHROME || SAFARI)) {
 					// Получаем время оповещения
 					var notify = localStorage.getItem('notify');
 
@@ -247,8 +248,10 @@ var BOARD = $('.board'),
 					// Если дело запланировано на сегодня
 					// и оно невыполнено, а время уже подошло
 					if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length && taskPresetTime <= realTime) {
+						// Помечаем, что время дела уже подошло
 						task.addClass('task--now');
 					} else {
+						// Убираем метку, что время дела уже подошло
 						task.removeClass('task--now');
 					}
 				});
@@ -369,7 +372,7 @@ function changeFavicon() {
 
 	// Если в браузере поддерживается смена фавиконки
 	// и браузер и устройство подходят
-	if (document.createElement('canvas').getContext && !CHROMEIOS && !ANDROID && !IPAD && !MSIE && !SAFARI && !MOBILE) {
+	if (document.createElement('canvas').getContext && !MOBILE && (FIREFOX || CHROME)) {
 		// Определяем фавиконки
 		var iconDefault = '/favicon-32x32.png?v=3',
 			iconToday = '/img/favicon-today.png?v=2';

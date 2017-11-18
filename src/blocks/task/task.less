@@ -14,6 +14,7 @@
 		font-size: @font-size-small;
 		position: absolute;
 		bottom: 0;
+		color: @dark-secondary;
 	}
 
 	&--completed {
@@ -29,8 +30,8 @@
 	max-width: 370px;
 	overflow: hidden;
 
-	body:not(.mobile) .task:not(.task--add):hover &,
-	body:not(.mobile) .task:not(.task--add):focus-within & {
+	body:not(.mobile) .task:hover &,
+	body:not(.mobile) .task:focus-within & {
 		background-color: @task-bg-hover;
 	}
 
@@ -200,6 +201,11 @@
 
 	.task--add & {
 		padding-right: 8px;
+		color: @dark-secondary;
+
+		&:focus {
+			color: @dark-primary;
+		}
 	}
 
 	.task--completed & {
@@ -260,8 +266,8 @@
 .task__grid {
 	background-color: @grid-bg;
 
-	body:not(.mobile) .task:not(.task--add):hover &,
-	body:not(.mobile) .task:not(.task--add):focus-within & {
+	body:not(.mobile) .task:hover &,
+	body:not(.mobile) .task:focus-within & {
 		background-color: @grid-bg-hover;
 	}
 
