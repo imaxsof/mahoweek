@@ -110,52 +110,55 @@ function loadTask() {
 
 (function() {
 
-	LIST_BOARD.on('change', '.js-add-task', function() {
+	LIST_BOARD.on('keyup', '.js-add-task', function() {
 		var isThis = $(this);
 
-		// Получаем хеш списка, хеш дела, текст дела и метку времени
-		var listId = isThis.parents('.list').attr('data-id'),
-			taskId = makeHash(),
-			taskName = isThis.val(),
-			taskCreatedTime = new Date().getTime();
+		// Если был нажат Enter и поле с делом не пустое
+		if (event.keyCode == 13 && isThis.val() != '') {
+			// Получаем хеш списка, хеш дела, текст дела и метку времени
+			var listId = isThis.parents('.list').attr('data-id'),
+				taskId = makeHash(),
+				taskName = isThis.val(),
+				taskCreatedTime = new Date().getTime();
 
-		// Парсим Хранилище
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+			// Парсим Хранилище
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-		// Добавляем новое дело
-		mahoweekStorage.tasks.push({
-			id: taskId,
-			listId: listId,
-			name: taskName,
-			createdTime: taskCreatedTime
-		});
+			// Добавляем новое дело
+			mahoweekStorage.tasks.push({
+				id: taskId,
+				listId: listId,
+				name: taskName,
+				createdTime: taskCreatedTime
+			});
 
-		// Обновляем Хранилище
-		updateStorage(mahoweekStorage);
+			// Обновляем Хранилище
+			updateStorage(mahoweekStorage);
 
-		// Стираем поле ввода добавления дела
-		isThis.val('');
+			// Стираем поле ввода добавления дела
+			isThis.val('');
 
-		// Выводим дело в списке
-		isThis.parents('.task--add').before(makeTask(taskId, taskName));
+			// Выводим дело в списке
+			isThis.parents('.task--add').before(makeTask(taskId, taskName));
 
-		// Рассчитываем прогресс выполнения списка
-		makeProgress(listId);
+			// Рассчитываем прогресс выполнения списка
+			makeProgress(listId);
 
-		// Находим созданное дело
-		var taskNew = isThis.parents('.task--add').prev();
+			// Находим созданное дело
+			var taskNew = isThis.parents('.task--add').prev();
 
-		// Берем данные окна
-		var win = $(window);
+			// Берем данные окна
+			var win = $(window);
 
-		// Если созданное дело вытесняет за рамки экрана конец списка
-		if (taskNew.offset().top > win.scrollTop() + win.height() - 30 - 40 - 39) {
-			// Смещаем позицию прокрутки на высоту строки дела
-			win.scrollTop(win.scrollTop() + taskNew.outerHeight(true));
+			// Если созданное дело вытесняет за рамки экрана конец списка
+			if (taskNew.offset().top > win.scrollTop() + win.height() - 30 - 40 - 39) {
+				// Смещаем позицию прокрутки на высоту строки дела
+				win.scrollTop(win.scrollTop() + taskNew.outerHeight(true));
+			}
+
+			// Добавляем данные в Метрику
+			yaCounter43856389.reachGoal('ya-add-task');
 		}
-
-		// Добавляем данные в Метрику
-		yaCounter43856389.reachGoal('ya-add-task');
 	});
 
 }());
