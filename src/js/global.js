@@ -48,9 +48,16 @@ var BOARD = $('.board'),
 		// Очищаем локальное хранилище полностью
 		localStorage.clear();
 
+		// Определяем время
+		var date = new Date(),
+			dateTime = date.getTime(),
+			dateDay = date.getDate(),
+			dateMonth = date.getMonth() + 1,
+			dateYear = date.getFullYear(),
+			dateNow = dateYear + '-' + (dateMonth < 10 ? '0' + dateMonth : dateMonth) + '-' + (dateDay < 10 ? '0' + dateDay : dateDay);
+
 		// Создаем некоторые объекты для Хранилища
 		var listId = makeHash(),
-			dateTime = new Date().getTime(),
 			theme = 'leaves';
 
 		// Генерируем первоначальные данные для Хранилища
@@ -67,19 +74,37 @@ var BOARD = $('.board'),
 					id: makeHash(),
 					listId: listId,
 					name: 'Прочитать справку о сайте: https://mahoweek.ru/#about',
-					createdTime: dateTime
+					createdTime: dateTime,
+					markers: [
+						{
+							"date": dateNow,
+							"label": "bull"
+						}
+					]
 				},
 				{
 					id: makeHash(),
 					listId: listId,
 					name: 'Посмотреть как здесь всё устроено: https://mahoweek.ru/#tour',
-					createdTime: dateTime
+					createdTime: dateTime,
+					markers: [
+						{
+							"date": dateNow,
+							"label": "bull"
+						}
+					]
 				},
 				{
 					id: makeHash(),
 					listId: listId,
 					name: 'Настроить доску: https://mahoweek.ru/#settings',
-					createdTime: dateTime
+					createdTime: dateTime,
+					markers: [
+						{
+							"date": dateNow,
+							"label": "bull"
+						}
+					]
 				},
 				{
 					id: makeHash(),
@@ -109,8 +134,8 @@ var BOARD = $('.board'),
 		// Добавляем тему к доске
 		THEME_BOARD.addClass('board__theme--' + theme);
 
-		// Если хеш не содержит вывода прощального сообщения
-		if (window.location.hash != '#bye') {
+		// Если хеш пуст
+		if (window.location.hash == '') {
 			// Добавляем хеш для вывода приветственного сообщения
 			window.location.replace('#hello');
 		}
