@@ -64,11 +64,20 @@
 
 .cartonbox-content {
 	padding: 30px 15px 15px;
-	overflow: hidden;
 	position: relative;
 
 	@media (min-width: 768px) {
 		padding: 60px 60px 45px;
+	}
+
+	> [id] {
+		margin-top: -60px;
+		padding-top: 60px;
+
+		@media (min-width: 768px) {
+			margin-top: -90px;
+			padding-top: 90px;
+		}
 	}
 }
 
