@@ -1,6 +1,6 @@
 {
   "name": "mahoweek",
-  "version": "1.17.7",
+  "version": "1.17.8",
   "dependencies": {
     "cartonbox": "^1.5.4",
     "firebase": "^4.6.0",
