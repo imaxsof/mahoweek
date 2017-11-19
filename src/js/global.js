@@ -128,6 +128,114 @@ var BOARD = $('.board'),
 			}
 		}
 
+		// Если в адресе содержатся гет-параметры
+		// if (window.location.search) {
+		// 	// Разбираем гет-параметры
+		// 	var get = window.location.search.replace('?','').split('&').reduce(
+		// 		function(p, e) {
+		// 			var a = e.split('=');
+		// 			p[decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
+		// 			return p;
+		// 		},
+		// 		{}
+		// 	);
+
+		// 	// Добавляем дополнительный лист с делами
+		// 	// для пользователей проекта «365 дней»
+		// 	if (get.src == '365dayz.ru' && get.user) {
+		// 		// Создаем данные для списка
+		// 		var listId = makeHash(),
+		// 			listName = 'Проект «365 дней»: https://365dayz.ru/users/' + get.user + '/';
+
+		// 		// Добавляем новый список
+		// 		storageData.lists.push({
+		// 			id: listId,
+		// 			name: listName,
+		// 			createdTime: dateTime
+		// 		});
+
+		// 		// Добавляем новое дело
+		// 		storageData.tasks.push(
+		// 			{
+		// 				id: makeHash(),
+		// 				listId: listId,
+		// 				name: '20:00 Загрузить фотографию: https://365dayz.ru/add/',
+		// 				createdTime: dateTime,
+		// 				markers: [
+		// 					{
+		// 						"date": dateNow,
+		// 						"label": "bull"
+		// 					},
+		// 					{
+		// 						"date": dateNow,
+		// 						"label": "bull"
+		// 					},
+		// 					{
+		// 						"date": dateNow,
+		// 						"label": "bull"
+		// 					},
+		// 					{
+		// 						"date": dateNow,
+		// 						"label": "bull"
+		// 					},
+		// 					{
+		// 						"date": dateNow,
+		// 						"label": "bull"
+		// 					},
+		// 					{
+		// 						"date": dateNow,
+		// 						"label": "bull"
+		// 					},
+		// 					{
+		// 						"date": dateNow,
+		// 						"label": "bull"
+		// 					},
+		// 					{
+		// 						"date": dateNow,
+		// 						"label": "bull"
+		// 					},
+		// 					{
+		// 						"date": dateNow,
+		// 						"label": "bull"
+		// 					},
+		// 					{
+		// 						"date": dateNow,
+		// 						"label": "bull"
+		// 					},
+		// 					{
+		// 						"date": dateNow,
+		// 						"label": "bull"
+		// 					},
+		// 					{
+		// 						"date": dateNow,
+		// 						"label": "bull"
+		// 					},
+		// 					{
+		// 						"date": dateNow,
+		// 						"label": "bull"
+		// 					},
+		// 					{
+		// 						"date": dateNow,
+		// 						"label": "bull"
+		// 					}
+		// 				]
+		// 			},
+		// 			{
+		// 				id: makeHash(),
+		// 				listId: listId,
+		// 				name: 'Ознакомиться с расширенным аккаунтом: https://365dayz.ru/plus/',
+		// 				createdTime: dateTime
+		// 			},
+		// 			{
+		// 				id: makeHash(),
+		// 				listId: listId,
+		// 				name: 'Заполнить подробнее профиль: https://365dayz.ru/settings/profile/',
+		// 				createdTime: dateTime
+		// 			}
+		// 		);
+		// 	}
+		// }
+
 		// Создаем Хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(storageData));
 
