@@ -2,8 +2,12 @@
 //------------------------------------------------------------------------------
 
 .share {
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin: 20px auto;
+	max-width: 280px;
+
+	@media (min-width: 768px) {
+		max-width: none;
+	}
 
 	.ya-share2 {
 		min-height: 34px;
@@ -35,7 +39,7 @@
 		}
 
 		&__badge {
-			border-radius: (@border-radius / 2);
+			border-radius: (@border-radius * 4.25);
 			padding: 5px;
 		}
 

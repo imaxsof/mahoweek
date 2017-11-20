@@ -103,13 +103,14 @@ a {
 	display: inline-block;
 	text-decoration: none;
 	border: 0;
-	border-radius: (@border-radius / 2);
+	border-radius: (@border-radius * 5.5);
 	padding: 10px 20px;
 	cursor: pointer;
 	line-height: @line-height;
 	position: relative;
 	min-width: 180px;
 	text-align: center;
+	white-space: nowrap;
 
 	body:not(.mobile) &:active {
 		top: 1px;
@@ -231,12 +232,17 @@ svg {
 
 .small {
 	font-size: @font-size-small;
+	line-height: (@font-size * 1.25);
 }
 
 .center-block {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.gray {
+	color: @dark-secondary;
 }
 
 .pt-sm-10 {

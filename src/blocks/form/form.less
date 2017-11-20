@@ -4,7 +4,7 @@
 .form__options {
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 400px;
+	max-width: 390px;
 }
 
 .form__group {
@@ -44,11 +44,11 @@
 	}
 
 	span {
-		width: 48px;
+		width: 40px;
 		height: 24px;
 		background-color: @checkbox-bg;
 		display: block;
-		border-radius: (@border-radius / 2);
+		border-radius: (@border-radius * 3);
 		border: 1px solid transparent;
 		overflow: hidden;
 		position: relative;
@@ -63,7 +63,7 @@
 			width: 22px;
 			height: 22px;
 			background-color: @light-primary;
-			border-radius: (@border-radius / 4);
+			border-radius: (@border-radius * 2.75);
 			transition-property: transform;
 			transition: @duration @timing-function;
 		}
@@ -71,37 +71,41 @@
 
 	body:not(.mobile) & input:hover + span::before,
 	body:not(.mobile) & input:focus + span::before {
-		transform: scale3d(1.1818, 1, 1);
-		transform-origin: 0 0;
+		transform: translate3d(2px, 0, 0);
 	}
 
 	input:checked + span {
 		background-color: @checkbox-checked-bg;
 
 		&::before {
-			transform: translate3d(calc(~"100% + 2px"), 0, 0);
+			transform: translate3d(16px, 0, 0);
 		}
 	}
 
 	body:not(.mobile) & input:hover:checked + span::before,
 	body:not(.mobile) & input:focus:checked + span::before {
-		transform: translate3d(calc(~"100% + 2px"), 0, 0) scale3d(1.1818, 1 ,1);
-		transform-origin: 100% 0;
+		transform: translate3d(14px, 0, 0);
 	}
 }
 
 .form__theme {
-	margin-top: 15px;
-	margin-bottom: 15px;
-	margin-left: -5px;
-	margin-right: -5px;
+	margin-bottom: -1px;
+	margin-right: -1px;
+
+	@media (min-width: 768px) {
+		margin-bottom: 14px;
+	}
+
+	legend {
+		margin-bottom: 20px;
+	}
 
 	label {
-		width: 33.33%;
+		width: calc(~"100% / 3");
 		float: left;
 		position: relative;
 		display: block;
-		padding: 5px;
+		padding: 0 1px 1px 0;
 	}
 
 	input {
@@ -117,7 +121,6 @@
 		background-size: cover;
 		background-position: 50% 50%;
 		cursor: pointer;
-		border-radius: (@border-radius / 2);
 
 		body:not(.mobile) &:hover,
 		body:not(.mobile) &:focus {
@@ -132,10 +135,41 @@
 			bottom: 5px;
 			left: 5px;
 			border: 1px solid fade(@light-primary, 50%);
-			border-radius: (@border-radius / 2);
 			transition-property: opacity;
 			transition: @duration @timing-function;
 			opacity: 0;
+		}
+	}
+
+	label:first-of-type span {
+		border-radius: @border-radius 0 0 0;
+
+		&::before {
+			border-radius: (@border-radius * 0.75) 0 0 0;
+		}
+	}
+
+	label:nth-of-type(3) span {
+		border-radius: 0 @border-radius 0 0;
+
+		&::before {
+			border-radius: 0 (@border-radius * 0.75) 0 0;
+		}
+	}
+
+	label:nth-last-of-type(4) span {
+		border-radius: 0 0 0 @border-radius;
+
+		&::before {
+			border-radius: 0 0 0 (@border-radius * 0.75);
+		}
+	}
+
+	label:last-of-type span {
+		border-radius: 0 0 @border-radius;
+
+		&::before {
+			border-radius: 0 0 (@border-radius * 0.75);
 		}
 	}
 
