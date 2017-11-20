@@ -289,6 +289,26 @@ ol.list-custom {
 // Animation
 //------------------------------------------------------------------------------
 
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
 @keyframes fadeInDown {
 	0% {
 		opacity: 0;
@@ -298,6 +318,18 @@ ol.list-custom {
 	100% {
 		opacity: 1;
 		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes fadeOutDown {
+	0% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translate3d(0, 10px, 0);
 	}
 }
 

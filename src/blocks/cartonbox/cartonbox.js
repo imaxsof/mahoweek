@@ -5,7 +5,7 @@
 
 	// Настраиваем Картонбокс
 	var cartonboxConfig = {
-		speed: 1,
+		speed: 200,
 		nav: false,
 		preload: false,
 		closeHtml: '<svg><use xlink:href="#icon-close"></use></svg>',
@@ -16,6 +16,21 @@
 				"tabindex": 0,
 				"aria-label": "Закрыть"
 			}).prependTo('.cartonbox-container');
+		},
+		onShowBefore: function() {
+			// Добавляем класс, что модальное окно открыто
+			$('body').addClass('modal-open');
+		},
+		onClosedBefore: function() {
+			// Удаляем класс, что модальное окно открыто
+			$('body').removeClass('modal-open');
+
+			// Добавляем класс, что модальное окно закрывается
+			$('body').addClass('modal-closed');
+		},
+		onClosedAfter: function() {
+			// Удаляем класс, что модальное окно закрывается
+			$('body').removeClass('modal-closed');
 		}
 	};
 

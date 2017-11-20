@@ -2,15 +2,21 @@
 //------------------------------------------------------------------------------
 
 .cartonbox-back {
-	top: -100px;
-	left: -100px;
-	width: calc(~"100% + 200px");
-	height: calc(~"100% + 200px");
 	background-color: fade(@board-bg, 70%);
 	visibility: hidden;
+	animation-name: none;
+	animation-duration: @duration;
+	animation-timing-function: @timing-function;
+	animation-fill-mode: both;
 
-	.ready & {
+	.ready.modal-open & {
 		visibility: visible;
+		animation-name: fadeIn;
+	}
+
+	.ready.modal-closed & {
+		visibility: visible;
+		animation-name: fadeOut;
 	}
 }
 
@@ -20,9 +26,19 @@
 
 .cartonbox-wrap {
 	visibility: hidden;
+	animation-name: none;
+	animation-duration: @duration;
+	animation-timing-function: @timing-function;
+	animation-fill-mode: both;
 
-	.ready & {
+	.ready.modal-open & {
 		visibility: visible;
+		animation-name: fadeInUp;
+	}
+
+	.ready.modal-closed & {
+		visibility: visible;
+		animation-name: fadeOutDown;
 	}
 
 	&:not(.cartonbox-img) {
@@ -89,6 +105,10 @@
 	position: absolute;
 	border: 0;
 	background: none;
+
+	.cartonbox-wrap & {
+		display: block;
+	}
 
 	@media (min-width: 768px) {
 		padding: 15px;
