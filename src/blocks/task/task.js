@@ -87,7 +87,10 @@ function loadTask() {
 
 		// Скроллим список к началу
 		// и запрещаем скроллиться
-		isThis.parents('.list').scrollLeft(0).css('overflow-x', 'hidden');
+		isThis.parents('.list').scrollLeft(0).css({
+			'overflow-x': 'hidden',
+			'-webkit-overflow-scrolling': 'auto'
+		});
 	});
 
 	// Если поле добавления не в фокусе
@@ -98,7 +101,10 @@ function loadTask() {
 		isThis.parents('.task--add').removeClass('task--focus');
 
 		// Возвращаем списку скролл
-		isThis.parents('.list').css('overflow-x', '');
+		isThis.parents('.list').css({
+			'overflow-x': '',
+			'-webkit-overflow-scrolling': ''
+		});
 	});
 
 }());
@@ -110,11 +116,11 @@ function loadTask() {
 
 (function() {
 
-	LIST_BOARD.on('keyup', '.js-add-task', function() {
+	LIST_BOARD.on('keyup change', '.js-add-task', function(event) {
 		var isThis = $(this);
 
 		// Если был нажат Enter и поле с делом не пустое
-		if (event.keyCode == 13 && isThis.val() != '') {
+		if (event.keyCode == 13 && isThis.val() != '' || event.type == 'change') {
 			// Получаем хеш списка, хеш дела, текст дела и метку времени
 			var listId = isThis.parents('.list').attr('data-id'),
 				taskId = makeHash(),

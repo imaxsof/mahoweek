@@ -479,7 +479,10 @@ var BOARD = $('.board'),
 
 					// Скроллим список к началу
 					// и запрещаем скроллиться
-					isThis.parents('.list').scrollLeft(0).css('overflow-x', 'hidden');
+					isThis.parents('.list').scrollLeft(0).css({
+						'overflow-x': 'hidden',
+						'-webkit-overflow-scrolling': 'auto'
+					});
 
 					// При расфокусировке
 					isThis.parents('.list').find('.list__input').focusout(function() {
@@ -487,7 +490,10 @@ var BOARD = $('.board'),
 						isThis.html(remakeListName($(this).val()));
 
 						// Возвращаем списку скролл
-						isThis.parents('.list').css('overflow-x', '');
+						isThis.parents('.list').css({
+							'overflow-x': '',
+							'-webkit-overflow-scrolling': ''
+						});
 					});
 				}
 
@@ -504,7 +510,10 @@ var BOARD = $('.board'),
 
 					// Скроллим список к началу
 					// и запрещаем скроллиться
-					isThis.parents('.list').scrollLeft(0).css('overflow-x', 'hidden');
+					isThis.parents('.list').scrollLeft(0).css({
+						'overflow-x': 'hidden',
+						'-webkit-overflow-scrolling': 'auto'
+					});
 
 					// При расфокусировке
 					isThis.parents('.task').find('.task__input').focusout(function() {
@@ -512,7 +521,10 @@ var BOARD = $('.board'),
 						isThis.html(remakeTaskName($(this).val()));
 
 						// Возвращаем списку скролл
-						isThis.parents('.list').css('overflow-x', '');
+						isThis.parents('.list').css({
+							'overflow-x': '',
+							'-webkit-overflow-scrolling': ''
+						});
 					});
 				}
 			}

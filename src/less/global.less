@@ -22,6 +22,8 @@ body {
 	fill: @dark-primary;
 	overflow-x: hidden;
 	background-color: @board-bg;
+	margin-top: constant(safe-area-inset-top);
+	margin-top: env(safe-area-inset-top);
 
 	@media (min-width: 992px) {
 		overflow-x: initial;
