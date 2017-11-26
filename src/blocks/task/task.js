@@ -119,7 +119,15 @@ function loadTask() {
 	LIST_BOARD.on('keyup change', '.js-add-task', function(event) {
 		var isThis = $(this);
 
+		// Показываем или скрываем кнопку отправки
+		if (isThis.val() != '') {
+			isThis.parents('.task--add').find('.task__submit').addClass('task__submit--show');
+		} else {
+			isThis.parents('.task--add').find('.task__submit').removeClass('task__submit--show');
+		}
+
 		// Если был нажат Enter и поле с делом не пустое
+		// или изменились данные в поле при потере фокуса
 		if (event.keyCode == 13 && isThis.val() != '' || event.type == 'change') {
 			// Получаем хеш списка, хеш дела, текст дела и метку времени
 			var listId = isThis.parents('.list').attr('data-id'),
@@ -143,6 +151,9 @@ function loadTask() {
 
 			// Стираем поле ввода добавления дела
 			isThis.val('');
+
+			// Скрываем кнопку отправки
+			isThis.parents('.task--add').find('.task__submit').removeClass('task__submit--show');
 
 			// Выводим дело в списке
 			isThis.parents('.task--add').before(makeTask(taskId, taskName));

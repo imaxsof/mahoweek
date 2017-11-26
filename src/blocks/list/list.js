@@ -322,21 +322,28 @@ function makeList(id, name) {
 			'<div class="list__grid  grid"></div>' +
 		'</div>' +
 		'<div class="list__tasks">' +
-			'<label class="task  task--add" aria-label="Дело">' +
+			'<div class="task  task--add">' +
 				'<div class="task__wrap">' +
-					'<div class="task__status">' +
+					'<label class="task__status" for="' + id + '-add-task" aria-label="Дело">' +
 						'<div class="task__plus">' +
 							'<svg>' +
 								'<use xlink:href="#icon-plus"></use>' +
 							'</svg>' +
 						'</div>' +
-					'</div>' +
+					'</label>' +
 					'<div class="task__name">' +
-						'<input class="task__input  js-add-task" type="text" maxlength="255">' +
+						'<input id="' + id + '-add-task" class="task__input  js-add-task" type="text" maxlength="255">' +
+					'</div>' +
+					'<div class="task__options">' +
+						'<button class="task__submit" aria-label="Добавить дело">' +
+							'<svg>' +
+								'<use xlink:href="#icon-plus"></use>' +
+							'</svg>' +
+						'</button>' +
 					'</div>' +
 				'</div>' +
 				'<div class="task__grid  grid"></div>' +
-			'</label>' +
+			'</div>' +
 		'</div>' +
 	'</section>';
 
