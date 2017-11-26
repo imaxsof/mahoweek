@@ -216,7 +216,6 @@
 .task__options {
 	width: 41px;
 	position: relative;
-	cursor: pointer;
 	border-top: 1px solid @task-border;
 	border-bottom: 1px solid @task-border;
 }
@@ -231,21 +230,42 @@
 	border: 0;
 	padding: 0;
 	background: none;
+	cursor: pointer;
 	fill: @task-trash;
+	visibility: hidden;
 	opacity: 0;
 	transform: scale3d(0.7, 0.7, 1);
-	transition-property: opacity, transform;
+	transition-property: visibility, opacity, transform;
 	transition: @duration @timing-function;
 
 	body:not(.mobile) &:hover,
 	body:not(.mobile) &:focus {
 		fill: @task-trash-hover;
+		visibility: visible;
 		opacity: 1;
 	}
 
 	.task__wrap:hover &,
 	.task__wrap:focus-within &,
 	.mobile & {
+		visibility: visible;
+		opacity: 1;
+		transform: scale3d(1, 1, 1);
+	}
+
+	.board__lists--drag & {
+		visibility: hidden;
+		opacity: 0 !important;
+	}
+
+	svg {
+		position: absolute;
+		width: 25px;
+		height: 25px;
+		top: 8px;
+		left: 8px;
+	}
+}
 		opacity: 1;
 		transform: scale3d(1, 1, 1);
 	}

@@ -82,29 +82,29 @@ function loadTask() {
 	LIST_BOARD.find('.js-add-task').focusin(function() {
 		var isThis = $(this);
 
-		// Ставим метку о фокусе
-		isThis.parents('.task--add').addClass('task--focus');
-
 		// Скроллим список к началу
 		// и запрещаем скроллиться
 		isThis.parents('.list').scrollLeft(0).css({
 			'overflow-x': 'hidden',
 			'-webkit-overflow-scrolling': 'auto'
 		});
+
+		// Ставим метку о фокусе
+		isThis.parents('.task--add').addClass('task--focus');
 	});
 
 	// Если поле добавления не в фокусе
 	LIST_BOARD.find('.js-add-task').focusout(function() {
 		var isThis = $(this);
 
-		// Снимаем метку о фокусе
-		isThis.parents('.task--add').removeClass('task--focus');
-
 		// Возвращаем списку скролл
 		isThis.parents('.list').css({
 			'overflow-x': '',
 			'-webkit-overflow-scrolling': ''
 		});
+
+		// Снимаем метку о фокусе
+		isThis.parents('.task--add').removeClass('task--focus');
 	});
 
 }());

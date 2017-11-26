@@ -7,8 +7,7 @@
 (function() {
 
 	// Если в браузере поддерживается смена фавиконки
-	// и браузер и устройство подходят
-	if (document.createElement('canvas').getContext && !MOBILE && (FIREFOX || CHROME)) {
+	if (CHANGE_FAVICON) {
 		// Показываем настройку
 		SETTINGS_FORM.find('.js-choose-favicon-counter').parents('.form__group').removeClass('form__group--hidden');
 
@@ -50,8 +49,7 @@
 (function() {
 
 	// Если в браузере поддерживаются оповещения
-	// и браузер и устройство подходят
-	if (('Notification' in window) && !MOBILE && (EDGE || FIREFOX || CHROME || SAFARI)) {
+	if (NOTIFICATION) {
 		// Показываем настройку
 		SETTINGS_FORM.find('.js-choose-notify').parents('.form__group').removeClass('form__group--hidden');
 

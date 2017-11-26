@@ -9,7 +9,7 @@
 	-webkit-overflow-scrolling: touch;
 
 	@media (min-width: 992px) {
-		overflow-x: initial;
+		overflow-x: initial !important;
 	}
 
 	&::before {
@@ -119,7 +119,6 @@
 .list__options {
 	width: 41px;
 	position: relative;
-	cursor: pointer;
 }
 
 .list__trash {
@@ -132,26 +131,31 @@
 	border: 0;
 	padding: 0;
 	background: none;
+	cursor: pointer;
 	fill: @list-trash;
+	visibility: hidden;
 	opacity: 0;
 	transform: scale3d(0.7, 0.7, 1);
-	transition-property: opacity, transform;
+	transition-property: visibility, opacity, transform;
 	transition: @duration @timing-function;
 
 	body:not(.mobile) &:hover,
 	body:not(.mobile) &:focus {
 		fill: @list-trash-hover;
+		visibility: visible;
 		opacity: 1;
 	}
 
 	.list__wrap:hover &,
 	.list__wrap:focus-within &,
 	.mobile & {
+		visibility: visible;
 		opacity: 1;
 		transform: scale3d(1, 1, 1);
 	}
 
 	.board__lists--drag & {
+		visibility: hidden;
 		opacity: 0 !important;
 	}
 

@@ -12,7 +12,7 @@ var WINDOWS = navigator.platform.toUpperCase().indexOf('WIN') !== -1,
 // Определяем браузер
 var FIREFOX = navigator.userAgent.toLowerCase().indexOf('firefox') > -1,
 	SAFARI = /^((?!chrome).)*safari/i.test(navigator.userAgent),
-	CHROME = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase()),
+	CHROME = /chrom(e|ium)(edge)?/.test(navigator.userAgent.toLowerCase()),
 	CHROMEIOS = navigator.userAgent.match('CriOS'),
 	MSIE = navigator.userAgent.match('MSIE'),
 	EDGE = navigator.userAgent.match('Edge'),
@@ -25,6 +25,10 @@ if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(naviga
 
 	$('body').addClass('mobile');
 }
+
+// Определяем поддержку функций
+var NOTIFICATION = ('Notification' in window) && !MOBILE && (EDGE || FIREFOX || CHROME || SAFARI) ? true : false,
+	CHANGE_FAVICON = document.createElement('canvas').getContext && !MOBILE && (FIREFOX || CHROME) ? true : false;
 
 
 
@@ -291,8 +295,7 @@ var BOARD = $('.board'),
 			// Если день еще не закончился
 			} else {
 				// Если в браузере поддерживаются оповещения
-				// и браузер и устройство подходят
-				if (('Notification' in window) && !MOBILE && (EDGE || FIREFOX || CHROME || SAFARI)) {
+				if (NOTIFICATION) {
 					// Получаем время оповещения
 					var notify = localStorage.getItem('notify');
 
@@ -541,8 +544,7 @@ var BOARD = $('.board'),
 function changeFavicon() {
 
 	// Если в браузере поддерживается смена фавиконки
-	// и браузер и устройство подходят
-	if (document.createElement('canvas').getContext && !MOBILE && (FIREFOX || CHROME)) {
+	if (CHANGE_FAVICON) {
 		// Определяем фавиконки
 		var iconDefault = '/favicon-32x32.png?v=3',
 			iconToday = '/img/favicon-today.png?v=2';
