@@ -133,112 +133,80 @@ var BOARD = $('.board'),
 		}
 
 		// Если в адресе содержатся гет-параметры
-		// if (window.location.search) {
-		// 	// Разбираем гет-параметры
-		// 	var get = window.location.search.replace('?','').split('&').reduce(
-		// 		function(p, e) {
-		// 			var a = e.split('=');
-		// 			p[decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
-		// 			return p;
-		// 		},
-		// 		{}
-		// 	);
+		if (window.location.search) {
+			// Разбираем гет-параметры
+			var get = window.location.search.replace('?','').split('&').reduce(
+				function(p, e) {
+					var a = e.split('=');
+					p[decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
+					return p;
+				},
+				{}
+			);
 
-		// 	// Добавляем дополнительный лист с делами
-		// 	// для пользователей проекта «365 дней»
-		// 	if (get.src == '365dayz.ru' && get.user) {
-		// 		// Создаем данные для списка
-		// 		var listId = makeHash(),
-		// 			listName = 'Проект «365 дней»: https://365dayz.ru/users/' + get.user + '/';
+			// Добавляем дополнительный лист с делами
+			// для пользователей проекта «365 дней»
+			if (get.src == '365dayz.ru' && get.user) {
+				// Создаем данные для списка
+				var dayzListId = makeHash(),
+					dayzListName = 'Проект «365 дней»: https://365dayz.ru/users/' + get.user + '/';
 
-		// 		// Добавляем новый список
-		// 		storageData.lists.push({
-		// 			id: listId,
-		// 			name: listName,
-		// 			createdTime: dateTime
-		// 		});
+				// Добавляем новый список
+				storageData.lists.push({
+					id: dayzListId,
+					name: dayzListName,
+					createdTime: dateTime
+				});
 
-		// 		// Добавляем новое дело
-		// 		storageData.tasks.push(
-		// 			{
-		// 				id: makeHash(),
-		// 				listId: listId,
-		// 				name: '20:00 Загрузить фотографию: https://365dayz.ru/add/',
-		// 				createdTime: dateTime,
-		// 				markers: [
-		// 					{
-		// 						"date": dateNow,
-		// 						"label": "bull"
-		// 					},
-		// 					{
-		// 						"date": dateNow,
-		// 						"label": "bull"
-		// 					},
-		// 					{
-		// 						"date": dateNow,
-		// 						"label": "bull"
-		// 					},
-		// 					{
-		// 						"date": dateNow,
-		// 						"label": "bull"
-		// 					},
-		// 					{
-		// 						"date": dateNow,
-		// 						"label": "bull"
-		// 					},
-		// 					{
-		// 						"date": dateNow,
-		// 						"label": "bull"
-		// 					},
-		// 					{
-		// 						"date": dateNow,
-		// 						"label": "bull"
-		// 					},
-		// 					{
-		// 						"date": dateNow,
-		// 						"label": "bull"
-		// 					},
-		// 					{
-		// 						"date": dateNow,
-		// 						"label": "bull"
-		// 					},
-		// 					{
-		// 						"date": dateNow,
-		// 						"label": "bull"
-		// 					},
-		// 					{
-		// 						"date": dateNow,
-		// 						"label": "bull"
-		// 					},
-		// 					{
-		// 						"date": dateNow,
-		// 						"label": "bull"
-		// 					},
-		// 					{
-		// 						"date": dateNow,
-		// 						"label": "bull"
-		// 					},
-		// 					{
-		// 						"date": dateNow,
-		// 						"label": "bull"
-		// 					}
-		// 				]
-		// 			},
-		// 			{
-		// 				id: makeHash(),
-		// 				listId: listId,
-		// 				name: 'Ознакомиться с расширенным аккаунтом: https://365dayz.ru/plus/',
-		// 				createdTime: dateTime
-		// 			},
-		// 			{
-		// 				id: makeHash(),
-		// 				listId: listId,
-		// 				name: 'Заполнить подробнее профиль: https://365dayz.ru/settings/profile/',
-		// 				createdTime: dateTime
-		// 			}
-		// 		);
-		// 	}
-		// }
+				var dayNumber = date.getDay();
+
+				if (dayNumber == 0) {
+					dayNumber = 7;
+				}
+
+				var dayzMarkers = [];
+
+				for (var i = 0; i <= 14 - dayNumber; i ++) {
+					var newDate = new Date(),
+						time = newDate.setDate(date.getDate() + i),
+						day = newDate.getDate(time),        // число
+						month = newDate.getMonth(time) + 1, // месяц
+						year = newDate.getFullYear(time),   // год
+						dataDate = year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day);
+
+					dayzMarkers.push({
+						"date": dataDate,
+						"label": "bull"
+					});
+				}
+
+				// Добавляем новое дело
+				storageData.tasks.push(
+					{
+						id: makeHash(),
+						listId: dayzListId,
+						name: '20:00 Загрузить фотографию: https://365dayz.ru/add/',
+						createdTime: dateTime,
+						markers: dayzMarkers
+					},
+					{
+						id: makeHash(),
+						listId: dayzListId,
+						name: 'Ознакомиться с расширенным аккаунтом: https://365dayz.ru/plus/',
+						createdTime: dateTime
+					},
+					{
+						id: makeHash(),
+						listId: dayzListId,
+						name: 'Заполнить подробнее профиль: https://365dayz.ru/settings/profile/',
+						createdTime: dateTime
+					}
+				);
+			}
+
+			// Вычищаем гет-параметры
+			window.history.replaceState(null, null, '/');
+		}
 
 		// Создаем Хранилище
 		localStorage.setItem('mahoweek', JSON.stringify(storageData));
@@ -254,6 +222,12 @@ var BOARD = $('.board'),
 
 	// Если Хранилище существует
 	} else {
+		// Если в адресе содержатся гет-параметры
+		if (window.location.search) {
+			// Вычищаем гет-параметры
+			window.history.replaceState(null, null, '/');
+		}
+
 		// Парсим Хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
