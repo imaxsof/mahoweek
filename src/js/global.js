@@ -77,7 +77,7 @@ var BOARD = $('.board'),
 				{
 					id: makeHash(),
 					listId: listId,
-					name: 'Прочитать справку о сайте: https://mahoweek.ru/#about',
+					name: 'Прочитать справку о сайте: https://mahoweek.ru/#about!',
 					createdTime: dateTime,
 					markers: [
 						{
@@ -101,7 +101,7 @@ var BOARD = $('.board'),
 				{
 					id: makeHash(),
 					listId: listId,
-					name: 'Настроить доску: https://mahoweek.ru/#settings',
+					name: '21:00 Настроить доску: https://mahoweek.ru/#settings',
 					createdTime: dateTime,
 					markers: [
 						{
