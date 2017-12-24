@@ -12,6 +12,9 @@
 	border-bottom: 1px solid @grid-border;
 	position: relative;
 	text-align: center;
+	border-right: 0;
+	padding: 0;
+	background: none;
 	cursor: pointer;
 
 	&:first-child {
@@ -41,12 +44,8 @@
 		}
 	}
 
-	&--holiday + &--holiday + & {
-		border-left-color: @grid-separator;
-	}
-
-	&--holiday + &--holiday&--today {
-		border-right-color: @grid-separator !important;
+	&:nth-child(8) {
+		border-left-color: @grid-separator !important;
 	}
 
 	&::before {
@@ -72,6 +71,12 @@
 		}
 	}
 
+	&--today {
+		&::before {
+			background-color: @grid-pea-today;
+		}
+	}
+
 	&--bull {
 		&::before {
 			.grid__date--past& {
@@ -84,11 +89,13 @@
 			}
 		}
 
-		body:not(.mobile) &:not(.grid__date--past):not(.grid__date--completed):hover::before {
+		body:not(.mobile) &:not(.grid__date--past):not(.grid__date--completed):hover::before,
+		body:not(.mobile) &:not(.grid__date--past):not(.grid__date--completed):focus::before {
 			background-color: @grid-pea-hover;
 		}
 
-		body:not(.mobile) &.grid__date--today:not(.grid__date--completed):hover::before {
+		body:not(.mobile) &.grid__date--today:not(.grid__date--completed):hover::before,
+		body:not(.mobile) &.grid__date--today:not(.grid__date--completed):focus::before {
 			background-color: @grid-pea-today-hover;
 		}
 	}

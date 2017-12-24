@@ -23,7 +23,7 @@ function loadList() {
 	// Выводим сетку дат в шапку существующих списков
 	// и в строки добавления дела
 	LIST_BOARD.find('.list__grid').html(makeGrid('list'));
-	LIST_BOARD.find('.task__grid').html(makeGrid());
+	LIST_BOARD.find('.task__grid').html(makeGrid('add-task'));
 
 }
 
@@ -62,7 +62,7 @@ function loadList() {
 		// Выводим сетку дат в шапку созданного списка
 		// и в строку добавления дела
 		listNew.find('.list__grid').html(makeGrid('list'));
-		listNew.find('.task__grid').html(makeGrid());
+		listNew.find('.task__grid').html(makeGrid('add-task'));
 
 		// Показываем поле редактирования имени списка
 		listNew.find('.js-name').trigger('mouseup', ['run']);
@@ -311,7 +311,7 @@ function makeList(id, name) {
 					remakeListName(name) +
 				'</div>' +
 				'<div class="list__options">' +
-					'<button class="list__trash  js-remove-list" aria-label="Удалить список">' +
+					'<button type="button" class="list__trash  js-remove-list" aria-label="Удалить список">' +
 						'<svg>' +
 							'<use xlink:href="#icon-trash"></use>' +
 						'</svg>' +
@@ -335,7 +335,7 @@ function makeList(id, name) {
 						'<input id="' + id + '-add-task" class="task__input  js-add-task" type="text" maxlength="255">' +
 					'</div>' +
 					'<div class="task__options">' +
-						'<button class="task__submit" aria-label="Добавить дело">' +
+						'<button type="button" class="task__submit" aria-label="Добавить дело">' +
 							'<svg>' +
 								'<use xlink:href="#icon-plus"></use>' +
 							'</svg>' +

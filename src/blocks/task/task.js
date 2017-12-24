@@ -492,13 +492,13 @@ function makeTask(id, name, completed, markers) {
 	'<div class="task' + completed + '" data-id="' + id + '">' +
 		'<div class="task__wrap">' +
 			'<div class="task__status">' +
-				'<button class="task__check  js-completed-task" aria-label="Отметить дело"></button>' +
+				'<button type="button" class="task__check  js-completed-task" aria-label="Отметить дело"></button>' +
 			'</div>' +
 			'<div class="task__name  js-name">' +
 				remakeTaskName(name) +
 			'</div>' +
 			'<div class="task__options">' +
-				'<button class="task__trash  js-remove-task" aria-label="Удалить дело">' +
+				'<button type="button" class="task__trash  js-remove-task" aria-label="Удалить дело">' +
 					'<svg>' +
 						'<use xlink:href="#icon-trash"></use>' +
 					'</svg>' +

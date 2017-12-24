@@ -115,7 +115,7 @@ function makeGrid(type, data) {
 	// Вычисляем номер дня
 	var dayNumber = date.getDay();
 
-	// Делаем воскресенье номером 7
+	// Задаем воскресенью порядковый номер 7
 	if (dayNumber == 0) {
 		dayNumber = 7;
 	}
@@ -138,7 +138,7 @@ function makeGrid(type, data) {
 	// Начинаем генерировать дни
 	var grid = '';
 
-	// Генерируем каждый день
+	// Генерируем каждый день,
 	// причем сдвигаем дни недели если неделя закончилась
 	for (var i = 1 - dayNumber; i <= 14 - dayNumber; i ++) {
 		// Определяем переменные
@@ -150,11 +150,6 @@ function makeGrid(type, data) {
 			year = newDate.getFullYear(time),   // год
 			newDayNumber = newDate.getDay(),    // номер дня
 			dataDate = year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day);
-
-		// Делаем воскресенье номером 7
-		if (newDayNumber == 0) {
-			newDayNumber = 7;
-		}
 
 		// Определяем текущий день
 		if (date.getDate() == day) {
