@@ -3,10 +3,10 @@
   "version": "1.17.13",
   "dependencies": {
     "cartonbox": "^1.5.4",
-    "firebase": "^4.6.0",
+    "firebase": "^4.8.0",
     "jquery": "^3.2.1",
     "normalize.css": "7.0.0",
-    "sortablejs": "^1.6.1"
+    "sortablejs": "^1.7.0"
   },
   "devDependencies": {
     "browser-sync": "^2.18.13",
@@ -16,7 +16,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-csscomb": "^3.0.8",
     "gulp-csso": "^3.0.0",
-    "gulp-file-include": "^1.2.0",
+    "gulp-file-include": "^2.0.0",
     "gulp-html-minifier": "^0.1.8",
     "gulp-html-version": "^1.0.1",
     "gulp-less": "^3.3.2",
@@ -24,6 +24,6 @@
     "gulp-typograf": "^3.1.0",
     "gulp-uglify": "2.0.1",
     "gulp-wrap": "^0.13.0",
-    "multipipe": "^1.0.2"
+    "multipipe": "^2.0.1"
   }
 }
