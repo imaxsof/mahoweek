@@ -109,6 +109,45 @@
 //------------------------------------------------------------------------------
 
 function makeGrid(type, data) {
+	// Создаем объект с официальными и неофициальными
+	// праздниками и праздничными днями РФ
+	var holidays = {
+		"2018-01-01": {
+			icon: "🎄",
+			title: "Новый год, праздничный день",
+			dayoff: true
+		},
+		"2018-01-02": {
+			title: "Праздничный день",
+			dayoff: true
+		},
+		"2018-01-03": {
+			title: "Праздничный день",
+			dayoff: true
+		},
+		"2018-01-04": {
+			title: "Праздничный день",
+			dayoff: true
+		},
+		"2018-01-05": {
+			title: "Праздничный день",
+			dayoff: true
+		},
+		"2018-01-06": {
+			title: "Праздничный день (выходной перенесён на 9 марта)",
+			dayoff: true
+		},
+		"2018-01-07": {
+			icon: "👼",
+			title: "Рождество Христово, праздничный день (выходной перенесён на 2 мая)",
+			dayoff: true
+		},
+		"2018-01-08": {
+			title: "Праздничный день",
+			dayoff: true
+		}
+	}
+
 	// Получаем метку реального времени
 	var date = new Date();
 
@@ -164,15 +203,28 @@ function makeGrid(type, data) {
 			dateClass += ' grid__date--past';
 		}
 
-		// Определяем выходные
-		if (newDayNumber == 6 || newDayNumber == 7) {
-			dateClass += ' grid__date--holiday';
-		}
+		// Если это шапка списка
+		if (type == 'list') {
+			if (dataDate in holidays) {
+				// Определяем выходной или праздничный ли день
+				if (newDayNumber == 6 || newDayNumber == 0 || holidays[dataDate].dayoff) {
+					dateClass += ' grid__date--holiday';
+				}
+
+				// Выводим день
+				grid += '<div class="grid__date' + dateClass + '" title="' + holidays[dataDate].title + '">' + (holidays[dataDate].icon !== undefined ? holidays[dataDate].icon : day) + '</div>';
+			} else {
+				// Определяем выходной ли день
+				if (newDayNumber == 6 || newDayNumber == 0) {
+					dateClass += ' grid__date--holiday';
+				}
+
+				// Выводим день
+				grid += '<div class="grid__date' + dateClass + '">' + day + '</div>';
+			}
 
 		// Если это дело
-		if (type == 'task') {
-			dateClass += ' js-marker-task';
-
+		} else if (type == 'task') {
 			// Если у дела есть метки
 			if (markerList) {
 				// Смотрим есть ли метка на этот день
@@ -188,19 +240,19 @@ function makeGrid(type, data) {
 					}
 				}
 			}
+
+			if (past) {
+				// Выводим прошедший день
+				grid += '<div class="grid__date' + dateClass + '"></div>';
+			} else {
+				// Выводим день настоящий или будущий
+				grid += '<button type="button" class="grid__date  js-marker-task' + dateClass + '" data-date="' + dataDate +'" aria-label="Добавить или снять метку" ></button>';
+			}
+
+		// Если это строка добавления дела
+		} else if (type == 'add-task') {
+			grid += '<div class="grid__date' + dateClass + '"></div>';
 		}
-
-		// Открываем код
-		grid += '<div class="grid__date' + dateClass + '" data-date="' + dataDate +'">';
-
-		// Если это шапка списка
-		if (type == 'list') {
-			// Выводим дату
-			grid += day;
-		}
-
-		// Закрываем код
-		grid += '</div>';
 	}
 
 	// Выводим дни
