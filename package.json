@@ -3,13 +3,13 @@
   "version": "1.17.13",
   "dependencies": {
     "cartonbox": "^1.5.4",
-    "firebase": "^4.8.0",
+    "firebase": "^4.8.1",
     "jquery": "^3.2.1",
     "normalize.css": "7.0.0",
     "sortablejs": "^1.7.0"
   },
   "devDependencies": {
-    "browser-sync": "^2.18.13",
+    "browser-sync": "^2.21.0",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
@@ -19,7 +19,7 @@
     "gulp-file-include": "^2.0.0",
     "gulp-html-minifier": "^0.1.8",
     "gulp-html-version": "^1.0.1",
-    "gulp-less": "^3.3.2",
+    "gulp-less": "^3.4.0",
     "gulp-sync": "^0.1.4",
     "gulp-typograf": "^3.1.0",
     "gulp-uglify": "2.0.1",
