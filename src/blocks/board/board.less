@@ -2,6 +2,34 @@
 //------------------------------------------------------------------------------
 
 .board {
+	&--404 {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		color: @light-primary;
+		fill: @light-primary;
+		transform: translate3d(-50%, -50%, 0);
+		text-align: center;
+		width: 100%;
+		max-width: 400px;
+		padding: 29px 15px 15px;
+	}
+}
+
+.board__loader {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	transition-property: opacity, transform;
+	transition: @duration @timing-function;
+
+	.ready & {
+		opacity: 0;
+		transform: scale3d(0.9, 0.9, 1);
+	}
+
 	&::before {
 		position: fixed;
 		content: "";
@@ -19,23 +47,6 @@
 		animation-timing-function: linear;
 		animation-fill-mode: both;
 		animation-iteration-count: infinite;
-	}
-
-	&--404 {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		color: @light-primary;
-		fill: @light-primary;
-		transform: translate3d(-50%, -50%, 0);
-		text-align: center;
-		width: 100%;
-		max-width: 400px;
-		padding: 29px 15px 15px;
-
-		&::before {
-			display: none;
-		}
 	}
 }
 
