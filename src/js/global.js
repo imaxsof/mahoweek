@@ -332,7 +332,7 @@ var BOARD = $('.board'),
 									// Показываем оповещение
 									var notification = new Notification('Через ' + notifyTitle + ', в ' + taskPresetTime, {
 										body: taskName,
-										icon: '/img/notify.png?v=2',
+										icon: 'img/notify.png?v=2',
 										requireInteraction: true
 									});
 
@@ -350,7 +350,7 @@ var BOARD = $('.board'),
 								// Показываем оповещение
 								var notification = new Notification('Время ' + taskPresetTime + '!', {
 									body: taskName,
-									icon: '/img/notify.png?v=2',
+									icon: 'img/notify.png?v=2',
 									requireInteraction: true
 								});
 
@@ -520,8 +520,8 @@ function changeFavicon() {
 	// Если в браузере поддерживается смена фавиконки
 	if (CHANGE_FAVICON) {
 		// Определяем фавиконки
-		var iconDefault = '/favicon-32x32.png?v=3',
-			iconToday = '/img/favicon-today.png?v=2';
+		var iconDefault = 'favicon-32x32.png?v=3',
+			iconToday = 'img/favicon-today.png?v=2';
 
 		// Удаляем текущие фавиконки
 		$('link[rel$=icon]').remove();

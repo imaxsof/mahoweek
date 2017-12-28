@@ -70,7 +70,7 @@
 			// Строим сообщение оповещения
 			var notificationTitle = 'Оповещения включены',
 				notificationBody = 'Теперь добавьте время выполнения делам и держите сайт открытым в браузере, чтобы оповещения приходили.',
-				notificationIcon = '/img/notify.png?v=2';
+				notificationIcon = 'img/notify.png?v=2';
 
 			if (notifyValue == 'none') {
 				// Выключаем оповещения
