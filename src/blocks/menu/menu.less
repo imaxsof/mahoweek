@@ -49,15 +49,51 @@
 		}
 	}
 
-	svg {
-		width: 25px;
-		height: 25px;
-		position: absolute;
-		top: 22.5px;
-		left: 5px;
+	&--profile .btn {
+		padding-left: 23px;
+		width: 43px;
 
 		@media (min-width: 768px) {
-			fill-opacity: 0.5;
+			padding-left: 40px;
+			width: auto;
 		}
+	}
+}
+
+.menu__icon {
+	width: 25px;
+	height: 25px;
+	position: absolute;
+	top: 22.5px;
+	left: 5px;
+
+	@media (min-width: 768px) {
+		fill-opacity: 0.5;
+	}
+
+	.menu__item--profile & {
+		display: none;
+	}
+}
+
+.menu__ava {
+	position: absolute;
+	top: 22.5px;
+	left: 9px;
+	width: 25px;
+	height: 25px;
+	left: 9px;
+	border-radius: 50%;
+	background-color: @menu-link;
+	background-size: cover;
+	display: none;
+
+	.btn:hover &,
+	.mobile .btn:hover & {
+		background-color: @menu-link-hover;
+	}
+
+	.menu__item--profile & {
+		display: block;
 	}
 }

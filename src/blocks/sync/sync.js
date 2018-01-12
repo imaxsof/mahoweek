@@ -32,8 +32,11 @@ firebase.initializeApp(firebaseConfig);
 			// Если пользователь идентифицирован
 			if (user) {
 				// Вставляем аватар и имя
-				$('.sync__ava').css('background-image', 'url(' + user.photoURL + ')');
+				$('.sync__ava, .menu__ava').css('background-image', 'url(' + user.photoURL + ')');
 				$('.sync__name').text(user.displayName);
+
+				// Показываем пользователя в меню
+				$('.menu__item--settings').addClass('menu__item--profile');
 
 				// Считаем кол-во синхронизаций изменений
 				var syncCount = 0;
