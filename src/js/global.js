@@ -585,6 +585,9 @@ function updateStorage(data) {
 
 	// Если пользователь идентифицирован
 	if (firebase.auth().currentUser) {
+		// Скрываем если было сообщение об ошибке
+		$('.sync__message').html('').hide();
+
 		// Показываем индикатор обновления
 		$('.sync__ava, .menu__ava').attr('data-sync', 'process');
 
@@ -600,8 +603,9 @@ function updateStorage(data) {
 			// Показываем индикатор краха
 			$('.sync__ava, .menu__ava').attr('data-sync', 'fail');
 
-			// Выводим ошибку
+			// Выводим ошибку в консоли и в сообщении
 			console.error(error.code + ': ' + error.message);
+			$('.sync__message').html(error.code + ': ' + error.message).show();
 		});
 	}
 

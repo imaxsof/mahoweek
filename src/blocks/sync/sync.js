@@ -108,6 +108,9 @@ firebase.initializeApp(firebaseConfig);
 	$('.js-login-sync').on('click', function() {
 		var isThis = $(this);
 
+		// Скрываем если было сообщение об ошибке
+		$('.sync__message').html('').hide();
+
 		// Показываем процесс аутентификации
 		$('.sync__auth').addClass('sync__auth--load');
 
@@ -132,8 +135,9 @@ firebase.initializeApp(firebaseConfig);
 					// Скрываем процесс аутентификации
 					$('.sync__auth').removeClass('sync__auth--load');
 
-					// Выводим ошибку
+					// Выводим ошибку в консоли и в сообщении
 					console.error(error.code + ': ' + error.message);
+					$('.sync__message').html(error.code + ': ' + error.message).show();
 				});
 
 			// Если вход выполняется с мобильного устройства
@@ -155,14 +159,18 @@ firebase.initializeApp(firebaseConfig);
 		// Скрываем процесс аутентификации
 		$('.sync__auth').removeClass('sync__auth--load');
 
-		// Выводим ошибку
+		// Выводим ошибку в консоли и в сообщении
 		console.error(error.code + ': ' + error.message);
+		$('.sync__message').html(error.code + ': ' + error.message).show();
 	});
 
 	// Разогиниваем пользователя
 	$('.js-logout-sync').on('click', function() {
 		// Если пользователь идентифицирован
 		if (firebase.auth().currentUser) {
+			// Скрываем если было сообщение об ошибке
+			$('.sync__message').html('').hide();
+
 			// Разлогиниваем
 			firebase.auth().signOut().then(function() {
 				// Очищаем локальное хранилище полностью
@@ -174,8 +182,9 @@ firebase.initializeApp(firebaseConfig);
 				// Перезагружаем страницу
 				window.location.reload(true);
 			}).catch(function(error) {
-				// Выводим ошибку
+				// Выводим ошибку в консоли и в сообщении
 				console.error(error.code + ': ' + error.message);
+				$('.sync__message').html(error.code + ': ' + error.message).show();
 			});
 		}
 	});
@@ -192,6 +201,9 @@ firebase.initializeApp(firebaseConfig);
 	$('.js-get-sync').on('click', function() {
 		// Если пользователь идентифицирован
 		if (firebase.auth().currentUser) {
+			// Скрываем если было сообщение об ошибке
+			$('.sync__message').html('').hide();
+
 			// Показываем индикатор обновления
 			$('.sync__ava, .menu__ava').attr('data-sync', 'process');
 			$('.sync__hand').addClass('sync__hand--spin');
@@ -240,8 +252,9 @@ firebase.initializeApp(firebaseConfig);
 						$('.sync__ava, .menu__ava').attr('data-sync', 'fail');
 						$('.sync__hand').removeClass('sync__hand--spin');
 
-						// Выводим ошибку
+						// Выводим ошибку в консоли и в сообщении
 						console.error(error.code + ': ' + error.message);
+						$('.sync__message').html(error.code + ': ' + error.message).show();
 					});
 				}
 			}).catch(function(error) {
@@ -249,8 +262,9 @@ firebase.initializeApp(firebaseConfig);
 				$('.sync__ava, .menu__ava').attr('data-sync', 'fail');
 				$('.sync__hand').removeClass('sync__hand--spin');
 
-				// Выводим ошибку
+				// Выводим ошибку в консоли и в сообщении
 				console.error(error.code + ': ' + error.message);
+				$('.sync__message').html(error.code + ': ' + error.message).show();
 			});
 		}
 	});
@@ -283,8 +297,9 @@ function checkUser(uid) {
 				// Перезагружаем страницу
 				window.location.reload(true);
 			}).catch(function(error) {
-				// Выводим ошибку
+				// Выводим ошибку в консоли и в сообщении
 				console.error(error.code + ': ' + error.message);
+				$('.sync__message').html(error.code + ': ' + error.message).show();
 			});
 
 		// Если пользователь в БД есть
@@ -306,8 +321,9 @@ function checkUser(uid) {
 			window.location.reload(true);
 		}
 	}).catch(function(error) {
-		// Выводим ошибку
+		// Выводим ошибку в консоли и в сообщении
 		console.error(error.code + ': ' + error.message);
+		$('.sync__message').html(error.code + ': ' + error.message).show();
 	});
 
 }
