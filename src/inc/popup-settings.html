@@ -24,18 +24,21 @@
 		</div>
 
 		<div class="sync__user">
-			<div class="sync__data">
-				<div class="sync__indicator" data-type="default"></div>
+			<button type="button" class="btn  btn--primary  sync__hand  js-get-sync" title="Синхронизировать вручную" aria-label="Синхронизировать вручную">
+				<svg>
+					<use xlink:href="#icon-sync"></use>
+				</svg>
+			</button>
 
-				<div class="sync__ava"></div>
-			</div>
+			<div class="sync__ava" data-sync="default"></div>
+
+			<button type="button" class="btn  btn--default  sync__logout  js-logout-sync" title="Отключить синхронизацию" aria-label="Отключить синхронизацию">
+				<svg>
+					<use xlink:href="#icon-logout"></use>
+				</svg>
+			</button>
 
 			<div class="sync__name"></div>
-
-			<div class="sync__control">
-				<button type="button" class="btn  btn--primary  js-get-sync">Синхронизировать</button>
-				<button type="button" class="btn  btn--default  js-logout-sync">Отключить</button>
-			</div>
 		</div>
 	</div>
 

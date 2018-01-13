@@ -14,11 +14,37 @@
 .sync__auth {
 	position: relative;
 
+	&--hidden {
+		display: none;
+	}
+
 	&::before {
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+		z-index: 2;
+		content: "";
+		top: calc(~"50% - 15px - 35px");
+		left: calc(~"50% - 15px");
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		border: 2px solid @dark-primary;
+		border-right-color: fade(@light-primary, 0);
+		border-bottom-color: fade(@light-primary, 0);
+		visibility: visible;
+		animation-name: spin;
+		animation-duration: (@duration * 3);
+		animation-timing-function: linear;
+		animation-fill-mode: both;
+		animation-iteration-count: infinite;
+	}
+
+	&::after {
 		position: absolute;
 		content: "";
 		z-index: 1;
-		top: 0;
+		top: -39px;
 		right: 0;
 		bottom: 0;
 		left: 0;
@@ -31,6 +57,11 @@
 
 	&--load {
 		&::before {
+			opacity: 1;
+			visibility: visible;
+		}
+
+		&::after {
 			opacity: 0.9;
 			visibility: visible;
 		}
@@ -56,11 +87,7 @@
 		svg {
 			width: 30px;
 			height: 30px;
-			margin: -4px -4px -9px;
-
-			@media (min-width: 768px) {
-				margin: -4px -3px -9px -9px;
-			}
+			margin: -4px -3px -9px -9px;
 		}
 	}
 
@@ -79,82 +106,82 @@
 		svg {
 			width: 30px;
 			height: 30px;
-			margin: -4px -4px -9px;
-
-			@media (min-width: 768px) {
-				margin: -5px 0 -8px -6px;
-			}
+			margin: -5px 0 -8px -6px;
 		}
 	}
 }
 
 .sync__user {
 	display: none;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
 	padding-top: 5px;
-	padding-bottom: 5px;
 	text-align: center;
+
+	&--show {
+		display: flex;
+	}
+
+	.btn {
+		min-width: 6px;
+	}
 }
 
-.sync__data {
-	margin: 5px auto 0;
-	position: relative;
-	width: 100px;
-	height: 100px;
-	box-sizing: content-box;
-	padding: 4px;
+.sync__hand {
+	animation-name: none;
+	animation-duration: (@duration * 3);
+	animation-timing-function: linear;
+	animation-fill-mode: both;
+	animation-iteration-count: infinite;
+
+	&--spin {
+		animation-name: spin;
+	}
+
+	svg {
+		width: 28px;
+		height: 28px;
+		margin: -2px -12px;
+		display: block;
+	}
 }
 
-.sync__indicator {
-	&::before {
-		position: absolute;
-		top: 0;
-		left: 0;
-		content: "";
-		width: 100%;
-		height: 100%;
-		border-radius: 50%;
-		background-color: @dark-divider;
-	}
-
-	&[data-type="process"]::before {
-		background-color: @sync-process;
-	}
-
-	&[data-type="ok"]::before {
-		background-color: @sync-ok;
-	}
-
-	&[data-type="fail"]::before {
-		background-color: @sync-fail;
-	}
+.sync__logout svg {
+	width: 25px;
+	height: 25px;
+	margin: -0.5px -11.5px -0.5px -9.5px;
+	display: block;
 }
 
 .sync__ava {
 	position: relative;
-	width: 100%;
-	padding-bottom: calc(~"100% - 2px");
+	width: 75px;
+	height: 75px;
 	background-color: @light-secondary;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 	border-radius: 50%;
-	overflow: hidden;
-	border: 1px solid @light-primary;
+	margin: 0 25px;
+	transition-property: box-shadow;
+	transition: @duration @timing-function;
+
+	&[data-sync="process"] {
+		box-shadow: inset 0 0 15px 1px @sync-process;
+	}
+
+	&[data-sync="ok"] {
+		box-shadow: inset 0 0 15px 1px @sync-ok;
+	}
+
+	&[data-sync="fail"] {
+		box-shadow: inset 0 0 15px 1px @sync-fail;
+	}
 }
 
 .sync__name {
+	width: 100%;
 	margin-top: 20px;
 	min-height: @line-height;
-}
-
-.sync__control {
-	margin: 20px -5px -10px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-
-	.btn {
-		min-width: auto;
-		margin: 0 5px 10px
-	}
 }

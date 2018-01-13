@@ -586,7 +586,7 @@ function updateStorage(data) {
 	// Если пользователь идентифицирован
 	if (firebase.auth().currentUser) {
 		// Показываем индикатор обновления
-		$('.sync__indicator').attr('data-type', 'process');
+		$('.sync__ava, .menu__ava').attr('data-sync', 'process');
 
 		// Отправляем изменения в БД из Хранилища
 		firebase.database().ref('users/' + firebase.auth().currentUser.uid + '/database').set({
@@ -595,10 +595,10 @@ function updateStorage(data) {
 			"settings": data.settings
 		}).then(function() {
 			// Показываем индикатор, что все окей
-			$('.sync__indicator').attr('data-type', 'ok');
+			$('.sync__ava, .menu__ava').attr('data-sync', 'ok');
 		}).catch(function(error) {
 			// Показываем индикатор краха
-			$('.sync__indicator').attr('data-type', 'fail');
+			$('.sync__ava, .menu__ava').attr('data-sync', 'fail');
 
 			// Выводим ошибку
 			console.error(error.code + ': ' + error.message);

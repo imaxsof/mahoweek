@@ -21,11 +21,11 @@ firebase.initializeApp(firebaseConfig);
 	// Если пользователь авторизован
 	if (localStorage.getItem('authorizedUser')) {
 		// Показываем панель пользователя
-		$('.sync__auth').hide();
-		$('.sync__user').show();
+		$('.sync__auth').addClass('sync__auth--hidden');
+		$('.sync__user').addClass('sync__user--show');
 
 		// Показываем индикатор обновления
-		$('.sync__indicator').attr('data-type', 'process');
+		$('.sync__ava, .menu__ava').attr('data-sync', 'process');
 
 		// Получаем данные о пользователе из Firebase
 		firebase.auth().onAuthStateChanged(function(user) {
@@ -63,7 +63,7 @@ firebase.initializeApp(firebaseConfig);
 					// Если это первая синхронизация
 					} else if (syncCount == 1) {
 						// Показываем индикатор, что все окей
-						$('.sync__indicator').attr('data-type', 'ok');
+						$('.sync__ava, .menu__ava').attr('data-sync', 'ok');
 
 						// Загружаем списки
 						loadList();
@@ -193,7 +193,8 @@ firebase.initializeApp(firebaseConfig);
 		// Если пользователь идентифицирован
 		if (firebase.auth().currentUser) {
 			// Показываем индикатор обновления
-			$('.sync__indicator').attr('data-type', 'process');
+			$('.sync__ava, .menu__ava').attr('data-sync', 'process');
+			$('.sync__hand').addClass('sync__hand--spin');
 
 			// Подключаемся к БД единоразово
 			return firebase.database().ref('/users/' + firebase.auth().currentUser.uid + '/database').once('value').then(function(data) {
@@ -227,7 +228,7 @@ firebase.initializeApp(firebaseConfig);
 						"settings": mahoweekStorage.settings
 					}).then(function() {
 						// Показываем индикатор, что все окей
-						$('.sync__indicator').attr('data-type', 'ok');
+						$('.sync__ava, .menu__ava').attr('data-sync', 'ok');
 
 						// Добавляем данные в Метрику
 						yaCounter43856389.reachGoal('ya-manually-sync');
@@ -236,7 +237,8 @@ firebase.initializeApp(firebaseConfig);
 						window.location.reload(true);
 					}).catch(function(error) {
 						// Показываем индикатор краха
-						$('.sync__indicator').attr('data-type', 'fail');
+						$('.sync__ava, .menu__ava').attr('data-sync', 'fail');
+						$('.sync__hand').removeClass('sync__hand--spin');
 
 						// Выводим ошибку
 						console.error(error.code + ': ' + error.message);
@@ -244,7 +246,8 @@ firebase.initializeApp(firebaseConfig);
 				}
 			}).catch(function(error) {
 				// Показываем индикатор краха
-				$('.sync__indicator').attr('data-type', 'fail');
+				$('.sync__ava, .menu__ava').attr('data-sync', 'fail');
+				$('.sync__hand').removeClass('sync__hand--spin');
 
 				// Выводим ошибку
 				console.error(error.code + ': ' + error.message);

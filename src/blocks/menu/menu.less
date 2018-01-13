@@ -86,7 +86,11 @@
 	border-radius: 50%;
 	background-color: @menu-link;
 	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
 	display: none;
+	transition-property: box-shadow;
+	transition: @duration @timing-function;
 
 	.btn:hover &,
 	.mobile .btn:hover & {
@@ -95,5 +99,17 @@
 
 	.menu__item--profile & {
 		display: block;
+	}
+
+	&[data-sync="process"] {
+		box-shadow: inset 0 0 5px 1px @sync-process;
+	}
+
+	&[data-sync="ok"] {
+		box-shadow: inset 0 0 5px 1px @sync-ok;
+	}
+
+	&[data-sync="fail"] {
+		box-shadow: inset 0 0 5px 1px @sync-fail;
 	}
 }
