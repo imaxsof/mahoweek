@@ -572,6 +572,25 @@ function makeHash() {
 
 
 
+// Конвертируем дату и время в человеческий вид
+//------------------------------------------------------------------------------
+
+function convertDate(time) {
+
+	var date = new Date(time),
+		day = date.getDate(),
+		month = date.getMonth() + 1,
+		year = date.getFullYear(),
+		hours = date.getHours(),
+		minutes = date.getMinutes(),
+		dataDate = (day < 10 ? '0' + day : day) + '.' + (month < 10 ? '0' + month : month) + '.' + year + ' в ' + (hours < 10 ? '0' + hours : hours) + ':' + (minutes < 10 ? '0' + minutes : minutes);
+
+	return dataDate;
+
+}
+
+
+
 // Обновляем Хранилище и БД
 //------------------------------------------------------------------------------
 
@@ -597,6 +616,9 @@ function updateStorage(data) {
 			"tasks": data.tasks,
 			"settings": data.settings
 		}).then(function() {
+			// Вставляем дату последнего изменения
+			$('.sync__updated span').text(convertDate(data.settings.updatedTime));
+
 			// Показываем индикатор, что все окей
 			$('.sync__ava, .menu__ava').attr('data-sync', 'ok');
 		}).catch(function(error) {
