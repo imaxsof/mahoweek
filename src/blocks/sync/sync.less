@@ -180,6 +180,42 @@
 	}
 }
 
+.sync__provider {
+	display: none;
+	position: absolute;
+	right: -3px;
+	bottom: -3px;
+	border-radius: 50%;
+	overflow: hidden;
+	background-color: @light-secondary;
+	border: 2px solid @light-primary;
+	width: 25px;
+	height: 25px;
+	box-sizing: content-box;
+	fill: @light-primary;
+
+	&--facebook {
+		background-color: #3B5998;
+
+		[data-provider="facebook.com"] & {
+			display: block;
+		}
+	}
+
+	&--twitter {
+		background-color: #1DA1F3;
+
+		[data-provider="twitter.com"] & {
+			display: block;
+		}
+	}
+
+	svg {
+		width: 25px;
+		height: 25px;
+	}
+}
+
 .sync__name {
 	width: 100%;
 	margin-top: 20px;

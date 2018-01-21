@@ -31,9 +31,10 @@ firebase.initializeApp(firebaseConfig);
 		firebase.auth().onAuthStateChanged(function(user) {
 			// Если пользователь идентифицирован
 			if (user) {
-				// Вставляем аватар и имя
+				// Вставляем аватар, имя и провайдера
 				$('.sync__ava, .menu__ava').css('background-image', 'url(' + user.photoURL + ')');
 				$('.sync__name').text(user.displayName);
+				$('.sync__ava').attr('data-provider', user.providerData[0].providerId);
 
 				// Показываем пользователя в меню
 				$('.menu__item--settings').addClass('menu__item--profile');
