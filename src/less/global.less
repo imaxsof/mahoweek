@@ -10,8 +10,13 @@
 html {
 	cursor: default;
 	overflow-y: scroll;
+	overflow-x: hidden;
 	-webkit-font-smoothing: antialiased;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+	@media (min-width: 992px) {
+		overflow-x: initial;
+	}
 }
 
 body {
@@ -20,12 +25,8 @@ body {
 	font-family: @font-family;
 	color: @dark-primary;
 	fill: @dark-primary;
-	overflow-x: hidden;
 	background-color: @board-bg;
-
-	@media (min-width: 992px) {
-		overflow-x: initial;
-	}
+	min-width: 320px;
 
 	&.mobile {
 		user-select: none;

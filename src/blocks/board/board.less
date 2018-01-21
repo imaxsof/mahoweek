@@ -302,11 +302,15 @@
 	margin: auto;
 	position: relative;
 	display: flex;
+	opacity: 0;
 	justify-content: space-between;
 	visibility: hidden;
+	transition-property: opacity, visibility;
+	transition: @duration @timing-function;
 
 	.ready & {
 		visibility: visible;
+		opacity: 1;
 	}
 
 	&::before {
