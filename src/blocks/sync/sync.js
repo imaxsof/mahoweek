@@ -74,6 +74,26 @@ firebase.initializeApp(firebaseConfig);
 
 						// Загружаем дела
 						loadTask();
+
+						// Слушаем состояние подключения к сети
+						// firebase.database().ref('.info/connected').on('value', function(snap) {
+						// 	// Если в сети
+						// 	if (snap.val() === true) {
+						// 		// Скрываем если было сообщение об ошибке
+						// 		$('.sync__message').html('').hide();
+
+						// 		// Показываем индикатор, что все окей
+						// 		$('.sync__ava, .menu__ava').attr('data-sync', 'ok');
+
+						// 	// Если не в сети
+						// 	} else {
+						// 		// Показываем индикатор краха
+						// 		$('.sync__ava, .menu__ava').attr('data-sync', 'fail');
+
+						// 		// Выводим ошибку в сообщении
+						// 		$('.sync__message').html('Проблема с сетью').show();
+						// 	}
+						// });
 					}
 				});
 
