@@ -1,7 +1,6 @@
 'use strict';
 
 
-
 // Packages
 //------------------------------------------------------------------------------
 
@@ -21,7 +20,6 @@ var gulp = require('gulp'),
 	gulpsync = require('gulp-sync')(gulp),
 	gulpHtmlVersion = require('gulp-html-version'),
 	typograf = require('gulp-typograf');
-
 
 
 // Paths
@@ -70,12 +68,17 @@ var paths = {
 		}
 	},
 	watch: {
-		html: 'src/**/*.html',
-		css: 'src/**/*.less',
-		js: 'src/**/*.js'
+		html: 'src/*.html',
+		css: [
+			'src/blocks/**/*.less',
+			'src/less/*.less'
+		],
+		js: [
+			'src/blocks/**/*.js',
+			'src/js/*.js'
+		]
 	}
 };
-
 
 
 // Build
@@ -161,7 +164,6 @@ gulp.task('js:app', function() {
 });
 
 
-
 // Build Docs
 //------------------------------------------------------------------------------
 
@@ -171,7 +173,6 @@ gulp.task('docs', ['clean:docs', 'default'], function() {
 		gulp.dest(paths.docs)
 	);
 });
-
 
 
 // Watch
@@ -191,7 +192,6 @@ gulp.task('watch', ['default'], function() {
 });
 
 
-
 // Clean
 //------------------------------------------------------------------------------
 
@@ -202,7 +202,6 @@ gulp.task('clean:dist', function() {
 gulp.task('clean:docs', function() {
 	return del.sync(['docs/**', '!docs']);
 });
-
 
 
 // Default
