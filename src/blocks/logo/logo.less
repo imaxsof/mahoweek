@@ -6,8 +6,9 @@
 
 	header & {
 		animation-name: none;
+		animation-delay: @duration;
 		animation-duration: @duration;
-		animation-timing-function: @timing-function;
+		animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
 		animation-fill-mode: both;
 
 		.ready & {

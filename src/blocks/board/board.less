@@ -23,7 +23,7 @@
 	height: 100%;
 	left: 0;
 	transition-property: opacity, transform;
-	transition: @duration @timing-function;
+	transition: @duration cubic-bezier(0.215, 0.61, 0.355, 1);
 
 	.ready & {
 		opacity: 0;
@@ -43,7 +43,7 @@
 		border-bottom-color: fade(@light-primary, 0);
 		visibility: visible;
 		animation-name: spin;
-		animation-duration: (@duration * 3);
+		animation-duration: 0.6s;
 		animation-timing-function: linear;
 		animation-fill-mode: both;
 		animation-iteration-count: infinite;
@@ -62,8 +62,9 @@
 	background-position: 50% 50%;
 	visibility: hidden;
 	animation-name: none;
-	animation-duration: @duration;
-	animation-timing-function: @timing-function;
+	animation-delay: @duration;
+	animation-duration: (@duration * 4);
+	animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
 	animation-fill-mode: both;
 
 	.ready & {
@@ -306,7 +307,7 @@
 	justify-content: space-between;
 	visibility: hidden;
 	transition-property: opacity, visibility;
-	transition: @duration @timing-function;
+	transition: @duration cubic-bezier(0.215, 0.61, 0.355, 1) @duration;
 
 	.ready & {
 		visibility: visible;
@@ -339,8 +340,9 @@
 	position: relative;
 	visibility: hidden;
 	animation-name: none;
+	animation-delay: @duration;
 	animation-duration: @duration;
-	animation-timing-function: @timing-function;
+	animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
 	animation-fill-mode: both;
 
 	.ready & {
