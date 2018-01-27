@@ -1,45 +1,40 @@
 // Global
 //------------------------------------------------------------------------------
 
-// Смотрим на используемые технологии
-//------------------------------------------------------------------------------
-
 // Определяем систему
-var WINDOWS = navigator.platform.toUpperCase().indexOf('WIN') !== -1,
-	OSX = navigator.platform.toUpperCase().indexOf('MAC') !== -1,
-	LINUX = navigator.platform.toUpperCase().indexOf('LINUX') !== -1;
+const WINDOWS = navigator.platform.toUpperCase().indexOf('WIN') !== -1;
+const OSX = navigator.platform.toUpperCase().indexOf('MAC') !== -1;
+const LINUX = navigator.platform.toUpperCase().indexOf('LINUX') !== -1;
 
 // Определяем браузер
-var FIREFOX = navigator.userAgent.toLowerCase().indexOf('firefox') > -1,
-	SAFARI = /^((?!chrome).)*safari/i.test(navigator.userAgent),
-	CHROME = /chrom(e|ium)(edge)?/.test(navigator.userAgent.toLowerCase()),
-	CHROMEIOS = navigator.userAgent.match('CriOS'),
-	MSIE = navigator.userAgent.match('MSIE'),
-	EDGE = navigator.userAgent.match('Edge'),
-	ANDROID = navigator.userAgent.toLowerCase().indexOf('android') > -1,
-	IPAD = navigator.userAgent.match(/iPad/i) !== null;
+const FIREFOX = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+const SAFARI = /^((?!chrome).)*safari/i.test(navigator.userAgent);
+const CHROME = /chrom(e|ium)(edge)?/.test(navigator.userAgent.toLowerCase());
+const CHROMEIOS = navigator.userAgent.match('CriOS');
+const MSIE = navigator.userAgent.match('MSIE');
+const EDGE = navigator.userAgent.match('Edge');
+const ANDROID = navigator.userAgent.toLowerCase().indexOf('android') > -1;
+const IPAD = navigator.userAgent.match(/iPad/i) !== null;
 
 // Определяем мобильное устройство
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-	var MOBILE = true;
+	const MOBILE = true;
 
 	$('body').addClass('mobile');
+} else {
+	const MOBILE = false;
 }
 
 // Определяем поддержку функций
-var NOTIFICATION = ('Notification' in window) && !MOBILE && (EDGE || FIREFOX || CHROME || SAFARI) ? true : false,
-	CHANGE_FAVICON = document.createElement('canvas').getContext && !MOBILE && (FIREFOX || CHROME) ? true : false;
-
-
+const NOTIFICATION = ('Notification' in window) && !MOBILE && (EDGE || FIREFOX || CHROME || SAFARI) ? true : false;
+const CHANGE_FAVICON = document.createElement('canvas').getContext && !MOBILE && (FIREFOX || CHROME) ? true : false;
 
 // Определяем элементы доски
-//------------------------------------------------------------------------------
 
-var BOARD = $('.board'),
-	THEME_BOARD = BOARD.find('.board__theme'),
-	LIST_BOARD = BOARD.find('.board__lists'),
-	SETTINGS_FORM = $('.form--settings');
-
+const BOARD = $('.board');
+const THEME_BOARD = BOARD.find('.board__theme');
+const LIST_BOARD = BOARD.find('.board__lists');
+const SETTINGS_FORM = $('.form--settings');
 
 
 // Инициализируем Хранилище
@@ -53,16 +48,16 @@ var BOARD = $('.board'),
 		localStorage.clear();
 
 		// Определяем время
-		var date = new Date(),
-			dateTime = date.getTime(),
-			dateDay = date.getDate(),
-			dateMonth = date.getMonth() + 1,
-			dateYear = date.getFullYear(),
-			dateNow = dateYear + '-' + (dateMonth < 10 ? '0' + dateMonth : dateMonth) + '-' + (dateDay < 10 ? '0' + dateDay : dateDay);
+		var date = new Date();
+		var dateTime = date.getTime();
+		var dateDay = date.getDate();
+		var dateMonth = date.getMonth() + 1;
+		var dateYear = date.getFullYear();
+		var dateNow = dateYear + '-' + (dateMonth < 10 ? '0' + dateMonth : dateMonth) + '-' + (dateDay < 10 ? '0' + dateDay : dateDay);
 
 		// Создаем некоторые объекты для Хранилища
-		var listId = makeHash(),
-			theme = 'leaves';
+		var listId = makeHash();
+		var theme = 'leaves';
 
 		// Генерируем первоначальные данные для Хранилища
 		var storageData = {
@@ -148,8 +143,8 @@ var BOARD = $('.board'),
 			// для пользователей проекта «365 дней»
 			if (get.src == '365dayz.ru' && get.user) {
 				// Создаем данные для списка
-				var dayzListId = makeHash(),
-					dayzListName = 'Проект «365 дней»: https://365dayz.ru/users/' + get.user + '/';
+				var dayzListId = makeHash();
+				var dayzListName = 'Проект «365 дней»: https://365dayz.ru/users/' + get.user + '/';
 
 				// Добавляем новый список
 				storageData.lists.push({
@@ -167,12 +162,12 @@ var BOARD = $('.board'),
 				var dayzMarkers = [];
 
 				for (var i = 0; i <= 14 - dayNumber; i ++) {
-					var newDate = new Date(),
-						time = newDate.setDate(date.getDate() + i),
-						day = newDate.getDate(time),        // число
-						month = newDate.getMonth(time) + 1, // месяц
-						year = newDate.getFullYear(time),   // год
-						dataDate = year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day);
+					var newDate = new Date();
+					var time = newDate.setDate(date.getDate() + i);
+					var day = newDate.getDate(time);        // число
+					var month = newDate.getMonth(time) + 1; // месяц
+					var year = newDate.getFullYear(time);   // год
+					var dataDate = year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day);
 
 					dayzMarkers.push({
 						"date": dataDate,
@@ -238,28 +233,27 @@ var BOARD = $('.board'),
 }());
 
 
-
 // Запускаем внутренний таймер
 //------------------------------------------------------------------------------
 
 (function() {
 
 	// Определяем первоначальные условия
-	var delay = 500,
-		date = new Date();
+	var delay = 500;
+	var date = new Date();
 
 	// Запускаем рекурсивный таймаут
 	setTimeout(function timer() {
 		// Если все элементы доски загружены
 		if ($('body').hasClass('ready')) {
 			// Получаем актуальную дату
-			var newDate = new Date(),
-				newDateTime = newDate.getTime();
+			var newDate = new Date();
+			var newDateTime = newDate.getTime();
 
 			// Получаем реальные часы и минуты
-			var realHours = newDate.getHours(),
-				realMinutes = newDate.getMinutes(),
-				realTime = (realHours < 10 ? '0' + realHours : realHours) + ':' + (realMinutes < 10 ? '0' + realMinutes : realMinutes);
+			var realHours = newDate.getHours();
+			var realMinutes = newDate.getMinutes();
+			var realTime = (realHours < 10 ? '0' + realHours : realHours) + ':' + (realMinutes < 10 ? '0' + realMinutes : realMinutes);
 
 			// Если наступил новый день
 			if (date.getDay() != newDate.getDay()) {
@@ -281,17 +275,17 @@ var BOARD = $('.board'),
 
 						// Составляем заголовок и диапазон оповещения в мс
 						if (notify == 900000) {
-							var notifyTitle = '15 минут',
-								notifyRange = 60000 * 2;
+							var notifyTitle = '15 минут';
+							var notifyRange = 60000 * 2;
 						} else if (notify == 1800000) {
-							var notifyTitle = '30 минут',
-								notifyRange = 60000 * 5;
+							var notifyTitle = '30 минут';
+							var notifyRange = 60000 * 5;
 						} else if (notify == 3600000) {
-							var notifyTitle = '1 час',
-								notifyRange = 60000 * 10;
+							var notifyTitle = '1 час';
+							var notifyRange = 60000 * 10;
 						} else if (notify == 7200000) {
-							var notifyTitle = '2 часа',
-								notifyRange = 60000 * 15;
+							var notifyTitle = '2 часа';
+							var notifyRange = 60000 * 15;
 						}
 
 						// Пробегаемся по каждому делу у которого установлено время
@@ -299,9 +293,9 @@ var BOARD = $('.board'),
 							var isThis = $(this);
 
 							// Получаем объект дела, запланированное время выполнения и текст дела
-							var task = isThis.parents('.task'),
-								taskPresetTime = isThis.text(),
-								taskName = task.find('.task__name').text();
+							var task = isThis.parents('.task');
+							var taskPresetTime = isThis.text();
+							var taskName = task.find('.task__name').text();
 
 							// Удаляем лишнее в тексте дела
 							taskName = taskName.replace(/((2[0-3]|[0-1]\d):([0-5]\d)) /ig, '');
@@ -369,8 +363,8 @@ var BOARD = $('.board'),
 					var isThis = $(this);
 
 					// Получаем объект дела и запланированное время выполнения
-					var task = isThis.parents('.task'),
-						taskPresetTime = isThis.text();
+					var task = isThis.parents('.task');
+					var taskPresetTime = isThis.text();
 
 					// Если дело запланировано на сегодня
 					// и оно невыполнено, а время уже подошло
@@ -389,7 +383,6 @@ var BOARD = $('.board'),
 	}, delay);
 
 }());
-
 
 
 // Показываем поле для редактирования имени списка или дела при явном действии
@@ -511,7 +504,6 @@ var BOARD = $('.board'),
 }());
 
 
-
 // Меняем фавиконку
 //------------------------------------------------------------------------------
 
@@ -520,15 +512,15 @@ function changeFavicon() {
 	// Если в браузере поддерживается смена фавиконки
 	if (CHANGE_FAVICON) {
 		// Определяем фавиконки
-		var iconDefault = 'favicon-32x32.png?v=3',
-			iconToday = 'img/favicon-today.png?v=2';
+		var iconDefault = 'favicon-32x32.png?v=3';
+		var iconToday = 'img/favicon-today.png?v=2';
 
 		// Удаляем текущие фавиконки
 		$('link[rel$=icon]').remove();
 
 		// Парсим Хранилище и находим настройку счетчика в фавиконке
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek')),
-			faviconCounter = mahoweekStorage.settings.faviconCounter;
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+		var faviconCounter = mahoweekStorage.settings.faviconCounter;
 
 		// Считаем кол-во дел на сегодня
 		var taskTodayTotal = LIST_BOARD.find('.task--today').length;
@@ -550,15 +542,14 @@ function changeFavicon() {
 }
 
 
-
 // Генерируем хеш
 //------------------------------------------------------------------------------
 
 function makeHash() {
 
 	// Определяем переменные для хеша
-	var hash = '',
-		possible = '0123456789abcdefghijklmnopqrstuvwxyz';
+	var hash = '';
+	var possible = '0123456789abcdefghijklmnopqrstuvwxyz';
 
 	// Генерируем хеш
 	for (var i = 0; i < 8; i ++) {
@@ -571,24 +562,22 @@ function makeHash() {
 }
 
 
-
 // Конвертируем дату и время в человеческий вид
 //------------------------------------------------------------------------------
 
 function convertDate(time) {
 
-	var date = new Date(time),
-		day = date.getDate(),
-		month = date.getMonth() + 1,
-		year = date.getFullYear(),
-		hours = date.getHours(),
-		minutes = date.getMinutes(),
-		dataDate = (day < 10 ? '0' + day : day) + '.' + (month < 10 ? '0' + month : month) + '.' + year + ' в ' + (hours < 10 ? '0' + hours : hours) + ':' + (minutes < 10 ? '0' + minutes : minutes);
+	var date = new Date(time);
+	var day = date.getDate();
+	var month = date.getMonth() + 1;
+	var year = date.getFullYear();
+	var hours = date.getHours();
+	var minutes = date.getMinutes();
+	var dataDate = (day < 10 ? '0' + day : day) + '.' + (month < 10 ? '0' + month : month) + '.' + year + ' в ' + (hours < 10 ? '0' + hours : hours) + ':' + (minutes < 10 ? '0' + minutes : minutes);
 
 	return dataDate;
 
 }
-
 
 
 // Обновляем Хранилище и БД

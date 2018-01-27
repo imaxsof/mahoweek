@@ -7,13 +7,13 @@
 (function() {
 
 	LIST_BOARD.on('click', '.js-marker-task:not(.grid__date--past):not(.grid__date--completed)', function() {
-		var isThis = $(this),
-			task = isThis.parents('.task');
+		var isThis = $(this);
+		var task = isThis.parents('.task');
 
 		// Получаем хеш списка, хеш дела и дату
-		var listId = task.parents('.list').attr('data-id'),
-			taskId = task.attr('data-id'),
-			taskDate = isThis.attr('data-date');
+		var listId = task.parents('.list').attr('data-id');
+		var taskId = task.attr('data-id');
+		var taskDate = isThis.attr('data-date');
 
 		// Парсим Хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
@@ -102,7 +102,6 @@
 	});
 
 }());
-
 
 
 // Генерируем сетку дат
@@ -200,14 +199,14 @@ function makeGrid(type, data) {
 	// причем сдвигаем дни недели если неделя закончилась
 	for (var i = 1 - dayNumber; i <= 14 - dayNumber; i ++) {
 		// Определяем переменные
-		var dateClass = '',
-			newDate = new Date(),
-			time = newDate.setDate(date.getDate() + i),
-			day = newDate.getDate(time),        // число
-			month = newDate.getMonth(time) + 1, // месяц
-			year = newDate.getFullYear(time),   // год
-			newDayNumber = newDate.getDay(),    // номер дня
-			dataDate = year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day);
+		var dateClass = '';
+		var newDate = new Date();
+		var time = newDate.setDate(date.getDate() + i);
+		var day = newDate.getDate(time);        // число
+		var month = newDate.getMonth(time) + 1; // месяц
+		var year = newDate.getFullYear(time);   // год
+		var newDayNumber = newDate.getDay();    // номер дня
+		var dataDate = year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day);
 
 		// Определяем текущий день
 		if (date.getDate() == day) {

@@ -72,7 +72,6 @@ function loadTask() {
 }
 
 
-
 // Фокусируем поле добавления дела
 //------------------------------------------------------------------------------
 
@@ -110,7 +109,6 @@ function loadTask() {
 }());
 
 
-
 // Добавляем дело
 //------------------------------------------------------------------------------
 
@@ -130,10 +128,10 @@ function loadTask() {
 		// или изменились данные в поле при потере фокуса
 		if (event.keyCode == 13 && isThis.val() != '' || event.type == 'change') {
 			// Получаем хеш списка, хеш дела, текст дела и метку времени
-			var listId = isThis.parents('.list').attr('data-id'),
-				taskId = makeHash(),
-				taskName = isThis.val(),
-				taskCreatedTime = new Date().getTime();
+			var listId = isThis.parents('.list').attr('data-id');
+			var taskId = makeHash();
+			var taskName = isThis.val();
+			var taskCreatedTime = new Date().getTime();
 
 			// Парсим Хранилище
 			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
@@ -181,21 +179,20 @@ function loadTask() {
 }());
 
 
-
 // Изменяем статус дела
 //------------------------------------------------------------------------------
 
 (function() {
 
 	LIST_BOARD.on('click', '.js-completed-task', function() {
-		var isThis = $(this),
-			task = isThis.parents('.task');
+		var isThis = $(this);
+		var task = isThis.parents('.task');
 
 		// Получаем хеш списка, хеш дела, метку о выполнении и дату текущего дня
-		var listId = task.parents('.list').attr('data-id'),
-			taskId = task.attr('data-id'),
-			taskCompleted = task.hasClass('task--completed'),
-			taskDateToday = task.find('.grid__date--today').attr('data-date');
+		var listId = task.parents('.list').attr('data-id');
+		var taskId = task.attr('data-id');
+		var taskCompleted = task.hasClass('task--completed');
+		var taskDateToday = task.find('.grid__date--today').attr('data-date');
 
 		// Парсим Хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
@@ -321,7 +318,6 @@ function loadTask() {
 }());
 
 
-
 // Сохраняем текст дела при изменении
 //------------------------------------------------------------------------------
 
@@ -333,8 +329,8 @@ function loadTask() {
 		// Если был нажат Enter или пропал фокус и были изменения
 		if (event.keyCode == 13 || event.type == 'change') {
 			// Получаем хеш и текст дела
-			var taskId = isThis.parents('.task').attr('data-id'),
-				taskName = isThis.val();
+			var taskId = isThis.parents('.task').attr('data-id');
+			var taskName = isThis.val();
 
 			// Парсим Хранилище
 			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
@@ -361,7 +357,6 @@ function loadTask() {
 }());
 
 
-
 // Удаляем дело
 //------------------------------------------------------------------------------
 
@@ -371,8 +366,8 @@ function loadTask() {
 		var isThis = $(this);
 
 		// Получаем хеш списке и хеш дела
-		var listId = isThis.parents('.list').attr('data-id'),
-			taskId = isThis.parents('.task').attr('data-id');
+		var listId = isThis.parents('.list').attr('data-id');
+		var taskId = isThis.parents('.task').attr('data-id');
 
 		// Парсим Хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
@@ -405,7 +400,6 @@ function loadTask() {
 	});
 
 }());
-
 
 
 // Работаем со стилем статуса дела
@@ -445,7 +439,6 @@ function changeStyleTaskStatus(task) {
 }
 
 
-
 // Форматируем текст дела
 //------------------------------------------------------------------------------
 
@@ -472,7 +465,6 @@ function remakeTaskName(name) {
 	return remakeName;
 
 }
-
 
 
 // Генерируем дело

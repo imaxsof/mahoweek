@@ -12,8 +12,8 @@
 		SETTINGS_FORM.find('.js-choose-favicon-counter').parents('.form__group').removeClass('form__group--hidden');
 
 		// Парсим Хранилище и находим настройку счетчика в фавиконке
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek')),
-			faviconCounter = mahoweekStorage.settings.faviconCounter;
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+		var faviconCounter = mahoweekStorage.settings.faviconCounter;
 
 		// Выставляем состояние чекбокса
 		if (faviconCounter === true) {
@@ -42,7 +42,6 @@
 }());
 
 
-
 // Настраиваем оповещения
 //------------------------------------------------------------------------------
 
@@ -68,9 +67,9 @@
 			var notifyValue = $(this).val();
 
 			// Строим сообщение оповещения
-			var notificationTitle = 'Оповещения включены',
-				notificationBody = 'Теперь добавьте время выполнения делам и держите сайт открытым в браузере, чтобы оповещения приходили.',
-				notificationIcon = 'img/notify.png?v=2';
+			var notificationTitle = 'Оповещения включены';
+			var notificationBody = 'Теперь добавьте время выполнения делам и держите сайт открытым в браузере, чтобы оповещения приходили.';
+			var notificationIcon = 'img/notify.png?v=2';
 
 			if (notifyValue == 'none') {
 				// Выключаем оповещения
@@ -133,7 +132,6 @@
 }());
 
 
-
 // Настраиваем доску
 //------------------------------------------------------------------------------
 
@@ -148,8 +146,8 @@
 	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
 	// Определяем текущие параметры
-	var theme = mahoweekStorage.settings.theme,
-		deleteCompletedTasks = mahoweekStorage.settings.deleteCompletedTasks;
+	var theme = mahoweekStorage.settings.theme;
+	var deleteCompletedTasks = mahoweekStorage.settings.deleteCompletedTasks;
 
 	// Выделяем текущую тему как активную
 	SETTINGS_FORM.find('.js-choose-theme[value="' + theme + '"]').attr('checked', 'checked');

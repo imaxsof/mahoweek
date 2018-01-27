@@ -28,7 +28,6 @@ function loadList() {
 }
 
 
-
 // Добавляем список
 //------------------------------------------------------------------------------
 
@@ -36,9 +35,9 @@ function loadList() {
 
 	$('.js-add-list').on('click', function() {
 		// Создаем данные для списка
-		var listId = makeHash(),
-			listName = 'Краткосрочный план дел №' + (LIST_BOARD.find('.list').length + 1),
-			listCreatedTime = new Date().getTime();
+		var listId = makeHash();
+		var listName = 'Краткосрочный план дел №' + (LIST_BOARD.find('.list').length + 1);
+		var listCreatedTime = new Date().getTime();
 
 		// Парсим Хранилище
 		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
@@ -80,7 +79,6 @@ function loadList() {
 }());
 
 
-
 // Сохраняем заголовок списка при изменении
 //------------------------------------------------------------------------------
 
@@ -92,9 +90,9 @@ function loadList() {
 		// Если был нажат Enter или пропал фокус и были изменения
 		if (event.keyCode == 13 || event.type == 'change') {
 			// Получаем объект списка, его хеш и заголовок
-			var list = isThis.parents('.list'),
-				listId = list.attr('data-id'),
-				listName = isThis.val();
+			var list = isThis.parents('.list');
+			var listId = list.attr('data-id');
+			var listName = isThis.val();
 
 			// Парсим Хранилище
 			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
@@ -127,7 +125,6 @@ function loadList() {
 }());
 
 
-
 // Удаляем список
 //------------------------------------------------------------------------------
 
@@ -137,9 +134,9 @@ function loadList() {
 		var isThis = $(this);
 
 		// Получаем объект списка, его хеш списка и кол-во дел
-		var list = isThis.parents('.list'),
-			listId = list.attr('data-id'),
-			taskTotal = list.find('.task:not(.task--add)').length;
+		var list = isThis.parents('.list');
+		var listId = list.attr('data-id');
+		var taskTotal = list.find('.task:not(.task--add)').length;
 
 		// Если в удаляемом списке были дела
 		if (taskTotal) {
@@ -194,7 +191,6 @@ function loadList() {
 }());
 
 
-
 // Сортируем вручную списки
 //------------------------------------------------------------------------------
 
@@ -247,7 +243,6 @@ function loadList() {
 }());
 
 
-
 // Форматируем заголовок списка
 //------------------------------------------------------------------------------
 
@@ -266,7 +261,6 @@ function remakeListName(name) {
 	return remakeName;
 
 }
-
 
 
 // Генерируем прогресс списка
@@ -294,7 +288,6 @@ function makeProgress(id) {
 	});
 
 }
-
 
 
 // Генерируем списки
