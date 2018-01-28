@@ -200,7 +200,7 @@ function loadList() {
 
 	Sortable.create(document.querySelector('.board__lists'), {
 		delay: sortableDelay,
-		animation: 200,
+		animation: SPEED,
 		handle: '.list__name',
 		filter: '.list__input',
 		preventOnFilter: false,

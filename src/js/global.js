@@ -36,6 +36,10 @@ const THEME_BOARD = BOARD.find('.board__theme');
 const LIST_BOARD = BOARD.find('.board__lists');
 const SETTINGS_FORM = $('.form--settings');
 
+// Задаём продолжительность анимаций и тп
+
+const SPEED = 200;
+
 
 // Инициализируем Хранилище
 //------------------------------------------------------------------------------

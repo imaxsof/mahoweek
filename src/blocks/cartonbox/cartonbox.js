@@ -5,7 +5,7 @@
 
 	// Настраиваем Картонбокс
 	var cartonboxConfig = {
-		speed: 200,
+		speed: SPEED,
 		nav: false,
 		preload: false,
 		closeHtml: '<svg><use xlink:href="#icon-close"></use></svg>',
@@ -22,6 +22,9 @@
 			$('body').addClass('modal-open');
 		},
 		onClosedBefore: function() {
+			// Удаляем класс, что модальное окно должно запуститься при загрузке страницы
+			$('body').removeClass('modal-start');
+
 			// Удаляем класс, что модальное окно открыто
 			$('body').removeClass('modal-open');
 
@@ -41,6 +44,12 @@
 	if (window.location.hash == '#hello') {
 		// Открываем окно приветствия
 		$('.js-open-hello').trigger('click');
+	}
+
+	// Если присутствует любой хеш
+	if (window.location.hash !== '') {
+		// Добавляем класс, что модальное окно должно запуститься при загрузке страницы
+		$('body').addClass('modal-start');
 	}
 
 	// Закрываем окно приветствия
