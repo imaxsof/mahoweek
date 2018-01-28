@@ -68,7 +68,10 @@ var paths = {
 		}
 	},
 	watch: {
-		html: 'src/*.html',
+		html: [
+			'src/inc/*.html',
+			'src/*.html'
+		],
 		css: [
 			'src/blocks/**/*.less',
 			'src/less/*.less'
