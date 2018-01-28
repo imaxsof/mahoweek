@@ -178,10 +178,11 @@
 	transform: scaleX(0);
 	transform-origin: 0 50%;
 	transition-property: transform;
-	transition: @duration @timing-function;
+	transition: (@duration * 2) @timing-function;
 }
 
 .list__grid {
+	position: relative;
 	border-radius: 0 (@border-radius * 2) 0 0;
 	background-color: @grid-bg-header;
 }

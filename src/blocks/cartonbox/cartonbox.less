@@ -9,6 +9,10 @@
 	animation-timing-function: @timing-function;
 	animation-fill-mode: both;
 
+	.modal-start & {
+		animation-delay: @duration;
+	}
+
 	.ready.modal-open & {
 		visibility: visible;
 		animation-name: fadeIn;
@@ -30,6 +34,10 @@
 	animation-duration: @duration;
 	animation-timing-function: @timing-function;
 	animation-fill-mode: both;
+
+	.modal-start & {
+		animation-delay: @duration;
+	}
 
 	.ready.modal-open & {
 		visibility: visible;

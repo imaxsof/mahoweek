@@ -11,6 +11,10 @@
 		animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
 		animation-fill-mode: both;
 
+		.modal-start & {
+			animation-delay: (@duration * 1.5);
+		}
+
 		.ready & {
 			animation-name: fadeInDown;
 		}
