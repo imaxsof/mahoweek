@@ -18,11 +18,11 @@ const IPAD = navigator.userAgent.match(/iPad/i) !== null;
 
 // Определяем мобильное устройство
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-	const MOBILE = true;
+	var MOBILE = true;
 
 	$('body').addClass('mobile');
 } else {
-	const MOBILE = false;
+	var MOBILE = false;
 }
 
 // Определяем поддержку функций
