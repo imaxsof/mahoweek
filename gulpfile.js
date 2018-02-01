@@ -4,22 +4,22 @@
 // Packages
 //------------------------------------------------------------------------------
 
-var gulp = require('gulp'),
-	concat = require('gulp-concat'),
-	htmlmin = require('gulp-html-minifier'),
-	csso = require('gulp-csso'),
-	less = require('gulp-less'),
-	autoprefixer = require('gulp-autoprefixer'),
-	uglify = require('gulp-uglify'),
-	wrap = require("gulp-wrap"),
-	del = require('del'),
-	csscomb = require('gulp-csscomb'),
-	fileinclude = require('gulp-file-include'),
-	multipipe = require('multipipe'),
-	browserSync = require('browser-sync').create(),
-	gulpsync = require('gulp-sync')(gulp),
-	gulpHtmlVersion = require('gulp-html-version'),
-	typograf = require('gulp-typograf');
+var gulp = require('gulp');
+var concat = require('gulp-concat');
+var htmlmin = require('gulp-html-minifier');
+var csso = require('gulp-csso');
+var less = require('gulp-less');
+var autoprefixer = require('gulp-autoprefixer');
+var uglify = require('gulp-uglify');
+var wrap = require("gulp-wrap");
+var del = require('del');
+var csscomb = require('gulp-csscomb');
+var fileinclude = require('gulp-file-include');
+var multipipe = require('multipipe');
+var browserSync = require('browser-sync').create();
+var gulpsync = require('gulp-sync')(gulp);
+var gulpHtmlVersion = require('gulp-html-version');
+var typograf = require('gulp-typograf');
 
 
 // Paths
@@ -103,7 +103,6 @@ gulp.task('html', function() {
 			locale: ['ru', 'en-US']
 		}),
 		htmlmin({
-			// collapseInlineTagWhitespace: true,
 			collapseWhitespace: true,
 			removeComments: true
 		}),
