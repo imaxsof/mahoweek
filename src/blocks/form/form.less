@@ -48,7 +48,7 @@
 		height: 24px;
 		background-color: @checkbox-bg;
 		display: block;
-		border-radius: (@border-radius * 3);
+		border-radius: (@radius * 3);
 		border: 1px solid transparent;
 		overflow: hidden;
 		position: relative;
@@ -63,7 +63,7 @@
 			width: 22px;
 			height: 22px;
 			background-color: @light-primary;
-			border-radius: (@border-radius * 2.75);
+			border-radius: (@radius * 2.75);
 			transition-property: transform;
 			transition: @duration @timing-function;
 		}
@@ -142,34 +142,34 @@
 	}
 
 	label:first-of-type span {
-		border-radius: @border-radius 0 0 0;
+		border-radius: @radius 0 0 0;
 
 		&::before {
-			border-radius: (@border-radius * 0.75) 0 0 0;
+			border-radius: (@radius * 0.75) 0 0 0;
 		}
 	}
 
 	label:nth-of-type(3) span {
-		border-radius: 0 @border-radius 0 0;
+		border-radius: 0 @radius 0 0;
 
 		&::before {
-			border-radius: 0 (@border-radius * 0.75) 0 0;
+			border-radius: 0 (@radius * 0.75) 0 0;
 		}
 	}
 
 	label:nth-last-of-type(4) span {
-		border-radius: 0 0 0 @border-radius;
+		border-radius: 0 0 0 @radius;
 
 		&::before {
-			border-radius: 0 0 0 (@border-radius * 0.75);
+			border-radius: 0 0 0 (@radius * 0.75);
 		}
 	}
 
 	label:last-of-type span {
-		border-radius: 0 0 @border-radius;
+		border-radius: 0 0 @radius;
 
 		&::before {
-			border-radius: 0 0 (@border-radius * 0.75);
+			border-radius: 0 0 (@radius * 0.75);
 		}
 	}
 

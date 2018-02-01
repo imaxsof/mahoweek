@@ -17,28 +17,28 @@ const ANDROID = navigator.userAgent.toLowerCase().indexOf('android') > -1;
 const IPAD = navigator.userAgent.match(/iPad/i) !== null;
 
 // Определяем мобильное устройство
-if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-	var MOBILE = true;
-
-	$('body').addClass('mobile');
-} else {
-	var MOBILE = false;
-}
+const MOBILE = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
 // Определяем поддержку функций
 const NOTIFICATION = ('Notification' in window) && !MOBILE && (EDGE || FIREFOX || CHROME || SAFARI) ? true : false;
 const CHANGE_FAVICON = document.createElement('canvas').getContext && !MOBILE && (FIREFOX || CHROME) ? true : false;
 
-// Определяем элементы доски
+// Задаём продолжительность анимаций и т.п.
+const SPEED = 200;
 
+// Определяем элементы доски
 const BOARD = $('.board');
 const THEME_BOARD = BOARD.find('.board__theme');
 const LIST_BOARD = BOARD.find('.board__lists');
 const SETTINGS_FORM = $('.form--settings');
 
-// Задаём продолжительность анимаций и тп
 
-const SPEED = 200;
+// Добавляем стили для мобильного устройства
+//------------------------------------------------------------------------------
+
+if (MOBILE) {
+	$('body').addClass('mobile');
+}
 
 
 // Инициализируем Хранилище
