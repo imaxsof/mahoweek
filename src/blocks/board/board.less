@@ -33,14 +33,15 @@
 	&::before {
 		position: fixed;
 		content: "";
-		top: calc(~"50% - 15px");
-		left: calc(~"50% - 15px");
+		top: 50%;
+		left: 50%;
+		margin: -15px 0 0 -15px;
 		width: 30px;
 		height: 30px;
 		border-radius: 50%;
 		border: 2px solid @light-primary;
-		border-right-color: fade(@light-primary, 0);
-		border-bottom-color: fade(@light-primary, 0);
+		border-right-color: fade(@light-primary, 30%);
+		border-bottom-color: fade(@light-primary, 30%);
 		visibility: visible;
 		animation-name: spin;
 		animation-duration: 0.6s;
@@ -75,10 +76,20 @@
 		animation-name: fallIn;
 	}
 
-	&--dark {
-		background-color: @board-bg !important;
+	&::before {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 100px;
+		content: "";
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0.48) 0, rgba(0, 0, 0, 0));
+	}
 
-		+ .board__header::before {
+	&--dark {
+		background-color: #303030 !important;
+
+		&::before {
 			opacity: 0;
 		}
 	}
@@ -87,7 +98,7 @@
 		background-color: #546f7b !important;
 		background-image: radial-gradient(circle at 50% 100%, lighten(#546f7b, 10%), #546f7b);
 
-		+ .board__header::before {
+		&::before {
 			opacity: 0;
 		}
 	}
@@ -96,7 +107,7 @@
 		background-color: #659259 !important;
 		background-image: radial-gradient(circle at 50% 100%, lighten(#659259, 10%), #659259);
 
-		+ .board__header::before {
+		&::before {
 			opacity: 0;
 		}
 	}
@@ -105,7 +116,7 @@
 		background-color: #179488 !important;
 		background-image: radial-gradient(circle at 50% 100%, lighten(#179488, 10%), #179488);
 
-		+ .board__header::before {
+		&::before {
 			opacity: 0;
 		}
 	}
@@ -114,7 +125,7 @@
 		background-color: #00838F !important;
 		background-image: radial-gradient(circle at 50% 100%, lighten(#00838F, 10%), #00838F);
 
-		+ .board__header::before {
+		&::before {
 			opacity: 0;
 		}
 	}
@@ -123,7 +134,7 @@
 		background-color: #34829e !important;
 		background-image: radial-gradient(circle at 50% 100%, lighten(#34829e, 10%), #34829e);
 
-		+ .board__header::before {
+		&::before {
 			opacity: 0;
 		}
 	}
@@ -132,7 +143,7 @@
 		background-color: #506b98 !important;
 		background-image: radial-gradient(circle at 50% 100%, lighten(#506b98, 10%), #506b98);
 
-		+ .board__header::before {
+		&::before {
 			opacity: 0;
 		}
 	}
@@ -141,7 +152,7 @@
 		background-color: #70678e !important;
 		background-image: radial-gradient(circle at 50% 100%, lighten(#70678e, 10%), #70678e);
 
-		+ .board__header::before {
+		&::before {
 			opacity: 0;
 		}
 	}
