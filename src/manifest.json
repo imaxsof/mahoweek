@@ -9,8 +9,8 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#303030",
-  "background_color": "#303030",
+  "theme_color": "#212121",
+  "background_color": "#212121",
   "start_url": "https://mahoweek.ru?src=homescreen",
   "display": "standalone",
   "scope": "/"
