@@ -2,65 +2,29 @@
 //------------------------------------------------------------------------------
 
 .menu {
-	margin: -20px -10px -20px 0;
+	margin: 0;
 	padding: 0;
 	list-style-type: none;
 	display: flex;
-	animation-name: none;
-	animation-delay: @duration;
-	animation-duration: @duration;
-	animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-	animation-fill-mode: both;
-
-	.modal-start & {
-		animation-delay: (@duration * 1.5);
-	}
-
-	.ready & {
-		animation-name: fadeInDown;
-	}
-
-	@media (min-width: 768px) {
-		margin-right: -15px;
-	}
 }
 
 .menu__item {
-	font-size: @font-size-small;
+	margin-left: 5px;
 
 	.btn {
+		position: relative;
 		width: 35px;
+		border-radius: @radius;
 		min-width: 0;
-		top: auto !important;
-		line-height: 32px;
-		padding: 20px 15px 18px;
-		text-indent: -9999px;
-		color: @menu-link;
-		fill: @menu-link;
-		background-color: transparent;
+		padding: 0;
+		height: 35px;
+		display: block;
+		color: @light-primary !important;
+		fill: @light-primary !important;
+		background-color: @menu-link;
 
-		&:hover,
-		// &:focus,
-		.mobile & {
-			color: @menu-link-hover !important;
-			fill: @menu-link-hover !important;
-			background-color: transparent !important;
-		}
-
-		@media (min-width: 768px) {
-			text-indent: inherit;
-			padding-left: 31px;
-			width: auto;
-		}
-	}
-
-	&--profile .btn {
-		padding-left: 23px;
-		width: 43px;
-
-		@media (min-width: 768px) {
-			padding-left: 40px;
-			width: auto;
+		body:not(.mobile) &:hover {
+			background-color: @menu-link-hover;
 		}
 	}
 }
@@ -69,38 +33,24 @@
 	width: 25px;
 	height: 25px;
 	position: absolute;
-	top: 22.5px;
+	top: 5px;
 	left: 5px;
-
-	@media (min-width: 768px) {
-		fill-opacity: 0.5;
-	}
-
-	.menu__item--profile & {
-		display: none;
-	}
 }
 
 .menu__ava {
 	position: absolute;
-	top: 22.5px;
-	left: 9px;
+	top: 5px;
+	left: 5px;
 	width: 25px;
 	height: 25px;
-	left: 9px;
 	border-radius: 50%;
-	background-color: @menu-link;
+	background-color: @light-primary;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 	display: none;
 	transition-property: box-shadow;
 	transition: @duration @timing-function;
-
-	.btn:hover &,
-	.mobile .btn:hover & {
-		background-color: @menu-link-hover;
-	}
 
 	.menu__item--profile & {
 		display: block;
