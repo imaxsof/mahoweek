@@ -17,21 +17,21 @@
 		content: "";
 		top: 0;
 		left: 5px;
-		right: 5px;
 		bottom: 0;
-		background-color: @list-bg-ghost;
-		border-radius: (@border-radius * 2);
-		opacity: 0;
+		width: calc(~"100vw + 554px");
+		max-width: 931px;
+		background-color: @list-bg;
+		border-radius: (@radius * 2);
 
 		@media (min-width: 768px) {
 			left: 20px;
-			right: 20px;
+			max-width: 1017px;
 		}
-	}
 
-	&--ghost {
-		&::before {
-			opacity: 1;
+		@media (min-width: 992px) {
+			max-width: none;
+			width: auto;
+			right: 20px;
 		}
 	}
 }

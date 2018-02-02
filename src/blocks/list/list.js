@@ -70,7 +70,7 @@ function loadList() {
 		var win = $(window);
 
 		// Если созданный список выходит за рамки видимости
-		if (listNew.offset().top > win.scrollTop() + win.height() - 30 - 80) {
+		if (listNew.offset().top > win.scrollTop() + win.height() - 75 - 80) {
 			// Смещаем позицию прокрутки до созданного списка
 			win.scrollTop(listNew.offset().top);
 		}

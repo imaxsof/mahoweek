@@ -78,10 +78,10 @@
 // List
 //------------------------------------------------------------------------------
 
-@list-bg: fade(@light-primary, 97%);
+@list-bg: fade(@light-primary, 30%);
 @list-bg-header: @light-primary;
-@list-bg-ghost: fade(@list-bg, 50%);
 @list-border: @dark-divider;
+
 @list-progress-first: @color-teal-blue;
 @list-progress-second: @logo-pea;
 
@@ -92,8 +92,8 @@
 // Task
 //------------------------------------------------------------------------------
 
-@task-bg: fade(@light-primary, 97%);
-@task-bg-hover: @light-primary;
+@task-bg: darken(@light-primary, 3%);
+@task-bg-hover: @list-bg-header;
 @task-border: @list-border;
 
 @task-pea: darken(@list-border, 5%);
@@ -115,7 +115,7 @@
 // Grid
 //------------------------------------------------------------------------------
 
-@grid-bg: fade(#fafafa, 97%);
+@grid-bg: darken(#fafafa, 3%);
 @grid-bg-hover: #fafafa;
 @grid-bg-header: @grid-bg-hover;
 @grid-border: @list-border;
