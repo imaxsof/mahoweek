@@ -70,7 +70,7 @@ function loadList() {
 		var win = $(window);
 
 		// Если созданный список выходит за рамки видимости
-		if (listNew.offset().top > win.scrollTop() + win.height() - 75 - 80) {
+		if (listNew.offset().top > win.scrollTop() + win.height() - 70 - 80) {
 			// Смещаем позицию прокрутки до созданного списка
 			win.scrollTop(listNew.offset().top);
 		}
@@ -304,7 +304,7 @@ function makeList(id, name) {
 					remakeListName(name) +
 				'</div>' +
 				'<div class="list__options">' +
-					'<button type="button" class="list__trash  js-remove-list" aria-label="Удалить список">' +
+					'<button type="button" class="list__trash  js-remove-list" aria-label="Удалить">' +
 						'<svg>' +
 							'<use xlink:href="#icon-trash"></use>' +
 						'</svg>' +
@@ -326,13 +326,6 @@ function makeList(id, name) {
 					'</label>' +
 					'<div class="task__name">' +
 						'<input id="' + id + '-add-task" class="task__input  js-add-task" type="text" maxlength="255">' +
-					'</div>' +
-					'<div class="task__options">' +
-						'<button type="button" class="task__submit" aria-label="Добавить дело">' +
-							'<svg>' +
-								'<use xlink:href="#icon-plus"></use>' +
-							'</svg>' +
-						'</button>' +
 					'</div>' +
 				'</div>' +
 				'<div class="task__grid  grid"></div>' +

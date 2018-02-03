@@ -35,7 +35,7 @@
 		border-bottom-color: fade(@dark-primary, 30%);
 		visibility: visible;
 		animation-name: spin;
-		animation-duration: 0.6s;
+		animation-duration: (@duration * 3);
 		animation-timing-function: linear;
 		animation-fill-mode: both;
 		animation-iteration-count: infinite;
@@ -129,7 +129,7 @@
 
 .sync__hand {
 	animation-name: none;
-	animation-duration: 0.6s;
+	animation-duration: (@duration * 3);
 	animation-timing-function: linear;
 	animation-fill-mode: both;
 	animation-iteration-count: infinite;

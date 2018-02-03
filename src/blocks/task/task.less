@@ -137,11 +137,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	fill: @task-plus;
-
-	.task--focus & {
-		fill: @task-plus-focus;
-	}
+	fill: @dark-disabled;
 
 	svg {
 		position: absolute;
@@ -195,10 +191,7 @@
 
 	.task--add & {
 		color: @dark-secondary;
-
-		&:focus {
-			color: @dark-primary;
-		}
+		padding-right: 8px;
 	}
 
 	.task--completed & {
@@ -207,7 +200,7 @@
 }
 
 .task__options {
-	width: 41px;
+	width: 39px;
 	position: relative;
 	border-top: 1px solid @task-border;
 	border-bottom: 1px solid @task-border;
@@ -223,7 +216,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	width: 100%;
+	width: 39px;
 	border: 0;
 	padding: 0;
 	background: none;
@@ -237,56 +230,16 @@
 
 	body:not(.mobile) &:hover {
 		fill: @task-trash-hover;
-		visibility: visible;
-		opacity: 1;
 	}
 
-	.task__wrap:hover &,
-	.mobile & {
+	.task__wrap:hover & {
 		visibility: visible;
 		opacity: 1;
 		transform: scale3d(1, 1, 1);
+		transition-delay: (@duration * 2);
 	}
 
-	.board__lists--drag & {
-		visibility: hidden;
-		opacity: 0 !important;
-	}
-
-	svg {
-		position: absolute;
-		width: 25px;
-		height: 25px;
-		top: 8px;
-		left: 8px;
-	}
-}
-
-.task__submit {
-	display: none;
-	position: absolute;
-	top: -1px;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	border: 0;
-	padding: 0;
-	background: none;
-	cursor: pointer;
-	fill: @dark-primary;
-	visibility: hidden;
-	opacity: 0;
-	transform: scale3d(0.8, 0.8, 1);
-	transition-property: visibility, opacity, transform;
-	transition: @duration @timing-function;
-
-	// body:not(.mobile) &:hover {
-	// 	fill: @task-trash-hover;
-	// 	opacity: 1;
-	// }
-
-	&--show {
+	.mobile & {
 		visibility: visible;
 		opacity: 1;
 		transform: scale3d(1, 1, 1);

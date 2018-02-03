@@ -87,9 +87,6 @@ function loadTask() {
 			'overflow-x': 'hidden',
 			'-webkit-overflow-scrolling': 'auto'
 		});
-
-		// Ставим метку о фокусе
-		isThis.parents('.task--add').addClass('task--focus');
 	});
 
 	// Если поле добавления не в фокусе
@@ -101,9 +98,6 @@ function loadTask() {
 			'overflow-x': '',
 			'-webkit-overflow-scrolling': ''
 		});
-
-		// Снимаем метку о фокусе
-		isThis.parents('.task--add').removeClass('task--focus');
 	});
 
 }());
@@ -117,16 +111,9 @@ function loadTask() {
 	LIST_BOARD.on('keyup change', '.js-add-task', function(event) {
 		var isThis = $(this);
 
-		// Показываем или скрываем кнопку отправки
-		if (isThis.val() != '') {
-			isThis.parents('.task--add').find('.task__submit').addClass('task__submit--show');
-		} else {
-			isThis.parents('.task--add').find('.task__submit').removeClass('task__submit--show');
-		}
-
 		// Если был нажат Enter и поле с делом не пустое
 		// или изменились данные в поле при потере фокуса
-		if (event.keyCode == 13 && isThis.val() != '' || event.type == 'change') {
+		if (event.keyCode === 13 && isThis.val() !== '' || event.type === 'change') {
 			// Получаем хеш списка, хеш дела, текст дела и метку времени
 			var listId = isThis.parents('.list').attr('data-id');
 			var taskId = makeHash();
@@ -150,9 +137,6 @@ function loadTask() {
 			// Стираем поле ввода добавления дела
 			isThis.val('');
 
-			// Скрываем кнопку отправки
-			isThis.parents('.task--add').find('.task__submit').removeClass('task__submit--show');
-
 			// Выводим дело в списке
 			isThis.parents('.task--add').before(makeTask(taskId, taskName));
 
@@ -166,7 +150,7 @@ function loadTask() {
 			var win = $(window);
 
 			// Если созданное дело вытесняет за рамки экрана конец списка
-			if (taskNew.offset().top > win.scrollTop() + win.height() - 75 - 40 - 39) {
+			if (taskNew.offset().top > win.scrollTop() + win.height() - 70 - 40 - 39) {
 				// Смещаем позицию прокрутки на высоту строки дела
 				win.scrollTop(win.scrollTop() + taskNew.outerHeight(true));
 			}
@@ -484,13 +468,13 @@ function makeTask(id, name, completed, markers) {
 	'<div class="task' + completed + '" data-id="' + id + '">' +
 		'<div class="task__wrap">' +
 			'<div class="task__status">' +
-				'<button type="button" class="task__check  js-completed-task" aria-label="Отметить дело"></button>' +
+				'<button type="button" class="task__check  js-completed-task" aria-label="Отметить"></button>' +
 			'</div>' +
 			'<div class="task__name  js-name">' +
 				remakeTaskName(name) +
 			'</div>' +
 			'<div class="task__options">' +
-				'<button type="button" class="task__trash  js-remove-task" aria-label="Удалить дело">' +
+				'<button type="button" class="task__trash  js-remove-task" aria-label="Удалить">' +
 					'<svg>' +
 						'<use xlink:href="#icon-trash"></use>' +
 					'</svg>' +

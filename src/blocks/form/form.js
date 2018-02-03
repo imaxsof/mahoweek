@@ -71,7 +71,7 @@
 			var notificationBody = 'Теперь добавьте время выполнения делам и держите сайт открытым в браузере, чтобы оповещения приходили.';
 			var notificationIcon = 'img/notify.png?v=2';
 
-			if (notifyValue == 'none') {
+			if (notifyValue === 'none') {
 				// Выключаем оповещения
 				localStorage.setItem('notify', 'none');
 			} else {

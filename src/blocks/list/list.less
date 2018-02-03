@@ -18,7 +18,7 @@
 		top: 0;
 		left: 5px;
 		bottom: 0;
-		width: calc(~"100vw + 554px");
+		width: calc(~"100vw + 544px");
 		max-width: 931px;
 		background-color: @list-bg;
 		border-radius: (@radius * 2);
@@ -117,7 +117,7 @@
 }
 
 .list__options {
-	width: 41px;
+	width: 39px;
 	position: relative;
 }
 
@@ -127,7 +127,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	width: 100%;
+	width: 39px;
 	border: 0;
 	padding: 0;
 	background: none;
@@ -141,11 +141,15 @@
 
 	body:not(.mobile) &:hover {
 		fill: @list-trash-hover;
-		visibility: visible;
-		opacity: 1;
 	}
 
-	.list__wrap:hover &,
+	.list__wrap:hover & {
+		visibility: visible;
+		opacity: 1;
+		transform: scale3d(1, 1, 1);
+		transition-delay: (@duration * 2);
+	}
+
 	.mobile & {
 		visibility: visible;
 		opacity: 1;
