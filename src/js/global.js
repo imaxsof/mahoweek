@@ -273,21 +273,21 @@ if (MOBILE) {
 
 					// Если время оповещения ранее выставлялось
 					// и пользователь разрешил оповещения
-					if (notify && notify != 'none' && Notification.permission === 'granted') {
+					if (notify && notify !== 'none' && Notification.permission === 'granted') {
 						// Получаем кол-во мс за которое нужно оповестить и реальное время
 						var notify = notify * 1;
 
 						// Составляем заголовок и диапазон оповещения в мс
-						if (notify == 900000) {
+						if (notify === 900000) {
 							var notifyTitle = '15 минут';
 							var notifyRange = 60000 * 2;
-						} else if (notify == 1800000) {
+						} else if (notify === 1800000) {
 							var notifyTitle = '30 минут';
 							var notifyRange = 60000 * 5;
-						} else if (notify == 3600000) {
+						} else if (notify === 3600000) {
 							var notifyTitle = '1 час';
 							var notifyRange = 60000 * 10;
-						} else if (notify == 7200000) {
+						} else if (notify === 7200000) {
 							var notifyTitle = '2 часа';
 							var notifyRange = 60000 * 15;
 						}
@@ -324,7 +324,7 @@ if (MOBILE) {
 
 							// Если о деле планируется оповестить заранее
 							// и этого еще не было сделано
-							if (taskRunTime && (!task.attr('data-notify') || (task.attr('data-notify') && task.attr('data-notify') != taskRunTime))) {
+							if (taskRunTime && (!task.attr('data-notify') || (task.attr('data-notify') && task.attr('data-notify') !== taskRunTime))) {
 								// Если время оповещения в диапазоне подошло
 								if (newDateTime + notify >= Date.parse(taskRunTime) && newDateTime + notify <= Date.parse(taskRunTime) + notifyRange) {
 									// Показываем оповещение
@@ -344,7 +344,7 @@ if (MOBILE) {
 
 							// Если дело запланировано на сегодня и оно невыполнено,
 							// а время точно совпадает с текущим и еще не было оповещения
-							if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length && taskPresetTime == realTime && !task.hasClass('task--now')) {
+							if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length && taskPresetTime === realTime && !task.hasClass('task--now')) {
 								// Показываем оповещение
 								var notification = new Notification('Время ' + taskPresetTime + '!', {
 									body: taskName,
