@@ -3,7 +3,6 @@
 
 .list {
 	position: relative;
-	padding-bottom: 40px;
 	margin: 0 0 20px;
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
@@ -211,5 +210,25 @@
 
 	.list--ghost & {
 		opacity: 0;
+}
+
+.list__foot {
+	width: calc(~"100vw + 554px");
+	max-width: 941px;
+	padding: 0 5px;
+
+	@media (min-width: 768px) {
+		max-width: 1057px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	@media (min-width: 992px) {
+		width: calc(~"100vw");
+		max-width: none;
+	}
+
+	@media (min-width: 1200px) {
+		width: 1160px;
 	}
 }

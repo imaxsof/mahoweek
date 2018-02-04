@@ -41,7 +41,7 @@
 	$.cartonbox(cartonboxConfig);
 
 	// Если хеш содержит вывод приветственного сообщения
-	if (window.location.hash == '#hello') {
+	if (window.location.hash === '#hello') {
 		// Открываем окно приветствия
 		$('.js-open-hello').trigger('click');
 	}

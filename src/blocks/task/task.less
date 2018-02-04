@@ -12,9 +12,8 @@
 
 	&--add {
 		font-size: @font-size-small;
-		position: absolute;
-		bottom: 0;
 		color: @dark-secondary;
+		height: 40px;
 	}
 
 	&--completed {
@@ -54,12 +53,12 @@
 .task__status {
 	width: 39px;
 	position: relative;
-	cursor: pointer;
 	border-top: 1px solid transparent;
 	border-bottom: 1px solid transparent;
 
 	.task--add & {
-		cursor: default;
+		height: 40px;
+		border-bottom-width: 0;
 	}
 }
 
@@ -72,6 +71,7 @@
 	width: 100%;
 	border: 0;
 	background: none;
+	cursor: pointer;
 
 	&::before {
 		position: absolute;
@@ -204,10 +204,6 @@
 	position: relative;
 	border-top: 1px solid @task-border;
 	border-bottom: 1px solid @task-border;
-
-	.task--add & {
-		border-bottom: 0;
-	}
 }
 
 .task__trash {

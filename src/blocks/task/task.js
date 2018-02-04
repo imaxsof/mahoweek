@@ -39,7 +39,7 @@ function loadTask() {
 		tasksNew.push(mahoweekStorage.tasks[i]);
 
 		// Заносим дело в свой список
-		LIST_BOARD.find('.list[data-id="' + mahoweekStorage.tasks[i].listId + '"] .task--add').before(makeTask(mahoweekStorage.tasks[i].id, mahoweekStorage.tasks[i].name, mahoweekStorage.tasks[i].completed, mahoweekStorage.tasks[i].markers));
+		LIST_BOARD.find('.list[data-id="' + mahoweekStorage.tasks[i].listId + '"] .list__tasks').append(makeTask(mahoweekStorage.tasks[i].id, mahoweekStorage.tasks[i].name, mahoweekStorage.tasks[i].completed, mahoweekStorage.tasks[i].markers));
 
 		// Находим это дело
 		var task = LIST_BOARD.find('.task[data-id="' + mahoweekStorage.tasks[i].id + '"]');
@@ -78,7 +78,7 @@ function loadTask() {
 (function() {
 
 	// Если поле добавления в фокусе
-	LIST_BOARD.find('.js-add-task').focusin(function() {
+	LIST_BOARD.on('focusin', '.js-add-task', function() {
 		var isThis = $(this);
 
 		// Скроллим список к началу
@@ -90,7 +90,7 @@ function loadTask() {
 	});
 
 	// Если поле добавления не в фокусе
-	LIST_BOARD.find('.js-add-task').focusout(function() {
+	LIST_BOARD.on('focusout', '.js-add-task', function() {
 		var isThis = $(this);
 
 		// Возвращаем списку скролл
@@ -138,13 +138,13 @@ function loadTask() {
 			isThis.val('');
 
 			// Выводим дело в списке
-			isThis.parents('.task--add').before(makeTask(taskId, taskName));
+			isThis.parents('.list').find('.list__tasks').append(makeTask(taskId, taskName));
 
 			// Рассчитываем прогресс выполнения списка
 			makeProgress(listId);
 
 			// Находим созданное дело
-			var taskNew = isThis.parents('.task--add').prev();
+			var taskNew = isThis.parents('.list').find('.list__tasks .task:last-child');
 
 			// Берем данные окна
 			var win = $(window);

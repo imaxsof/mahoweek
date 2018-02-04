@@ -78,7 +78,7 @@
 				// Если пользователь ранее разрешил оповещения
 				if (Notification.permission === 'granted') {
 					// Если до изменения оповещения не были заданы или были выключены
-					if (!localStorage.getItem('notify') || localStorage.getItem('notify') == 'none') {
+					if (!localStorage.getItem('notify') || localStorage.getItem('notify') === 'none') {
 						// Показываем оповещение с краткой справкой
 						var notification = new Notification(notificationTitle, {
 							body: notificationBody,

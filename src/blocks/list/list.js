@@ -112,7 +112,7 @@ function loadList() {
 			updateStorage(mahoweekStorage);
 
 			// Если в списке нет ни одного дела
-			if (list.find('.task:not(.task--add)').length == 0) {
+			if (list.find('.list__tasks .task').length == 0) {
 				// Ставим фокус в поле добавления дел в созданном списке
 				list.find('.js-add-task').focus();
 			} else {
@@ -136,7 +136,7 @@ function loadList() {
 		// Получаем объект списка, его хеш списка и кол-во дел
 		var list = isThis.parents('.list');
 		var listId = list.attr('data-id');
-		var taskTotal = list.find('.task:not(.task--add)').length;
+		var taskTotal = list.find('.list__tasks .task').length;
 
 		// Если в удаляемом списке были дела
 		if (taskTotal) {
@@ -269,7 +269,7 @@ function remakeListName(name) {
 function makeProgress(id) {
 
 	// Считаем общее кол-во дел
-	var taskTotal = LIST_BOARD.find('.list[data-id="' + id + '"] .task:not(.task--add)').length;
+	var taskTotal = LIST_BOARD.find('.list[data-id="' + id + '"] .list__tasks .task').length;
 
 	// Считаем кол-во выполненных дел
 	var taskCompleted = LIST_BOARD.find('.list[data-id="' + id + '"] .task--completed').length;
@@ -314,7 +314,8 @@ function makeList(id, name) {
 			'</div>' +
 			'<div class="list__grid  grid"></div>' +
 		'</div>' +
-		'<div class="list__tasks">' +
+		'<div class="list__tasks"></div>' +
+		'<div class="list__foot">' +
 			'<div class="task  task--add">' +
 				'<div class="task__wrap">' +
 					'<label class="task__status" for="' + id + '-add-task" aria-label="Дело">' +

@@ -410,9 +410,6 @@ if (MOBILE) {
 		} else {
 			xy1 = event.pageX + event.pageY;
 		}
-
-		// Убираем фокус из поля добавления дела
-		LIST_BOARD.find('.js-add-task').blur();
 	});
 
 	// Определяем событие при отпускании
@@ -459,7 +456,7 @@ if (MOBILE) {
 					});
 
 					// При расфокусировке
-					isThis.parents('.list').find('.list__input').focusout(function() {
+					isThis.parents('.list').find('.list__input').on('focusout', function() {
 						// Заменяем поле редактирования на заголовок списка
 						isThis.html(remakeListName($(this).val()));
 
@@ -490,7 +487,7 @@ if (MOBILE) {
 					});
 
 					// При расфокусировке
-					isThis.parents('.task').find('.task__input').focusout(function() {
+					isThis.parents('.task').find('.task__input').on('focusout', function() {
 						// Заменяем поле редактирования на текст дела
 						isThis.html(remakeTaskName($(this).val()));
 
