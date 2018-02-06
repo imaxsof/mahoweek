@@ -48,6 +48,14 @@
 	.task--add & {
 		border-radius: 0 0 0 (@radius * 2);
 	}
+
+	.task--chosen & {
+		opacity: 0.5;
+	}
+
+	.task--ghost & {
+		opacity: 0;
+	}
 }
 
 .task__status {
@@ -266,5 +274,13 @@
 
 	.task--add & {
 		border-radius: 0 0 (@radius * 2) 0;
+	}
+
+	.task--chosen & {
+		opacity: 0.5;
+	}
+
+	.task--ghost & {
+		opacity: 0;
 	}
 }

@@ -437,6 +437,9 @@ if (MOBILE) {
 		if (!$(event.target).hasClass('js-link-task') && !$(event.target).hasClass('cartonbox')) {
 			// Если это было явное действие для редактирования
 			if (xy1 == xy2 || run == 'run') {
+				// На всякий случай, удаляем класс, что выполняется сортировка
+				LIST_BOARD.removeClass('board__lists--drag');
+
 				// Если это список и поля для редактирования еще нет
 				if (isThis.hasClass('list__name') && !isThis.parents('.list').find('.list__input').length) {
 					// Берем заголовок списка

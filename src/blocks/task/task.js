@@ -52,6 +52,9 @@ function loadTask() {
 	for (var i = 0; i < mahoweekStorage.lists.length; i ++) {
 		// Рассчитываем прогресс выполнения списка
 		makeProgress(mahoweekStorage.lists[i].id);
+
+		// Включаем сортировку дел
+		sortableTask(document.querySelectorAll('.list__tasks')[i]);
 	}
 
 	// Если массив дел изменился
@@ -384,6 +387,99 @@ function loadTask() {
 	});
 
 }());
+
+
+// Сортируем вручную дела
+//------------------------------------------------------------------------------
+
+function sortableTask(element) {
+
+	Sortable.create(element, {
+		group: 'group',
+		delay: SPEED,
+		animation: (SPEED / 2),
+		handle: '.task__name',
+		filter: '.task__input',
+		preventOnFilter: false,
+		ghostClass: 'task--ghost',
+		chosenClass: 'task--chosen',
+		dragClass: 'task--drag',
+		forceFallback: true,
+		fallbackClass: 'task--fallback',
+		fallbackOnBody: true,
+		scrollSensitivity: 100,
+		onChoose: function() {
+			// Добавляем класс, что выполняется сортировка
+			LIST_BOARD.addClass('board__lists--drag');
+		},
+		onEnd: function() {
+			// Удаляем класс, что выполняется сортировка
+			LIST_BOARD.removeClass('board__lists--drag');
+		},
+		onSort: function(event) {
+			// Получаем хеш листа и хеш текущего дела
+			var listId = event.item.parentElement.parentElement.attributes['data-id'].value;
+			var taskId = event.item.attributes['data-id'].value;
+
+			// Парсим Хранилище
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+
+			// Получаем элемент дела в Хранилище
+			var taskElement = mahoweekStorage.tasks.filter(function(value) {
+				return value.id == taskId;
+			});
+
+			// Получаем индекс дела в Хранилище
+			var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
+
+			// Изменяем хеш листа дела
+			mahoweekStorage.tasks[taskIndex].listId = listId;
+
+			// Получаем удаленный элемент
+			var taskRemove = mahoweekStorage.tasks.splice(taskIndex, 1)[0];
+
+			// Если дело помещено в самое начало списка
+			if (event.newIndex === 0) {
+				// Сортируем
+				mahoweekStorage.tasks.splice(0, 0, taskRemove);
+
+			// Если дело помещено в середину списка
+			} else {
+				// Получаем хеш дела выше текущего
+				var taskPrevId = event.item.previousElementSibling.attributes['data-id'].value;
+
+				// Получаем элемент дела в Хранилище
+				var taskPrevElement = mahoweekStorage.tasks.filter(function(value) {
+					return value.id == taskPrevId;
+				});
+
+				// Получаем индекс дела в Хранилище
+				var taskPrevIndex = mahoweekStorage.tasks.indexOf(taskPrevElement[0]);
+
+				// Сортируем
+				mahoweekStorage.tasks.splice((taskPrevIndex + 1), 0, taskRemove);
+			}
+
+			// Обновляем Хранилище
+			updateStorage(mahoweekStorage);
+		},
+		onAdd: function(event) {
+			// Получаем хеш листа в который перенесли дело
+			var listId = event.to.parentElement.attributes['data-id'].value;
+
+			// Рассчитываем прогресс выполнения списка
+			makeProgress(listId);
+		},
+		onRemove: function(event) {
+			// Получаем хеш листа из которого перенесли дело
+			var listId = event.from.parentElement.attributes['data-id'].value;
+
+			// Рассчитываем прогресс выполнения списка
+			makeProgress(listId);
+		}
+	});
+
+}
 
 
 // Работаем со стилем статуса дела
