@@ -175,6 +175,10 @@ input[type="text"] {
 	&::placeholder {
 		color: @dark-disabled;
 	}
+
+	&::-ms-clear {
+		display: none;
+	}
 }
 
 select {
@@ -191,6 +195,7 @@ select {
 	background-position: calc(~"100% + 3px") calc(~"50% - 1px");
 	background-repeat: no-repeat;
 	background-size: 25px 25px;
+	cursor: pointer;
 }
 
 button,
@@ -365,10 +370,10 @@ ol.list-custom {
 
 @keyframes spin {
 	0% {
-		transform:rotate(0deg);
+		transform: rotate(0deg);
 	}
 
 	100% {
-		transform:rotate(360deg);
+		transform: rotate(360deg);
 	}
 }

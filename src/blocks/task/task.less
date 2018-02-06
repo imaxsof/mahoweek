@@ -22,14 +22,14 @@
 }
 
 .task__wrap {
-	flex: 1 0 0;
+	flex: 1 0 1px;
 	display: flex;
 	background-color: @task-bg;
 	width: calc(~"100vw - 17px");
 	max-width: 370px;
 	overflow: hidden;
 
-	body:not(.mobile) .task:hover & {
+	body:not(.mobile) .board__lists:not(.board__lists--drag) .task:hover & {
 		background-color: @task-bg-hover;
 	}
 
@@ -153,7 +153,7 @@
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
-	flex: 1 0 0;
+	flex: 1 0 1px;
 	border-top: 1px solid @task-border;
 	border-bottom: 1px solid @task-border;
 
@@ -228,7 +228,7 @@
 		fill: @task-trash-hover;
 	}
 
-	.task__wrap:hover & {
+	body:not(.mobile) .task__wrap:hover & {
 		visibility: visible;
 		opacity: 1;
 		transform: scale3d(1, 1, 1);
@@ -242,7 +242,10 @@
 	}
 
 	.board__lists--drag & {
+		visibility: hidden;
+		transform: scale3d(0.8, 0.8, 1) !important;
 		opacity: 0 !important;
+		transition-delay: 0s !important;
 	}
 
 	svg {
@@ -257,7 +260,7 @@
 .task__grid {
 	background-color: @grid-bg;
 
-	body:not(.mobile) .task:hover & {
+	body:not(.mobile) .board__lists:not(.board__lists--drag) .task:hover & {
 		background-color: @grid-bg-hover;
 	}
 

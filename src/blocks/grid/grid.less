@@ -63,6 +63,10 @@
 		transition: @duration @timing-function;
 	}
 
+	body:not(.mobile) .task:not(.task--add) &:not(.grid__date--past):hover::before {
+		opacity: 1;
+	}
+
 	&--bull,
 	&--completed {
 		&::before {

@@ -150,7 +150,7 @@ function loadTask() {
 			var win = $(window);
 
 			// Если созданное дело вытесняет за рамки экрана конец списка
-			if (taskNew.offset().top > win.scrollTop() + win.height() - 70 - 40 - 39) {
+			if (taskNew.offset().top > win.scrollTop() + win.height() - 30 - 40 - 39) {
 				// Смещаем позицию прокрутки на высоту строки дела
 				win.scrollTop(win.scrollTop() + taskNew.outerHeight(true));
 			}
