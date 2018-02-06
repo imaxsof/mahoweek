@@ -25,6 +25,9 @@ function loadList() {
 	LIST_BOARD.find('.list__grid').html(makeGrid('list'));
 	LIST_BOARD.find('.task__grid').html(makeGrid('add-task'));
 
+	// Включаем сортировку списков
+	sortableList();
+
 }
 
 
@@ -57,6 +60,9 @@ function loadList() {
 
 		// Находим созданный список
 		var listNew = LIST_BOARD.find('.list:last-child');
+
+		// Включаем сортировку дел
+		sortableTask(document.querySelector('.list:last-child .list__tasks'));
 
 		// Выводим сетку дат в шапку созданного списка
 		// и в строку добавления дела
@@ -196,12 +202,10 @@ function loadList() {
 // Сортируем вручную списки
 //------------------------------------------------------------------------------
 
-(function() {
-
-	var sortableDelay = MOBILE ? 200 : 0;
+function sortableList() {
 
 	Sortable.create(document.querySelector('.board__lists'), {
-		delay: sortableDelay,
+		delay: SPEED,
 		animation: SPEED,
 		handle: '.list__name',
 		filter: '.list__input',
@@ -209,40 +213,34 @@ function loadList() {
 		ghostClass: 'list--ghost',
 		chosenClass: 'list--chosen',
 		dragClass: 'list--drag',
-		scrollSensitivity: 80,
-		onClone: function() {
-			// Добавляем класс сортировки
+		forceFallback: true,
+		fallbackClass: 'list--fallback',
+		fallbackOnBody: true,
+		scrollSensitivity: 100,
+		onChoose: function() {
+			// Добавляем класс, что выполняется сортировка
 			LIST_BOARD.addClass('board__lists--drag');
 		},
-		onEnd: function(evt) {
-			if (Number.isInteger(evt.oldIndex) && Number.isInteger(evt.newIndex) && evt.oldIndex >= 0 && evt.newIndex >= 0 && evt.oldIndex != evt.newIndex) {
-				// Парсим Хранилище
-				var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
-
-				// Проверяем присутствуют ли сортируемые списки в Хранилище
-				if (mahoweekStorage.lists[evt.oldIndex] !== undefined && mahoweekStorage.lists[evt.newIndex] !== undefined) {
-					// Получаем удаленный элемент
-					var listRemove = mahoweekStorage.lists.splice(evt.oldIndex, 1)[0];
-
-					// Сортируем
-					mahoweekStorage.lists.splice(evt.newIndex, 0, listRemove);
-
-					// Обновляем Хранилище
-					updateStorage(mahoweekStorage);
-
-				// Если не присутствуют
-				} else {
-					// Перезагружаем страницу во избежание ошибок
-					window.location.reload(true);
-				}
-			}
-
-			// Удаляем класс сортировки
+		onEnd: function() {
+			// Удаляем класс, что выполняется сортировка
 			LIST_BOARD.removeClass('board__lists--drag');
+		},
+		onSort: function(event) {
+			// Парсим Хранилище
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+
+			// Получаем удаленный элемент
+			var listRemove = mahoweekStorage.lists.splice(event.oldIndex, 1)[0];
+
+			// Сортируем
+			mahoweekStorage.lists.splice(event.newIndex, 0, listRemove);
+
+			// Обновляем Хранилище
+			updateStorage(mahoweekStorage);
 		}
 	});
 
-}());
+}
 
 
 // Форматируем заголовок списка

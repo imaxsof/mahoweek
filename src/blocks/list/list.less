@@ -62,6 +62,10 @@
 		width: 1160px;
 	}
 
+	.list--chosen & {
+		opacity: 0.5;
+	}
+
 	.list--ghost & {
 		opacity: 0;
 	}
@@ -212,8 +216,19 @@
 		width: 1160px;
 	}
 
+	.board__lists--drag & {
+		padding-bottom: 39px;
+		margin-bottom: -40px;
+		z-index: 5;
+	}
+
+	.list--chosen & {
+		opacity: 0.5;
+	}
+
 	.list--ghost & {
 		opacity: 0;
+	}
 }
 
 .list__foot {
@@ -236,5 +251,13 @@
 
 	@media (min-width: 1200px) {
 		width: 1160px;
+	}
+
+	.list--chosen & {
+		opacity: 0.5;
+	}
+
+	.list--ghost & {
+		opacity: 0;
 	}
 }
