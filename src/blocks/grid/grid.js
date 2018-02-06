@@ -160,6 +160,11 @@ function makeGrid(type, data) {
 			title: "День сурка",
 			dayoff: false
 		},
+		"2018-02-12": {
+			icon: "🌞",
+			title: "Масленица",
+			dayoff: false
+		},
 		"2018-02-14": {
 			icon: "❤",
 			title: "День всех влюблённых",
@@ -195,6 +200,11 @@ function makeGrid(type, data) {
 		"2018-03-17": {
 			icon: "🍀",
 			title: "День святого Патрика",
+			dayoff: false
+		},
+		"2018-04-08": {
+			icon: "🐇",
+			title: "Пасха",
 			dayoff: false
 		},
 		"2018-04-13": {
