@@ -84,7 +84,7 @@ var paths = {
 };
 
 
-// Build
+// Dist
 //------------------------------------------------------------------------------
 
 gulp.task('base', function() {
@@ -166,7 +166,7 @@ gulp.task('js:app', function() {
 });
 
 
-// Build Docs
+// Docs
 //------------------------------------------------------------------------------
 
 gulp.task('docs', ['clean:docs', 'default'], function() {
