@@ -1,6 +1,6 @@
 ![Интерфейс](https://mahoweek.ru/img/interface.png?v=4)
 
-# Mahoweek
+# [Mahoweek](https://mahoweek.ru)
 
 Веб-приложение по ведению краткосрочного плана дел. Поможет просто организовать список задач и наметить на календарной сетке даты их выполнения на одну-две недели вперёд.
 
@@ -10,4 +10,6 @@ Mahoweek полностью бесплатен, не перенасыщен фу
 
 [mahoweek.ru](https://mahoweek.ru)
 
-Следите за проектом в соцсетях: [ВКонтакте](https://vk.com/mahoweek), [Телеграм](https://t.me/mahoweek), [Фейсбук](https://fb.com/mahoweekapp) и [Твиттер](https://twitter.com/mahoweek).
+Любые вопросы, предложения, сомнения, критика или замечания помогают нам стать лучше, а вам — счастливее. Пишите на электронную почту mahoweek@mahoweek.ru или в соцсетях [ВКонтакте](https://vk.com/mahoweek), [Телеграм](https://t.me/mahoweek), [Фейсбук](https://fb.com/mahoweekapp) и [Твиттер](https://twitter.com/mahoweek).
+
+Автор и разработчик [Максим Софронов](https://github.com/imaxsof)

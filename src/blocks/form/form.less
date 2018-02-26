@@ -140,6 +140,13 @@
 			transition-property: opacity;
 			transition: @duration @timing-function;
 			opacity: 0;
+
+			@media (min-width: 768px) {
+				top: 10px;
+				right: 10px;
+				bottom: 10px;
+				left: 10px;
+			}
 		}
 	}
 
@@ -147,7 +154,7 @@
 		border-radius: @radius 0 0 0;
 
 		&::before {
-			border-radius: (@radius * 0.75) 0 0 0;
+			border-radius: (@radius / 2) 0 0 0;
 		}
 	}
 
@@ -155,7 +162,7 @@
 		border-radius: 0 @radius 0 0;
 
 		&::before {
-			border-radius: 0 (@radius * 0.75) 0 0;
+			border-radius: 0 (@radius / 2) 0 0;
 		}
 	}
 
@@ -163,7 +170,7 @@
 		border-radius: 0 0 0 @radius;
 
 		&::before {
-			border-radius: 0 0 0 (@radius * 0.75);
+			border-radius: 0 0 0 (@radius / 2);
 		}
 	}
 
@@ -171,7 +178,7 @@
 		border-radius: 0 0 @radius;
 
 		&::before {
-			border-radius: 0 0 (@radius * 0.75);
+			border-radius: 0 0 (@radius / 2);
 		}
 	}
 
