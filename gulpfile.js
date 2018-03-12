@@ -4,28 +4,28 @@
 // Packages
 //------------------------------------------------------------------------------
 
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var htmlmin = require('gulp-html-minifier');
-var csso = require('gulp-csso');
-var less = require('gulp-less');
-var autoprefixer = require('gulp-autoprefixer');
-var uglify = require('gulp-uglify');
-var wrap = require("gulp-wrap");
-var del = require('del');
-var csscomb = require('gulp-csscomb');
-var fileinclude = require('gulp-file-include');
-var multipipe = require('multipipe');
-var browserSync = require('browser-sync').create();
-var gulpsync = require('gulp-sync')(gulp);
-var gulpHtmlVersion = require('gulp-html-version');
-var typograf = require('gulp-typograf');
+const gulp = require('gulp');
+const concat = require('gulp-concat');
+const htmlmin = require('gulp-html-minifier');
+const csso = require('gulp-csso');
+const less = require('gulp-less');
+const autoprefixer = require('gulp-autoprefixer');
+const uglify = require('gulp-uglify');
+const wrap = require("gulp-wrap");
+const del = require('del');
+const csscomb = require('gulp-csscomb');
+const fileinclude = require('gulp-file-include');
+const multipipe = require('multipipe');
+const browserSync = require('browser-sync').create();
+const gulpsync = require('gulp-sync')(gulp);
+const gulpHtmlVersion = require('gulp-html-version');
+const typograf = require('gulp-typograf');
 
 
 // Paths
 //------------------------------------------------------------------------------
 
-var paths = {
+const paths = {
 	docs: 'docs/',
 	dist: {
 		base: 'dist/',

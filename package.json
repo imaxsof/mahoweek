@@ -19,7 +19,7 @@
     "gulp-file-include": "^2.0.1",
     "gulp-html-minifier": "^0.1.8",
     "gulp-html-version": "^1.0.1",
-    "gulp-less": "^3.5.0",
+    "gulp-less": "3.5.0",
     "gulp-sync": "^0.1.4",
     "gulp-typograf": "^3.1.0",
     "gulp-uglify": "2.0.1",
