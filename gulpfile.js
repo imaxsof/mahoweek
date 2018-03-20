@@ -42,7 +42,7 @@ const paths = {
 			'src/*.html'
 		],
 		img: [
-			'src/img/**/*.{jpg,jpeg,gif,png,svg}'
+			'src/img/**/*.{jpg,png,svg}'
 		],
 		css: {
 			libs: [

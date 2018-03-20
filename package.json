@@ -3,7 +3,7 @@
   "version": "2.1.0",
   "dependencies": {
     "cartonbox": "^1.5.4",
-    "firebase": "^4.10.0",
+    "firebase": "^4.12.0",
     "jquery": "^3.3.1",
     "normalize.css": "^8.0.0",
     "sortablejs": "^1.7.0"
@@ -12,7 +12,7 @@
     "browser-sync": "^2.23.6",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^4.1.0",
+    "gulp-autoprefixer": "^5.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-csscomb": "^3.0.8",
     "gulp-csso": "^3.0.1",
