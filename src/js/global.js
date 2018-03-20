@@ -346,7 +346,7 @@ if (MOBILE) {
 							// а время точно совпадает с текущим и еще не было оповещения
 							if (task.find('.grid__date--today.grid__date--bull:not(.grid__date--completed)').length && taskPresetTime === realTime && !task.hasClass('task--now')) {
 								// Показываем оповещение
-								var notification = new Notification('Время ' + taskPresetTime + '!', {
+								var notification = new Notification('Время ' + taskPresetTime + '', {
 									body: taskName,
 									icon: 'img/notify.png?v=2',
 									requireInteraction: true
