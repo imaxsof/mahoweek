@@ -100,7 +100,10 @@ gulp.task('html', function() {
 		fileinclude(),
 		gulpHtmlVersion(),
 		typograf({
-			locale: ['ru', 'en-US']
+			locale: ['ru', 'en-US'],
+			enableRule: ['common/nbsp/afterNumber'],
+			disableRule: ['common/space/replaceTab'],
+			processingSeparateParts: false
 		}),
 		htmlmin({
 			collapseWhitespace: true,
