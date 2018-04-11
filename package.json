@@ -3,7 +3,7 @@
   "version": "2.1.1",
   "dependencies": {
     "cartonbox": "^1.5.4",
-    "firebase": "^4.12.0",
+    "firebase": "^4.12.1",
     "jquery": "^3.3.1",
     "normalize.css": "^8.0.0",
     "sortablejs": "^1.7.0"
@@ -22,7 +22,7 @@
     "gulp-less": "3.5.0",
     "gulp-sync": "^0.1.4",
     "gulp-typograf": "^3.1.0",
-    "gulp-uglify": "2.0.1",
+    "gulp-uglify-es": "^1.0.1",
     "gulp-wrap": "^0.13.0",
     "multipipe": "^2.0.3"
   }
