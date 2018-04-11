@@ -10,6 +10,6 @@ Mahoweek полностью бесплатен, не перенасыщен фу
 
 ∼∼∼
 
-Любые вопросы, предложения, сомнения, критика или замечания помогают нам стать лучше, а вам — счастливее. Пишите на электронную почту mahoweek@mahoweek.ru или в соцсетях [ВКонтакте](https://vk.com/mahoweek), [Телеграм](https://t.me/mahoweek), [Фейсбук](https://fb.com/mahoweekapp) и [Твиттер](https://twitter.com/mahoweek).
+Любые вопросы, предложения, сомнения, критика или замечания помогают нам стать лучше, а вам — счастливее. Пишите на электронную почту mahoweek@mahoweek.ru или в соцсетях [ВКонтакте](https://vk.com/mahoweek), [Фейсбук](https://fb.com/mahoweekapp) и [Твиттер](https://twitter.com/mahoweek).
 
 Автор и разработчик [Максим Софронов](https://github.com/imaxsof).
