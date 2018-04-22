@@ -3,13 +3,13 @@
   "version": "2.1.2",
   "dependencies": {
     "cartonbox": "^1.5.4",
-    "firebase": "^4.12.1",
+    "firebase": "^4.13.1",
     "jquery": "^3.3.1",
     "normalize.css": "^8.0.0",
     "sortablejs": "^1.7.0"
   },
   "devDependencies": {
-    "browser-sync": "^2.23.6",
+    "browser-sync": "^2.23.7",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
