@@ -243,7 +243,7 @@ if (MOBILE) {
 (function() {
 
 	// Определяем первоначальные условия
-	var delay = 500;
+	var delay = 5000;
 	var date = new Date();
 
 	// Запускаем рекурсивный таймаут
