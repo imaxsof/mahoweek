@@ -6,67 +6,67 @@
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		color: @light-primary;
-		fill: @light-primary;
-		transform: translate3d(-50%, -50%, 0);
-		text-align: center;
 		width: 100%;
 		max-width: 400px;
 		padding: 29px 15px 15px;
+		text-align: center;
+		color: @light-primary;
+		fill: @light-primary;
+		transform: translate3d(-50%, -50%, 0);
 	}
 }
 
 .board__throbber {
 	position: fixed;
-	z-index: 1;
 	top: 0;
+	left: 0;
+	z-index: 1;
 	width: 100%;
 	height: 100%;
-	left: 0;
-	transition-property: opacity, transform;
 	transition: @duration cubic-bezier(0.215, 0.61, 0.355, 1);
+	transition-property: opacity, transform;
 
 	.ready & {
-		opacity: 0;
 		transform: scale3d(0.9, 0.9, 1);
+		opacity: 0;
 	}
 
 	&::before {
-		position: fixed;
 		content: "";
+		position: fixed;
 		top: 50%;
 		left: 50%;
-		margin: -15px 0 0 -15px;
 		width: 30px;
 		height: 30px;
-		border-radius: 50%;
+		margin: -15px 0 0 -15px;
 		border: 2px solid @light-primary;
 		border-right-color: fade(@light-primary, 30%);
 		border-bottom-color: fade(@light-primary, 30%);
+		border-radius: 50%;
 		visibility: visible;
 		animation-name: spin;
 		animation-duration: (@duration * 3);
 		animation-timing-function: linear;
-		animation-fill-mode: both;
 		animation-iteration-count: infinite;
+		animation-fill-mode: both;
 	}
 }
 
 .board__theme {
 	position: fixed;
-	z-index: 2;
 	top: 0;
+	left: 0;
+	z-index: 2;
 	width: 100%;
 	height: 100%;
-	left: 0;
 	background-repeat: no-repeat;
-	background-size: cover;
 	background-position: 50% 50%;
+	background-size: cover;
 	visibility: hidden;
 	animation-name: none;
-	animation-delay: @duration;
 	animation-duration: (@duration * 4);
 	animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+	animation-delay: @duration;
 	animation-fill-mode: both;
 
 	.modal-start & {
@@ -79,15 +79,15 @@
 	}
 
 	&::before {
+		content: "";
 		position: absolute;
 		top: 0;
-		left: 0;
 		right: 0;
+		left: 0;
 		height: 100px;
-		content: "";
 		background: linear-gradient(180deg, rgba(0, 0, 0, 0.48) 0, rgba(0, 0, 0, 0));
-		transition-property: opacity;
 		transition: @duration @timing-function;
+		transition-property: opacity;
 	}
 
 	&--dark {
@@ -126,8 +126,8 @@
 	}
 
 	&--cyan {
-		background-color: #00838F !important;
-		background-image: radial-gradient(circle at 50% 100%, lighten(#00838F, 10%), #00838F);
+		background-color: #00838f !important;
+		background-image: radial-gradient(circle at 50% 100%, lighten(#00838f, 10%), #00838f);
 
 		&::before {
 			opacity: 0;
@@ -317,17 +317,17 @@
 }
 
 .board__header {
-	padding: 20px;
-	margin: -1px auto 0;
 	position: relative;
 	z-index: 3;
 	display: flex;
 	justify-content: space-between;
+	margin: -1px auto 0;
+	padding: 20px;
 	visibility: hidden;
 	animation-name: none;
-	animation-delay: @duration;
 	animation-duration: @duration;
 	animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+	animation-delay: @duration;
 	animation-fill-mode: both;
 
 	.modal-start & {
@@ -340,8 +340,8 @@
 	}
 
 	@media (min-width: 768px) {
-		padding-left: 35px;
 		padding-right: 35px;
+		padding-left: 35px;
 	}
 
 	@media (min-width: 1200px) {
@@ -350,15 +350,15 @@
 }
 
 .board__lists {
-	padding: 0 0 10px;
-	margin: auto;
 	position: relative;
 	z-index: 3;
+	margin: auto;
+	padding: 0 0 10px;
 	visibility: hidden;
 	animation-name: none;
-	animation-delay: @duration;
 	animation-duration: @duration;
 	animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+	animation-delay: @duration;
 	animation-fill-mode: both;
 
 	.modal-start & {

@@ -2,12 +2,12 @@
 //------------------------------------------------------------------------------
 
 html {
-	cursor: default;
-	overflow-y: scroll;
+	box-sizing: border-box;
 	overflow-x: hidden;
+	overflow-y: scroll;
+	cursor: default;
 	-webkit-font-smoothing: antialiased;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-	box-sizing: border-box;
 
 	@media (min-width: 992px) {
 		overflow-x: initial;
@@ -21,6 +21,7 @@ html {
 }
 
 body {
+	min-width: 320px;
 	font-size: @font-size;
 	line-height: @line-height;
 	font-family: @font-family;
@@ -28,7 +29,6 @@ body {
 	color: @dark-primary;
 	fill: @dark-primary;
 	background-color: @dark-primary;
-	min-width: 320px;
 
 	&.mobile {
 		user-select: none;
@@ -40,26 +40,26 @@ body {
 //------------------------------------------------------------------------------
 
 h1 {
-	font-family: Verdana, @font-family;
-	text-transform: uppercase;
+	position: relative;
+	margin: 0;
 	font-weight: normal;
 	font-size: 18px;
-	margin: 0;
-	position: relative;
 	line-height: 30px;
+	font-family: Verdana, @font-family;
+	text-transform: uppercase;
 	letter-spacing: 1px;
 }
 
 h2,
 .h2 {
-	font-size: 24px;
-	line-height: 30px;
-	font-weight: normal;
-	font-family: Verdana, @font-family;
-	text-transform: uppercase;
+	position: relative;
 	margin-top: 0;
 	margin-bottom: 15px;
-	position: relative;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 30px;
+	font-family: Verdana, @font-family;
+	text-transform: uppercase;
 	letter-spacing: 1px;
 
 	@media (min-width: 768px) {
@@ -70,12 +70,12 @@ h2,
 h3,
 .h3 {
 	margin-top: 0;
+	margin-bottom: 15px;
 	font-weight: normal;
 	font-size: 18px;
 	line-height: 24px;
 	font-family: Verdana, @font-family;
 	text-transform: uppercase;
-	margin-bottom: 15px;
 	letter-spacing: 1px;
 }
 
@@ -84,9 +84,9 @@ h3,
 //------------------------------------------------------------------------------
 
 a {
-	outline: none;
-	text-decoration: none;
 	color: @link-color;
+	text-decoration: none;
+	outline: none;
 
 	body:not(.mobile) &:hover {
 		color: @link-color-hover;
@@ -98,30 +98,30 @@ a {
 //------------------------------------------------------------------------------
 
 .btn {
-	outline: none;
+	position: relative;
 	display: inline-block;
+	min-width: 180px;
+	padding: 10px 20px;
+	line-height: @line-height;
+	font-family: @font-family;
+	text-align: center;
 	text-decoration: none;
+	white-space: nowrap;
 	border: 0;
 	border-radius: (@radius * 5.5);
-	padding: 10px 20px;
+	outline: none;
 	cursor: pointer;
-	line-height: @line-height;
-	position: relative;
-	min-width: 180px;
-	text-align: center;
-	font-family: @font-family;
-	white-space: nowrap;
 
 	body:not(.mobile) &:active {
 		top: 1px;
 	}
 
 	&--default {
-		border: 1px solid @dark-disabled;
 		padding: 9px 19px;
-		background-color: @btn-default-bg;
 		color: @dark-primary !important;
 		fill: @dark-primary !important;
+		background-color: @btn-default-bg;
+		border: 1px solid @dark-disabled;
 
 		body:not(.mobile) &:hover {
 			background-color: @btn-default-bg-hover;
@@ -129,9 +129,9 @@ a {
 	}
 
 	&--primary {
-		background-color: @btn-primary-bg;
 		color: @light-primary !important;
 		fill: @light-primary !important;
+		background-color: @btn-primary-bg;
 
 		body:not(.mobile) &:hover {
 			background-color: @btn-primary-bg-hover;
@@ -139,9 +139,9 @@ a {
 	}
 
 	&--danger {
-		background-color: @btn-danger-bg;
 		color: @light-primary !important;
 		fill: @light-primary !important;
+		background-color: @btn-danger-bg;
 
 		body:not(.mobile) &:hover {
 			background-color: @btn-danger-bg-hover;
@@ -165,14 +165,14 @@ legend {
 }
 
 input[type="text"] {
-	background-color: transparent;
-	line-height: @line-height;
-	color: @dark-primary;
-	border: 0;
-	outline: none;
 	width: 100%;
 	padding: 0;
+	line-height: @line-height;
 	font-family: @font-family;
+	color: @dark-primary;
+	background-color: transparent;
+	border: 0;
+	outline: none;
 
 	&::placeholder {
 		color: @dark-disabled;
@@ -184,27 +184,27 @@ input[type="text"] {
 }
 
 select {
-	background-color: transparent;
+	margin: 0 -5px;
+	padding: 0 18px 0 5px;
 	line-height: @line-height;
-	color: @dark-primary;
 	font-family: @font-family;
+	color: @dark-primary;
+	background-color: transparent;
+	background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'><path d='M25 32.4l-9.7-9.7 1.4-1.4 8.3 8.3 8.3-8.3 1.4 1.4z' fill='#212121'/></svg>") !important;
+	background-repeat: no-repeat;
+	background-position: calc(~"100% + 3px") calc(~"50% - 1px");
+	background-size: 25px 25px;
 	border: 0;
 	outline: none;
-	padding: 0 18px 0 5px;
-	margin: 0 -5px;
-	appearance: none;
-	background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'><path d='M25 32.4l-9.7-9.7 1.4-1.4 8.3 8.3 8.3-8.3 1.4 1.4z' fill='#212121'/></svg>") !important;
-	background-position: calc(~"100% + 3px") calc(~"50% - 1px");
-	background-repeat: no-repeat;
-	background-size: 25px 25px;
 	cursor: pointer;
+	appearance: none;
 }
 
 button,
 [role="button"] {
+	font-family: @font-family;
 	outline: none;
 	cursor: pointer;
-	font-family: @font-family;
 }
 
 
@@ -239,8 +239,8 @@ svg {
 
 .center-block {
 	display: block;
-	margin-left: auto;
 	margin-right: auto;
+	margin-left: auto;
 }
 
 .gray {
@@ -254,9 +254,9 @@ svg {
 }
 
 .list-custom {
+	margin-bottom: 15px;
 	padding-left: 23px;
 	list-style: none;
-	margin-bottom: 15px;
 
 	li {
 		margin-bottom: 5px;
@@ -274,14 +274,14 @@ svg {
 
 	&--status li {
 		&::before {
+			content: "";
 			width: 15px;
 			height: 15px;
-			content: "";
-			border-radius: 50%;
+			margin-top: 5px;
 			border: 2px solid;
 			border-color: @task-pea;
+			border-radius: 50%;
 			opacity: 1;
-			margin-top: 5px;
 		}
 
 		&:nth-child(2)::before {
@@ -306,13 +306,13 @@ svg {
 
 	&--markers li {
 		&::before {
+			content: "";
 			width: 11px;
 			height: 11px;
-			content: "";
-			border-radius: 50%;
-			background-color: @grid-pea;
-			opacity: 1;
 			margin-top: 7px;
+			background-color: @grid-pea;
+			border-radius: 50%;
+			opacity: 1;
 		}
 
 		&:nth-child(2)::before {
@@ -339,8 +339,8 @@ ol.list-custom {
 	counter-reset: code;
 
 	li::before {
-		counter-increment: code;
 		content: counter(code)".";
+		counter-increment: code;
 	}
 }
 
@@ -370,61 +370,61 @@ ol.list-custom {
 
 @keyframes fadeInDown {
 	0% {
-		opacity: 0;
 		transform: translate3d(0, -10px, 0);
+		opacity: 0;
 	}
 
 	100% {
-		opacity: 1;
 		transform: translate3d(0, 0, 0);
+		opacity: 1;
 	}
 }
 
 @keyframes fadeOutDown {
 	0% {
-		opacity: 1;
 		transform: translate3d(0, 0, 0);
+		opacity: 1;
 	}
 
 	100% {
-		opacity: 0;
 		transform: translate3d(0, 10px, 0);
+		opacity: 0;
 	}
 }
 
 @keyframes fadeInUp {
 	0% {
-		opacity: 0;
 		transform: translate3d(0, 10px, 0);
+		opacity: 0;
 	}
 
 	100% {
-		opacity: 1;
 		transform: translate3d(0, 0, 0);
+		opacity: 1;
 	}
 }
 
 @keyframes fadeOutUp {
 	0% {
-		opacity: 1;
 		transform: translate3d(0, 0, 0);
+		opacity: 1;
 	}
 
 	100% {
-		opacity: 0;
 		transform: translate3d(0, -10px, 0);
+		opacity: 0;
 	}
 }
 
 @keyframes fallIn {
 	0% {
-		opacity: 0;
 		transform: scale3d(1.05, 1.05, 1);
+		opacity: 0;
 	}
 
 	100% {
-		opacity: 1;
 		transform: scale3d(1, 1, 1);
+		opacity: 1;
 	}
 }
 

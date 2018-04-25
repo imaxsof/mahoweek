@@ -23,21 +23,21 @@
 	}
 
 	&--past {
+		color: @dark-disabled;
 		background-image: linear-gradient(135deg, fade(@grid-past-bg, 0) 3px, @grid-past-bg 3px, fade(@grid-past-bg, 0) 4px);
-		background-size: 5px 5px;
 		background-repeat: repeat;
 		background-position: 50%;
+		background-size: 5px 5px;
 		cursor: default;
-		color: @dark-disabled;
 	}
 
 	&--today {
-		background-color: @grid-today-bg;
-		border-right: 1px solid @grid-today-border;
-		border-color: @grid-today-border !important;
+		z-index: 1;
 		width: 41px;
 		margin-right: -1px;
-		z-index: 1;
+		background-color: @grid-today-bg;
+		border-color: @grid-today-border !important;
+		border-right: 1px solid @grid-today-border;
 
 		&:first-child {
 			width: 42px;

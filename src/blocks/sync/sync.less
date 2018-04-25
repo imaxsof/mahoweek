@@ -19,52 +19,52 @@
 	}
 
 	&::before {
-		opacity: 0;
-		visibility: hidden;
-		position: absolute;
-		z-index: 2;
 		content: "";
+		position: absolute;
 		top: 50%;
 		left: 50%;
-		margin: -50px 0 0 -15px;
+		z-index: 2;
 		width: 30px;
 		height: 30px;
-		border-radius: 50%;
+		margin: -50px 0 0 -15px;
 		border: 2px solid @dark-primary;
 		border-right-color: fade(@dark-primary, 30%);
 		border-bottom-color: fade(@dark-primary, 30%);
+		border-radius: 50%;
+		visibility: hidden;
 		visibility: visible;
+		opacity: 0;
 		animation-name: spin;
 		animation-duration: (@duration * 3);
 		animation-timing-function: linear;
-		animation-fill-mode: both;
 		animation-iteration-count: infinite;
+		animation-fill-mode: both;
 	}
 
 	&::after {
-		position: absolute;
 		content: "";
-		z-index: 1;
+		position: absolute;
 		top: -39px;
 		right: 0;
 		bottom: 0;
 		left: 0;
+		z-index: 1;
 		background-color: @light-primary;
-		opacity: 0;
 		visibility: hidden;
-		transition-property: opacity, visibility;
+		opacity: 0;
 		transition: @duration @timing-function;
+		transition-property: opacity, visibility;
 	}
 
 	&--load {
 		&::before {
-			opacity: 1;
 			visibility: visible;
+			opacity: 1;
 		}
 
 		&::after {
-			opacity: 0.97;
 			visibility: visible;
+			opacity: 0.97;
 		}
 	}
 }
@@ -74,14 +74,14 @@
 	justify-content: center;
 
 	.btn[data-provider="facebook"] {
-		background-color: #3B5998;
-		color: @light-primary;
-		fill: @light-primary;
 		min-width: 44px;
 		margin: 5px;
+		color: @light-primary;
+		fill: @light-primary;
+		background-color: #3b5998;
 
 		body:not(.mobile) &:hover {
-			background-color: darken(#3B5998, 5%);
+			background-color: darken(#3b5998, 5%);
 		}
 
 		svg {
@@ -92,14 +92,14 @@
 	}
 
 	.btn[data-provider="twitter"] {
-		background-color: #1DA1F3;
-		color: @light-primary;
-		fill: @light-primary;
 		min-width: 44px;
 		margin: 5px;
+		color: @light-primary;
+		fill: @light-primary;
+		background-color: #1da1f3;
 
 		body:not(.mobile) &:hover {
-			background-color: darken(#1DA1F3, 5%);
+			background-color: darken(#1da1f3, 5%);
 		}
 
 		svg {
@@ -112,9 +112,9 @@
 
 .sync__user {
 	display: none;
+	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	flex-wrap: wrap;
 	padding-top: 5px;
 	text-align: center;
 
@@ -131,40 +131,40 @@
 	animation-name: none;
 	animation-duration: (@duration * 3);
 	animation-timing-function: linear;
-	animation-fill-mode: both;
 	animation-iteration-count: infinite;
+	animation-fill-mode: both;
 
 	&--spin {
 		animation-name: spin;
 	}
 
 	svg {
+		display: block;
 		width: 28px;
 		height: 28px;
 		margin: -2px -12px;
-		display: block;
 	}
 }
 
 .sync__logout svg {
+	display: block;
 	width: 25px;
 	height: 25px;
 	margin: -0.5px -11.5px -0.5px -9.5px;
-	display: block;
 }
 
 .sync__ava {
 	position: relative;
 	width: 75px;
 	height: 75px;
+	margin: 0 25px;
 	background-color: @light-secondary;
-	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
+	background-size: cover;
 	border-radius: 50%;
-	margin: 0 25px;
-	transition-property: box-shadow;
 	transition: @duration @timing-function;
+	transition-property: box-shadow;
 
 	&[data-sync="process"] {
 		box-shadow: inset 0 0 5px 1px @sync-process;
@@ -180,21 +180,21 @@
 }
 
 .sync__provider {
-	display: none;
 	position: absolute;
 	right: -3px;
 	bottom: -3px;
-	border-radius: 50%;
-	overflow: hidden;
-	background-color: @light-secondary;
-	border: 2px solid @light-primary;
+	display: none;
+	box-sizing: content-box;
 	width: 25px;
 	height: 25px;
-	box-sizing: content-box;
+	overflow: hidden;
 	fill: @light-primary;
+	background-color: @light-secondary;
+	border: 2px solid @light-primary;
+	border-radius: 50%;
 
 	&--facebook {
-		background-color: #3B5998;
+		background-color: #3b5998;
 
 		[data-provider="facebook.com"] & {
 			display: block;
@@ -202,7 +202,7 @@
 	}
 
 	&--twitter {
-		background-color: #1DA1F3;
+		background-color: #1da1f3;
 
 		[data-provider="twitter.com"] & {
 			display: block;
@@ -229,12 +229,12 @@
 
 .sync__message {
 	display: none;
-	word-wrap: break-word;
-	text-align: center;
 	width: 100%;
 	max-width: 390px;
 	margin: 20px auto;
 	padding: 15px;
+	text-align: center;
+	word-wrap: break-word;
 	border-radius: @radius;
 
 	&--fail {

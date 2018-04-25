@@ -3,10 +3,10 @@
 
 .view {
 	position: relative;
-	background-color: @light-secondary;
-	background-repeat: no-repeat;
 	margin-top: 20px;
 	margin-bottom: 20px;
+	background-color: @light-secondary;
+	background-repeat: no-repeat;
 
 	@media (min-width: 768px) {
 		margin-top: 30px;
@@ -15,36 +15,36 @@
 
 	&--browser {
 		padding-bottom: 56.25%;
-		background-size: cover;
 		background-position: 50% 0;
-		border-radius: @radius @radius 0 0;
+		background-size: cover;
 		border-top: 10px solid @dark-divider;
+		border-radius: @radius @radius 0 0;
 
 		@media (min-width: 768px) {
 			border-top-width: 21px;
 		}
 
 		&::before {
-			position: absolute;
 			content: "";
-			height: 1px;
-			left: -7.5px;
+			position: absolute;
 			right: -7.5px;
 			bottom: 0;
+			left: -7.5px;
+			height: 1px;
 			background-color: @dark-divider;
 
 			@media (min-width: 768px) {
-				left: -15px;
 				right: -15px;
+				left: -15px;
 			}
 		}
 	}
 
 	&--details {
-		border-radius: 50%;
 		width: 201px;
 		padding-bottom: 199px;
 		border: 1px solid @dark-divider;
+		border-radius: 50%;
 	}
 }
 
@@ -54,8 +54,8 @@
 	left: 10px;
 	width: 4px;
 	height: 4px;
-	border-radius: 50%;
 	background-color: @dark-disabled;
+	border-radius: 50%;
 
 	@media (min-width: 768px) {
 		top: -14px;
@@ -66,13 +66,13 @@
 
 	&::before,
 	&::after {
-		position: absolute;
 		content: "";
+		position: absolute;
 		top: 0;
 		width: 100%;
 		padding-bottom: 100%;
-		border-radius: 50%;
 		background-color: @dark-disabled;
+		border-radius: 50%;
 	}
 
 	&::before {

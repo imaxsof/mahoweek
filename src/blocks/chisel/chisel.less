@@ -2,13 +2,13 @@
 //------------------------------------------------------------------------------
 
 .chisel {
+	position: relative;
 	margin-top: 30px;
 	margin-bottom: 30px;
 	padding-top: 30px;
 	padding-right: 15px;
 	padding-bottom: 15px;
 	padding-left: 15px;
-	position: relative;
 	border-radius: @radius;
 
 	&:last-child {
@@ -47,8 +47,8 @@
 
 	&--inset {
 		@media (min-width: 768px) {
-			padding-left: 30px;
 			padding-right: 30px;
+			padding-left: 30px;
 		}
 	}
 
@@ -60,12 +60,12 @@
 		}
 
 		&::before {
-			position: absolute;
 			content: "";
+			position: absolute;
 			top: 0;
-			left: 0;
 			right: 0;
 			bottom: 0;
+			left: 0;
 			background-color: @light-primary;
 			border-radius: (@radius / 2);
 		}
@@ -76,23 +76,23 @@
 	}
 
 	&--default {
-		background-color: #F5F5F5;
-		border-color: #F5F5F5;
+		background-color: #f5f5f5;
+		border-color: #f5f5f5;
 	}
 
 	&--warning {
-		background-color: #FFECB3;
-		border-color: #FFECB3;
+		background-color: #ffecb3;
+		border-color: #ffecb3;
 	}
 
 	&--email {
-		border-color: transparent;
-		background-image: linear-gradient(135deg, #F5F5F5 12.5%, #64B5F6 12.5%, #64B5F6 25%, #F5F5F5 25%, #F5F5F5 37.5%, #E57373 37.5%, #E57373 50%, #F5F5F5 50%, #F5F5F5 62.5%, #64B5F6 62.5%, #64B5F6 75%, #F5F5F5 75%, #F5F5F5 87.5%, #E57373 87.5%);
-		background-size: 50px 50px;
+		background-image: linear-gradient(135deg, #f5f5f5 12.5%, #64b5f6 12.5%, #64b5f6 25%, #f5f5f5 25%, #f5f5f5 37.5%, #e57373 37.5%, #e57373 50%, #f5f5f5 50%, #f5f5f5 62.5%, #64b5f6 62.5%, #64b5f6 75%, #f5f5f5 75%, #f5f5f5 87.5%, #e57373 87.5%);
 		background-repeat: repeat;
+		background-size: 50px 50px;
+		border-color: transparent;
 
 		&::before {
-			background-color: #F5F5F5;
+			background-color: #f5f5f5;
 		}
 	}
 }

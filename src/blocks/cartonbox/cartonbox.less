@@ -50,16 +50,16 @@
 	}
 
 	&:not(.cartonbox-img) {
-		padding: 0 5px;
 		width: auto;
+		padding: 0 5px;
 
 		@media (min-width: 480px) {
 			max-width: 480px;
 		}
 
 		@media (min-width: 768px) {
-			padding: 0 20px;
 			max-width: 768px;
+			padding: 0 20px;
 		}
 	}
 }
@@ -69,16 +69,16 @@
 }
 
 .cartonbox-container {
-	padding: 0;
+	position: relative;
 	width: 100% !important;
 	height: auto !important;
-	position: relative;
-	border-radius: (@radius * 2);
+	padding: 0;
 	overflow: visible;
+	border-radius: (@radius * 2);
 
 	.cartonbox-no-close &::before {
-		position: fixed;
 		content: "";
+		position: fixed;
 		top: -100px;
 		left: -100px;
 		width: calc(~"100% + 200px");
@@ -87,8 +87,8 @@
 }
 
 .cartonbox-content {
-	padding: 30px 15px 15px;
 	position: relative;
+	padding: 30px 15px 15px;
 	overflow: hidden;
 
 	@media (min-width: 768px) {
@@ -112,13 +112,13 @@
 }
 
 .cartonbox-close {
-	height: 25px;
-	width: 25px;
-	box-sizing: content-box;
-	padding: 10px;
 	position: absolute;
-	border: 0;
+	box-sizing: content-box;
+	width: 25px;
+	height: 25px;
+	padding: 10px;
 	background: none;
+	border: 0;
 
 	.cartonbox-wrap & {
 		display: block;
