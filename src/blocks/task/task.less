@@ -145,7 +145,7 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
-	fill: @dark-disabled;
+	fill: @dark-hint;
 
 	svg {
 		position: absolute;
@@ -170,14 +170,14 @@
 	}
 
 	.task--completed & {
-		color: @dark-disabled;
+		color: @dark-hint;
 
 		strong {
 			font-weight: normal;
 		}
 
 		a {
-			color: @dark-disabled;
+			color: @dark-hint;
 		}
 	}
 }
@@ -185,7 +185,7 @@
 .task__time {
 	margin-right: 2px;
 	font-weight: normal;
-	color: @dark-disabled;
+	color: @dark-hint;
 
 	.task--today.task--now:not(.task--completed) & {
 		color: @task-pea-today-hover;
@@ -203,7 +203,7 @@
 	}
 
 	.task--completed & {
-		color: @dark-disabled;
+		color: @dark-hint;
 	}
 }
 
