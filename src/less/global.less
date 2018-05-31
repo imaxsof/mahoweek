@@ -184,13 +184,15 @@ input[type="text"] {
 }
 
 select {
+	@icon: escape("<svg viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg' fill='@{dark-primary}'><path d='M25 32.4l-9.7-9.7 1.4-1.4 8.3 8.3 8.3-8.3 1.4 1.4z'/></svg>");
+
 	margin: 0 -5px;
 	padding: 0 18px 0 5px;
 	line-height: @line-height;
 	font-family: @font-family;
 	color: @dark-primary;
 	background-color: transparent;
-	background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'><path d='M25 32.4l-9.7-9.7 1.4-1.4 8.3 8.3 8.3-8.3 1.4 1.4z' fill='#212121'/></svg>") !important;
+	background-image: url("data:image/svg+xml, @{icon}") !important;
 	background-repeat: no-repeat;
 	background-position: calc(~"100% + 3px") calc(~"50% - 1px");
 	background-size: 25px 25px;
@@ -435,5 +437,19 @@ ol.list-custom {
 
 	100% {
 		transform: rotate(360deg);
+	}
+}
+
+@keyframes chosen {
+	0% {
+		transform: scale3d(1, 1, 1);
+	}
+
+	50% {
+		transform: scale3d(1.01, 1.01, 1);
+	}
+
+	100% {
+		transform: scale3d(1, 1, 1);
 	}
 }

@@ -34,6 +34,18 @@
 			max-width: none;
 		}
 	}
+
+	&--chosen {
+		animation-name: chosen;
+		animation-duration: @duration;
+		animation-fill-mode: both;
+		animation-timing-function: linear;
+	}
+
+	&--fallback,
+	&--ghost {
+		animation-name: none;
+	}
 }
 
 .list__head {
@@ -64,6 +76,8 @@
 
 	.list--chosen & {
 		opacity: 0.5;
+		transition: @duration @timing-function;
+		transition-property: opacity;
 	}
 
 	.list--ghost & {
@@ -74,7 +88,7 @@
 .list__wrap {
 	position: relative;
 	display: flex;
-	flex: 1 0 1px;
+	flex: 1 0 0%;
 	width: calc(~"100vw - 17px");
 	max-width: 370px;
 	overflow: hidden;
@@ -105,7 +119,7 @@
 }
 
 .list__name {
-	flex: 1 0 1px;
+	flex: 1 0 0%;
 	padding: 8px 0 7px 15px;
 	overflow: hidden;
 	color: @dark-secondary;
@@ -224,6 +238,8 @@
 
 	.list--chosen & {
 		opacity: 0.5;
+		transition: @duration @timing-function;
+		transition-property: opacity;
 	}
 
 	.list--ghost & {
@@ -255,6 +271,8 @@
 
 	.list--chosen & {
 		opacity: 0.5;
+		transition: @duration @timing-function;
+		transition-property: opacity;
 	}
 
 	.list--ghost & {

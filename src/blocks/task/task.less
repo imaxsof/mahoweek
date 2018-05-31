@@ -19,11 +19,22 @@
 	&--completed {
 		font-size: @font-size-small;
 	}
+
+	&--chosen {
+		animation-name: chosen;
+		animation-duration: @duration;
+		animation-fill-mode: both;
+		animation-timing-function: linear;
+	}
+
+	&--fallback {
+		animation-name: none;
+	}
 }
 
 .task__wrap {
 	display: flex;
-	flex: 1 0 1px;
+	flex: 1 0 0%;
 	width: calc(~"100vw - 17px");
 	max-width: 370px;
 	overflow: hidden;
@@ -51,6 +62,8 @@
 
 	.task--chosen & {
 		opacity: 0.5;
+		transition: @duration @timing-function;
+		transition-property: opacity;
 	}
 
 	.task--ghost & {
@@ -157,7 +170,7 @@
 }
 
 .task__name {
-	flex: 1 0 1px;
+	flex: 1 0 0%;
 	padding: 8px 0 7px;
 	overflow: hidden;
 	white-space: nowrap;
@@ -277,6 +290,8 @@
 	}
 
 	.task--chosen & {
+		transition: @duration @timing-function;
+		transition-property: opacity;
 		opacity: 0.5;
 	}
 

@@ -141,7 +141,7 @@ function loadList() {
 	LIST_BOARD.on('click', '.js-remove-list', function() {
 		var isThis = $(this);
 
-		// Получаем объект списка, его хеш списка и кол-во дел
+		// Получаем объект списка, его хеш и кол-во дел
 		var list = isThis.parents('.list');
 		var listId = list.attr('data-id');
 		var taskTotal = list.find('.list__tasks .task').length;
