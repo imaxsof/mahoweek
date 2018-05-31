@@ -3,7 +3,7 @@
   "always-semicolon": true,
   "color-case": "lower",
   "block-indent": "\t",
-  "color-shorthand": false,
+  "color-shorthand": true,
   "element-case": "lower",
   "eof-newline": true,
   "leading-zero": true,
