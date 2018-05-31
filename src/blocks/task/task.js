@@ -352,38 +352,49 @@ function loadTask() {
 	LIST_BOARD.on('click', '.js-remove-task', function() {
 		var isThis = $(this);
 
-		// Получаем хеш списке и хеш дела
+		// Получаем хеш списка, хеш дела и метку о выполнении
 		var listId = isThis.parents('.list').attr('data-id');
 		var taskId = isThis.parents('.task').attr('data-id');
+		var taskCompleted = isThis.parents('.task').hasClass('task--completed');
 
-		// Парсим Хранилище
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+		// Если дело не выполнено
+		if (!taskCompleted) {
+			// Задаем вопрос
+			var question = confirm('Дело ещё не выполнено, но будет удалено');
+		}
 
-		// Получаем элемент дела в хранилище
-		var taskElement = mahoweekStorage.tasks.filter(function(value) {
-			return value.id == taskId;
-		});
+		// Если дело выполнено
+		// или ответом на вопрос было «Да»
+		if (taskCompleted || question) {
+			// Парсим Хранилище
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
 
-		// Получаем индекс дела в Хранилище
-		var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
+			// Получаем элемент дела в хранилище
+			var taskElement = mahoweekStorage.tasks.filter(function(value) {
+				return value.id == taskId;
+			});
 
-		// Удаляем дело
-		mahoweekStorage.tasks.splice(taskIndex, 1);
+			// Получаем индекс дела в Хранилище
+			var taskIndex = mahoweekStorage.tasks.indexOf(taskElement[0]);
 
-		// Обновляем Хранилище
-		updateStorage(mahoweekStorage);
+			// Удаляем дело
+			mahoweekStorage.tasks.splice(taskIndex, 1);
 
-		// Удаляем дело из списка
-		isThis.parents('.task').remove();
+			// Обновляем Хранилище
+			updateStorage(mahoweekStorage);
 
-		// Рассчитываем прогресс выполнения списка
-		makeProgress(listId);
+			// Удаляем дело из списка
+			isThis.parents('.task').remove();
 
-		// Меняем фавиконку
-		changeFavicon();
+			// Рассчитываем прогресс выполнения списка
+			makeProgress(listId);
 
-		// Добавляем данные в Метрику
-		yaCounter43856389.reachGoal('ya-remove-task');
+			// Меняем фавиконку
+			changeFavicon();
+
+			// Добавляем данные в Метрику
+			yaCounter43856389.reachGoal('ya-remove-task');
+		}
 	});
 
 }());
