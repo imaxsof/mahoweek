@@ -1,3 +1,0 @@
-User-agent: *
-Host: https://mahoweek.ru
-Sitemap: https://mahoweek.ru/sitemap.xml
