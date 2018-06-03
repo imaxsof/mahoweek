@@ -76,7 +76,7 @@ if (MOBILE) {
 				{
 					id: makeHash(),
 					listId: listId,
-					name: 'Прочитать справку о сайте: https://mahoweek.ru/#about!',
+					name: 'Прочитать справку о сайте: https://mahoweek.com/#about!',
 					createdTime: dateTime,
 					markers: [
 						{
@@ -88,7 +88,7 @@ if (MOBILE) {
 				{
 					id: makeHash(),
 					listId: listId,
-					name: 'Посмотреть как здесь всё устроено: https://mahoweek.ru/#tour',
+					name: 'Посмотреть как здесь всё устроено: https://mahoweek.com/#tour',
 					createdTime: dateTime,
 					markers: [
 						{
@@ -100,7 +100,7 @@ if (MOBILE) {
 				{
 					id: makeHash(),
 					listId: listId,
-					name: '21:00 Настроить доску: https://mahoweek.ru/#settings',
+					name: '21:00 Настроить доску: https://mahoweek.com/#settings',
 					createdTime: dateTime,
 					markers: [
 						{
