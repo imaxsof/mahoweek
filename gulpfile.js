@@ -26,7 +26,7 @@ const typograf = require('gulp-typograf');
 //------------------------------------------------------------------------------
 
 const paths = {
-	docs: 'docs/',
+	build: 'build/',
 	dist: {
 		base: 'dist/',
 		css: 'dist/css/',
@@ -169,13 +169,13 @@ gulp.task('js:app', function() {
 });
 
 
-// Docs
+// Build
 //------------------------------------------------------------------------------
 
-gulp.task('docs', ['clean:docs', 'default'], function() {
+gulp.task('build', ['clean:build', 'default'], function() {
 	return multipipe(
 		gulp.src(paths.dist.base + '**'),
-		gulp.dest(paths.docs)
+		gulp.dest(paths.build)
 	);
 });
 
@@ -204,8 +204,8 @@ gulp.task('clean:dist', function() {
 	return del.sync(['dist/**', '!dist']);
 });
 
-gulp.task('clean:docs', function() {
-	return del.sync(['docs/**', '!docs']);
+gulp.task('clean:build', function() {
+	return del.sync(['build/**', '!build']);
 });
 
 
