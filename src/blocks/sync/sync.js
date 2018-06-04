@@ -167,6 +167,11 @@ firebase.initializeApp(firebaseConfig);
 				// Открываем аутентификацию в текущем окне
 				firebase.auth().signInWithRedirect(provider);
 			}
+
+		// Если вдруг пользователь был как-то криво авторизован
+		} else {
+			// Разогиниваем пользователя
+			$('.js-logout-sync').trigger('click');
 		}
 	});
 
