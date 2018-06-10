@@ -33,6 +33,7 @@ firebase.initializeApp(firebaseConfig);
 				// Вставляем аватар, имя и провайдера
 				$('.sync__ava, .menu__ava').css('background-image', 'url(' + user.photoURL + ')');
 				$('.sync__name').text(user.displayName);
+				$('.sync__id').text(user.uid);
 				$('.sync__ava').attr('data-provider', user.providerData[0].providerId);
 
 				// Показываем пользователя в меню
