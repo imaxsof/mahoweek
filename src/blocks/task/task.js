@@ -72,6 +72,11 @@ function loadTask() {
 	// Меняем фавиконку
 	changeFavicon();
 
+	// Запускаем инфу о переезде
+	if (window.location.hash === '') {
+		$('.js-open-moving').trigger('click');
+	}
+
 }
 
 
