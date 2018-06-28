@@ -4,7 +4,7 @@
 // Задаем конфигурацию Firebase
 var firebaseConfig = {
 	apiKey: 'AIzaSyBzWqGiMDErDxB_kUOO8-KYABo0_SYNap8',
-	authDomain: 'mahoweek-8c3db.firebaseapp.com',
+	authDomain: 'mahoweek.com',
 	databaseURL: 'https://mahoweek-8c3db.firebaseio.com'
 };
 
@@ -139,12 +139,14 @@ firebase.initializeApp(firebaseConfig);
 		// Если пользователь не идентифицирован
 		if (!firebase.auth().currentUser) {
 			// Определяем способы аутентификации
-			if (isThis.attr('data-provider') == 'twitter') {
-				var provider = new firebase.auth.TwitterAuthProvider();
+			if (isThis.attr('data-provider') == 'google') {
+				var provider = new firebase.auth.GoogleAuthProvider();
+				provider.addScope('email');
 			} else if (isThis.attr('data-provider') == 'facebook') {
 				var provider = new firebase.auth.FacebookAuthProvider();
-				provider.addScope('public_profile');
 				provider.addScope('email');
+			} else if (isThis.attr('data-provider') == 'twitter') {
+				var provider = new firebase.auth.TwitterAuthProvider();
 			}
 
 			// Если вход выполняется не с мобильного устройства

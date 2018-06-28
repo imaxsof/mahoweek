@@ -8,6 +8,13 @@
 			<p class="text-center  center-block" style="max-width: 390px;">Чтобы синхронизировать свои дела и списки на всех ваших устройствах, авторизуйтесь через любую из соцсетей, которой вы пользуетесь.</p>
 
 			<p class="sync__btn">
+				<button type="button" class="btn  btn--primary  js-login-sync" data-provider="google">
+					<svg>
+						<use xlink:href="#icon-google"></use>
+					</svg>
+
+					Гугл
+				</button>
 				<button type="button" class="btn  btn--primary  js-login-sync" data-provider="facebook">
 					<svg>
 						<use xlink:href="#icon-facebook"></use>
@@ -35,6 +42,12 @@
 			</button>
 
 			<div class="sync__ava" data-sync="default" data-provider="default">
+				<div class="sync__provider  sync__provider--google">
+					<svg>
+						<use xlink:href="#icon-google"></use>
+					</svg>
+				</div>
+
 				<div class="sync__provider  sync__provider--facebook">
 					<svg>
 						<use xlink:href="#icon-facebook"></use>

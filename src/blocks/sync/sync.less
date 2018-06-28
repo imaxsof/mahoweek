@@ -71,7 +71,26 @@
 
 .sync__btn {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
+
+	.btn[data-provider="google"] {
+		min-width: 44px;
+		margin: 5px;
+		color: @light-primary;
+		fill: @light-primary;
+		background-color: #E15B4D;
+
+		body:not(.mobile) &:hover {
+			background-color: darken(#E15B4D, 5%);
+		}
+
+		svg {
+			width: 30px;
+			height: 30px;
+			margin: -4px -6px -9px -3px;
+		}
+	}
 
 	.btn[data-provider="facebook"] {
 		min-width: 44px;
@@ -105,7 +124,7 @@
 		svg {
 			width: 30px;
 			height: 30px;
-			margin: -5px -3px -8px -6px;
+			margin: -4px -3px -9px -6px;
 		}
 	}
 }
@@ -192,6 +211,18 @@
 	background-color: @light-secondary;
 	border: 2px solid @light-primary;
 	border-radius: 50%;
+
+	&--google {
+		background-color: #E15B4D;
+
+		[data-provider="google.com"] & {
+			display: block;
+		}
+
+		svg {
+			margin-right: -5px;
+		}
+	}
 
 	&--facebook {
 		background-color: #3b5998;
