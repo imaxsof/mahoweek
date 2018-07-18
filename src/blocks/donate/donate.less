@@ -1,0 +1,37 @@
+// Donate
+//------------------------------------------------------------------------------
+
+.donate {
+	width: 201px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	border-radius: @radius;
+	background-color: #F0F4C3;
+	padding: 30px 15px 15px;
+	margin-bottom: 15px;
+	position: relative;
+	overflow: hidden;
+
+	svg {
+		width: 96px;
+		height: 96px;
+		display: block;
+		margin: 0 auto 5px;
+	}
+
+	button {
+		min-width: auto;
+		margin-top: 10px;
+		margin-bottom: 10px;
+
+		&::before {
+			top: -500px;
+			left: -500px;
+			right: -500px;
+			bottom: -500px;
+			position: absolute;
+			content: "";
+		}
+	}
+}

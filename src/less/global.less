@@ -138,6 +138,16 @@ a {
 		}
 	}
 
+	&--donate {
+		color: @dark-primary !important;
+		fill: @dark-primary !important;
+		background-color: @btn-donate-bg;
+
+		body:not(.mobile) &:hover {
+			background-color: @btn-donate-bg-hover;
+		}
+	}
+
 	&--danger {
 		color: @light-primary !important;
 		fill: @light-primary !important;
