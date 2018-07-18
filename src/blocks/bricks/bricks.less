@@ -4,7 +4,6 @@
 .bricks {
 	display: flex;
 	flex-direction: column;
-	flex-wrap: wrap;
 	margin-right: -7.5px;
 	margin-left: -7.5px;
 
@@ -21,17 +20,15 @@
 			margin-top: 60px;
 		}
 	}
-
-	&--reverse {
-		@media (min-width: 768px) {
-			flex-direction: row-reverse;
-		}
-	}
 }
 
 .bricks__col {
 	padding-right: 7.5px;
 	padding-left: 7.5px;
+
+	@media (max-width: 767px) {
+		width: 100% !important;
+	}
 
 	@media (min-width: 768px) {
 		padding-right: 15px;
