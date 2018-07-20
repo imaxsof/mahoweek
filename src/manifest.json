@@ -11,7 +11,7 @@
   ],
   "theme_color": "#212121",
   "background_color": "#212121",
-  "start_url": "https://mahoweek.com?src=homescreen",
+  "start_url": "https://mahoweek.com",
   "display": "standalone",
   "scope": "/"
 }
