@@ -1,7 +1,8 @@
 {
   "lang": "ru",
   "dir": "ltr",
-  "name": "Mahoweek",
+  "name": "Mahoweek: краткосрочный план дел",
+  "short_name": "Mahoweek",
   "icons": [
     {
       "src": "android-chrome-192x192.png?v=2",
@@ -12,6 +13,7 @@
   "theme_color": "#212121",
   "background_color": "#212121",
   "start_url": "https://mahoweek.com",
+  "orientation": "any",
   "display": "standalone",
   "scope": "/"
 }
