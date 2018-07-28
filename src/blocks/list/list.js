@@ -10,7 +10,7 @@ function loadList() {
 	var listBoardCreate = '';
 
 	// Парсим Хранилище
-	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+	var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 	// Пробегаемся по каждому списку
 	for (var i = 0; i < mahoweekStorage.lists.length; i ++) {
@@ -43,7 +43,7 @@ function loadList() {
 		var listCreatedTime = new Date().getTime();
 
 		// Парсим Хранилище
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 		// Добавляем новый список
 		mahoweekStorage.lists.push({
@@ -103,7 +103,7 @@ function loadList() {
 			var listName = isThis.val();
 
 			// Парсим Хранилище
-			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 			// Получаем элемент списка в Хранилище
 			var listElement = mahoweekStorage.lists.filter(function(value) {
@@ -156,7 +156,7 @@ function loadList() {
 		// или ответом на вопрос было «Да»
 		if (!taskTotal || question) {
 			// Парсим Хранилище
-			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 			// Получаем элемент списка в Хранилище
 			var listElement = mahoweekStorage.lists.filter(function(value) {
@@ -227,7 +227,7 @@ function sortableList() {
 		},
 		onSort: function(event) {
 			// Парсим Хранилище
-			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 			// Получаем удаленный элемент
 			var listRemove = mahoweekStorage.lists.splice(event.oldIndex, 1)[0];

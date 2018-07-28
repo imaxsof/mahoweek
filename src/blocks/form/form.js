@@ -12,7 +12,7 @@
 		SETTINGS_FORM.find('.js-choose-favicon-counter').parents('.form__group').removeClass('form__group--hidden');
 
 		// Парсим Хранилище и находим настройку счетчика в фавиконке
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 		var faviconCounter = mahoweekStorage.settings.faviconCounter;
 
 		// Выставляем состояние чекбокса
@@ -28,7 +28,7 @@
 			faviconCounter = SETTINGS_FORM.find('.js-choose-favicon-counter').prop('checked');
 
 			// Парсим Хранилище и меняем настройку
-			mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+			mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 			mahoweekStorage.settings.faviconCounter = faviconCounter;
 
 			// Обновляем Хранилище
@@ -54,11 +54,11 @@
 
 		// Если время оповещения ранее выставлялось
 		// и пользователь разрешил оповещения
-		if (localStorage.getItem('notify') && Notification.permission === 'granted') {
+		if (localStorage.getItem('mwNotify') && Notification.permission === 'granted') {
 			// Показываем выбранный пункт
-			SETTINGS_FORM.find('.js-choose-notify option[value="' + localStorage.getItem('notify') + '"]').attr('selected', 'selected');
+			SETTINGS_FORM.find('.js-choose-notify option[value="' + localStorage.getItem('mwNotify') + '"]').attr('selected', 'selected');
 		} else {
-			localStorage.removeItem('notify');
+			localStorage.removeItem('mwNotify');
 		}
 
 		// Меняем время оповещения
@@ -73,12 +73,12 @@
 
 			if (notifyValue === 'none') {
 				// Выключаем оповещения
-				localStorage.setItem('notify', 'none');
+				localStorage.setItem('mwNotify', 'none');
 			} else {
 				// Если пользователь ранее разрешил оповещения
 				if (Notification.permission === 'granted') {
 					// Если до изменения оповещения не были заданы или были выключены
-					if (!localStorage.getItem('notify') || localStorage.getItem('notify') === 'none') {
+					if (!localStorage.getItem('mwNotify') || localStorage.getItem('mwNotify') === 'none') {
 						// Показываем оповещение с краткой справкой
 						var notification = new Notification(notificationTitle, {
 							body: notificationBody,
@@ -88,7 +88,7 @@
 					}
 
 					// Меняем время оповещения
-					localStorage.setItem('notify', notifyValue);
+					localStorage.setItem('mwNotify', notifyValue);
 
 				// Если пользователь еще не включал оповещения
 				} else if (Notification.permission === 'default') {
@@ -97,7 +97,7 @@
 						// И если пользователь разрешил оповещения
 						if (permission === 'granted') {
 							// Записываем время оповещения
-							localStorage.setItem('notify', notifyValue);
+							localStorage.setItem('mwNotify', notifyValue);
 
 							// Показываем оповещение с краткой справкой
 							var notification = new Notification(notificationTitle, {
@@ -109,7 +109,7 @@
 						// А если пользователь заблокировал оповещения
 						} else {
 							// Выключаем оповещения
-							localStorage.setItem('notify', 'none');
+							localStorage.setItem('mwNotify', 'none');
 
 							// Делаем состояние селекта по-умолчанию
 							SETTINGS_FORM.find('.js-choose-notify option').removeAttr('selected', 'selected');
@@ -143,7 +143,7 @@
 	});
 
 	// Парсим Хранилище
-	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+	var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 	// Определяем текущие параметры
 	var theme = mahoweekStorage.settings.theme;
@@ -169,7 +169,7 @@
 		THEME_BOARD.attr('class', 'board__theme  board__theme--' + theme);
 
 		// Парсим Хранилище и изменяем параметры
-		mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+		mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 		mahoweekStorage.settings.theme = theme;
 		mahoweekStorage.settings.deleteCompletedTasks = deleteCompletedTasks;
 

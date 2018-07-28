@@ -46,8 +46,29 @@ if (MOBILE) {
 
 (function() {
 
+	//--------------------------------------------------------------------------
+	// Временная мера 24.07.2018
+	// Переименовываем ключи в локальном хранилище
+
+	if (localStorage.getItem('mahoweek')) {
+		localStorage.setItem('mwStorage', localStorage.getItem('mahoweek'));
+		localStorage.removeItem('mahoweek');
+	}
+
+	if (localStorage.getItem('notify')) {
+		localStorage.setItem('mwNotify', localStorage.getItem('notify'));
+		localStorage.removeItem('notify');
+	}
+
+	if (localStorage.getItem('authorizedUser')) {
+		localStorage.setItem('mwAuth', localStorage.getItem('authorizedUser'));
+		localStorage.removeItem('authorizedUser');
+	}
+
+	//--------------------------------------------------------------------------
+
 	// Если Хранилища не существует
-	if (!localStorage.getItem('mahoweek')) {
+	if (!localStorage.getItem('mwStorage')) {
 		// Очищаем локальное хранилище полностью
 		localStorage.clear();
 
@@ -208,7 +229,7 @@ if (MOBILE) {
 		}
 
 		// Создаем Хранилище
-		localStorage.setItem('mahoweek', JSON.stringify(storageData));
+		localStorage.setItem('mwStorage', JSON.stringify(storageData));
 
 		// Добавляем тему к доске
 		THEME_BOARD.addClass('board__theme--' + theme);
@@ -228,7 +249,7 @@ if (MOBILE) {
 		}
 
 		// Парсим Хранилище
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 		// Добавляем тему к доске
 		THEME_BOARD.addClass('board__theme--' + mahoweekStorage.settings.theme);
@@ -243,7 +264,7 @@ if (MOBILE) {
 (function() {
 
 	// Определяем первоначальные условия
-	var delay = 5000;
+	var delay = 1000;
 	var date = new Date();
 
 	// Запускаем рекурсивный таймаут
@@ -269,7 +290,7 @@ if (MOBILE) {
 				// Если в браузере поддерживаются оповещения
 				if (NOTIFICATION) {
 					// Получаем время оповещения
-					var notify = localStorage.getItem('notify');
+					var notify = localStorage.getItem('mwNotify');
 
 					// Если время оповещения ранее выставлялось
 					// и пользователь разрешил оповещения
@@ -523,7 +544,7 @@ function changeFavicon() {
 		$('link[rel$=icon]').remove();
 
 		// Парсим Хранилище и находим настройку счетчика в фавиконке
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 		var faviconCounter = mahoweekStorage.settings.faviconCounter;
 
 		// Считаем кол-во дел на сегодня
@@ -593,7 +614,7 @@ function updateStorage(data) {
 	data.settings.updatedTime = new Date().getTime();
 
 	// Обновляем Хранилище
-	localStorage.setItem('mahoweek', JSON.stringify(data));
+	localStorage.setItem('mwStorage', JSON.stringify(data));
 
 	// Если пользователь идентифицирован
 	if (firebase.auth().currentUser) {

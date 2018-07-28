@@ -16,7 +16,7 @@
 		var taskDate = isThis.attr('data-date');
 
 		// Парсим Хранилище
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 		// Получаем элемент дела в Хранилище
 		var taskElement = mahoweekStorage.tasks.filter(function(value) {

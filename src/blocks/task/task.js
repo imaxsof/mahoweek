@@ -24,7 +24,7 @@ function loadTask() {
 	var tasksNew = [];
 
 	// Парсим Хранилище
-	var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+	var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 	// Пробегаемся по каждому делу
 	for (var i = 0; i < mahoweekStorage.tasks.length; i ++) {
@@ -124,7 +124,7 @@ function loadTask() {
 			var taskCreatedTime = new Date().getTime();
 
 			// Парсим Хранилище
-			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 			// Добавляем новое дело
 			mahoweekStorage.tasks.push({
@@ -182,7 +182,7 @@ function loadTask() {
 		var taskDateToday = task.find('.grid__date--today').attr('data-date');
 
 		// Парсим Хранилище
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+		var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 		// Получаем элемент дела в Хранилище
 		var taskElement = mahoweekStorage.tasks.filter(function(value) {
@@ -320,7 +320,7 @@ function loadTask() {
 			var taskName = isThis.val();
 
 			// Парсим Хранилище
-			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 			// Получаем элемент дела в Хранилище
 			var taskElement = mahoweekStorage.tasks.filter(function(value) {
@@ -367,7 +367,7 @@ function loadTask() {
 		// или ответом на вопрос было «Да»
 		if (taskCompleted || question) {
 			// Парсим Хранилище
-			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 			// Получаем элемент дела в хранилище
 			var taskElement = mahoweekStorage.tasks.filter(function(value) {
@@ -433,7 +433,7 @@ function sortableTask(element) {
 			var taskId = event.item.attributes['data-id'].value;
 
 			// Парсим Хранилище
-			var mahoweekStorage = JSON.parse(localStorage.getItem('mahoweek'));
+			var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 			// Получаем элемент дела в Хранилище
 			var taskElement = mahoweekStorage.tasks.filter(function(value) {
