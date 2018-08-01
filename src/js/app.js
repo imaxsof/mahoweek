@@ -14,3 +14,4 @@
 @@include('../blocks/grid/grid.js')
 @@include('../blocks/list/list.js')
 @@include('../blocks/task/task.js')
+@@include('../blocks/focus/focus.js')

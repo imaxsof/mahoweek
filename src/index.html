@@ -120,9 +120,31 @@
 						</a>
 					</li>
 				</ul>
+
+				<form class="focus">
+					<label class="focus__item">
+						<input class="js-choose-focus" type="radio" name="focus" value="all" checked>
+						<span>Все</span>
+					</label>
+
+					<label class="focus__item">
+						<input class="js-choose-focus" type="radio" name="focus" value="today">
+						<span>Сегодня</span>
+					</label>
+
+					<label class="focus__item">
+						<input class="js-choose-focus" type="radio" name="focus" value="planned">
+						<span>В плане</span>
+					</label>
+
+					<label class="focus__item">
+						<input class="js-choose-focus" type="radio" name="focus" value="someday">
+						<span>Потом</span>
+					</label>
+				</form>
 			</header>
 
-			<main class="board__lists"></main>
+			<main class="board__lists  board__lists--all"></main>
 		</div>
 
 		<div class="hidden">

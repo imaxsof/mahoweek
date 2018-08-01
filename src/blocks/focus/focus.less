@@ -1,0 +1,57 @@
+// Focus
+//------------------------------------------------------------------------------
+
+.focus {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+
+	@media (min-width: 768px) {
+		margin-top: -30px;
+		justify-content: center;
+	}
+}
+
+.focus__item {
+	@media (min-width: 768px) {
+		margin-right: 20px;
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+
+	input {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		border: 0;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
+	}
+
+	input + span {
+		display: block;
+		cursor: pointer;
+		color: @light-primary;
+		font-size: @font-size-small;
+		line-height: 30px;
+
+		body:not(.mobile) & {
+			color: fade(@light-primary, 70%);
+
+			&:hover {
+				color: @light-primary;
+			}
+		}
+	}
+
+	input:checked + span {
+		cursor: default;
+		color: @light-primary !important;
+	}
+}
