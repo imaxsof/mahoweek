@@ -37,7 +37,7 @@ const SETTINGS_FORM = $('.form--settings');
 //------------------------------------------------------------------------------
 
 if (MOBILE) {
-	$('body').addClass('mobile');
+	document.querySelector('body').classList.add('mobile');
 }
 
 
