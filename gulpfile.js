@@ -11,7 +11,6 @@ const csso = require('gulp-csso');
 const less = require('gulp-less');
 const autoprefixer = require('gulp-autoprefixer');
 const uglify = require('gulp-uglify-es').default;
-const wrap = require("gulp-wrap");
 const del = require('del');
 const csscomb = require('gulp-csscomb');
 const fileinclude = require('gulp-file-include');
@@ -161,7 +160,6 @@ gulp.task('js:app', function() {
 		gulp.src(paths.src.js.app),
 		fileinclude(),
 		concat('app.min.js'),
-		wrap("(function($){'use strict';<%= contents %>}(jQuery));"),
 		uglify(),
 		gulp.dest(paths.dist.js),
 		browserSync.stream()
