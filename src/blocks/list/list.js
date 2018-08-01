@@ -56,10 +56,15 @@ function loadList() {
 		updateStorage(mahoweekStorage);
 
 		// Выводим список на доске
-		LIST_BOARD.append(makeList(listId, listName));
+		LIST_BOARD.append(makeList(listId, listName, 'list--new'));
 
 		// Находим созданный список
 		var listNew = LIST_BOARD.find('.list:last-child');
+
+		// Удаляем метку о том что это новосозданный лист
+		setTimeout(function() {
+			listNew.removeClass('list--new');
+		}, SPEED);
 
 		// Включаем сортировку дел
 		sortableTask(document.querySelector('.list:last-child .list__tasks'));
@@ -188,8 +193,13 @@ function loadList() {
 			// Обновляем Хранилище
 			updateStorage(mahoweekStorage);
 
+			// Запускаем процесс удаления
+			list.height(list.height()).addClass('list--remove').innerHeight(0);
+
 			// Удаляем список из доски
-			list.remove();
+			setTimeout(function() {
+				list.remove();
+			}, SPEED);
 
 			// Меняем фавиконку
 			changeFavicon();
@@ -293,11 +303,11 @@ function makeProgress(id) {
 // Генерируем списки
 //------------------------------------------------------------------------------
 
-function makeList(id, name) {
+function makeList(id, name, modifier = '') {
 
 	// Генерируем код
 	return '' +
-	'<section class="list" data-id="' + id + '">' +
+	'<section class="list ' + modifier + '" data-id="' + id + '">' +
 		'<div class="list__head">' +
 			'<div class="list__wrap">' +
 				'<div class="list__name  js-name">' +

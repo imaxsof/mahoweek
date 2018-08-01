@@ -3,10 +3,11 @@
 
 .list {
 	position: relative;
-	margin: 0 0 20px;
+	margin-bottom: 20px;
 	padding-bottom: 39px;
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
+	will-change: padding-bottom, margin-bottom, height;
 
 	@media (min-width: 992px) {
 		overflow-x: initial !important;
@@ -33,6 +34,24 @@
 			width: auto;
 			max-width: none;
 		}
+	}
+
+	&--new {
+		animation-name: fadeInUp;
+		animation-duration: @duration;
+		animation-fill-mode: both;
+		animation-timing-function: @timing-function;
+	}
+
+	&--remove {
+		animation-name: fadeOut;
+		animation-duration: @duration;
+		animation-fill-mode: both;
+		animation-timing-function: @timing-function;
+		padding-bottom: 0;
+		margin-bottom: 0;
+		transition: @duration @timing-function;
+		transition-property: padding-bottom, margin-bottom, height;
 	}
 
 	&--chosen {
