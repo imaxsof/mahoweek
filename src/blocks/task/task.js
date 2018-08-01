@@ -39,7 +39,7 @@ function loadTask() {
 		tasksNew.push(mahoweekStorage.tasks[i]);
 
 		// Заносим дело в свой список
-		LIST_BOARD.find('.list[data-id="' + mahoweekStorage.tasks[i].listId + '"] .list__tasks').append(makeTask(mahoweekStorage.tasks[i].id, mahoweekStorage.tasks[i].name, mahoweekStorage.tasks[i].completed, mahoweekStorage.tasks[i].markers));
+		LIST_BOARD.find('.list[data-id="' + mahoweekStorage.tasks[i].listId + '"] .list__tasks').append(makeTask(mahoweekStorage.tasks[i].id, mahoweekStorage.tasks[i].name, '', mahoweekStorage.tasks[i].completed, mahoweekStorage.tasks[i].markers));
 
 		// Находим это дело
 		var task = LIST_BOARD.find('.task[data-id="' + mahoweekStorage.tasks[i].id + '"]');
@@ -141,13 +141,18 @@ function loadTask() {
 			isThis.val('');
 
 			// Выводим дело в списке
-			isThis.parents('.list').find('.list__tasks').append(makeTask(taskId, taskName));
+			isThis.parents('.list').find('.list__tasks').append(makeTask(taskId, taskName, 'task--new'));
 
 			// Рассчитываем прогресс выполнения списка
 			makeProgress(listId);
 
 			// Находим созданное дело
 			var taskNew = isThis.parents('.list').find('.list__tasks .task:last-child');
+
+			// Удаляем метку о том что это новосозданное дело
+			setTimeout(function() {
+				taskNew.removeClass('task--new');
+			}, SPEED);
 
 			// Берем данные окна
 			var win = $(window);
@@ -353,9 +358,10 @@ function loadTask() {
 		var isThis = $(this);
 
 		// Получаем хеш списка, хеш дела и метку о выполнении
+		var task = isThis.parents('.task');
+		var taskId = task.attr('data-id');
+		var taskCompleted = task.hasClass('task--completed');
 		var listId = isThis.parents('.list').attr('data-id');
-		var taskId = isThis.parents('.task').attr('data-id');
-		var taskCompleted = isThis.parents('.task').hasClass('task--completed');
 
 		// Если дело не выполнено
 		if (!taskCompleted) {
@@ -383,14 +389,19 @@ function loadTask() {
 			// Обновляем Хранилище
 			updateStorage(mahoweekStorage);
 
+			// Запускаем процесс удаления
+			task.addClass('task--remove');
+
 			// Удаляем дело из списка
-			isThis.parents('.task').remove();
+			setTimeout(function() {
+				task.remove();
 
-			// Рассчитываем прогресс выполнения списка
-			makeProgress(listId);
+				// Рассчитываем прогресс выполнения списка
+				makeProgress(listId);
 
-			// Меняем фавиконку
-			changeFavicon();
+				// Меняем фавиконку
+				changeFavicon();
+			}, SPEED);
 
 			// Добавляем данные в Метрику
 			yaCounter43856389.reachGoal('ya-remove-task');
@@ -561,18 +572,18 @@ function remakeTaskName(name) {
 // Генерируем дело
 //------------------------------------------------------------------------------
 
-function makeTask(id, name, completed, markers) {
+function makeTask(id, name, modifier = '', completed, markers) {
 
 	// Определяем статус дела
-	if (completed == 1) {
-		var completed = ' task--completed';
+	if (completed === 1) {
+		var completed = 'task--completed';
 	} else {
 		var completed = '';
 	}
 
 	// Генерируем код
 	return '' +
-	'<div class="task' + completed + '" data-id="' + id + '">' +
+	'<div class="task ' + modifier + ' ' + completed + '" data-id="' + id + '">' +
 		'<div class="task__wrap">' +
 			'<div class="task__status">' +
 				'<button type="button" class="task__check  js-completed-task" aria-label="Отметить"></button>' +

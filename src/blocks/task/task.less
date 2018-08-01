@@ -7,14 +7,29 @@
 	height: 41px;
 	margin-top: -1px;
 	transition: @duration @timing-function;
-	transition-property: font-size;
-	will-change: font-size;
+	transition-property: font-size, height;
+	will-change: font-size, height;
 
 	&--add {
 		display: flex;
 		height: 40px;
 		font-size: @font-size-small;
 		color: @dark-secondary;
+	}
+
+	&--new {
+		animation-name: add;
+		animation-duration: @duration;
+		animation-fill-mode: both;
+		animation-timing-function: @timing-function;
+	}
+
+	&--remove {
+		animation-name: fadeOut;
+		animation-duration: @duration;
+		animation-fill-mode: both;
+		animation-timing-function: @timing-function;
+		height: 1px;
 	}
 
 	&--completed {
