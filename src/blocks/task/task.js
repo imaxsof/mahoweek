@@ -78,7 +78,7 @@ function loadTask() {
 // Фокусируем поле добавления дела
 //------------------------------------------------------------------------------
 
-(function() {
+(function($) {
 
 	// Если поле добавления в фокусе
 	LIST_BOARD.on('focusin', '.js-add-task', function() {
@@ -103,13 +103,13 @@ function loadTask() {
 		});
 	});
 
-}());
+}(jQuery));
 
 
 // Добавляем дело
 //------------------------------------------------------------------------------
 
-(function() {
+(function($) {
 
 	LIST_BOARD.on('keyup change', '.js-add-task', function(event) {
 		var isThis = $(this);
@@ -163,13 +163,13 @@ function loadTask() {
 		}
 	});
 
-}());
+}(jQuery));
 
 
 // Изменяем статус дела
 //------------------------------------------------------------------------------
 
-(function() {
+(function($) {
 
 	LIST_BOARD.on('click', '.js-completed-task', function() {
 		var isThis = $(this);
@@ -302,13 +302,13 @@ function loadTask() {
 		changeFavicon();
 	});
 
-}());
+}(jQuery));
 
 
 // Сохраняем текст дела при изменении
 //------------------------------------------------------------------------------
 
-(function() {
+(function($) {
 
 	LIST_BOARD.on('keyup change', '.js-edit-task', function(event) {
 		var isThis = $(this);
@@ -341,13 +341,13 @@ function loadTask() {
 		}
 	});
 
-}());
+}(jQuery));
 
 
 // Удаляем дело
 //------------------------------------------------------------------------------
 
-(function() {
+(function($) {
 
 	LIST_BOARD.on('click', '.js-remove-task', function() {
 		var isThis = $(this);
@@ -397,7 +397,7 @@ function loadTask() {
 		}
 	});
 
-}());
+}(jQuery));
 
 
 // Сортируем вручную дела

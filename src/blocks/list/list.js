@@ -34,7 +34,7 @@ function loadList() {
 // Добавляем список
 //------------------------------------------------------------------------------
 
-(function() {
+(function($) {
 
 	$('.js-add-list').on('click', function() {
 		// Создаем данные для списка
@@ -84,13 +84,13 @@ function loadList() {
 		}
 	});
 
-}());
+}(jQuery));
 
 
 // Сохраняем заголовок списка при изменении
 //------------------------------------------------------------------------------
 
-(function() {
+(function($) {
 
 	LIST_BOARD.on('keyup change', '.js-edit-list', function(event) {
 		var isThis = $(this);
@@ -130,13 +130,13 @@ function loadList() {
 		}
 	});
 
-}());
+}(jQuery));
 
 
 // Удаляем список
 //------------------------------------------------------------------------------
 
-(function() {
+(function($) {
 
 	LIST_BOARD.on('click', '.js-remove-list', function() {
 		var isThis = $(this);
@@ -196,7 +196,7 @@ function loadList() {
 		}
 	});
 
-}());
+}(jQuery));
 
 
 // Сортируем вручную списки

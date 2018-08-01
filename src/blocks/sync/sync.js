@@ -15,7 +15,7 @@ firebase.initializeApp(firebaseConfig);
 // Работаем с идентификацией пользователя
 //------------------------------------------------------------------------------
 
-(function() {
+(function($) {
 
 	// Если пользователь авторизован
 	if (localStorage.getItem('mwAuth')) {
@@ -118,13 +118,13 @@ firebase.initializeApp(firebaseConfig);
 		loadTask();
 	}
 
-}());
+}(jQuery));
 
 
 // Работаем с аутентификацией пользователя
 //------------------------------------------------------------------------------
 
-(function() {
+(function($) {
 
 	// Логиним пользователя
 	$('.js-login-sync').on('click', function() {
@@ -218,13 +218,13 @@ firebase.initializeApp(firebaseConfig);
 		}
 	});
 
-}());
+}(jQuery));
 
 
 // Синхронизируем Хранилище и БД вручную
 //------------------------------------------------------------------------------
 
-(function() {
+(function($) {
 
 	$('.js-get-sync').on('click', function() {
 		// Если пользователь идентифицирован
@@ -297,7 +297,7 @@ firebase.initializeApp(firebaseConfig);
 		}
 	});
 
-}());
+}(jQuery));
 
 
 // Работаем с авторизацией пользователя

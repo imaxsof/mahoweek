@@ -1,7 +1,7 @@
 // Focus
 //------------------------------------------------------------------------------
 
-(function() {
+(function($) {
 
 	Array.prototype.forEach.call(document.querySelectorAll('.js-choose-focus'), function(el) {
 		el.addEventListener('change', function(value) {
@@ -25,4 +25,4 @@
 		});
 	});
 
-}());
+}(jQuery));

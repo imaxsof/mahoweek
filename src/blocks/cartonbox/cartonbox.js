@@ -1,7 +1,7 @@
 // Cartonbox
 //------------------------------------------------------------------------------
 
-(function() {
+(function($) {
 
 	// Настраиваем Картонбокс
 	var cartonboxConfig = {
@@ -57,4 +57,4 @@
 		$('.cartonbox-close').trigger('click');
 	});
 
-}());
+}(jQuery));

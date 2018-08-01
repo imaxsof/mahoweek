@@ -4,7 +4,7 @@
 // Добавляем/убираем метку
 //------------------------------------------------------------------------------
 
-(function() {
+(function($) {
 
 	LIST_BOARD.on('click', '.js-marker-task:not(.grid__date--past):not(.grid__date--completed)', function() {
 		var isThis = $(this);
@@ -101,7 +101,7 @@
 		changeFavicon();
 	});
 
-}());
+}(jQuery));
 
 
 // Генерируем сетку дат
