@@ -537,18 +537,18 @@ function changeFavicon() {
 	// Если в браузере поддерживается смена фавиконки
 	if (CHANGE_FAVICON) {
 		// Определяем фавиконки
-		var iconDefault = 'favicon-32x32.png?v=3';
-		var iconToday = 'img/favicon-today.png?v=2';
+		let iconDefault = 'favicon-32x32.png?v=3';
+		let iconToday = 'img/favicon-today.png?v=2';
 
 		// Удаляем текущие фавиконки
-		$('link[rel$=icon]').remove();
+		$('link[rel$="icon"]').remove();
 
 		// Парсим Хранилище и находим настройку счетчика в фавиконке
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
-		var faviconCounter = mahoweekStorage.settings.faviconCounter;
+		let mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
+		let faviconCounter = mahoweekStorage.settings.faviconCounter;
 
 		// Считаем кол-во дел на сегодня
-		var taskTodayTotal = LIST_BOARD.find('.task--today').length;
+		let taskTodayTotal = LIST_BOARD.find('.task--today').length;
 
 		// Если на сегодня намечены дела
 		// и показ счетчика в фавиконке включен
@@ -573,11 +573,11 @@ function changeFavicon() {
 function makeHash() {
 
 	// Определяем переменные для хеша
-	var hash = '';
-	var possible = '0123456789abcdefghijklmnopqrstuvwxyz';
+	let hash = '';
+	let possible = '0123456789abcdefghijklmnopqrstuvwxyz';
 
 	// Генерируем хеш
-	for (var i = 0; i < 8; i ++) {
+	for (let i = 0; i < 8; i ++) {
 		hash += possible.charAt(Math.floor(Math.random() * possible.length));
 	}
 
@@ -592,13 +592,13 @@ function makeHash() {
 
 function convertDate(time) {
 
-	var date = new Date(time);
-	var day = date.getDate();
-	var month = date.getMonth() + 1;
-	var year = date.getFullYear();
-	var hours = date.getHours();
-	var minutes = date.getMinutes();
-	var dataDate = (day < 10 ? '0' + day : day) + '.' + (month < 10 ? '0' + month : month) + '.' + year + ' в ' + (hours < 10 ? '0' + hours : hours) + ':' + (minutes < 10 ? '0' + minutes : minutes);
+	let date = new Date(time);
+	let day = date.getDate();
+	let month = date.getMonth() + 1;
+	let year = date.getFullYear();
+	let hours = date.getHours();
+	let minutes = date.getMinutes();
+	let dataDate = (day < 10 ? '0' + day : day) + '.' + (month < 10 ? '0' + month : month) + '.' + year + ' в ' + (hours < 10 ? '0' + hours : hours) + ':' + (minutes < 10 ? '0' + minutes : minutes);
 
 	return dataDate;
 

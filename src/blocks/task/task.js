@@ -66,9 +66,6 @@ function loadTask() {
 		updateStorage(mahoweekStorage);
 	}
 
-	// Показываем содержимое доски
-	$('body').addClass('ready');
-
 	// Меняем фавиконку
 	changeFavicon();
 

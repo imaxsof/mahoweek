@@ -199,10 +199,10 @@ function loadList() {
 			// Удаляем список из доски
 			setTimeout(function() {
 				list.remove();
-			}, SPEED);
 
-			// Меняем фавиконку
-			changeFavicon();
+				// Меняем фавиконку
+				changeFavicon();
+			}, SPEED);
 		}
 	});
 
