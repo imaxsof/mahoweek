@@ -228,7 +228,8 @@ firebase.initializeApp(firebaseConfig);
 
 	$('.js-get-sync').on('click', function() {
 		// Если пользователь идентифицирован
-		if (firebase.auth().currentUser) {
+		// и есть метка о авторизации
+		if (firebase.auth().currentUser && localStorage.getItem('mwAuth')) {
 			// Скрываем если было сообщение об ошибке
 			$('.sync__message').html('').hide();
 
@@ -294,6 +295,11 @@ firebase.initializeApp(firebaseConfig);
 				console.error(error.code + ': ' + error.message);
 				$('.sync__message').html(error.code + ': ' + error.message).show();
 			});
+
+		// Если пользователь не идентифицирован
+		} else {
+			// Разогиниваем пользователя
+			$('.js-logout-sync').trigger('click');
 		}
 	});
 
