@@ -38,12 +38,12 @@ function loadList() {
 
 	$('.js-add-list').on('click', function() {
 		// Создаем данные для списка
-		var listId = makeHash();
-		var listName = 'Краткосрочный план дел №' + (LIST_BOARD.find('.list').length + 1);
-		var listCreatedTime = new Date().getTime();
+		let listId = makeHash();
+		let listName = 'Краткосрочный план дел №' + (LIST_BOARD.find('.list').length + 1);
+		let listCreatedTime = new Date().getTime();
 
 		// Парсим Хранилище
-		var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
+		let mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 		// Добавляем новый список
 		mahoweekStorage.lists.push({
