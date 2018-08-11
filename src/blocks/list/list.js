@@ -59,34 +59,44 @@ function loadList() {
 		LIST_BOARD.append(makeList(listId, listName, 'list--new'));
 
 		// Находим созданный список
-		var listNew = LIST_BOARD.find('.list:last-child');
-
-		// Удаляем метку о том что это новосозданный лист
-		setTimeout(function() {
-			listNew.removeClass('list--new');
-		}, SPEED);
-
-		// Включаем сортировку дел
-		sortableTask(document.querySelector('.list:last-child .list__tasks'));
+		let listNew = LIST_BOARD.find('.list:last-child');
 
 		// Выводим сетку дат в шапку созданного списка
 		// и в строку добавления дела
 		listNew.find('.list__grid').html(makeGrid('list'));
 		listNew.find('.task__grid').html(makeGrid('add-task'));
 
-		// Показываем поле редактирования имени списка
-		listNew.find('.js-name').trigger('mouseup', ['run']);
+		// Включаем сортировку дел
+		sortableTask(document.querySelector('.list:last-child .list__tasks'));
 
 		// Берем данные окна
-		var win = $(window);
+		// и определяем задержку для анимации
+		let win = $(window);
+		let delay = 0;
 
-		// Если созданный список выходит за рамки видимости
-		if (listNew.offset().top > win.scrollTop() + win.height() - 30 - 80) {
-			// Смещаем позицию прокрутки до созданного списка
-			$('body, html').stop().animate({
-				scrollTop: listNew.offset().top
-			}, SPEED);
+		// Если созданный список выходит за рамки видимости,
+		// то перезаписываем задержку для анимации
+		if (listNew.offset().top > win.scrollTop() + win.height() - 30 - 81) {
+			delay = SPEED;
 		}
+
+		// Добавляем задержку анимации
+		listNew.css('animation-delay', delay / 1000 + 's');
+
+		// Удаляем метку о том что это новосозданный лист
+		setTimeout(function() {
+			listNew.removeClass('list--new').css('animation-delay', '');
+		}, delay + SPEED);
+
+		// Смещаем позицию прокрутки до созданного списка
+		$('body, html').stop().animate({
+			scrollTop: listNew.offset().top
+		}, SPEED * 2);
+
+		// Показываем поле редактирования имени списка
+		setTimeout(function() {
+			listNew.find('.js-name').trigger('mouseup', ['run']);
+		}, delay);
 	});
 
 }(jQuery));
@@ -194,7 +204,7 @@ function loadList() {
 			updateStorage(mahoweekStorage);
 
 			// Запускаем процесс удаления
-			list.height(list.height()).addClass('list--remove').innerHeight(0);
+			list.addClass('list--remove');
 
 			// Удаляем список из доски
 			setTimeout(function() {

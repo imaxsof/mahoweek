@@ -7,19 +7,17 @@
 	height: 1px;
 	margin-top: -1px;
 	transition: @duration @timing-function;
-	transition-property: font-size, height;
-	will-change: font-size, height;
+	transition-property: font-size;
+	will-change: font-size;
 
 	&--add {
-		display: flex;
 		height: 40px;
 		font-size: @font-size-small;
 		color: @dark-secondary;
 	}
 
 	&--new {
-		display: flex;
-		animation-name: add;
+		animation-name: fadeInUp;
 		animation-duration: @duration;
 		animation-fill-mode: both;
 		animation-timing-function: @timing-function;
@@ -30,7 +28,6 @@
 		animation-duration: @duration;
 		animation-fill-mode: both;
 		animation-timing-function: @timing-function;
-		height: 1px;
 	}
 
 	&--completed {
@@ -38,7 +35,6 @@
 	}
 
 	&--chosen {
-		display: flex;
 		animation-name: chosen;
 		animation-duration: @duration;
 		animation-fill-mode: both;

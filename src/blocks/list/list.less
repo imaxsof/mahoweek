@@ -7,7 +7,6 @@
 	padding-bottom: 39px;
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
-	will-change: padding-bottom, margin-bottom, height;
 
 	@media (min-width: 992px) {
 		overflow-x: initial !important;
@@ -48,10 +47,6 @@
 		animation-duration: @duration;
 		animation-fill-mode: both;
 		animation-timing-function: @timing-function;
-		padding-bottom: 0;
-		margin-bottom: 0;
-		transition: @duration @timing-function;
-		transition-property: padding-bottom, margin-bottom, height;
 	}
 
 	&--chosen {
