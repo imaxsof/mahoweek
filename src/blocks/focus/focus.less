@@ -35,11 +35,15 @@
 	}
 
 	input + span {
+		position: relative;
 		display: block;
 		cursor: pointer;
 		color: @light-primary;
 		font-size: @font-size-small;
-		line-height: 30px;
+
+		@media (min-width: 768px) {
+			line-height: 30px;
+		}
 
 		body:not(.mobile) & {
 			color: fade(@light-primary, 70%);
@@ -48,10 +52,29 @@
 				color: @light-primary;
 			}
 		}
+
+		&::before {
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			content: "";
+			transform: translate3d(-50%, 0, 0) scaleX(0);
+			width: 50%;
+			height: 1px;
+			background-color: @light-primary;
+			opacity: 0;
+			transition: @duration @timing-function;
+			transition-property: transform, opacity;
+		}
 	}
 
 	input:checked + span {
 		cursor: default;
 		color: @light-primary !important;
+
+		&::before {
+			opacity: 1;
+			transform: translate3d(-50%, 0, 0) scaleX(1);
+		}
 	}
 }

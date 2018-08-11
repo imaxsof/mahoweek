@@ -28,7 +28,7 @@
 		@@include('inc/metrika.html')
 	</head>
 
-	<body>
+	<body class="focus-all">
 		<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
 			<symbol id="icon-close" viewbox="0 0 50 50">
 				<path d="M43.3,5.3l1.4,1.4l-38,38l-1.4-1.4L43.3,5.3z"></path>
@@ -141,10 +141,15 @@
 						<input class="js-choose-focus" type="radio" name="focus" value="someday">
 						<span>Потом</span>
 					</label>
+
+					<label class="focus__item">
+						<input class="js-choose-focus" type="radio" name="focus" value="completed">
+						<span>Готовые</span>
+					</label>
 				</form>
 			</header>
 
-			<main class="board__lists  board__lists--all"></main>
+			<main class="board__lists"></main>
 		</div>
 
 		<div class="hidden">

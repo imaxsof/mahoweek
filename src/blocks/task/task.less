@@ -49,10 +49,11 @@
 		animation-name: none;
 	}
 
-	.board__lists--all &,
-	.board__lists--today &--today,
-	.board__lists--planned &--bull:not(&--today),
-	.board__lists--someday &:not(&--bull) {
+	.focus-all &:not(&--add),
+	.focus-today &--today:not(&--add),
+	.focus-planned &--bull:not(&--add):not(&--today),
+	.focus-someday &:not(&--add):not(&--bull):not(&--completed),
+	.focus-completed &--completed:not(&--add) {
 		height: 41px;
 	}
 }
