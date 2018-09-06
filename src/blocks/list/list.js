@@ -37,9 +37,19 @@ function loadList() {
 (function($) {
 
 	$('.js-add-list').on('click', function() {
+		// Варианты именования списка
+		let listNameArr = [
+			'Задачи',
+			'Дела',
+			'Ту-Ду лист',
+			'План',
+			'Сделать',
+			'Выполнить'
+		]
+
 		// Создаем данные для списка
 		let listId = makeHash();
-		let listName = 'Краткосрочный план дел №' + (LIST_BOARD.find('.list').length + 1);
+		let listName = listNameArr[Math.floor(Math.random() * listNameArr.length)];
 		let listCreatedTime = new Date().getTime();
 
 		// Парсим Хранилище
