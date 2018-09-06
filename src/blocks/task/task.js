@@ -572,13 +572,15 @@ function remakeTaskName(name) {
 // Генерируем дело
 //------------------------------------------------------------------------------
 
-function makeTask(id, name, modifier = '', completed, markers) {
+function makeTask(id, name, modifier, completed, markers) {
+
+	modifier = modifier === undefined ? '' : modifier;
 
 	// Определяем статус дела
 	if (completed === 1) {
-		var completed = 'task--completed';
+		completed = 'task--completed';
 	} else {
-		var completed = '';
+		completed = '';
 	}
 
 	// Генерируем код

@@ -313,7 +313,9 @@ function makeProgress(id) {
 // Генерируем списки
 //------------------------------------------------------------------------------
 
-function makeList(id, name, modifier = '') {
+function makeList(id, name, modifier) {
+
+	modifier = modifier === undefined ? '' : modifier;
 
 	// Генерируем код
 	return '' +
