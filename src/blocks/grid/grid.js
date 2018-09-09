@@ -343,11 +343,9 @@ function makeGrid(type, data) {
 		var dateClass = '';
 		var newDate = new Date();
 		var time = newDate.setDate(date.getDate() + i);
-		var day = newDate.getDate(time);        // число
-		var month = newDate.getMonth(time) + 1; // месяц
-		var year = newDate.getFullYear(time);   // год
-		var newDayNumber = newDate.getDay();    // номер дня
-		var dataDate = year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day);
+		var day = newDate.getDate(time);
+		var newDayNumber = newDate.getDay();
+		var dataDate = makeDate(time, 'grid');
 
 		// Определяем текущий день
 		if (date.getDate() == day) {

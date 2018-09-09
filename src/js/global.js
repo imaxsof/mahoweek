@@ -75,10 +75,7 @@ if (MOBILE) {
 		// Определяем время
 		var date = new Date();
 		var dateTime = date.getTime();
-		var dateDay = date.getDate();
-		var dateMonth = date.getMonth() + 1;
-		var dateYear = date.getFullYear();
-		var dateNow = dateYear + '-' + (dateMonth < 10 ? '0' + dateMonth : dateMonth) + '-' + (dateDay < 10 ? '0' + dateDay : dateDay);
+		var dateNow = makeDate(dateTime, 'grid');
 
 		// Создаем некоторые объекты для Хранилища
 		var listId = makeHash();
@@ -189,10 +186,7 @@ if (MOBILE) {
 				for (var i = 0; i <= 14 - dayNumber; i ++) {
 					var newDate = new Date();
 					var time = newDate.setDate(date.getDate() + i);
-					var day = newDate.getDate(time);        // число
-					var month = newDate.getMonth(time) + 1; // месяц
-					var year = newDate.getFullYear(time);   // год
-					var dataDate = year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day);
+					var dataDate = makeDate(time, 'grid');
 
 					dayzMarkers.push({
 						"date": dataDate,
@@ -587,20 +581,26 @@ function makeHash() {
 }
 
 
-// Конвертируем дату и время в человеческий вид
+// Преобразуем дату в удобный вид
 //------------------------------------------------------------------------------
 
-function convertDate(time) {
+function makeDate(time, type) {
 
 	let date = new Date(time);
-	let day = date.getDate();
-	let month = date.getMonth() + 1;
+	let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+	let month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
 	let year = date.getFullYear();
-	let hours = date.getHours();
-	let minutes = date.getMinutes();
-	let dataDate = (day < 10 ? '0' + day : day) + '.' + (month < 10 ? '0' + month : month) + '.' + year + ' в ' + (hours < 10 ? '0' + hours : hours) + ':' + (minutes < 10 ? '0' + minutes : minutes);
+	let hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours();
+	let minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes();
+	let result = '';
 
-	return dataDate;
+	if (type === 'full') {
+		result = day + '.' + month + '.' + year + ' в ' + hours + ':' + minutes;
+	} else if (type === 'grid') {
+		result = year + '-' + month + '-' + day;
+	}
+
+	return result;
 
 }
 
@@ -632,7 +632,7 @@ function updateStorage(data) {
 			"settings": data.settings
 		}).then(function() {
 			// Вставляем дату последнего изменения
-			$('.sync__updated span').text(convertDate(data.settings.updatedTime));
+			$('.sync__updated span').text(makeDate(data.settings.updatedTime, 'full'));
 
 			// Показываем индикатор, что все окей
 			$('.sync__ava, .menu__ava').attr('data-sync', 'ok');

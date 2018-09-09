@@ -63,7 +63,7 @@ firebase.initializeApp(firebaseConfig);
 					// Если это первая синхронизация
 					} else if (syncCount == 1) {
 						// Вставляем дату последнего изменения
-						$('.sync__updated span').text(convertDate(data.val().settings.updatedTime));
+						$('.sync__updated span').text(makeDate(data.val().settings.updatedTime, 'full'));
 
 						// Показываем индикатор, что все окей
 						$('.sync__ava, .menu__ava').attr('data-sync', 'ok');
