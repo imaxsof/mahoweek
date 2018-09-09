@@ -584,6 +584,23 @@ function remakeTaskName(name) {
 		remakeName = '<strong>' + remakeName + '</strong>';
 	}
 
+	// Работаем с датой
+	if (/сегодня/i.test(name)) {
+		remakeName = remakeName.replace(/(.+)?(\s)?(сегодня)(\s)?(.+)?/ig, '$1$5').trim();
+
+		// Запоминаем метку для нового дела
+		let date = new Date();
+		let time = date.getTime();
+		localStorage.setItem('mwTempNewTaskMarker', makeDate(time, 'grid'));
+	} else if (/завтра/i.test(name)) {
+		remakeName = remakeName.replace(/(.+)?(\s)?(завтра)(\s)?(.+)?/ig, '$1$5').trim();
+
+		// Запоминаем метку для нового дела
+		let date = new Date();
+		let time = date.setDate(date.getDate() + 1);
+		localStorage.setItem('mwTempNewTaskMarker', makeDate(time, 'grid'));
+	}
+
 	// Выводим отформатированный текст
 	return remakeName;
 
