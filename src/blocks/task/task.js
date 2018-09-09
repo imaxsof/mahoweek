@@ -111,20 +111,30 @@ function loadTask() {
 
 (function($) {
 
-	LIST_BOARD.on('keyup change', '.js-add-task', function(event) {
-		var isThis = $(this);
+	LIST_BOARD.on('input change', '.js-add-task', function(event) {
+		let isThis = $(this);
 
-		// Если был нажат Enter и поле с делом не пустое
+		// Получаем текст дела
+		let taskName = isThis.val();
+
+		// Ставим или убираем метку о заполнении поля
+		if (taskName !== '') {
+			isThis.parents('.task').addClass('task--filled');
+		} else {
+			isThis.parents('.task').removeClass('task--filled');
+		}
+
+		// Если был нажат Энтер и поле с делом не пустое
 		// или изменились данные в поле при потере фокуса
-		if (event.keyCode === 13 && isThis.val() !== '' || event.type === 'change') {
-			// Получаем хеш списка, хеш дела, текст дела и метку времени
-			var listId = isThis.parents('.list').attr('data-id');
-			var taskId = makeHash();
-			var taskName = isThis.val();
-			var taskCreatedTime = new Date().getTime();
+		if (event.keyCode === 13 && taskName !== '' || event.type === 'change') {
+			// Получаем список, хеш списка, хеш дела и метку времени
+			let list = isThis.parents('.list');
+			let listId = list.attr('data-id');
+			let taskId = makeHash();
+			let taskCreatedTime = new Date().getTime();
 
 			// Парсим Хранилище
-			var mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
+			let mahoweekStorage = JSON.parse(localStorage.getItem('mwStorage'));
 
 			// Добавляем новое дело
 			mahoweekStorage.tasks.push({
@@ -138,7 +148,9 @@ function loadTask() {
 			updateStorage(mahoweekStorage);
 
 			// Стираем поле ввода добавления дела
+			// и убираем метку о заполненности поля
 			isThis.val('');
+			isThis.parents('.task').removeClass('task--filled');
 
 			// Выводим дело в списке
 			isThis.parents('.list').find('.list__tasks').append(makeTask(taskId, taskName, 'task--new'));
@@ -147,7 +159,16 @@ function loadTask() {
 			makeProgress(listId);
 
 			// Находим созданное дело
-			var taskNew = isThis.parents('.list').find('.list__tasks .task:last-child');
+			let taskNew = isThis.parents('.list').find('.list__tasks .task:last-child');
+
+			// Если дело добавлялось с меткой
+			if (list.attr('data-task-new-date')) {
+				// Добавляем делу метку
+				taskNew.find('.grid__date[data-date="' + list.attr('data-task-new-date') + '"]').trigger('click');
+
+				// Стираем запоминание дня
+				list.removeAttr('data-task-new-date');
+			}
 
 			// Удаляем метку о том что это новосозданное дело
 			setTimeout(function() {
@@ -155,7 +176,7 @@ function loadTask() {
 			}, SPEED);
 
 			// Берем данные окна
-			var win = $(window);
+			let win = $(window);
 
 			// Если созданное дело вытесняет за рамки экрана конец списка
 			if (taskNew.offset().top > win.scrollTop() + win.height() - 30 - 41 - 40) {
@@ -315,7 +336,7 @@ function loadTask() {
 
 (function($) {
 
-	LIST_BOARD.on('keyup change', '.js-edit-task', function(event) {
+	LIST_BOARD.on('input change', '.js-edit-task', function(event) {
 		var isThis = $(this);
 
 		// Если был нажат Enter или пропал фокус и были изменения

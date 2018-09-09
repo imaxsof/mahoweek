@@ -23,7 +23,7 @@ function loadList() {
 	// Выводим сетку дат в шапку существующих списков
 	// и в строки добавления дела
 	LIST_BOARD.find('.list__grid').html(makeGrid('list'));
-	LIST_BOARD.find('.task__grid').html(makeGrid('add-task'));
+	LIST_BOARD.find('.task__grid').html(makeGrid('task'));
 
 	// Включаем сортировку списков
 	sortableList();
@@ -74,7 +74,7 @@ function loadList() {
 		// Выводим сетку дат в шапку созданного списка
 		// и в строку добавления дела
 		listNew.find('.list__grid').html(makeGrid('list'));
-		listNew.find('.task__grid').html(makeGrid('add-task'));
+		listNew.find('.task__grid').html(makeGrid('task'));
 
 		// Включаем сортировку дел
 		sortableTask(document.querySelector('.list:last-child .list__tasks'));
@@ -117,7 +117,7 @@ function loadList() {
 
 (function($) {
 
-	LIST_BOARD.on('keyup change', '.js-edit-list', function(event) {
+	LIST_BOARD.on('input change', '.js-edit-list', function(event) {
 		var isThis = $(this);
 
 		// Если был нажат Enter или пропал фокус и были изменения

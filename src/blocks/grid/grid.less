@@ -68,6 +68,10 @@
 		opacity: 1;
 	}
 
+	body:not(.mobile) .task--filled &:not(.grid__date--past):hover::before {
+		opacity: 1;
+	}
+
 	&--bull,
 	&--completed {
 		&::before {
@@ -144,6 +148,9 @@
 
 	.task--add & {
 		border-bottom-width: 0;
+	}
+
+	.task--add:not(.task--filled) & {
 		cursor: default;
 	}
 }
