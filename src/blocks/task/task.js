@@ -162,12 +162,12 @@ function loadTask() {
 			let taskNew = isThis.parents('.list').find('.list__tasks .task:last-child');
 
 			// Если дело добавлялось с меткой
-			if (list.attr('data-task-new-date')) {
+			if (localStorage.getItem('mwTempNewTaskMarker')) {
 				// Добавляем делу метку
-				taskNew.find('.grid__date[data-date="' + list.attr('data-task-new-date') + '"]').trigger('click');
+				taskNew.find('.grid__date[data-date="' + localStorage.getItem('mwTempNewTaskMarker') + '"]').trigger('click');
 
-				// Стираем запоминание дня
-				list.removeAttr('data-task-new-date');
+				// Удаляем метку для нового дела
+				localStorage.removeItem('mwTempNewTaskMarker');
 			}
 
 			// Удаляем метку о том что это новосозданное дело

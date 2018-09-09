@@ -9,20 +9,19 @@
 	LIST_BOARD.on('mousedown click', '.js-marker-task:not(.grid__date--past):not(.grid__date--completed)', function(event) {
 		var isThis = $(this);
 
-		// Получаем хеш списка, дело и дату
-		var list = isThis.parents('.list');
-		var listId = list.attr('data-id');
+		// Получаем дело и дату
 		var task = isThis.parents('.task');
 		var taskDate = isThis.attr('data-date');
 
 		// Если метка ставилась при добавлении дела
 		if (task.hasClass('task--filled') && event.type === 'mousedown') {
-			// Запоминаем день
-			list.attr('data-task-new-date', taskDate);
+			// Запоминаем метку для нового дела
+			localStorage.setItem('mwTempNewTaskMarker', taskDate);
 
 		// Если метка ставилась у существующего дела
 		} else if (!task.hasClass('task--add') && event.type === 'click') {
-			// Получаем хеш дела
+			// Получаем хеш списка и хеш дела
+			var listId = isThis.parents('.list').attr('data-id');
 			var taskId = task.attr('data-id');
 
 			// Парсим Хранилище
