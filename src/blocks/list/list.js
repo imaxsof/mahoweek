@@ -117,7 +117,7 @@ function loadList() {
 
 (function($) {
 
-	LIST_BOARD.on('input change', '.js-edit-list', function(event) {
+	LIST_BOARD.on('keyup change', '.js-edit-list', function(event) {
 		var isThis = $(this);
 
 		// Если был нажат Enter или пропал фокус и были изменения

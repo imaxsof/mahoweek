@@ -567,10 +567,10 @@ function changeStyleTaskStatus(task) {
 
 function remakeTaskName(name) {
 
-	var remakeName = name;
+	let remakeName = name;
 
 	// Работаем с УРЛ
-	if (/https:\/\/mahoweek\.com\/#/.test(name)) {
+	if (/https:\/\/mahoweek\.com\/#/i.test(name)) {
 		remakeName = remakeName.replace(/(https:\/\/)(mahoweek\.com\/#)([\S]+[^ ,\.!])/ig, '<a href="#$3" class="cartonbox" data-cb-type="inline" data-cb-hash="$3"><span class="hidden">$1</span>$2$3</a>');
 	} else {
 		remakeName = remakeName.replace(/(http(s)?:\/\/(www\.)?)([\S]+[^ ,\.!])/ig, '<a href="$1$4" class="js-link-task" target="_blank" rel="noopener noreferrer"><span class="hidden">$1</span>$4</a>');
