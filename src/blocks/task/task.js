@@ -570,18 +570,19 @@ function remakeTaskName(name) {
 	let remakeName = name;
 
 	// Работаем с УРЛ
-	if (/https:\/\/mahoweek\.com\/#/i.test(name)) {
-		remakeName = remakeName.replace(/(https:\/\/)(mahoweek\.com\/#)([\S]+[^ ,\.!])/ig, '<a href="#$3" class="cartonbox" data-cb-type="inline" data-cb-hash="$3"><span class="hidden">$1</span>$2$3</a>');
-	} else {
-		remakeName = remakeName.replace(/(http(s)?:\/\/(www\.)?)([\S]+[^ ,\.!])/ig, '<a href="$1$4" class="js-link-task" target="_blank" rel="noopener noreferrer"><span class="hidden">$1</span>$4</a>');
+	if (/(http(s)?:\/\/)/i.test(name)) {
+		if (/https:\/\/mahoweek\.com\/#/i.test(name)) {
+			remakeName = remakeName.replace(/(https:\/\/)(mahoweek\.com\/#)([\S]+[^ ,\.!])/ig, '<a href="#$3" class="cartonbox" data-cb-type="inline" data-cb-hash="$3"><span class="hidden">$1</span>$2$3</a>');
+		} else {
+			remakeName = remakeName.replace(/(http(s)?:\/\/(www\.)?)([\S]+[^ ,\.!])/ig, '<a href="$1$4" class="js-link-task" target="_blank" rel="noopener noreferrer"><span class="hidden">$1</span>$4</a>');
+		}
 	}
 
 	// Работаем с временем
-	remakeName = remakeName.replace(/(.+)?(\s)?((2[0-3]|[0-1]\d)[:\.]([0-5]\d))(\s)?(.+)?/ig, '<span class="task__time">$4:$5</span> $1$7').trim();
+	if (/((2[0-3]|[0-1]\d)[:\.]([0-5]\d))/.test(name)) {
+		remakeName = remakeName.replace(/(.+)?(\s)?((2[0-3]|[0-1]\d)[:\.]([0-5]\d))(\s)?(.+)?/i, '<span class="task__time">$4:$5</span> $1$7').trim();
 
-	// Работаем с важностью
-	if (/[!]{1,}/.test(name)) {
-		remakeName = '<strong>' + remakeName + '</strong>';
+		remakeName = remakeName.replace(/(.+)?(\sв)(\s)?(!)?$/i, '$1$4');
 	}
 
 	// Работаем с датой
@@ -599,6 +600,11 @@ function remakeTaskName(name) {
 		let date = new Date();
 		let time = date.setDate(date.getDate() + 1);
 		localStorage.setItem('mwTempNewTaskMarker', makeDate(time, 'grid'));
+	}
+
+	// Работаем с важностью
+	if (/[!]{1,}/.test(name)) {
+		remakeName = '<strong>' + remakeName + '</strong>';
 	}
 
 	// Выводим отформатированный текст
