@@ -107,6 +107,9 @@ function loadList() {
 		setTimeout(function() {
 			listNew.find('.js-name').trigger('mouseup', ['run']);
 		}, delay);
+
+		// Добавляем данные в Метрику
+		yaCounter43856389.reachGoal('ya-add-list');
 	});
 
 }(jQuery));

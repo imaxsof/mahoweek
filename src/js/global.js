@@ -643,6 +643,9 @@ function updateStorage(data) {
 			// Выводим ошибку в консоли и в сообщении
 			console.error(error.code + ': ' + error.message);
 			$('.sync__message').html(error.code + ': ' + error.message).show();
+
+			// Добавляем данные в Метрику
+			yaCounter43856389.reachGoal('ya-firebase-fail');
 		});
 
 	// Если пользователь не идентифицирован

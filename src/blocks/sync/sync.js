@@ -162,6 +162,9 @@ firebase.initializeApp(firebaseConfig);
 					// Выводим ошибку в консоли и в сообщении
 					console.error(error.code + ': ' + error.message);
 					$('.sync__message').html(error.code + ': ' + error.message).show();
+
+					// Добавляем данные в Метрику
+					yaCounter43856389.reachGoal('ya-firebase-fail');
 				});
 
 			// Если вход выполняется с мобильного устройства
@@ -191,6 +194,9 @@ firebase.initializeApp(firebaseConfig);
 		// Выводим ошибку в консоли и в сообщении
 		console.error(error.code + ': ' + error.message);
 		$('.sync__message').html(error.code + ': ' + error.message).show();
+		
+		// Добавляем данные в Метрику
+		yaCounter43856389.reachGoal('ya-firebase-fail');
 	});
 
 	// Разогиниваем пользователя
@@ -214,6 +220,9 @@ firebase.initializeApp(firebaseConfig);
 				// Выводим ошибку в консоли и в сообщении
 				console.error(error.code + ': ' + error.message);
 				$('.sync__message').html(error.code + ': ' + error.message).show();
+
+				// Добавляем данные в Метрику
+				yaCounter43856389.reachGoal('ya-firebase-fail');
 			});
 		}
 	});
@@ -284,6 +293,9 @@ firebase.initializeApp(firebaseConfig);
 						// Выводим ошибку в консоли и в сообщении
 						console.error(error.code + ': ' + error.message);
 						$('.sync__message').html(error.code + ': ' + error.message).show();
+
+						// Добавляем данные в Метрику
+						yaCounter43856389.reachGoal('ya-firebase-fail');
 					});
 				}
 			}).catch(function(error) {
@@ -294,6 +306,9 @@ firebase.initializeApp(firebaseConfig);
 				// Выводим ошибку в консоли и в сообщении
 				console.error(error.code + ': ' + error.message);
 				$('.sync__message').html(error.code + ': ' + error.message).show();
+
+				// Добавляем данные в Метрику
+				yaCounter43856389.reachGoal('ya-firebase-fail');
 			});
 
 		// Если пользователь не идентифицирован
@@ -333,6 +348,9 @@ function checkUser(uid) {
 				// Выводим ошибку в консоли и в сообщении
 				console.error(error.code + ': ' + error.message);
 				$('.sync__message').html(error.code + ': ' + error.message).show();
+
+				// Добавляем данные в Метрику
+				yaCounter43856389.reachGoal('ya-firebase-fail');
 			});
 
 		// Если пользователь в БД есть
@@ -358,6 +376,9 @@ function checkUser(uid) {
 		// Выводим ошибку в консоли и в сообщении
 		console.error(error.code + ': ' + error.message);
 		$('.sync__message').html(error.code + ': ' + error.message).show();
+
+		// Добавляем данные в Метрику
+		yaCounter43856389.reachGoal('ya-firebase-fail');
 	});
 
 }
