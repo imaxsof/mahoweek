@@ -4,10 +4,8 @@
 .logo {
 	color: @logo-light;
 
-	h1,
-	h2 {
+	h1 {
 		padding: 0 13px;
-		letter-spacing: 2px;
 
 		&::before {
 			content: "";
@@ -19,27 +17,5 @@
 			background-color: @logo-pea;
 			border-radius: 50%;
 		}
-	}
-
-	&--dark {
-		color: @logo-dark;
-	}
-
-	&--big {
-		h2 {
-			padding: 0 18px;
-			letter-spacing: 4px;
-
-			&::before {
-				top: 10px;
-				width: 10px;
-				height: 10px;
-			}
-		}
-	}
-
-	&--center {
-		display: flex;
-		justify-content: center;
 	}
 }
