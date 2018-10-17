@@ -65,8 +65,8 @@ firebase.initializeApp(firebaseConfig);
 						// Вставляем дату последнего изменения
 						$('.sync__updated span').text(makeDate(data.val().settings.updatedTime, 'full'));
 
-						// Показываем индикатор, что все окей
-						$('.sync__ava, .menu__ava').attr('data-sync', 'ok');
+						// Показываем индикатор по-умолчанию
+						$('.sync__ava, .menu__ava').attr('data-sync', 'default');
 
 						// Загружаем списки
 						loadList();
@@ -81,8 +81,8 @@ firebase.initializeApp(firebaseConfig);
 						// 		// Скрываем если было сообщение об ошибке
 						// 		$('.sync__message').html('').hide();
 
-						// 		// Показываем индикатор, что все окей
-						// 		$('.sync__ava, .menu__ava').attr('data-sync', 'ok');
+						// 		// Показываем индикатор по-умолчанию
+						// 		$('.sync__ava, .menu__ava').attr('data-sync', 'default');
 
 						// 	// Если не в сети
 						// 	} else {
@@ -268,8 +268,8 @@ firebase.initializeApp(firebaseConfig);
 						"tasks": mahoweekStorage.tasks,
 						"settings": mahoweekStorage.settings
 					}).then(function() {
-						// Показываем индикатор, что все окей
-						$('.sync__ava, .menu__ava').attr('data-sync', 'ok');
+						// Показываем индикатор по-умолчанию
+						$('.sync__ava, .menu__ava').attr('data-sync', 'default');
 
 						// Добавляем данные в Метрику
 						yaCounter43856389.reachGoal('ya-manually-sync');
@@ -350,7 +350,8 @@ function checkUser(uid) {
 			// Ставим метку, что пользователь успешно авторизовался
 			localStorage.setItem('mwAuth', true);
 
-			// Перезагружаем страницу
+			// Редиректим на главную
+			window.history.replaceState(null, null, '/');
 			window.location.reload(true);
 		}
 	}).catch(function(error) {

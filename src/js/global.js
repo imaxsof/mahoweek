@@ -94,7 +94,7 @@ if (MOBILE) {
 				{
 					id: makeHash(),
 					listId: listId,
-					name: 'Прочитать справку о сайте: https://mahoweek.com/#about!',
+					name: '21:00 Прочитать справку о сайте: https://mahoweek.com/#about!',
 					createdTime: dateTime,
 					markers: [
 						{
@@ -118,7 +118,7 @@ if (MOBILE) {
 				{
 					id: makeHash(),
 					listId: listId,
-					name: '21:00 Настроить доску: https://mahoweek.com/#settings',
+					name: 'Настроить вид и синхронизацию: https://mahoweek.com/#settings',
 					createdTime: dateTime,
 					markers: [
 						{
@@ -130,7 +130,7 @@ if (MOBILE) {
 				{
 					id: makeHash(),
 					listId: listId,
-					name: 'Добавить ещё дел в список',
+					name: 'Добавить в список ближайшие дела',
 					createdTime: dateTime
 				},
 				{
@@ -634,8 +634,8 @@ function updateStorage(data) {
 			// Вставляем дату последнего изменения
 			$('.sync__updated span').text(makeDate(data.settings.updatedTime, 'full'));
 
-			// Показываем индикатор, что все окей
-			$('.sync__ava, .menu__ava').attr('data-sync', 'ok');
+			// Показываем индикатор по-умолчанию
+			$('.sync__ava, .menu__ava').attr('data-sync', 'default');
 		}).catch(function(error) {
 			// Показываем индикатор краха
 			$('.sync__ava, .menu__ava').attr('data-sync', 'fail');
